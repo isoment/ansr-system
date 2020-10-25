@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     *  Polymorphic relationship to either Tenant or Employee.
+     */
+    public function userable()
+    {
+        return $this->morphTo();
+    }
 }
