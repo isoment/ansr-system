@@ -11,8 +11,18 @@
                 </header>
 
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST"
-                    action="{{ route('register') }}">
+                    action="{{ route('register') }}" id="register-form">
                     @csrf
+
+                    <div class="flex flex-col">
+                        <label for="account_type" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                            Account Type:
+                        </label>
+                        <select name="account_type" id="account_type" class="form-input" form="register-form">
+                            <option value="tenant">Tenant</option>
+                            <option value="employee">Employee</option>
+                        </select>
+                    </div>
 
                     <div class="flex flex-wrap">
                         <label for="name" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
@@ -39,6 +49,22 @@
                             value="{{ old('email') }}" required autocomplete="email">
 
                         @error('email')
+                        <p class="text-red-500 text-xs italic mt-4">
+                            {{ $message }}
+                        </p>
+                        @enderror
+                    </div>
+
+                    <div class="flex flex-wrap">
+                        <label for="role_id" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                            Lease/Employee ID:
+                        </label>
+
+                        <input id="role_id" type="text"
+                            class="form-input w-full @error('role_id') border-red-500 @enderror" name="role_id"
+                            value="{{ old('role_id') }}" required autocomplete="role_id">
+
+                        @error('role_id')
                         <p class="text-red-500 text-xs italic mt-4">
                             {{ $message }}
                         </p>
