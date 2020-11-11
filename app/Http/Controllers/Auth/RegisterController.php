@@ -7,6 +7,8 @@ use App\Models\Employee;
 use App\Models\Tenant;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Rules\ValidateEmployee;
+use App\Rules\ValidateTenant;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -52,32 +54,26 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // return Validator::make($data, [
-        //     'account_type' => 'required',
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //     'role_id' => ['required', 'exists:employees,employee_id_number'],
-        //     'account_type' => ['required'],
-        // ]);
-
-        // Tommorow verify by email too
-
         $mainValidation = Validator::make($data, [
             'account_type' => 'required',
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
+        // Tenant specific validation
         if ($data['account_type'] == 'tenant') {
-            return $mainValidation->sometimes('role_id', 'required|exists:tenants,lease_id', function($input) {
+            return $mainValidation->sometimes('id', ['required', new ValidateTenant], function($input) {
+                return $input->account_type == 'tenant';
+            })->sometimes('email', ['required','string','email','max:255','unique:users', new ValidateTenant], function($input) {
                 return $input->account_type == 'tenant';
             });
         }
 
+        // Employee specific validation
         if ($data['account_type'] == 'employee') {
-            return $mainValidation->sometimes('role_id', 'required|exists:employees,employee_id_number', function($input) {
+            return $mainValidation->sometimes('id', ['required', new ValidateEmployee], function($input) {
+                return $input->account_type == 'employee';
+            })->sometimes('email', ['required','string','email','max:255','unique:users', new ValidateEmployee], function($input) {
                 return $input->account_type == 'employee';
             });
         }
@@ -91,13 +87,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Get userable_type
+        // Determine and set morphable type
         if ($data['account_type'] == 'tenant') {
             $userableType = 'App\Models\Tenant';
-            $userableID = Tenant::where('lease_id', $data['role_id'])->first();
+            $userableID = Tenant::where('lease_id', $data['id'])->first();
         } else {
             $userableType = 'App\Models\Employee';
-            $userableID = Employee::where('employee_id_number', $data['role_id'])->first();
+            $userableID = Employee::where('employee_id_number', $data['id'])->first();
         }
 
         return User::create([

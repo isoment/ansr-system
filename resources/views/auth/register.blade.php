@@ -19,8 +19,8 @@
                             Account Type:
                         </label>
                         <select name="account_type" id="account_type" class="form-input" form="register-form">
-                            <option value="tenant">Tenant</option>
-                            <option value="employee">Employee</option>
+                            <option value="tenant" {{old('account_type') == 'tenant' ? 'selected' : ''}}>Tenant</option>
+                            <option value="employee" {{old('account_type') == 'employee' ? 'selected' : ''}}>Employee</option>
                         </select>
                     </div>
 
@@ -56,15 +56,15 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="role_id" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="id" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
                             Lease/Employee ID:
                         </label>
 
-                        <input id="role_id" type="text"
-                            class="form-input w-full @error('role_id') border-red-500 @enderror" name="role_id"
-                            value="{{ old('role_id') }}" required autocomplete="role_id">
+                        <input id="id" type="text"
+                            class="form-input w-full @error('id') border-red-500 @enderror" name="id"
+                            value="{{ old('id') }}" required autocomplete="id">
 
-                        @error('role_id')
+                        @error('id')
                         <p class="text-red-500 text-xs italic mt-4">
                             {{ $message }}
                         </p>
