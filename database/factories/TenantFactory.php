@@ -22,7 +22,11 @@ class TenantFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'lease_id' => $this->faker->numberBetween(1, 245),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->unique()->email
         ];
     }
 }

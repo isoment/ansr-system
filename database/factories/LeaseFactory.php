@@ -22,7 +22,11 @@ class LeaseFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'propery_id' => $this->faker->numberBetween(1, 25),
+            'building' => $this->faker->numberBetween(1, 5),
+            'unit' => $this->faker->unique()->numberBetween(100, 999),
+            'start_date' => $this->faker->dateTimeBetween('-1 years', 'now', null),
+            'end_date' => $this->faker->dateTimeBetween('now', '+1 years', null),
         ];
     }
 }

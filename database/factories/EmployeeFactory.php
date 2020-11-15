@@ -22,7 +22,16 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'property_id' => $this->faker->numberBetween(1, 25),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'department' => function() {
+                $jobs = ['Leasing', 'Maintenance', 'Administrative'];
+                return array_rand(array_flip($jobs), 1);
+            },
+            'employee_id_number' => $this->faker->unique()->numerify('#####'),
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->unique()->email,
         ];
     }
 }
