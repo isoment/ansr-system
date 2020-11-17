@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\WorkDetails;
+use App\Models\WorkOrder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WorkDetailsFactory extends Factory
@@ -22,7 +23,11 @@ class WorkDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'work_order_id' => WorkOrder::all()->random()->id,
+            'details' => $this->faker->sentence,
+            'tenant_notes' => $this->faker->paragraph,
+            'start_date' => $this->faker->dateTimeBetween('-10 days', '-6days', null),
+            'end_date' => $this->faker->dateTimeBetween('-5days', 'now', null),
         ];
     }
 }

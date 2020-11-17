@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Lease;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ class TenantFactory extends Factory
     public function definition()
     {
         return [
-            'lease_id' => $this->faker->numberBetween(1, 245),
+            'lease_id' => Lease::all()->random()->id,
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'phone' => $this->faker->phoneNumber,

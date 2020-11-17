@@ -22,7 +22,16 @@ class RequestIssueFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'is_billable' => $this->faker->randomElement(['Billable', 'No Charge']),
+            // 'bill_amount' => $this->faker->randomFloat(2, 20, 200),
+            'bill_amount' => function($attributes) {
+                if ($attributes['is_billable'] == 'Billable') {
+                    return $this->faker->randomFloat(2, 20, 200);
+                } else {
+                    return 0;
+                }
+            },
+            'note' => $this->faker->paragraph,
         ];
     }
 }

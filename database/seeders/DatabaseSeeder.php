@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
             LeaseSeeder::class,
             TenantSeeder::class,
             EmployeeSeeder::class,
+            RequestCategorySeeder::class,
+            ServiceRequestSeeder::class,
+            WorkOrderSeeder::class,
+            WorkDetailsSeeder::class,
         ]);
     }
 }

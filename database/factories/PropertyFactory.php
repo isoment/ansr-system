@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Property;
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PropertyFactory extends Factory
@@ -22,7 +23,7 @@ class PropertyFactory extends Factory
     public function definition()
     {
         return [
-            'region_id' => $this->faker->numberBetween(1, 5),
+            'region_id' => Region::all()->random()->id,
             'name' => $this->faker->sentence(3),
             'street' => $this->faker->streetAddress,
             'city' => $this->faker->city,
