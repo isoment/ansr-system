@@ -50,4 +50,16 @@ class User extends Authenticatable
     {
         return $this->morphTo();
     }
+
+    /**
+     *  Method to determine a user role
+     */
+    public function userRole($role)
+    {
+        if (User::where('id', $this->id)->where('userable_type', $role)->first()) {
+            return true;
+        }
+        
+        return false;
+    }
 }
