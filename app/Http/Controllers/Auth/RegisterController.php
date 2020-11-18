@@ -34,7 +34,19 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+     *  Override above to redirect based on role
+     */
+    protected function redirectTo()
+    {
+        if (auth()->user()->userRole('App\Models\Employee')) {
+            return route('employee.dashboard');
+        }
+
+        return route('tenant.dashboard');
+    }
 
     /**
      * Create a new controller instance.

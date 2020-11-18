@@ -53,13 +53,16 @@ class User extends Authenticatable
 
     /**
      *  Method to determine a user role
+     * 
+     *  @param string $role
+     *  @return boolean 
      */
     public function userRole($role)
     {
         if (User::where('id', $this->id)->where('userable_type', $role)->first()) {
             return true;
         }
-        
+
         return false;
     }
 }

@@ -19,5 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/tenant/db', [\App\Http\Controllers\Tenant\TenantDashboardController::class, 'index'])
+    ->name('tenant.dashboard');
+
+Route::get('/employee/db', [\App\Http\Controllers\Employee\EmployeeDashboardController::class, 'index'])
+    ->name('employee.dashboard');
 
