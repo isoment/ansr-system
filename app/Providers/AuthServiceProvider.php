@@ -26,12 +26,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // Employee user role
-        Gate::define('is-employee', function($user) {
+        Gate::define('isEmployee', function($user) {
             return $user->userRole('App\Models\Employee');
         });
 
         // Tenant user role
-        Gate::define('is-tenant', function($user) {
+        Gate::define('isTenant', function($user) {
             return $user->userRole('App\Models\Tenant');
         });
     }

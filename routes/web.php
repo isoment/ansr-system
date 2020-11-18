@@ -19,9 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/tenant/db', [\App\Http\Controllers\Tenant\TenantDashboardController::class, 'index'])
-    ->name('tenant.dashboard');
+// Tenant Routes
+Route::middleware('can:isTenant')->group(function() {
+    Route::get('/tenant/db', [\App\Http\Controllers\Tenant\TenantDashboardController::class, 'index'])
+        ->name('tenant.dashboard');
+});
 
-Route::get('/employee/db', [\App\Http\Controllers\Employee\EmployeeDashboardController::class, 'index'])
-    ->name('employee.dashboard');
+// Employee Routes
+Route::middleware('can:isEmployee')->group(function() {
+    Route::get('/employee/db', [\App\Http\Controllers\Employee\EmployeeDashboardController::class, 'index'])
+        ->name('employee.dashboard');
+});
 
