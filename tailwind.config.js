@@ -4,7 +4,10 @@ module.exports = {
     './resources/css/**/*.css',
   ],
   theme: {
-    extend: {}
+    extend: {},
+    fontFamily: {
+      'nunito': ['Nunito'],
+    },
   },
   variants: {},
   plugins: [

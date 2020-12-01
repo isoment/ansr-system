@@ -62,7 +62,6 @@ class User extends Authenticatable
         if (User::where('id', $this->id)->where('userable_type', $role)->first()) {
             return true;
         }
-
         return false;
     }
 }
