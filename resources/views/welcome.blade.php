@@ -22,7 +22,7 @@
     <main class="w-full">
 
         {{-- Header --}}
-        <header class="w-full text-gray-500 bg-transparent fixed top-0 left-0 z-50 px-4 sm:px-8 lg:px-16 
+        <header class="w-full text-gray-500 bg-transparent absolute top-0 left-0 z-50 px-4 sm:px-8 lg:px-16 
                        xl:px-40 2xl:px-64 py-4"
                 id="navbar"
                 x-data="{ navShow: false }">
@@ -37,7 +37,7 @@
                 </div>
 
                 {{-- Hamburger --}}
-                <div class="block sm:hidden"
+                <div class="block md:hidden"
                      x-show="! navShow">
                     <button type="button" class="focus:outline-none focus:ring-2 focus:ring-inset"
                             @click="navShow = true">
@@ -72,10 +72,9 @@
                         </div>
                         <div>
                             <div class="px-2 pt-2 pb-3 space-y-1">
-                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Product</a>
-                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Features</a>
-                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Marketplace</a>
-                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Company</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Demo</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">About Us</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Pricing</a>
                             </div>
                             <div>
                                 <a href="#" class="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100">
@@ -87,12 +86,11 @@
                 </div>
 
                 {{-- Desktop Nav Items --}}
-                <div class="hidden sm:flex">
+                <div class="hidden md:flex">
                     <ul class="flex flex-col sm:flex-row">
-                        <li><a href="#" class="sm:px-4 py-2 block">Rates</a></li>
+                        <li><a href="#" class="sm:px-4 py-2 block">Demo</a></li>
                         <li><a href="#" class="sm:px-4 py-2 sm:hidden lg:block">About Us</a></li>
-                        <li><a href="#" class="sm:px-4 py-2 sm:hidden md:block">Resources</a></li>
-                        <li><a href="#" class="sm:px-4 py-2 sm:hidden md:block">FAQs</a></li>
+                        <li><a href="#" class="sm:px-4 py-2 sm:hidden md:block">Pricing</a></li>
                         @if(Route::has('login'))
                             @auth
                                 @can('isEmployee')
@@ -142,6 +140,50 @@
                 </div>
             </div>
         </section>
+
+        {{-- Cards --}}
+        <section class="bg-gray-50 text-center py-20 px-6 sm:px-8 lg:px-16 xl:px-40 2xl:px-64">
+            <h1 class="text-3xl lg:text-3xl xl:text-4xl leading-tight font-bold lg:mb-4">By choosing ANSR you are able to...</h1>
+            <div class="flex flex-col md:flex-row justify-center py-8">
+                <div class="my-8 mx-4 py-6 px-4 bg-white shadow-md rounded-lg">
+                    <img class="mx-auto h-24 lg:h-32" src="img/buildings.svg" alt="buildings">
+                    <h2 class="my-3 font-bold text-xl">Simplify Maintenance</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, expedita!</p>
+                </div>
+                <div class="my-8 mx-4 py-6 px-4 bg-white shadow-md rounded-lg">
+                    <img class="mx-auto h-24 lg:h-32" src="img/tenants.svg" alt="tenants">
+                    <h2 class="my-3 font-bold text-xl">Increase tenant satisfaction</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, ullam.</p>
+                </div>
+                <div class="my-8 mx-4 py-6 px-4 bg-white shadow-md rounded-lg">
+                    <img class="mx-auto h-24 lg:h-32" src="img/value.svg" alt="value">
+                    <h2 class="my-3 font-bold text-xl">Up productivity, cut costs</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, ipsam!</p>
+                </div>
+            </div>
+        </section>
+
+        {{-- Info --}}
+        <section class="bg-gray-50 px-6 pb-20 lg:py-20 sm:px-8 lg:px-16 xl:px-32 2xl:px-64">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                <div class="lg:mx-12 mb-20 md:mb-0">
+                    <h6 class="text-orange-500 uppercase font-bold text-sm">Lorem</h6>
+                    <h2 class="text-2xl lg:text-2xl xl:text-3xl leading-tight font-bold">Lorem ipsum dolor sit amet consectetur adipisicing.</h2>
+                    <p class="text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eius ipsum nostrum laborum facilis nam rerum assumenda nobis?</p>
+                </div>
+                <div class="bg-white shadow-xl rounded-lg lg:mx-12 p-8">
+                    <div class="flex items-center mb-3">
+                        <img src="img/user-1.jpg" alt="user" class="rounded-full w-20 h-20">
+                        <div class="ml-3">
+                            <h3 class="font-bold text-lg">John Doe</h3>
+                            <h6 class="text-sm text-gray-400 mb-3">Operations Manager</h6>
+                        </div>
+                    </div>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident at dignissimos illum sed, inventore ipsum?</p>
+                </div>
+            </div>
+        </section>
+
 
     </main>
 
