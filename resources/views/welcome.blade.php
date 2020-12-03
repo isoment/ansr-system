@@ -296,27 +296,27 @@
         </section>
 
         {{-- Footer --}}
-        <footer class="bg-white">
-            <div class="flex flex-col justify-around items-start md:flex-row max-width-1375 mx-auto py-36">
-                <div class="flex flex-col">
-                    <h4 class="font-prompt text-lg font-bold mb-4 text-orange-500">Company</h4>
+        <footer class="bg-white text-center lg:text-left">
+            <div class="flex flex-col items-center lg:justify-around lg:items-start lg:flex-row max-width-1375 mx-auto py-12 lg:py-36">
+                <div class="flex flex-col mb-6 lg:mb-0">
+                    <h4 class="font-prompt text-lg font-bold mb-1 lg:mb-4 text-orange-500">Company</h4>
                     <a href="#">Resources</a>
                     <a href="#">About</a>
                 </div>
-                <div class="flex flex-col">
-                    <h4 class="font-prompt text-lg font-bold mb-4 text-orange-500">Legal</h4>
+                <div class="flex flex-col mb-6 lg:mb-0">
+                    <h4 class="font-prompt text-lg font-bold mb-1 lg:mb-4 text-orange-500">Legal</h4>
                     <a href="#">Terms Of Service</a>
                     <a href="#">Information</a>
                     <a href="#">Privacy Policy</a>
                 </div>
-                <div class="flex flex-col">
-                    <h4 class="font-prompt text-lg font-bold mb-4 text-orange-500">Contact</h4>
+                <div class="flex flex-col mb-6 lg:mb-0">
+                    <h4 class="font-prompt text-lg font-bold mb-1 lg:mb-4 text-orange-500">Contact</h4>
                     <a href="#">contact@ansr.test</a>
                     <p>4800 Commerce Pkwy</p>
                     <p>Summerdale, TN 89221</p>
                     <p>555-555-5555</p>
                 </div>
-                <div class="flex flex-col">
+                <div class="flex flex-col items-center lg:items-start mt-6 lg:mt-0">
                     <div>
                         <a href='#' class="flex items-center">
                             <img src="img/house.svg" alt="Logo" class="h-8 w-8">
