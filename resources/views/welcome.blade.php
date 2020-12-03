@@ -49,7 +49,8 @@
 
                 {{-- Mobile Nav Items --}}
                 <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-                     x-show="navShow">
+                     x-show="navShow"
+                     @click.away="navShow = false">
                     <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div class="px-5 pt-4 flex items-center justify-between">
                             <div>
@@ -107,12 +108,12 @@
                             @else
                                 <li>
                                     <a href="{{route('login')}}" class="sm:px-4 py-2 block text-teal-300 border border-teal-300 
-                                        hover:bg-teal-300 hover:text-white rounded-lg ml-4">Login</a>
+                                        hover:bg-teal-300 hover:text-white rounded-lg ml-4 transition-all ease-in-out duration-200">Login</a>
                                 </li>
                                 @if (Route::has('register'))
                                     <li>
                                         <a href="{{route('register')}}" class="sm:px-4 py-2 block bg-teal-300 hover:bg-teal-400 
-                                            text-white rounded-lg ml-4">Register</a>
+                                            text-white rounded-lg ml-4 transition-all ease-in-out duration-200">Register</a>
                                     </li>
                                 @endif
                             @endauth
@@ -129,10 +130,12 @@
                         sm:text-left">
             <div>
                 <div class="relative w-full sm:w-2/3 lg:w-1/2 z-10">
-                    <h1 class="text-3xl lg:text-4xl xl:text-5xl leading-tight font-bold">ANSR, the premier upkeep solution for property managers</h1>
+                    <h1 class="text-3xl lg:text-4xl xl:text-5xl leading-tight font-bold font-prompt">ANSR, the premier upkeep solution for property managers</h1>
                     <p class="text-base leading-snug text-gray-700 mt-4">Fusce dapibus, tellus ac cursus commodo, tortor mauris
                         condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <a href="#" class="w-full block sm:inline-block sm:w-auto px-6 py-4 bg-orange-400 hover:bg-orange-500 text-white rounded-lg mt-8">Get Started</a>
+                    <a href="#" class="w-full block sm:inline-block sm:w-auto px-6 py-3 bg-orange-400 
+                                    hover:bg-orange-500 text-white rounded-lg mt-8 transition-all ease-in-out
+                                    duration-200">Get Started</a>
                 </div>
 
                 <div class="w-full absolute bottom-0 right-0">
@@ -142,9 +145,9 @@
         </section>
 
         {{-- Cards --}}
-        <section class="bg-gray-50 text-center py-20 px-6 sm:px-8 lg:px-16 xl:px-40 2xl:px-64">
-            <h1 class="text-3xl lg:text-3xl xl:text-4xl leading-tight font-bold lg:mb-4">By choosing ANSR you are able to...</h1>
-            <div class="flex flex-col md:flex-row justify-center py-8">
+        <section class="bg-gray-50 text-center pt-20 pb-8 px-6 sm:px-8 lg:px-16 xl:px-40 2xl:px-96">
+            <h1 class="text-3xl lg:text-3xl xl:text-4xl leading-tight font-bold lg:mb-4 font-prompt">By choosing ANSR you...</h1>
+            <div class="flex flex-col md:flex-row justify-center py-8 max-width-1375 mx-auto">
                 <div class="my-8 mx-4 py-6 px-4 bg-white shadow-md rounded-lg">
                     <img class="mx-auto h-24 lg:h-32" src="img/buildings.svg" alt="buildings">
                     <h2 class="my-3 font-bold text-xl">Simplify Maintenance</h2>
@@ -163,13 +166,121 @@
             </div>
         </section>
 
-        {{-- Info --}}
-        <section class="bg-gray-50 px-6 pb-20 lg:py-20 sm:px-8 lg:px-16 xl:px-32 2xl:px-64">
-            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+        {{-- About --}}
+        <section class="bg-gray-50 px-6 lg:pt-4 pb-20 sm:px-8 lg:px-16 xl:px-32 2xl:px-92">
+            <h1 class="text-3xl lg:text-3xl xl:text-4xl leading-tight font-bold mb-16 lg:mb-16 font-prompt text-center">About our product...</h1>
+            <div class="lg:mx-auto grid grid-cols-1 lg:grid-cols-2 gap-0 max-width-1375">
+                <div class="bg-white rounded-t-lg lg:rounded-tr-none lg:rounded-tl-lg lg:rounded-bl-lg border border-teal-400">
+                    <div class="mx-4 lg:ml-8 lg:mr-20 my-8 lg:my-20">
+                        <h6 class="text-orange-500 uppercase font-bold text-lg">Full Featured</h6>
+                        <h2 class="text-3xl leading-tight font-bold mb-16">Lorem ipsum dolor sit amet cotetur adipisicing.</h2>
+                        <div class="flex flex-row items-start mb-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-20 rounded-lg bg-teal-400 text-white p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold mb-2">List View</h5>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, perferendis inventore. Expedita treu corporis adipisci?</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-start mb-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-20 rounded-lg bg-teal-400 text-white p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold mb-2">List View</h5>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, perferendis inventore. Expedita treu corporis adipisci?</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-start mb-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-20 rounded-lg bg-teal-400 text-white p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold mb-2">List View</h5>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, perferendis inventore. Expedita treu corporis adipisci?</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-20 rounded-lg bg-teal-400 text-white p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            <div class="ml-4">
+                                <h5 class="text-lg font-bold mb-2">List View</h5>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, perferendis inventore. Expedita treu corporis adipisci?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-white bg-teal-400 rounded-b-lg lg:rounded-tr-lg lg:rounded-bl-none lg:rounded-br-lg flex flex-col justify-center items-center">
+                    <div class="flex flex-col items-center p-8 lg:p-0">
+                        <div class="flex items-center mb-8 mr-3">
+                            <div class="flex flex-col items-center">
+                                <h2 class="font-extrabold text-4xl sm:text-6xl font-prompt">$99</h2>
+                                <span class="-mt-4 text-teal-100">Setup Fee</span>
+                            </div>
+                            <div><span class="mx-8 sm:mx-16 text-3xl text-teal-100">+</span></div>
+                            <div class="flex flex-col items-center">
+                                <h2 class="font-extrabold text-4xl sm:text-6xl font-prompt">$15</h2>
+                                <span class="-mt-4 text-teal-100">Per Month</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-px text-lg text-white">
+                            <div class="bg-teal-500 px-4 py-4 rounded-tl-lg flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="ml-2">Unlimited regions</span>
+                            </div>
+                            <div class="bg-teal-500 px-4 py-4 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="ml-2">Unlimited employees</span>
+                            </div>
+                            <div class="bg-teal-500 px-4 py-4 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="ml-2">No hidden fees</span>
+                            </div>
+                            <div class="bg-teal-500 px-4 py-4 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="ml-2">Free support</span>
+                            </div>
+                            <div class="bg-teal-500 px-4 py-4 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="ml-2">New features</span>
+                            </div>
+                            <div class="bg-teal-500 px-4 py-4 flex items-center rounded-br-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="ml-2">Cancel anytime</span>
+                            </div>
+                        </div>
+                            <a href="#" class="w-auto sm:w-full block text-center font-semibold text-lg px-6 py-3 bg-orange-400 
+                                    hover:bg-orange-500 text-white rounded-lg mt-8 transition-all ease-in-out
+                                    duration-200">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- Testimony --}}
+        <section class="bg-gray-50 px-6 pb-20 sm:px-8 lg:px-16 xl:px-32 2xl:px-92">
+            <h1 class="text-3xl lg:text-3xl xl:text-4xl leading-tight font-bold mb-12 lg:mb-12 text-center font-prompt">What customers are saying...</h1>
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center max-width-1375 mx-auto">
                 <div class="lg:mx-12 mb-20 md:mb-0">
                     <h6 class="text-orange-500 uppercase font-bold text-sm">Lorem</h6>
                     <h2 class="text-2xl lg:text-2xl xl:text-3xl leading-tight font-bold">Lorem ipsum dolor sit amet consectetur adipisicing.</h2>
-                    <p class="text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eius ipsum nostrum laborum facilis nam rerum assumenda nobis?</p>
+                    <p class="text-lg mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eius ipsum nostrum laborum facilis nam rerum assumenda nobis?</p>
+                    <a href="#" class="px-4 py-1 bg-orange-400 hover:bg-orange-500 text-white rounded-lg
+                                transition-all ease-in-out duration-200">Learn More</a>
                 </div>
                 <div class="bg-white shadow-xl rounded-lg lg:mx-12 p-8">
                     <div class="flex items-center mb-3">
