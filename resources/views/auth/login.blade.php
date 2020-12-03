@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="w-full h-screen flex items-center justify-center">
-    <form class="w-full md:w-1/3 bg-white rounded-lg" method="POST" action="{{ route('login') }}">
+    <form class="w-full md:w-1/2 max-w-xl bg-white lg:border border-cool-gray-300 rounded-lg" method="POST" action="{{ route('login') }}">
         @csrf
 
-        <div class="flex font-bold justify-center mb-6">
+        <div class="flex font-bold justify-center mb-3 lg:mb-6 lg:mt-12">
             <a href="{{ route('landing') }}">
                 <img src="img/house.svg" alt="Logo" class="h-20 w-20 mb-4">
             </a>
@@ -14,16 +14,18 @@
 
         <div class="px-12 pb-10">
 
+            <h2 class="font-bold text-lg mb-5 text-gray-600">Sign In</h2>
+
             {{-- Email --}}
             <div class="w-full mb-4">
                 <div class="flex items-center">
-                    <i class='ml-3 fill-current text-gray-400 text-xs z-10 fas fa-user'></i>
+                    <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-user'></i>
                     <input type="email" id="email" name="email" placeholder="Email"
-                        class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none 
-                            @error('email') border-red-500 @enderror" value="{{ old('email') }}" required />
+                        class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                            @error('email') border-orange-400 @enderror" value="{{ old('email') }}" required />
                 </div>
                 @error('email')
-                    <p class="text-red-500 text-xs italic mt-4">
+                    <p class="text-orange-400 text-xs italic mt-4">
                         {{ $message }}
                     </p>
                 @enderror
@@ -32,13 +34,13 @@
             {{-- Password --}}
             <div class="w-full mb-4">
                 <div class="flex items-center">
-                    <i class='ml-3 fill-current text-gray-400 text-xs z-10 fas fa-lock'></i>
+                    <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-lock'></i>
                     <input name="password" type='password' id="password" placeholder="Password"
-                        class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
-                            @error('password') border-red-500 @enderror"/>
+                        class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                            @error('password') border-orange-400 @enderror"/>
                 </div>
                 @error('password')
-                    <p class="text-red-500 text-xs italic mt-4">
+                    <p class="text-orange-400 text-xs italic mt-4">
                         {{ $message }}
                     </p>
                 @enderror
@@ -63,8 +65,8 @@
             {{-- Submit and no account --}}
             <div class="flex flex-wrap">
                 <button type="submit"
-                    class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base 
-                        leading-normal no-underline text-gray-100 bg-orange-400 hover:bg-orange-500 sm:py-4">
+                    class="w-full select-none font-bold whitespace-no-wrap px-3 py-2 rounded-lg text-base 
+                        leading-normal no-underline text-gray-100 bg-orange-400 hover:bg-orange-500 focus:outline-none">
                         {{ __('Login') }}
                 </button>
 
