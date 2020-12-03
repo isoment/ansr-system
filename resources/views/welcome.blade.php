@@ -295,6 +295,45 @@
             </div>
         </section>
 
+        {{-- Footer --}}
+        <footer class="bg-white">
+            <div class="flex flex-col justify-around items-start md:flex-row max-width-1375 mx-auto py-36">
+                <div class="flex flex-col">
+                    <h4 class="font-prompt text-lg font-bold mb-4 text-orange-500">Company</h4>
+                    <a href="#">Resources</a>
+                    <a href="#">About</a>
+                </div>
+                <div class="flex flex-col">
+                    <h4 class="font-prompt text-lg font-bold mb-4 text-orange-500">Legal</h4>
+                    <a href="#">Terms Of Service</a>
+                    <a href="#">Information</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="flex flex-col">
+                    <h4 class="font-prompt text-lg font-bold mb-4 text-orange-500">Contact</h4>
+                    <a href="#">contact@ansr.test</a>
+                    <p>4800 Commerce Pkwy</p>
+                    <p>Summerdale, TN 89221</p>
+                    <p>555-555-5555</p>
+                </div>
+                <div class="flex flex-col">
+                    <div>
+                        <a href='#' class="flex items-center">
+                            <img src="img/house.svg" alt="Logo" class="h-8 w-8">
+                            <span class="text-xl font-bold ml-2">ANSR</span>
+                        </a>
+                    </div>
+                    <div class="mt-2">
+                        Lorem, ipsum dolor sit amet consectetur<br> adipisicing elit. Soluta culpa at numquam!
+                    </div>
+                </div>
+            </div>
+            <div class="max-width-1375 mx-auto">
+                <hr class="mb-4">
+                <div class="mb-4 text-center">&#169; 2020</div>
+            </div>
+        </footer>
+
 
     </main>
 
