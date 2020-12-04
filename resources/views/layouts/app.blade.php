@@ -22,38 +22,9 @@
 <body class="bg-white h-screen antialiased leading-none font-nunito">
 <div id="app">
 
-        {{-- <header class="bg-white shadow-sm py-3">
-            <div class="container mx-auto flex justify-between items-center px-6">
-                <div>
-                    <a href='/' class="flex items-center">
-                        <img src="/img/house.svg" alt="Logo" class="h-8 w-8">
-                        <span class="text-xl text-gray-500 font-bold ml-2">ANSR</span>
-                    </a>
-                </div>
-                <nav class="space-x-4 text-sm font-bold">
-                    @guest
-                        <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        @if (Route::has('register'))
-                            <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        @endif
-                    @else
-                        <span>{{ Auth::user()->name }}</span>
-
-                        <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline"
-                           onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                            {{ csrf_field() }}
-                        </form>
-                    @endguest
-                </nav>
-            </div>
-        </header> --}}
-
     <div class="flex h-screen bg-gray-50"
         :class="{ 'overflow-hidden': isSideMenuOpen }"
-        x-data="tenantDashMain()">
+        x-data="mainAppDashboard()">
 
         {{-- Desktop Side Menu --}}
         <aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
@@ -214,6 +185,7 @@
 
         {{-- Darken screen mobile --}}
         <div x-show="isSideMenuOpen"
+            x-cloak
             x-transition:enter="transition ease-in-out duration-150"
             x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100"
@@ -226,6 +198,7 @@
         {{-- Mobile Sidebar --}}
         <aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white"
             x-show="isSideMenuOpen"
+            x-cloak
             x-transition:enter="transition ease-in-out duration-150"
             x-transition:enter-start="opacity-0 transform -translate-x-20"
             x-transition:enter-end="opacity-100"
@@ -389,22 +362,47 @@
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md">
                 <div class="container flex items-center justify-between md:justify-end h-full px-6 mx-auto">
+
                     {{-- Mobile hamburger --}}
-                    <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-orange"
-                            @click="toggleSideMenu"
-                            aria-label="Menu">
+                    <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-orange" 
+                            aria-label="Menu"
+                            @click="toggleSideMenu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
-                    <ul class="flex items-center flex-shrink-0 space-x-6">
+
+                    <div class="flex items-center flex-shrink-0 space-x-6">
+
                         {{-- Profile menu --}}
-                        <li class="relative">
-                        <button class="align-middle rounded-full focus:shadow-outline-orange focus:outline-none"
-                                aria-label="Account" aria-haspopup="true">
-                            <img class="object-cover w-8 h-8 rounded-full"
-                            src="/img/no-avatar.svg">
-                        </button>
-                        </li>
-                    </ul>
+                        <div class="relative"
+                             @click.away="isProfileMenuOpen = false"
+                             @keydown.escape="isProfileMenuOpen = false">
+                            <button class="align-middle rounded-full focus:shadow-outline-orange focus:outline-none"
+                                    aria-label="Account" 
+                                    aria-haspopup="true"
+                                    @click="toggleProfileMenu">
+                                <img class="object-cover w-8 h-8 rounded-full"
+                                src="/img/no-avatar.svg">
+                            </button>
+                        </div>
+
+                        {{-- Profile Dropdown --}}
+                        <div class="bg-gray-50 py-2 flex flex-col absolute top-14 right-9 rounded 
+                                    shadow-md font-bold text-sm text-gray-600"
+                             x-show="isProfileMenuOpen"
+                             x-cloak>
+                            <span class="block py-2 px-4 text-teal-400">{{auth()->user()->name}}</span>
+                            <a href="#" class="block py-2 px-4 hover:bg-gray-100">Profile</a>
+                            <div class="block py-2 px-4 hover:bg-gray-100">
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
+                        </div>  
+
+                    </div>
                 </div>
             </header>
             <div class="m-12">
@@ -416,20 +414,25 @@
 
 </div>
 <script>
-    function tenantDashMain() {
+    function mainAppDashboard() {
 
         return {
             isSideMenuOpen: false,
+            isProfileMenuOpen: false,
 
             toggleSideMenu() {
-                this.isSideMenuOpen = !this.isSideMenuOpen
+                this.isSideMenuOpen = ! this.isSideMenuOpen;
             },
 
             closeSideMenu() {
-                this.isSideMenuOpen = false
+                this.isSideMenuOpen = false;
             },
-        }
-    }
+
+            toggleProfileMenu() {
+                this.isProfileMenuOpen = ! this.isProfileMenuOpen;
+            }
+        };
+    };
 </script>
 </body>
 </html>

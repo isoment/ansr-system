@@ -11,6 +11,11 @@
     box-sizing: border-box;
 }
 
+/* For Alpine.js */
+[x-cloak] {
+    display: none;
+}
+
 .max-width-1375 {
     max-width: 1300px;
 }
