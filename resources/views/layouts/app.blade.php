@@ -58,7 +58,11 @@
         {{-- Desktop Side Menu --}}
         <aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
             <div class="py-4 text-gray-500">
-                <a class="ml-6 text-lg font-bold text-gray-800" href="#">ANSR</a>
+                {{-- <a class="ml-6 text-lg font-bold text-gray-800" href="#">ANSR</a> --}}
+                <a href='#' class="flex items-center ml-6">
+                    <img src="/img/house.svg" alt="Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold ml-2">ANSR</span>
+                </a>
 
                 <ul class="mt-6">
                     <li class="relative px-6 py-3">
@@ -232,7 +236,10 @@
             @keydown.escape="closeSideMenu">
 
             <div class="py-4 text-gray-500">
-                <a class="ml-6 text-lg font-bold text-gray-800" href="#">ANSR</a>
+                <a href='#' class="flex items-center ml-6">
+                    <img src="/img/house.svg" alt="Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold ml-2">ANSR</span>
+                </a>
                 <ul class="mt-6">
                     <li class="relative px-6 py-3">
                         <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 
@@ -386,12 +393,7 @@
                     <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-orange"
                             @click="toggleSideMenu"
                             aria-label="Menu">
-                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                clip-rule="evenodd">
-                            </path>
-                        </svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                     <ul class="flex items-center flex-shrink-0 space-x-6">
                         {{-- Profile menu --}}
@@ -399,7 +401,7 @@
                         <button class="align-middle rounded-full focus:shadow-outline-orange focus:outline-none"
                                 aria-label="Account" aria-haspopup="true">
                             <img class="object-cover w-8 h-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82">
+                            src="/img/no-avatar.svg">
                         </button>
                         </li>
                     </ul>

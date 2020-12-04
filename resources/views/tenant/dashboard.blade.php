@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <main class="sm:container sm:mx-auto sm:mt-10">
+
+<main class="sm:container sm:mx-auto sm:mt-10 text-sm">
     <div class="w-full sm:px-6">
 
         @if (session('status'))
@@ -11,21 +12,15 @@
             </div>
         @endif
 
-        <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-lg">
-
-            <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                Dashboard
-            </header>
-
+        <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md">
             <div class="w-full p-6">
                 <p class="text-gray-700">
                     Hello, tenant!
                 </p>
             </div>
         </section>
+        
     </div>
-</main> --}}
-
-TEST
+</main>
 
 @endsection
