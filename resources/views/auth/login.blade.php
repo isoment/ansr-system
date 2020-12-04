@@ -84,6 +84,10 @@
         </div>
 
     </form>
+    <script>
+        console.log({'tenant': 'rozella.heathcote@gmail.com'});
+        console.log({'employee': 'schiller.hope@johns.info'});
+    </script>
 </div>
 
 @endsection
