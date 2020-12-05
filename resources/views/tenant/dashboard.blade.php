@@ -37,7 +37,7 @@
                 </a>
             </div>
             <div class="">
-                <a href="">
+                <a href="#">
                     <div class="h-full flex flex-col items-center justify-center text-center 
                                 shadow-md rounded-lg py-6 px-20 bg-white">
                         <i class="text-orange-400 fas fa-toolbox text-6xl"></i>
@@ -47,7 +47,7 @@
                 </a>    
             </div>
             <div class="">
-                <a href="">
+                <a href="#">
                     <div class="h-full flex flex-col items-center justify-center text-center 
                                 shadow-md rounded-lg py-6 px-20 bg-white">
                         <i class="text-orange-400 fas fa-toolbox text-6xl"></i>
@@ -57,7 +57,7 @@
                 </a>
             </div>
             <div class="mb-8 lg:mb-0">
-                <a href="">
+                <a href="#">
                     <div class="h-full flex flex-col items-center justify-center text-center 
                                 shadow-md rounded-lg py-6 px-20 bg-white">
                         <i class="text-orange-400 fas fa-key text-6xl"></i>
