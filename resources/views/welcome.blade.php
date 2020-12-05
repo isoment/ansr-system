@@ -50,6 +50,7 @@
                 {{-- Mobile Nav Items --}}
                 <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
                      x-show="navShow"
+                     x-cloak
                      @click.away="navShow = false">
                     <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div class="px-5 pt-4 flex items-center justify-between">
@@ -71,16 +72,41 @@
                                 </button>
                             </div>
                         </div>
-                        <div>
+                        <div class="flex flex-col">
                             <div class="px-2 pt-2 pb-3 space-y-1">
-                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Demo</a>
-                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">About Us</a>
-                                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-orange-50">Pricing</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:text-gray-900 hover:bg-orange-50">Demo</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:text-gray-900 hover:bg-orange-50">About Us</a>
+                                <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:text-gray-900 hover:bg-orange-50">Pricing</a>
                             </div>
                             <div>
-                                <a href="#" class="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100">
-                                    Get Started
-                                </a>
+                                <ul class="text-center">
+                                    @if(Route::has('login'))
+                                        @auth
+                                            @can('isEmployee')
+                                                <li>
+                                                    <a href="{{route('employee.dashboard')}}" class="bg-teal-300 
+                                                        text-white block px-3 py-2">Dashboard</a>
+                                                </li>
+                                            @elsecan('isTenant')
+                                                <li>
+                                                    <a href="{{route('tenant.dashboard')}}" class="bg-teal-300 
+                                                        text-white block px-3 py-2">Dashboard</a>
+                                                </li>
+                                            @endcan
+                                        @else
+                                            <li>
+                                                <a href="{{route('login')}}" class="bg-teal-300 
+                                                text-white block px-3 py-2 uppercase font-bold font-prompt tracking-wider border-b border-gray-50">Login</a>
+                                            </li>
+                                            @if (Route::has('register'))
+                                                <li>
+                                                    <a href="{{route('register')}}" class="bg-teal-300 
+                                                    text-white block px-3 py-2 uppercase font-bold font-prompt tracking-wider">Register</a>
+                                                </li>
+                                            @endif
+                                        @endauth
+                                    @endif
+                                </ul>
                             </div>
                         </div>
                     </div>
