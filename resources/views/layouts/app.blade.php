@@ -174,9 +174,11 @@
                     </div>
                 </div>
             </header>
-            <div class="mx-2 my-7 md:m-12">
+
+            <main class="h-full overflow-y-auto">
                 @yield('content')
-            </div>
+            </main>
+
         </div>
 
     </div>
