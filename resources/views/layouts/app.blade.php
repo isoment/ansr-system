@@ -19,9 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 
 </head>
-<body class="bg-white h-screen antialiased leading-none font-nunito">
+<body class="bg-gray-50 h-screen antialiased leading-none font-nunito">
 <div id="app">
-
     <div class="flex h-screen bg-gray-50"
         :class="{ 'overflow-hidden': isSideMenuOpen }"
         x-data="mainAppDashboard()">
@@ -43,7 +42,6 @@
                                 transition-colors duration-150 hover:text-gray-800" href="#">
                         <svg
                             class="w-5 h-5"
-                            aria-hidden="true"
                             fill="none"
                             stroke-linecap="round"
                             stroke-linejoin="round"
@@ -106,7 +104,6 @@
                                 transition-colors duration-150 hover:text-gray-800" href="#">
                             <svg
                                 class="w-5 h-5"
-                                aria-hidden="true"
                                 fill="none"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -133,13 +130,13 @@
             </div>
         </aside>
 
+        {{-- Top Navigation --}}
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md">
                 <div class="container flex items-center justify-between md:justify-end h-full px-6 mx-auto">
 
                     {{-- Mobile hamburger --}}
                     <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-orange" 
-                            aria-label="Menu"
                             @click="toggleSideMenu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
@@ -151,8 +148,6 @@
                              @click.away="isProfileMenuOpen = false"
                              @keydown.escape="isProfileMenuOpen = false">
                             <button class="align-middle rounded-full focus:shadow-outline-orange focus:outline-none"
-                                    aria-label="Account" 
-                                    aria-haspopup="true"
                                     @click="toggleProfileMenu">
                                 <img class="object-cover w-8 h-8 rounded-full"
                                 src="/img/no-avatar.svg">
@@ -165,8 +160,8 @@
                              x-show="isProfileMenuOpen"
                              x-cloak>
                             <span class="block py-2 px-4 text-teal-500">{{auth()->user()->name}}</span>
-                            <a href="#" class="block py-2 px-4 hover:bg-gray-100">Profile</a>
-                            <div class="block py-2 px-4 hover:bg-gray-100">
+                            <a href="#" class="block py-2 px-4 hover:bg-teal-100">Profile</a>
+                            <div class="block py-2 px-4 hover:bg-teal-100">
                                 <a href="{{ route('logout') }}" class="block"
                                     onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
@@ -179,7 +174,7 @@
                     </div>
                 </div>
             </header>
-            <div class="m-12">
+            <div class="mx-2 my-7 md:m-12">
                 @yield('content')
             </div>
         </div>

@@ -346,7 +346,7 @@
                     <div>
                         <a href='#' class="flex items-center">
                             <img src="img/house.svg" alt="Logo" class="h-8 w-8">
-                            <span class="text-xl font-bold ml-2">ANSR</span>
+                            <span class="text-xl font-bold ml-2 text-gray-500">ANSR</span>
                         </a>
                     </div>
                     <div class="mt-2">
