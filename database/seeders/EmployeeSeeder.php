@@ -14,6 +14,14 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
+        Employee::factory()->create([
+            'id' => 1,
+            'first_name' => 'Test',
+            'last_name' => 'Employee',
+            'employee_id_number' => 'a8839910',
+            'email' => 'employee@test.com',
+        ]);
+
         Employee::factory()->times(48)->create();
     }
 }

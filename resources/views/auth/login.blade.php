@@ -12,6 +12,13 @@
             </a>
         </div>
 
+        <div class="text-sm border rounded text-teal-700 border-teal-600 text-center
+                bg-teal-100 px-3 py-4 mb-4 mx-4" role="alert">
+            <h2 class="mb-2 font-bold">Test Logins</h2>
+            <h6 class="text-xs mb-1">Email: employee@test.com, Password: password</h6>
+            <h6 class="text-xs">Email: tenant@test.com, Password: password</h6>
+        </div>
+
         <div class="px-12 pb-10">
 
             <h2 class="font-bold text-lg mb-5 text-gray-600">Sign In</h2>
@@ -84,10 +91,6 @@
         </div>
 
     </form>
-    <script>
-        console.log({'tenant': 'rozella.heathcote@gmail.com'});
-        console.log({'employee': 'schiller.hope@johns.info'});
-    </script>
 </div>
 
 @endsection

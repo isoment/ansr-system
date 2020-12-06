@@ -14,7 +14,7 @@
     {{-- Greeting --}}
     <section class="flex flex-col break-words bg-white text-gray-700 sm:border-1 sm:rounded-md
                     mb-8">
-        <div class="w-full p-6">
+        <div class="w-full p-6 shadow-md">
             <h3 class="font-bold text-lg">
                 Hello {{auth()->user()->name}}. What do you need help with?
             <h3>
@@ -49,7 +49,7 @@
             <a href="#">
                 <div class="h-full flex flex-col items-center justify-center text-center 
                             shadow-md rounded-lg py-6 px-20 bg-white">
-                    <i class="text-orange-400 fas fa-toolbox text-6xl"></i>
+                    <i class="text-orange-400 fas fa-copy text-6xl"></i>
                     <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Leasing</h2>
                     <p class="mt-4">Any issues related to leasing including renewals.</p>
                 </div>
@@ -59,7 +59,7 @@
             <a href="#">
                 <div class="h-full flex flex-col items-center justify-center text-center 
                             shadow-md rounded-lg py-6 px-20 bg-white">
-                    <i class="text-orange-400 fas fa-key text-6xl"></i>
+                    <i class="text-orange-400 fas fa-list-alt text-6xl"></i>
                     <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">All other issues</h2>
                     <p class="mt-4">Anything not covered by the above categories.</p>
                 </div>

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ServiceRequestSeeder::class,
             WorkOrderSeeder::class,
             WorkDetailsSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

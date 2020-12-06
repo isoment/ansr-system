@@ -15,6 +15,10 @@ class RequestCategorySeeder extends Seeder
     public function run()
     {
         RequestCategory::create([
+            'name' => 'New Key'
+        ]);
+
+        RequestCategory::create([
             'name' => 'Plumbing'
         ]);
 
