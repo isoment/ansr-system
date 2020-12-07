@@ -64,4 +64,21 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    /**
+     *  Tenant Lease
+     */
+    public function tenantLease()
+    {
+        return $this->userable->lease;
+    }
+
+    /**
+     *  Property associated with tenants lease
+     */
+    public function tenantProperty()
+    {
+        return $this->userable->lease->property;
+    }
+
 }

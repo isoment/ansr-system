@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container px-20 py-12 mx-auto">
+<div class="container px-4 lg:px-20 py-12 mx-auto">
 
     @if (session('status'))
         <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 
@@ -15,7 +15,7 @@
     <section class="flex flex-col break-words bg-white text-gray-700 sm:border-1 sm:rounded-md
                     mb-8">
         <div class="w-full p-6 shadow-md">
-            <h3 class="font-bold text-lg">
+            <h3 class="font-bold text-lg text-center">
                 Hello {{auth()->user()->name}}. What do you need help with?
             <h3>
         </div>
@@ -24,7 +24,7 @@
     {{-- Help Cards --}}
     <section class="text-gray-700 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="">
-            <a href="#">
+            <a href="{{ route('replace.key') }}">
                 <div class="h-full flex flex-col items-center justify-center text-center 
                             shadow-md rounded-lg py-6 px-20 bg-white">
                     <i class="text-orange-400 fas fa-key text-6xl"></i>

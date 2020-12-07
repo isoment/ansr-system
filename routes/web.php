@@ -21,8 +21,14 @@ Auth::routes();
 
 // Tenant Routes
 Route::middleware('can:isTenant')->group(function() {
+
+    // Dashboard
     Route::get('/tenant/db', [\App\Http\Controllers\Tenant\TenantDashboardController::class, 'index'])
         ->name('tenant.dashboard');
+
+    // Key request
+    Route::get('tenant/replace-key', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'keyReplacement'])
+        ->name('replace.key');
 });
 
 // Employee Routes

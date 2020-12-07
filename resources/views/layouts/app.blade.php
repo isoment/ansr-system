@@ -94,7 +94,7 @@
             @keydown.escape="closeSideMenu">
 
             <div class="py-4 text-gray-500">
-                <a href='#' class="flex items-center ml-6">
+                <a href='{{ route('tenant.dashboard') }}' class="flex items-center ml-6">
                     <img src="/img/house.svg" alt="Logo" class="h-8 w-8">
                     <span class="text-xl font-bold ml-2">ANSR</span>
                 </a>
@@ -133,7 +133,7 @@
         {{-- Top Navigation --}}
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md">
-                <div class="container flex items-center justify-between md:justify-end h-full px-6 mx-auto">
+                <div class="flex items-center justify-between md:justify-end h-full px-6 mx-auto">
 
                     {{-- Mobile hamburger --}}
                     <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-orange" 
