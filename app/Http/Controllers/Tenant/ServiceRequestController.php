@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
+use App\Models\RequestCategory;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -40,7 +41,29 @@ class ServiceRequestController extends Controller
      */
     public function keyReplacementStore(Request $request)
     {
-        //
+        if (Gate::allows('isTenant')) {
+
+            // Get category
+            $category = RequestCategory::newKeyCategory()->first();
+
+            // Key cost, hardcoded for now
+            $keyCost = 20.00;
+
+            $validated = $request->validate([
+                'quantity' => 'numeric|min:1|max:5',
+                'notes' => 'min:5',
+            ]);
+
+            ServiceRequest::create([
+                'tenant_id' => auth()->user()->id,
+                'category_id' => $category->id,
+                'issue' => 'Tenant requests new key.',
+                'description' => 'Tenant Notes: ' . $validated['notes'],
+                'tenant_charges' => $validated['quantity'] * $keyCost,
+            ]);
+
+            return redirect(route('tenant.dashboard'))->with('success', 'Your new key request was sent!');
+        }
     }
 
     /**

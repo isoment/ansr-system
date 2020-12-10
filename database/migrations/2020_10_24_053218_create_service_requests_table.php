@@ -17,7 +17,7 @@ class CreateServiceRequestsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('request_issue_id');
+            $table->unsignedBigInteger('request_issue_id')->nullable();
             $table->string('issue');
             $table->text('description');
             $table->decimal('tenant_charges')->nullable();

@@ -25,10 +25,12 @@ Route::middleware('can:isTenant')->group(function() {
     // Dashboard
     Route::get('/tenant/db', [\App\Http\Controllers\Tenant\TenantDashboardController::class, 'index'])
         ->name('tenant.dashboard');
-
     // Key request
     Route::get('tenant/replace-key', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'keyReplacement'])
         ->name('replace.key');
+    // Store key request
+    Route::post('tenant/replace-key', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'keyReplacementStore'])
+        ->name('replace.key.store');
 });
 
 // Employee Routes

@@ -9,6 +9,16 @@ class ServiceRequest extends Model
 {
     use HasFactory;
 
+    // protected $fillable = [
+    //     'issue',
+    //     'description',
+    //     'tenant_charges',
+    //     'assigned_date',
+    //     'completed_date',
+    // ];
+
+    protected $guarded = ['id'];
+
     /**
      *  RequestCategory Relationship
      */
