@@ -20,8 +20,24 @@ class RequestCategory extends Model
     /**
      *  Scope a query for the 'New Key' category
      */
-    public function scopeNewKeyCategory($query)
+    public function scopeNewKey($query)
     {
         return $query->where('name', 'New Key');
+    }
+
+    /**
+     *  Scope a query for all except 'New Key' category and return collection of names
+     */
+    public function scopeNamesExceptNewKey($query)
+    {
+        return $query->whereNotIn('name', ['New Key'])->pluck('name');
+    }
+
+    /**
+     *  Scope a query for a specified category
+     */
+    public function scopeSpecifiedCategory($query, $category)
+    {
+        return $query->where('name', $category)->first();
     }
 }

@@ -33,7 +33,7 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        if (auth()->user()->userRole('App\Models\Employee')) {
+        if (auth()->user()->userable_type === 'App\Models\Employee') {
             return route('employee.dashboard');
         }
 

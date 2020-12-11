@@ -33,19 +33,19 @@ class ServiceRequestController extends Controller
     {
         if (Gate::allows('isTenant')) {
 
-            // Get category
-            $category = RequestCategory::newKeyCategory()->first();
-
-            // Key cost, hardcoded for now
-            $keyCost = 20.00;
-
             $validated = $request->validate([
                 'quantity' => 'numeric|min:1|max:5',
                 'notes' => 'min:5',
             ]);
 
+            // Get category
+            $category = RequestCategory::newKey()->first();
+
+            // Key cost, hardcoded for now
+            $keyCost = 20.00;
+
             ServiceRequest::create([
-                'tenant_id' => auth()->user()->id,
+                'tenant_id' => auth()->id(),
                 'category_id' => $category->id,
                 'issue' => 'Tenant requests new key.',
                 'description' => 'Tenant Notes: ' . $validated['notes'],
@@ -64,10 +64,10 @@ class ServiceRequestController extends Controller
      */
     public function createServiceRequest() 
     {
-        $requestCategories = RequestCategory::all()->pluck('name');
+        $requestCategories = RequestCategory::namesExceptNewKey();
 
         return view('tenant.service-request', [
-            'requestCategories' => $requestCategories
+            'requestCategories' => $requestCategories,
         ]);
     }
 
@@ -86,6 +86,17 @@ class ServiceRequestController extends Controller
                 'issue' => 'required|min:5',
                 'description' => 'required|min:10',
             ]);
+
+            $categoryId = RequestCategory::specifiedCategory($validated['category'])->id;
+
+            ServiceRequest::create([
+                'tenant_id' => auth()->id(),
+                'category_id' => $categoryId,
+                'issue' => $validated['issue'],
+                'description' => $validated['description'],
+            ]);
+
+            return redirect(route('tenant.dashboard'))->with('success', 'Your service request was sent!');
 
         }
     }
