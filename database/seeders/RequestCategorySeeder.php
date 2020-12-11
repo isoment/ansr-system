@@ -9,7 +9,7 @@ class RequestCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * 
      * @return void
      */
     public function run()
@@ -23,7 +23,7 @@ class RequestCategorySeeder extends Seeder
         ]);
 
         RequestCategory::create([
-            'name' => 'Electric'
+            'name' => 'Electrical'
         ]);
 
         RequestCategory::create([
@@ -35,7 +35,7 @@ class RequestCategorySeeder extends Seeder
         ]);
 
         RequestCategory::create([
-            'name' => 'Misc'
+            'name' => 'Other'
         ]);
     }
 }

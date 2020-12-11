@@ -31,6 +31,12 @@ Route::middleware('can:isTenant')->group(function() {
     // Store key request
     Route::post('tenant/replace-key', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'keyReplacementStore'])
         ->name('replace.key.store');
+    // Service request
+    Route::get('tenant/service-request', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'createServiceRequest'])
+        ->name('tenant.service-request');
+    // Service request store
+    Route::post('tenant/service-request', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'serviceRequestStore'])
+        ->name('tenant.service-request.store');
 });
 
 // Employee Routes

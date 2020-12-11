@@ -30,7 +30,7 @@
                     <div>{{$property->city}}, {{$property->state}} {{$property->zipcode}}</div>
                 </div>
 
-                <form action="" method="POST">
+                <form action="{{ route('replace.key.store') }}" method="POST">
 
                     @csrf
 
