@@ -49,10 +49,20 @@
                 <div class="h-full flex flex-col items-center justify-center text-center 
                             shadow-md rounded-lg py-6 px-20 bg-white">
                     <i class="text-orange-400 fas fa-toolbox text-6xl"></i>
-                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Service Request</h2>
+                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">New Service Request</h2>
                     <p class="mt-4">Here you can submit any other type of service request relating to your rental.</p>
                 </div>
             </a>    
+        </div>
+        <div class="mb-8 lg:mb-0">
+            <a href="#">
+                <div class="h-full flex flex-col items-center justify-center text-center 
+                            shadow-md rounded-lg py-6 px-20 bg-white">
+                    <i class="text-orange-400 fas fa-list-alt text-6xl"></i>
+                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">My Requests</h2>
+                    <p class="mt-4">Keep track of active and previous requests.</p>
+                </div>
+            </a>
         </div>
         <div class="">
             <a href="#">
@@ -61,16 +71,6 @@
                     <i class="text-orange-400 fas fa-copy text-6xl"></i>
                     <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Leasing</h2>
                     <p class="mt-4">Any issues related to leasing including renewals.</p>
-                </div>
-            </a>
-        </div>
-        <div class="mb-8 lg:mb-0">
-            <a href="#">
-                <div class="h-full flex flex-col items-center justify-center text-center 
-                            shadow-md rounded-lg py-6 px-20 bg-white">
-                    <i class="text-orange-400 fas fa-list-alt text-6xl"></i>
-                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">All other issues</h2>
-                    <p class="mt-4">Anything not covered by the above categories.</p>
                 </div>
             </a>
         </div>

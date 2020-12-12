@@ -100,6 +100,23 @@ class ServiceRequestController extends Controller
         }
     }
 
+    /**
+     *  Index of tenants service requests
+     * 
+     *  @return \Illuminate\Http\Response
+     */
+    public function index() 
+    {
+        return view('tenant.request-index');
+    }
+
+
+
+
+
+
+
+
 
 
     /**
@@ -109,29 +126,6 @@ class ServiceRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(ServiceRequest $serviceRequest)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ServiceRequest  $serviceRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ServiceRequest $serviceRequest)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ServiceRequest  $serviceRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ServiceRequest $serviceRequest)
     {
         //
     }

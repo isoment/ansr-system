@@ -21,7 +21,6 @@ Auth::routes();
 
 // Tenant Routes
 Route::middleware('can:isTenant')->group(function() {
-
     // Dashboard
     Route::get('/tenant/db', [\App\Http\Controllers\Tenant\TenantDashboardController::class, 'index'])
         ->name('tenant.dashboard');
@@ -37,6 +36,9 @@ Route::middleware('can:isTenant')->group(function() {
     // Service request store
     Route::post('tenant/service-request', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'serviceRequestStore'])
         ->name('tenant.service-request.store');
+    // Service request index
+    Route::get('tenant/my-requests', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'index'])
+        ->name('tenant.request-index');
 });
 
 // Employee Routes

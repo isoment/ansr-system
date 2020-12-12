@@ -57,12 +57,8 @@ class User extends Authenticatable
     public function tenantDetails()
     {
         return collect($this->userable->lease->property)
-            ->filter(function ($value, $key) {
-                return $key === 'street' || 
-                       $key === 'city' || 
-                       $key === 'state' || 
-                       $key === 'zipcode';
-            })->put('unit', $this->userable->lease->unit);
+            ->only(['street', 'city', 'state', 'zipcode'])
+            ->put('unit', $this->userable->lease->unit);
     }
 
 }
