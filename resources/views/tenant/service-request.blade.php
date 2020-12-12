@@ -24,10 +24,10 @@
                     to you as soon as we review it.
                 </h3>
                 
-                {{-- <div class="my-4 text-sm md:text-base text-center text-gray-500 border-2 bg-teal-50 border-teal-400 rounded-lg py-6 font-bold font-prompt">
-                    <div class="mb-2">{{ $property->street }}, {{$lease->unit}}</div>
-                    <div>{{$property->city}}, {{$property->state}} {{$property->zipcode}}</div>
-                </div> --}}
+                <div class="my-4 text-sm md:text-base text-center text-gray-500 border-2 bg-teal-50 border-teal-400 rounded-lg py-6 font-bold font-prompt">
+                    <div class="mb-2">{{ $tenantDetails->street }}, {{$tenantDetails->unit}}</div>
+                    <div>{{$tenantDetails->city}}, {{$tenantDetails->state}} {{$tenantDetails->zipcode}}</div>
+                </div>
 
                 <form action="{{ route('tenant.service-request.store') }}" method="POST">
 

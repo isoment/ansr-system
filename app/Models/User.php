@@ -52,19 +52,17 @@ class User extends Authenticatable
     }
 
     /**
-     *  Tenant Lease
+     *  Method to get some lease details
      */
-    public function tenantLease()
+    public function tenantDetails()
     {
-        return $this->userable->lease;
-    }
-
-    /**
-     *  Property associated with tenants lease
-     */
-    public function tenantProperty()
-    {
-        return $this->userable->lease->property;
+        return collect($this->userable->lease->property)
+            ->filter(function ($value, $key) {
+                return $key === 'street' || 
+                       $key === 'city' || 
+                       $key === 'state' || 
+                       $key === 'zipcode';
+            })->put('unit', $this->userable->lease->unit);
     }
 
 }

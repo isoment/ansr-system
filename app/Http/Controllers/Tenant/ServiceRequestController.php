@@ -18,8 +18,7 @@ class ServiceRequestController extends Controller
     public function keyReplacement()
     {
         return view('tenant.replace-key', [
-            'lease' => auth()->user()->tenantLease(),
-            'property' => auth()->user()->tenantProperty(),
+            'tenantDetails' => auth()->user()->tenantDetails(),
         ]);
     }
 
@@ -64,10 +63,9 @@ class ServiceRequestController extends Controller
      */
     public function createServiceRequest() 
     {
-        $requestCategories = RequestCategory::namesExceptNewKey();
-
         return view('tenant.service-request', [
-            'requestCategories' => $requestCategories,
+            'requestCategories' => RequestCategory::namesExceptNewKey(),
+            'tenantDetails' => auth()->user()->tenantDetails(),
         ]);
     }
 
@@ -87,6 +85,7 @@ class ServiceRequestController extends Controller
                 'description' => 'required|min:10',
             ]);
 
+            // Get a specific category
             $categoryId = RequestCategory::specifiedCategory($validated['category'])->id;
 
             ServiceRequest::create([
