@@ -23,7 +23,6 @@ class CreateServiceRequestsTable extends Migration
             $table->decimal('tenant_charges')->nullable();
             $table->dateTime('assigned_date')->nullable();
             $table->dateTime('completed_date')->nullable();
-            $table->boolean('open')->default(true);
             $table->timestamps();
         });
     }

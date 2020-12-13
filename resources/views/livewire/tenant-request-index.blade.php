@@ -71,15 +71,15 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                @if ($request->open)
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 text-teal-400">
-                                    Open
-                                </span>
-                                @else
+                                @if ($request->completed_date)
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-green-100 text-green-400">
                                     Complete
+                                </span>
+                                @else
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 text-teal-400">
+                                    Open
                                 </span>
                                 @endif
                             </td>

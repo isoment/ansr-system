@@ -33,7 +33,7 @@ class ServiceRequestController extends Controller
         if (Gate::allows('isTenant')) {
 
             $validated = $request->validate([
-                'quantity' => 'numeric|min:1|max:5',
+                'quantity' => 'required|numeric|min:1|max:5',
                 'notes' => 'min:5',
             ]);
 
@@ -44,7 +44,7 @@ class ServiceRequestController extends Controller
             $keyCost = 20.00;
 
             ServiceRequest::create([
-                'tenant_id' => auth()->id(),
+                'tenant_id' => auth()->user()->userable->id,
                 'category_id' => $category->id,
                 'issue' => 'Tenant requests new key.',
                 'description' => 'Tenant Notes: ' . $validated['notes'],
@@ -89,7 +89,7 @@ class ServiceRequestController extends Controller
             $categoryId = RequestCategory::specifiedCategory($validated['category'])->id;
 
             ServiceRequest::create([
-                'tenant_id' => auth()->id(),
+                'tenant_id' => auth()->user()->userable->id,
                 'category_id' => $categoryId,
                 'issue' => $validated['issue'],
                 'description' => $validated['description'],
