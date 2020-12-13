@@ -17,7 +17,7 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-
+    @livewireStyles
 </head>
 <body class="bg-gray-50 h-screen antialiased leading-none font-nunito">
 <div id="app">
@@ -76,27 +76,6 @@
                     <img src="/img/house.svg" alt="Logo" class="h-8 w-8">
                     <span class="text-xl font-bold ml-2">ANSR</span>
                 </a>
-                <ul class="mt-6">
-                    <li class="relative px-6 py-3">
-                        <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 
-                                transition-colors duration-150 hover:text-gray-800" href="#">
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                                ></path>
-                            </svg>
-                            <span class="ml-4">Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
 
                 {{-- Sidebar Links --}}
                 @can('isEmployee')
@@ -184,5 +163,6 @@
         };
     };
 </script>
+@livewireScripts
 </body>
 </html>

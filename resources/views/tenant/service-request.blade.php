@@ -8,7 +8,7 @@
                 mb-8">
         <div class="w-full p-6 shadow-md">
             <h3 class="font-bold text:lg lg:text-2xl text-center">
-                Submit a service request
+                Submit a Service Request
             <h3>
         </div>
     </div>

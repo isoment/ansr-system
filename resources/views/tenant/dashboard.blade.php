@@ -55,7 +55,7 @@
             </a>    
         </div>
         <div class="mb-8 lg:mb-0">
-            <a href="#">
+            <a href="{{ route('tenant.request-index') }}">
                 <div class="h-full flex flex-col items-center justify-center text-center 
                             shadow-md rounded-lg py-6 px-20 bg-white">
                     <i class="text-orange-400 fas fa-list-alt text-6xl"></i>

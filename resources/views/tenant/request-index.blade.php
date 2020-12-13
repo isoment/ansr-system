@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container px-4 lg:px-24 xl:px-60 pt-4 md:py-12 mx-auto">
+<div class="container px-4 lg:px-20 xl:px-32 pt-4 md:py-12 mx-auto">
 
     <div class="break-words bg-white text-gray-700 sm:border-1 sm:rounded-md
                 mb-8">
@@ -12,5 +12,7 @@
             <h3>
         </div>
     </div>
+
+    <livewire:tenant-request-index />
 
 @endsection
