@@ -92,9 +92,9 @@
                 </table>
             </div>
 
-            {{-- <div class="mt-8">
-                {{ $users->links() }}
-            </div> --}}
+            <div class="mt-8">
+                {{ $requests->links('vendor.livewire.pagination') }}
+            </div>
         </div>
     </div>
 </div>

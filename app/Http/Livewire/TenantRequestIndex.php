@@ -4,11 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\ServiceRequest;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class TenantRequestIndex extends Component
 {
+    use WithPagination;
+
     public $open = true;
-    public $sortAsc = true;
+    public $sortAsc = false;
 
     public function sortDirection()
     {
@@ -21,7 +24,7 @@ class TenantRequestIndex extends Component
             'requests' => ServiceRequest::where('tenant_id', auth()->user()->userable->id)
                                 ->where('completed_date', $this->open ? '=' : '!=', null)
                                 ->orderBy('created_at', $this->sortAsc ? 'asc' : 'desc')
-                                ->get()
+                                ->paginate(5)
         ]);
     }
 }
