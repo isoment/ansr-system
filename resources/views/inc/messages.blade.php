@@ -24,7 +24,7 @@
             </div>
             <div>
                 <button type="button"
-                        class="bg-indigo-300 bg-opacity-25 text-gray-700 hover:text-red-500 rounded overflow-hidden 
+                        class="bg-red-200 bg-opacity-25 text-red-500 hover:text-red-700 rounded overflow-hidden 
                               p-1 lg:p-2 focus:outline-none"
                         @click="successAlertOpen = false">
                 <svg
