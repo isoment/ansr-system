@@ -19,3 +19,7 @@
 .max-width-1375 {
     max-width: 1300px;
 }
+
+.tenant-index-modal-background {
+    background-color: rgba(0, 0, 0, 0.35);
+}

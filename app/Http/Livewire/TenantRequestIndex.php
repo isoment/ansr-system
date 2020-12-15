@@ -18,6 +18,11 @@ class TenantRequestIndex extends Component
         $this->sortAsc = ! $this->sortAsc;
     }
 
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.tenant-request-index', [
