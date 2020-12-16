@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @livewireScripts
     <script src="/alpine.min.js" defer></script>
     
     <!-- Styles -->
@@ -163,6 +164,5 @@
         };
     };
 </script>
-@livewireScripts
 </body>
 </html>

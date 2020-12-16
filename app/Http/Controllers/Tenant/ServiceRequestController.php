@@ -109,25 +109,4 @@ class ServiceRequestController extends Controller
     {
         return view('tenant.request-index');
     }
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ServiceRequest  $serviceRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ServiceRequest $serviceRequest)
-    {
-        //
-    }
-
 }
