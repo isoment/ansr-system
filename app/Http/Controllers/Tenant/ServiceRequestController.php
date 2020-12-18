@@ -38,7 +38,7 @@ class ServiceRequestController extends Controller
             ]);
 
             // Get category
-            $category = RequestCategory::newKey()->first();
+            $category = RequestCategory::newKey();
 
             // Key cost, hardcoded for now
             $keyCost = 20.00;

@@ -13,7 +13,7 @@
                     <button wire:click="previousPage" wire:loading.attr="disabled" rel="prev" 
                             class="relative inline-flex items-center px-2 py-1 text-xs font-medium text-white
                             bg-teal-300 border border-teal-300 leading-5 rounded-tl-lg rounded-bl-lg 
-                            hover:text-teal-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 
+                            hover:bg-teal-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 
                             active:bg-teal-100 active:text-teal-500 transition ease-in-out duration-150 mr-1">
                         Prev
                     </button>
@@ -25,7 +25,7 @@
                 @if ($paginator->hasMorePages())
                     <button wire:click="nextPage" wire:loading.attr="disabled" rel="next" 
                             class="relative inline-flex items-center px-2 py-1 text-xs font-medium text-white 
-                            bg-teal-300 border border-teal-300 leading-5 rounded-tr-lg rounded-br-lg hover:text-teal-500 
+                            bg-teal-300 border border-teal-300 leading-5 rounded-tr-lg rounded-br-lg hover:bg-teal-400 
                             focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-teal-100
                             active:text-teal-500 transition ease-in-out duration-150">
                         Next

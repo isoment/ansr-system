@@ -3,13 +3,8 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\TenantRequestIndex;
-use App\Models\Lease;
-use App\Models\Property;
-use App\Models\Region;
 use App\Models\RequestCategory;
 use App\Models\ServiceRequest;
-use App\Models\Tenant;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -144,34 +139,4 @@ class TenantRequestIndexTest extends TestCase
             ]);
     }
 
-    /**
-     *  Create a tenant User for testing.
-     */
-    public function createTestingTenant()
-    {
-        $region = Region::factory()->create([
-            'region_name' => 'Test Region',
-            'slug' => 'TST',
-        ]);
-
-        $property = Property::factory()->create([
-            'region_id' => $region->id
-        ]);
-
-        $lease = Lease::factory()->create([
-            'property_id' => $property->id
-        ]);
-
-        $tenant = Tenant::factory()->create([
-            'lease_id' => $lease->id
-        ]);
-
-        return User::create([
-            'name' => 'TestTenant',
-            'email' => $tenant->email,
-            'userable_type' => 'App\Models\Tenant',
-            'userable_id' => $tenant->id,
-            'password' => bcrypt('password'),
-        ]);
-    }
 }

@@ -22,7 +22,7 @@ class RequestCategory extends Model
      */
     public function scopeNewKey($query)
     {
-        return $query->where('name', 'New Key');
+        return $query->where('name', 'New Key')->first();
     }
 
     /**
