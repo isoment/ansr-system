@@ -8,7 +8,7 @@
                 mb-8">
         <div class="w-full px-6 py-3 mb-20 shadow-md">
             <h3 class="font-bold text:lg lg:text-2xl text-center">
-                Properties
+                Property Management
             <h3>
         </div>
     </div>

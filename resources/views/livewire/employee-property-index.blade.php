@@ -21,18 +21,6 @@
 
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between">
-                {{-- <div class="relative flex items-start">
-                    <div class="flex items-center h-5">
-                        <input wire:model="active" id="active" type="checkbox"
-                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                    </div>
-                    <div class="ml-3 text-sm leading-5">
-                        <label for="active" class="font-medium text-gray-700">Active?</label>
-                    </div>
-                </div> --}}
-            </div>
-
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4">
 
                 <table class="min-w-full divide-y divide-gray-200">
@@ -40,13 +28,13 @@
                         <tr>
                             <th class="px-6 py-3 bg-gray-50 text-left">
                                 <div class="flex items-center">
-                                    <button wire:click="sortBy('name')"
+                                    <button wire:click=""
                                         class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</button>
                                 </div>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left">
                                 <div class="flex items-center">
-                                    <button wire:click="sortBy('email')"
+                                    <button wire:click=""
                                         class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Region</button>
                                 </div>
                             </th>
@@ -75,7 +63,7 @@
                                 <div class="text-sm leading-5 text-gray-900">{{$property->city}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                <a href="#" class="text-teal-400 hover:text-indigo-900">Edit</a>
+                                <a href="#" class="text-teal-400 hover:text-teal-600">Edit</a>
                             </td>
                         </tr>
                         @endforeach
