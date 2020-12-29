@@ -43,7 +43,11 @@ Route::middleware('can:isTenant')->group(function() {
 
 // Employee Routes
 Route::middleware('can:isEmployee')->group(function() {
+    // Dashboard
     Route::get('/employee/db', [\App\Http\Controllers\Employee\EmployeeDashboardController::class, 'index'])
         ->name('employee.dashboard');
+    // Properties
+    Route::get('/employee/properties', [\App\Http\Controllers\Employee\PropertyController::class, 'index'])
+        ->name('employee.properties-index');
 });
 

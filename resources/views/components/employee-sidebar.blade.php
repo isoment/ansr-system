@@ -1,7 +1,8 @@
 <ul class="mt-6">
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 
-                transition-colors duration-150 hover:text-gray-800" href="#">
+                transition-colors duration-150 hover:text-gray-800 {{Route::current()->getName() == 'employee.dashboard' ? 'text-orange-400' : ''}}" 
+           href="{{route('employee.dashboard')}}">
         <svg
             class="w-5 h-5"
             fill="none"

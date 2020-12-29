@@ -1,21 +1,22 @@
 <div class="flex flex-col mt-8">
-    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="flex justify-start">
-                <div class="relative flex items-start">
-                    <div class="mx-2 text-sm leading-5">
-                        <label for="open" class="font-medium text-gray-700">Open Requests:</label>
-                    </div>
-                    <div class="flex items-center h-5">
-                        <input id="open" type="checkbox"
-                            wire:model="open"
-                            class="form-checkbox h-4 w-4 text-teal-400 transition duration-150 ease-in-out">
-                    </div>
-                </div>
+
+    <div class="flex justify-start">
+        <div class="relative flex items-start">
+            <div class="mx-2 text-sm leading-5">
+                <label for="open" class="font-medium text-gray-700">Open Requests:</label>
             </div>
+            <div class="flex items-center h-5">
+                <input id="open" type="checkbox"
+                    wire:model="open"
+                    class="form-checkbox h-4 w-4 text-teal-400 transition duration-150 ease-in-out">
+            </div>
+        </div>
+    </div>
 
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4">
-
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
