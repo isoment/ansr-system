@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Property;
+use App\Models\Region;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,7 +13,8 @@ class EmployeePropertyIndex extends Component
 
     public $search;
 
-    public function updatingSearch() {
+    public function updatingSearch() 
+    {
         $this->resetPage();
     }
 
@@ -21,11 +23,9 @@ class EmployeePropertyIndex extends Component
         return view('livewire.employee-property-index', [
 
             'properties' => Property::whereHas('region', function($query) {
-
                 $query->where('name', 'like', '%'.$this->search.'%')
                     ->orWhere('city', 'like', '%'.$this->search.'%')
                     ->orWhere('region_name', 'like', '%'.$this->search.'%');
-
             })->with('region')->paginate(10),
             
         ]);
