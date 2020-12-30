@@ -63,7 +63,7 @@
                                 <div class="text-sm leading-5 text-gray-900">{{$property->city}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                <a href="#" class="text-teal-400 hover:text-teal-600">Edit</a>
+                                <a href="{{route('employee.properties-edit', $property->id)}}" class="text-teal-400 hover:text-teal-600">Edit</a>
                             </td>
                         </tr>
                         @endforeach

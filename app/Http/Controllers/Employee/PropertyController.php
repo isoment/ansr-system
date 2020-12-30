@@ -17,4 +17,26 @@ class PropertyController extends Controller
     {
         return view('employee.property-index');
     }
+
+    /**
+     * Create a new property.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('employee.property-create');
+    }
+
+    /**
+     * Display a property edit form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Property $property) 
+    {
+        return view('employee.property-edit', [
+            'property' => $property,
+        ]);
+    }
 }
