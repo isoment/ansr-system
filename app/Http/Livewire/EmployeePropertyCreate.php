@@ -55,6 +55,21 @@ class EmployeePropertyCreate extends Component
             'email' => $this->email,
             'phone' => $this->phone,
         ]);
+
+        $this->formReset();
+
+        session()->flash('success', 'Property successfully added');
+    }
+
+    private function formReset() {
+        $this->name = '';
+        $this->region = '';
+        $this->street = '';
+        $this->city = '';
+        $this->state = '';
+        $this->zip = '';
+        $this->email = '';
+        $this->phone = '';
     }
 
     public function render()

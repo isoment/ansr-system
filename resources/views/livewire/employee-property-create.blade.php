@@ -1,10 +1,12 @@
 <div class="flex flex-col">
 
+    @include('inc.livewire-success')
+
     <h6 class="font-bold text-sm mt-4 mb-8 text-center">Please fill out the form below with the relevant information in order
         to add a new property to the system.
     </h6>
 
-    <form action="#" method="POST" wire:submit.prevent="submitForm">
+    <form wire:submit.prevent="submitForm">
 
         @csrf
 
@@ -23,7 +25,7 @@
                     <input type="text" id="name" name="name" placeholder="Property Name"
                         class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                             @error('name') border-orange-400 @enderror" value="{{ old('name') }}" required 
-                        wire:model.lazy="name"/>
+                        wire:model.debounce.500ms="name"/>
                 </div>
             </div>
             <div class="w-full sm:w-1/4 sm:ml-8 mt-4 sm:mt-0">
@@ -31,7 +33,7 @@
                 <div class="w-full mt-1">
                     <select name="region" id="region" required
                             class="text-sm pl-2 w-full border focus:border-teal-400 rounded py-2 bg-white focus:outline-none"
-                            wire:model.lazy="region">
+                            wire:model.debounce.500ms="region">
                         <option value="" disabled selected hidden>Select Region</option>
                         @foreach ($regions as $region)
                             <option value="{{$region}}" {{old('region') == $region ? 'selected' : ''}}>{{$region}}</option>
@@ -55,7 +57,7 @@
                 <input type="text" id="street" name="street" placeholder="Street"
                     class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                         @error('street') border-orange-400 @enderror" value="{{ old('street') }}" required 
-                    wire:model.lazy="street"/>
+                    wire:model.debounce.500ms="street"/>
             </div>
         </div>
 
@@ -73,7 +75,7 @@
                 <input type="text" id="city" name="city" placeholder="City"
                     class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                         @error('city') border-orange-400 @enderror" value="{{ old('city') }}" required 
-                    wire:model.lazy="city"/>
+                    wire:model.debounce.500ms="city"/>
             </div>
         </div>
 
@@ -92,7 +94,7 @@
                     <input type="text" id="state" name="state" placeholder="State"
                         class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                             @error('state') border-orange-400 @enderror" value="{{ old('state') }}" required 
-                        wire:model.lazy="state"/>
+                        wire:model.debounce.500ms="state"/>
                 </div>
             </div>
             <div class="w-full sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
@@ -108,7 +110,7 @@
                     <input type="number" id="zip" name="zip" placeholder="Zip"
                         class="pl-4 pr-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                             @error('zip') border-orange-400 @enderror" value="{{ old('zip') }}" required 
-                        wire:model.lazy="zip"/>
+                        wire:model.debounce.500ms="zip"/>
                 </div>
             </div>
         </div>
@@ -128,7 +130,7 @@
                     <input type="email" id="email" name="email" placeholder="Email"
                         class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                             @error('email') border-orange-400 @enderror" value="{{ old('email') }}" required 
-                        wire:model.lazy="email"/>
+                        wire:model.debounce.500ms="email"/>
                 </div>
             </div>
             <div class="w-full sm:w-1/3 sm:ml-4 mt-4 sm:mt-0">
@@ -144,7 +146,7 @@
                     <input type="text" id="phone" name="phone" placeholder="Phone Number"
                         class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                             @error('phone') border-orange-400 @enderror" value="{{ old('phone') }}" required 
-                        wire:model.lazy="phone"/>
+                        wire:model.debounce.500ms="phone"/>
                 </div>
             </div>
         </div>

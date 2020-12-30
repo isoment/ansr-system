@@ -14,7 +14,9 @@
     </div>
 
     <div class="break-words bg-white text-gray-700 sm:border-1 sm:rounded-md mb-8 py-6 px-12">
+
         <livewire:employee-property-create />
+        
     </div>
 
 </div>
