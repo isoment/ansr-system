@@ -2,6 +2,7 @@
 
     @include('inc.livewire-success')
 
+    <h2 class="font-bold text:lg lg:text-2xl text-center">Add New Property</h2>
     <h6 class="font-bold text-sm mt-4 mb-8 text-center">Please fill out the form below with the relevant information in order
         to add a new property to the system.
     </h6>

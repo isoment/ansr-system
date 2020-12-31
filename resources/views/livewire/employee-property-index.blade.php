@@ -1,7 +1,7 @@
 <div class="flex flex-col mt-8">
 
     {{-- Search --}}
-    <div class="max-w-lg w-full lg:max-w-xs">
+    <div class="max-w-lg w-full lg:max-w-xs mb-0">
         <label for="search" class="sr-only">Search</label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
