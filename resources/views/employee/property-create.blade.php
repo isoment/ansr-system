@@ -10,7 +10,7 @@
                   py-2 text-xs font-bold rounded-t-md">Property Index</a>
     </div>
 
-    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-8 py-6 px-4 md:px-12">
+    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-8 py-6 px-4 md:px-12 shadow-sm">
         <livewire:employee-property-create />
     </div>
 

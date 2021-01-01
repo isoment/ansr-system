@@ -55,5 +55,8 @@ Route::middleware('can:isEmployee')->group(function() {
     // Edit Properties
     Route::get('/employee/properties/{property}/edit', [\App\Http\Controllers\Employee\PropertyController::class, 'edit'])
         ->name('employee.properties-edit');
+    // Regions
+    Route::get('/employee/regions', [\App\Http\Controllers\Employee\PropertyController::class, 'region'])
+        ->name('employee.region');
 });
 

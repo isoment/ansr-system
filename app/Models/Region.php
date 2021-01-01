@@ -9,6 +9,8 @@ class Region extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      *  Property Relationship
      */

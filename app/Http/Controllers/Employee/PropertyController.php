@@ -39,4 +39,14 @@ class PropertyController extends Controller
             'property' => $property,
         ]);
     }
+
+    /**
+     * Display region page
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function region()
+    {
+        return view('employee.region');
+    }
 }

@@ -26,7 +26,7 @@ class EmployeePropertyIndex extends Component
                 $query->where('name', 'like', '%'.$this->search.'%')
                     ->orWhere('city', 'like', '%'.$this->search.'%')
                     ->orWhere('region_name', 'like', '%'.$this->search.'%');
-            })->with('region')->paginate(10),
+            })->with('region')->orderBy('created_at', 'desc')->paginate(10),
             
         ]);
     }
