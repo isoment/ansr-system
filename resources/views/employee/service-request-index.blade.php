@@ -11,7 +11,7 @@
                 Service Requests
             <h3>
             <div class="flex items-center">
-                <a href="#" 
+                <a href="{{route('employee.request-category')}}" 
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200">Add Category</a>
                 <a href="#"
@@ -21,16 +21,16 @@
         </div>
     </div>
 
-    <div class="flex justify-around items-center my-4">
-        <div class="bg-white rounded shadow-md text-center px-8 py-6">
+    <div class="flex flex-col sm:flex-row justify-around items-center my-4">
+        <div class="bg-white rounded shadow-md text-center px-8 py-6 mb-3 sm:mb-0 w-2/3 sm:w-auto">
             <h3 class="text-teal-300 font-prompt font-bold text-3xl mb-4">{{$totalRequests}}</h3>
             <h6 class="text-uppercase font-thin text-sm">Requests this Year</h6>
         </div>
-        <div class="bg-white rounded shadow-md text-center px-8 py-6">
+        <div class="bg-white rounded shadow-md text-center px-8 py-6 mb-3 sm:mb-0 w-2/3 sm:w-auto">
             <h3 class="text-orange-300 font-prompt font-bold text-3xl mb-4">{{$openRequests}}</h3>
             <h6 class="text-uppercase font-thin text-sm">Open requests</h6>
         </div>
-        <div class="bg-white rounded shadow-md text-center px-8 py-6">
+        <div class="bg-white rounded shadow-md text-center px-8 py-6 mb-3 sm:mb-0 w-2/3 sm:w-auto">
             <h3 class="text-orange-300 font-prompt font-bold text-3xl mb-4">{{$closedRequests}}</h3>
             <h6 class="text-uppercase font-thin text-sm">Completed requests</h6>
         </div>

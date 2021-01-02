@@ -56,25 +56,7 @@
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left">
                                 <div class="flex items-center">
-                                    <button class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                            wire:click="sortDirection()">Date</button>
-                                    {{-- @if ($sortAsc)
-                                        <span>
-                                            <svg class="w-4 text-gray-500 ml-2" 
-                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" 
-                                                xmlns="http://www.w3.org/2000/svg"><path 
-                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
-                                            </svg>
-                                        </span>
-                                    @else 
-                                        <span>
-                                            <svg class="w-4 text-gray-500 ml-2" 
-                                                fill="none" stroke="currentColor" 
-                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path 
-                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                            </svg>
-                                        </span>
-                                    @endif --}}
+                                    <div class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date</div>
                                 </div>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">

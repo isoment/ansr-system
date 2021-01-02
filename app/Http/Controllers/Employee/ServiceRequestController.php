@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\RequestCategory;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
 
@@ -21,5 +22,15 @@ class ServiceRequestController extends Controller
             'openRequests' => ServiceRequest::openRequests(),
             'closedRequests' => ServiceRequest::closedRequests(),
         ]);
+    }
+
+    /**
+     *  Display request category page
+     * 
+     *  @return \Illuminate\Http\Response
+     */
+    public function requestCategory()
+    {
+        return view('employee.request-category');
     }
 }

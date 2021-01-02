@@ -9,6 +9,8 @@ class RequestCategory extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      *  ServiceRequest Relationship
      */
