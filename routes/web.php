@@ -21,9 +21,11 @@ Auth::routes();
 
 // Tenant Routes
 Route::middleware('can:isTenant')->group(function() {
+
     // Dashboard
     Route::get('/tenant/db', [\App\Http\Controllers\Tenant\TenantDashboardController::class, 'index'])
         ->name('tenant.dashboard');
+
     // Key request
     Route::get('tenant/replace-key', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'keyReplacement'])
         ->name('replace.key');
@@ -39,13 +41,16 @@ Route::middleware('can:isTenant')->group(function() {
     // Service request index
     Route::get('tenant/my-requests', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'index'])
         ->name('tenant.request-index');
+
 });
 
 // Employee Routes
 Route::middleware('can:isEmployee')->group(function() {
+
     // Dashboard
     Route::get('/employee/db', [\App\Http\Controllers\Employee\EmployeeDashboardController::class, 'index'])
         ->name('employee.dashboard');
+
     // Properties
     Route::get('/employee/properties', [\App\Http\Controllers\Employee\PropertyController::class, 'index'])
         ->name('employee.properties-index');
@@ -58,5 +63,8 @@ Route::middleware('can:isEmployee')->group(function() {
     // Regions
     Route::get('/employee/regions', [\App\Http\Controllers\Employee\PropertyController::class, 'region'])
         ->name('employee.region');
-});
 
+    // Service Requests
+    Route::get('/employee/service-request', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'index'])
+        ->name('employee.service-request-index');
+});

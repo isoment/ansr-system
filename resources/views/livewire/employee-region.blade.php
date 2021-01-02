@@ -1,25 +1,6 @@
 <div>
 
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-8 py-6 px-4 md:px-12 shadow-sm">
-        <div class="mb-10 text-left">
-            <h2 class="text-2xl font-bold mb-3">Regions</h2>
-            <h6 class="text-sm font-bold mb-6">These are the regions currently in the app. You can add new ones below.</h6>
-        </div>
-        <div class="grid grid-cols-2 xl:grid-cols-4 gap-12">
-            @foreach ($regions as $region)
-                <div class="bg-teal-50 border-2 border-teal-400 rounded shadow-md p-4 text-sm font-bold
-                           text-center">
-                    <h5 class="mb-2 text-xl">{{$region->slug}}</h5>
-                    <h5 class="text-sm text-gray-500">{{$region->region_name}}</h5>
-                </div>
-            @endforeach
-        </div>
-        <div class="mt-8">
-            {{ $regions->links('vendor.livewire.pagination') }}
-        </div>
-    </div>
-    
-    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-8 py-6 px-4 md:px-12 shadow-sm">
         <div class="mb-4">
             @include('inc.livewire-success')
         </div>
@@ -64,13 +45,32 @@
                 </div>
             </div>
     
-            <div class="mt-4 text-left">
+            <div class="mt-4 text-center">
                 <button type="submit" class="w-full block sm:inline-block sm:w-1/4 px-6 py-3 bg-orange-400 
                     hover:bg-orange-500 text-white rounded-lg mt-2 transition-all ease-in-out
                     duration-200">Submit
                 </button>
             </div>
         </form>
+    </div>
+
+    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-8 py-6 px-4 md:px-12 shadow-sm">
+        <div class="mb-10 text-left">
+            <h2 class="text-2xl font-bold mb-3">Regions</h2>
+            <h6 class="text-sm font-bold mb-6">These are the regions currently in the app. You can add new ones below.</h6>
+        </div>
+        <div class="grid grid-cols-2 xl:grid-cols-4 gap-12">
+            @foreach ($regions as $region)
+                <div class="bg-teal-50 border-2 border-teal-400 rounded shadow-md p-4 text-sm font-bold
+                           text-center">
+                    <h5 class="mb-2 text-xl">{{$region->slug}}</h5>
+                    <h5 class="text-sm text-gray-500">{{$region->region_name}}</h5>
+                </div>
+            @endforeach
+        </div>
+        <div class="mt-8">
+            {{ $regions->links('vendor.livewire.pagination') }}
+        </div>
     </div>
 
 </div>

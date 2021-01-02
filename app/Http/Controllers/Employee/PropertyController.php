@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PropertyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display property index.
      *
      * @return \Illuminate\Http\Response
      */

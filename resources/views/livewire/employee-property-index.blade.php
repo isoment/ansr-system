@@ -71,9 +71,9 @@
                 </table>
             </div>
 
-            <div class="mt-8">
-                {{ $properties->links('vendor.livewire.pagination') }}
-            </div>
         </div>
+    </div>
+    <div class="my-4">
+        {{ $properties->links('vendor.livewire.pagination') }}
     </div>
 </div>

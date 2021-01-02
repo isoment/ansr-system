@@ -26,13 +26,13 @@
     {{-- Help Cards --}}
     <section class="text-gray-700 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-            <a href="#">
+            <a href="{{route('employee.properties-index')}}">
                 <div class="h-full flex flex-col items-center justify-center text-center 
                             shadow-md rounded-lg py-6 px-20 bg-white">
                     <i class="text-orange-400 fas fa-key text-6xl"></i>
-                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Temp</h2>
-                    <p class="mt-4">A lost key is our most common service request. Here you can quickly file a request
-                        for a replacement key.
+                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Properties and Regions</h2>
+                    <p class="mt-4">
+                        Here you can manage the properties of your organization and add new regions.
                     </p>
                 </div>
             </a>
@@ -43,7 +43,9 @@
                             shadow-md rounded-lg py-6 px-20 bg-white">
                     <i class="text-orange-400 fas fa-toolbox text-6xl"></i>
                     <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Temp</h2>
-                    <p class="mt-4">Here you can submit any other type of service request relating to your rental.</p>
+                    <p class="mt-4">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A dolore aliquam sed ab similique nesciunt.
+                    </p>
                 </div>
             </a>    
         </div>

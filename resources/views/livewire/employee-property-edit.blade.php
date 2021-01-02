@@ -1,6 +1,8 @@
 <div class="flex flex-col">
 
-    @include('inc.livewire-success')
+    <div class="mb-4">
+        @include('inc.livewire-success')
+    </div>
 
     <h2 class="font-bold text:lg lg:text-2xl text-center">Edit Property</h2>
     <h6 class="font-bold text-sm mt-4 mb-8 text-center">
