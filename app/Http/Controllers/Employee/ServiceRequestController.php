@@ -15,6 +15,11 @@ class ServiceRequestController extends Controller
      */
     public function index()
     {
-        return view('employee.service-request-index');
+        return view('employee.service-request-index', [
+
+            'totalRequests' => ServiceRequest::totalRequests(),
+            'openRequests' => ServiceRequest::openRequests(),
+            'closedRequests' => ServiceRequest::closedRequests(),
+        ]);
     }
 }

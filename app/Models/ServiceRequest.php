@@ -2,20 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ServiceRequest extends Model
 {
     use HasFactory;
-
-    // protected $fillable = [
-    //     'issue',
-    //     'description',
-    //     'tenant_charges',
-    //     'assigned_date',
-    //     'completed_date',
-    // ];
 
     protected $guarded = ['id'];
 
@@ -57,5 +50,48 @@ class ServiceRequest extends Model
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    /**
+     *  @return String of current date time
+     */
+    private function getCurrentDateString()
+    {
+        return Carbon::now()->toDateTimeString();
+    }
+
+    /**
+     *  @return String of the date time from a year ago
+     */
+    private function aYearAgoString()
+    {
+        return Carbon::now()->subYear()->toDateTimeString();
+    }
+
+    /**
+     *  Scope a query for past years total service requests
+     */
+    public function scopeTotalRequests($query)
+    {
+        return $query->whereBetween('created_at', [$this->aYearAgoString(), $this->getCurrentDateString()])
+            ->count();
+    }
+
+    /**
+     *  Scope a query for total open requests
+     */
+    public function scopeOpenRequests($query)
+    {
+        return $query->where('completed_date', '=', null)->count();
+    }
+
+    /**
+     *  Scope a query for closed requests from past year
+     */
+    public function scopeClosedRequests($query) 
+    {
+        return $query->whereBetween('created_at', [$this->aYearAgoString(), $this->getCurrentDateString()])
+            ->where('completed_date', '!=', null)
+            ->count();
     }
 }

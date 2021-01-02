@@ -41,7 +41,9 @@
     </li>
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                duration-150 hover:text-gray-800" href="#">
+                duration-150 hover:text-gray-800 
+                {{Route::current()->getName() == 'employee.service-request-index' ? 'text-orange-400' : ''}}" 
+           href="{{route('employee.service-request-index')}}">
             <svg
                 class="w-5 h-5"
                 aria-hidden="true"
@@ -102,7 +104,8 @@
     </li>
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                duration-150 hover:text-gray-800 {{Route::current()->getName() == 'employee.properties-index' || 
+                duration-150 hover:text-gray-800 
+                {{Route::current()->getName() == 'employee.properties-index' || 
                 Route::current()->getName() == 'employee.region' ? 'text-orange-400' : ''}}" 
            href="{{route('employee.properties-index')}}">
             <svg

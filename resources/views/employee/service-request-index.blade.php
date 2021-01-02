@@ -21,6 +21,21 @@
         </div>
     </div>
 
+    <div class="flex justify-around items-center my-4">
+        <div class="bg-white rounded shadow-md text-center px-8 py-6">
+            <h3 class="text-teal-300 font-prompt font-bold text-3xl mb-4">{{$totalRequests}}</h3>
+            <h6 class="text-uppercase font-thin text-sm">Requests this Year</h6>
+        </div>
+        <div class="bg-white rounded shadow-md text-center px-8 py-6">
+            <h3 class="text-orange-300 font-prompt font-bold text-3xl mb-4">{{$openRequests}}</h3>
+            <h6 class="text-uppercase font-thin text-sm">Open requests</h6>
+        </div>
+        <div class="bg-white rounded shadow-md text-center px-8 py-6">
+            <h3 class="text-orange-300 font-prompt font-bold text-3xl mb-4">{{$closedRequests}}</h3>
+            <h6 class="text-uppercase font-thin text-sm">Completed requests</h6>
+        </div>
+    </div>
+
     <div class="relative">
         <div class="flex items-center ml-4">
             <a href="#"
