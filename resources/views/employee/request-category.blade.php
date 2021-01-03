@@ -7,7 +7,7 @@
     <div class="flex items-center ml-4">
         <a href="{{route('employee.service-request-index')}}"
            class="bg-teal-300 hover:bg-teal-400 transition-all duration-200 text-white px-4 
-                  py-2 text-xs font-bold rounded-t-md">Request Categories</a>
+                  py-2 text-xs font-bold rounded-t-md">Service Requests</a>
     </div>
 
     <livewire:employee-request-category />

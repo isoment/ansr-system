@@ -16,7 +16,19 @@ class RequestCategory extends Model
      */
     public function serviceRequests()
     {
-        return $this->hasMany(ServiceRequest::class);
+        return $this->hasMany(ServiceRequest::class, 'category_id');
+    }
+
+    /**
+     *  Method to determine if there are any service requests associated with category
+     */
+    public function requestsAssociated()
+    {
+        if ($this->serviceRequests()->first()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

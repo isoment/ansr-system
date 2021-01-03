@@ -40,13 +40,37 @@
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-8 py-6 px-4 md:px-12 shadow-sm">
         <div class="mb-10 text-left">
             <h2 class="text-2xl font-bold mb-3">Categories</h2>
-            <h6 class="text-sm font-bold mb-6">These are the categories currently in the app. You can add new ones above.</h6>
+            <h6 class="text-sm font-bold mb-6">These are the categories currently in the app. You can delete
+                categories as long as there is no service request associated with it yet.
+            </h6>
         </div>
         <div class="grid grid-cols-2 xl:grid-cols-4 gap-12">
             @foreach ($requestCategories as $category)
-                <div class="bg-teal-50 border-2 border-teal-400 rounded shadow-md p-4 text-sm font-bold
-                           text-center">
+                <div class="bg-teal-50 border-2 border-teal-400 rounded shadow-md py-4 px-6 text-sm font-bold
+                           text-center flex items-center justify-center">
                     <h5 class="text-sm text-gray-500">{{$category->name}}</h5>
+
+                    @if (! $category->requestsAssociated())
+                        <div>
+                            <button type="button"
+                                    class="text-red-500 hover:text-red-700 rounded overflow-hidden 
+                                            p-1 focus:outline-none ml-4"
+                                    wire:click="deleteCategory({{$category->id}})">
+                                <svg
+                                    class="h-4 w-auto"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                    fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+                    @endif
+
                 </div>
             @endforeach
         </div>

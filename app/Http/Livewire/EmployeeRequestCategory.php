@@ -36,6 +36,17 @@ class EmployeeRequestCategory extends Component
         session()->flash('success', 'New category added');
     }
 
+    public function deleteCategory($id) 
+    {
+        $currentCategory = RequestCategory::find($id);
+
+        if (! $currentCategory->requestsAssociated()) {
+
+            $currentCategory->delete();
+
+        }
+    }
+
     public function render()
     {
         return view('livewire.employee-request-category', [
