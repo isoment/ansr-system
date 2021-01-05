@@ -17,7 +17,9 @@
             @endif
         </div>
         
-        <div class="mt-4">
+        <div class="mt-4"
+             x-data="{ showModal: false }">
+
             <div class="my-3">
                 <span class="font-bold">Request Created:</span> 
                 <div class="text-sm font-light mt-1">
@@ -26,8 +28,14 @@
             </div>
             <div class="my-3">
                 <span class="font-bold">Tenant Name:</span> 
-                <div class="text-sm font-light mt-1">
-                    {{$request->tenant->first_name}} {{$request->tenant->last_name}}
+                <div class="flex items-center mt-1">
+                    <div class="text-sm font-light">
+                        {{$request->tenant->first_name}} {{$request->tenant->last_name}}
+                    </div>
+                    <i class="text-sm far fa-question-circle text-orange-300 transition duration-200
+                             hover:text-orange-400 ml-1 cursor-pointer"
+                       @click="showModal = true">
+                    </i>
                 </div>
             </div>
             <div class="my-3">
@@ -66,6 +74,72 @@
                     {{$request->tenant_charges ? '$'.$request->tenant_charges : 'N/A'}}
                 </div>
             </div>
+
+            {{-- Modal --}}
+            <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
+                        items-center justify-center whitespace-normal"
+                    x-show="showModal"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 transform"
+                    x-transition:enter-end="opacity-100 transform"
+                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave-start="opacity-100 transform"
+                    x-transition:leave-end="opacity-0 transform"
+                    x-cloak>
+                <div class="w-11/12 md:max-w-lg mx-auto rounded-md shadow-lg text-gray-700 whitespace-normal"
+                        @click.away="showModal = false">
+                    <div class="text-left bg-white px-6 py-2 rounded-b-md rounded-t-md">
+                        <div class="flex items-center justify-between mt-4">
+                            <h5 class="text-xl font-bold">Tenant Information</h5>
+                            <div>
+                                <i class="fas fa-times text-lg cursor-pointer"
+                                    @click="showModal = false">
+                                </i>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="my-3">
+                                <span class="font-bold">Tenant Name:</span> 
+                                <div class="text-sm font-light mt-1">
+                                    {{$request->tenant->first_name}} {{$request->tenant->last_name}}
+                                </div>
+                            </div>
+                            <div class="my-3">
+                                <span class="font-bold">Email:</span> 
+                                <div class="text-sm font-light mt-1">
+                                    {{$request->tenant->email}}
+                                </div>
+                            </div>
+                            <div class="my-3">
+                                <span class="font-bold">Phone Number:</span> 
+                                <div class="text-sm font-light mt-1">
+                                    {{$request->tenant->phone}}
+                                </div>
+                            </div>
+                            <div class="my-3">
+                                <span class="font-bold">Tenant Address:</span> 
+                                <div class="text-sm font-light mt-1">
+                                    {{$request->tenant->lease->property->street}}
+                                </div>
+                                @if ($request->tenant->lease->unit)
+                                    <div class="text-sm font-light mt-1">
+                                        Unit: {{$request->tenant->lease->unit}}
+                                    </div>
+                                @endif
+                                @if ($request->tenant->lease->building)
+                                    <div class="text-sm font-light mt-1">
+                                        Building: {{$request->tenant->lease->building}}
+                                    </div>
+                                @endif
+                                <div class="text-sm font-light mt-1">
+                                    {{$request->tenant->lease->property->city}}, {{$request->tenant->lease->property->state}} {{$request->tenant->lease->property->zipcode}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -90,9 +164,10 @@
         </div>
         <div class="text-center">
             <h6 class="font-bold text-sm mb-2">Open or close the Service Request:</h6>
-            <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500"
+            <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                           transition duration-200"
                     wire:click="toggleComplete">
-                {{$request->completed_date ? 'Open Request' : 'Complete Request'}}
+                {{$request->completed_date ? 'Reopen Request' : 'Complete Request'}}
             </button>
         </div>
     </div>

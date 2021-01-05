@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\ServiceRequest;
+use App\Models\Tenant;
 use App\Models\WorkOrder;
 use Livewire\Component;
 
