@@ -17,7 +17,7 @@ class ServiceRequest extends Model
      */
     public function requestCategory()
     {
-        return $this->belongsTo(RequestCategory::class);
+        return $this->belongsTo(RequestCategory::class, 'category_id');
     }
 
     /**

@@ -33,4 +33,16 @@ class ServiceRequestController extends Controller
     {
         return view('employee.request-category');
     }
+
+    /**
+     *  Display request management
+     * 
+     *  @return \Illuminate\Http\Response
+     */
+    public function manageRequest(ServiceRequest $request)
+    {
+        return view('employee.service-request-manage', [
+            'request' => $request,
+        ]);
+    }
 }

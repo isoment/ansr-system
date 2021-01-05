@@ -14,7 +14,7 @@ class EmployeeRequestCategory extends Component
     public $name;
 
     protected $rules = [
-        'name' => 'required|max:30',
+        'name' => 'required|max:30|unique:request_categories',
     ];
 
     // Realtime validation

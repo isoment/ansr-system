@@ -70,4 +70,7 @@ Route::middleware('can:isEmployee')->group(function() {
     // Requests Category
     Route::get('/employee/request-category', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'requestCategory'])
         ->name('employee.request-category');
+    // Request Management
+    Route::get('/employee/service-request/{request}/manage', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'manageRequest'])
+        ->name('employee.manage-request');
 });

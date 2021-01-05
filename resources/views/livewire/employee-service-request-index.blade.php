@@ -111,7 +111,8 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                    <a class="text-teal-400 hover:text-teal-600 cursor-pointer">Details</a>
+                                    <a href="{{route('employee.manage-request', $request->id)}}"
+                                       class="text-teal-400 hover:text-teal-600 cursor-pointer">Details</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -125,17 +126,6 @@
         <div class="my-4">
             {{ $requests->links('vendor.livewire.pagination') }}
         </div>
-        {{-- Checkbox --}}
-        {{-- <div class="relative flex items-start">
-            <div class="mx-2 text-sm leading-5">
-                <label for="open" class="font-medium text-gray-700">Open Requests:</label>
-            </div>
-            <div class="flex items-center h-5">
-                <input id="open" type="checkbox"
-                       wire:model="open"
-                       class="form-checkbox h-4 w-4 text-teal-400 transition duration-150 ease-in-out">
-            </div>
-        </div> --}}
     </div>
 
 </div>

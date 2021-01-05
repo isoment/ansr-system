@@ -41,20 +41,20 @@
         <div class="mb-10 text-left">
             <h2 class="text-2xl font-bold mb-3">Categories</h2>
             <h6 class="text-sm font-bold mb-6">These are the categories currently in the app. You can delete
-                categories as long as there is no service request associated with it yet.
+                a category as long as there is no service request associated with it yet.
             </h6>
         </div>
         <div class="grid grid-cols-2 xl:grid-cols-4 gap-12">
             @foreach ($requestCategories as $category)
                 <div class="bg-teal-50 border-2 border-teal-400 rounded shadow-md py-4 px-6 text-sm font-bold
-                           text-center flex items-center justify-center">
+                           text-center flex items-center justify-center relative">
                     <h5 class="text-sm text-gray-500">{{$category->name}}</h5>
 
                     @if (! $category->requestsAssociated())
                         <div>
                             <button type="button"
                                     class="text-red-500 hover:text-red-700 rounded overflow-hidden 
-                                            p-1 focus:outline-none ml-4"
+                                            p-1 focus:outline-none absolute top-1 right-1"
                                     wire:click="deleteCategory({{$category->id}})">
                                 <svg
                                     class="h-4 w-auto"

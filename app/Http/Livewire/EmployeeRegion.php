@@ -15,8 +15,8 @@ class EmployeeRegion extends Component
     public $abbreviation;
 
     protected $rules = [
-        'name' => 'required',
-        'abbreviation' => 'required|alpha|min:3|max:3',
+        'name' => 'required|unique:regions,region_name',
+        'abbreviation' => 'required|alpha|min:3|max:3|unique:regions,slug',
     ];
 
     // Realtime validation

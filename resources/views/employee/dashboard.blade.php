@@ -38,13 +38,13 @@
             </a>
         </div>
         <div>
-            <a href="#">
+            <a href="{{route('employee.service-request-index')}}">
                 <div class="h-full flex flex-col items-center justify-center text-center 
                             shadow-md rounded-lg py-6 px-20 bg-white">
                     <i class="text-orange-400 fas fa-toolbox text-6xl"></i>
-                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Temp</h2>
+                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Service Requests</h2>
                     <p class="mt-4">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A dolore aliquam sed ab similique nesciunt.
+                        View and work with service requests here. You can also manage categories for service requests.
                     </p>
                 </div>
             </a>    
