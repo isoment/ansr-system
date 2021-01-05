@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ServiceRequest;
+use App\Models\WorkOrder;
 use Livewire\Component;
 
 class EmployeeServiceRequestManage extends Component
@@ -10,11 +12,19 @@ class EmployeeServiceRequestManage extends Component
 
     public function toggleComplete()
     {
-        
+        if ($this->request->completed_date) {
+            $this->request->update(['completed_date' => NULL]);
+        } else {
+            $this->request->update(['completed_date' => now()]);
+        }
     }
 
     public function render()
     {
-        return view('livewire.employee-service-request-manage');
+        return view('livewire.employee-service-request-manage', [
+
+            'workOrders' => WorkOrder::where('service_request_id', $this->request->id)->get(),
+
+        ]);
     }
 }
