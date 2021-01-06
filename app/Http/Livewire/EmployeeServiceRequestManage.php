@@ -20,6 +20,20 @@ class EmployeeServiceRequestManage extends Component
         }
     }
 
+    public function newWorkOrder()
+    {
+        WorkOrder::create([
+            'service_request_id' => $this->request->id,
+        ]);
+    }
+
+    public function deleteWorkOrder($id)
+    {
+        $workOrder = WorkOrder::find($id);
+
+        $workOrder->delete();
+    }
+
     public function render()
     {
         return view('livewire.employee-service-request-manage', [

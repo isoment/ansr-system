@@ -145,31 +145,74 @@
     </div>
 
     {{-- Col 2 --}}
-    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-2 shadow-sm">
+    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-2 
+               shadow-sm flex flex-col justify-between">
         <div class="text-center mb-10">
-            <h6 class="font-bold text-sm mb-2">Work Orders for this Service Request:</h6>
-            @if ($workOrders->isNotEmpty())
+            <h6 class="font-bold text-sm mb-2 text-teal-300">Work Orders for this Service Request:</h6>
+            <div class="overflow-y-auto h-72">
+                @if ($workOrders->isNotEmpty())
                 @foreach ($workOrders as $workOrder)
                     <div class="my-3 font-light">
-                        <div>Work Order ID: {{$workOrder->id}}</div>
-                        <div>Assigned To: {{$workOrder->employee->first_name}} {{$workOrder->employee->last_name}}</div>
+                        <div class="flex items-center justify-center">
+                            <div class="font-bold text-sm">Work Order ID: {{$workOrder->id}}</div>
+                            @if (! $workOrder->hasWorkDetails())
+                                <button type="button"
+                                        class="text-red-500 hover:text-red-700 rounded overflow-hidden 
+                                                p-1 focus:outline-none"
+                                        wire:click="deleteWorkOrder({{$workOrder->id}})">
+                                    <svg
+                                        class="h-3 w-3"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                        fill-rule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </button>
+                            @endif
+                        </div>
+                        <div>
+                            @if ($workOrder->employee_id)
+                                Assigned To: {{$workOrder->employee->first_name}} {{$workOrder->employee->last_name}}
+                            @else 
+                                No assignment yet
+                            @endif
+                        </div>
                     </div>
                 @endforeach
-            @else 
-                <div class="my-3 font-light">
-                    No work orders associated.
-                </div>
-            @endif
-
+                @else 
+                    <div class="my-3 font-light">
+                        No work orders associated.
+                    </div>
+                @endif
+            </div>
         </div>
         <div class="text-center">
-            <h6 class="font-bold text-sm mb-2">Open or close the Service Request:</h6>
-            <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
-                           transition duration-200"
-                    wire:click="toggleComplete">
-                {{$request->completed_date ? 'Reopen Request' : 'Complete Request'}}
-            </button>
+            <div class="my-2">
+                <h6 class="font-bold text-sm mb-2">Open or close the Service Request:</h6>
+                <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                               transition duration-200"
+                        wire:click="toggleComplete">
+                    {{$request->completed_date ? 'Reopen Request' : 'Complete Request'}}
+                </button>
+            </div>
+            <div class="my-2">
+                <h6 class="font-bold text-sm mb-2">Create New Work Order:</h6>
+                <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
+                               transition duration-200"
+                        wire:click="newWorkOrder">
+                    New Work Order
+                </button>
+            </div>
         </div>
     </div>
 
+</div>
+
+<div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
+shadow-sm">
+    TEST
 </div>

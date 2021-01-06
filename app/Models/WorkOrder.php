@@ -9,6 +9,8 @@ class WorkOrder extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      *  ServiceRequest Relationship
      */
@@ -31,5 +33,17 @@ class WorkOrder extends Model
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     *  Method to check if there are work details created yet
+     */
+    public function hasWorkDetails()
+    {
+        if ($this->workDetails()->first()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
