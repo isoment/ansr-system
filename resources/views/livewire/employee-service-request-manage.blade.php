@@ -140,21 +140,19 @@
                         </div>
                     </div>
                 </div>
-    
             </div>
-    
         </div>
     
         {{-- Col 2 --}}
         <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-2 
                    shadow-sm flex flex-col justify-between">
-            <div class="text-center mb-10">
+            <div class="text-center mb-6">
                 <h6 class="font-bold text-sm mb-2 text-teal-300">Work Orders for this Service Request:</h6>
-                <div class="overflow-y-auto h-72">
+                <div class="overflow-y-auto max-h-72">
                     @if ($workOrders->isNotEmpty())
                     @foreach ($workOrders as $workOrder)
                         <a class="cursor-pointer"
-                           wire:click="displayWorkOrderDetails({{$workOrder->id}})">
+                           wire:click="getWorkOrderDetails({{$workOrder->id}})">
                             <div class="my-3 font-light">
                                 <div class="flex items-center justify-center">
                                     <div class="font-bold text-sm">Work Order ID: {{$workOrder->id}}</div>
@@ -213,25 +211,51 @@
                 </div>
             </div>
         </div>
-    
+
     </div>
     
-    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
+    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-6 
                 shadow-sm">
-        <h3 class="text-lg font-bold mb-4">Click work order above to see details</h3>
+        <h3 class="text-lg font-bold mb-2">Work Order Details...</h3>
         <div>
             @if ($workOrderDetails->isNotEmpty())
                 @foreach ($workOrderDetails as $detail)
-                    <div class="my-2">
-                        <p>Belongs to work order: {{$detail->work_order_id}}</p>
-                        <h5>{{$detail->details}}</h5>
+                    <div class="{{$loop->last ? '' : 'border-b'}} border-teal-200 my-8">
+                        <div class="my-3">
+                            <span class="font-bold">Detail description:</span>
+                            <div class="text-sm font-light mt-1">
+                                {{$detail->details}}
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <span class="font-bold">Belongs to Work Order:</span>
+                            <div class="text-sm font-bold mt-1 text-teal-400">
+                                <a href="{{route('employee.manage-workorder', $detail->work_order_id)}}">{{$detail->work_order_id}}</a>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <span class="font-bold">Start Date:</span>
+                            <div class="text-sm font-light mt-1">
+                                {{\Carbon\Carbon::parse($request->start_date)->toFormattedDateString()}}
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <span class="font-bold">End Date:</span> 
+                            <div class="text-sm font-light mt-1">
+                                {{\Carbon\Carbon::parse($request->end_date)->toFormattedDateString()}}
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             @else
-                <h5 class="text-orange-400">Please select a work order!</h5>
+                <h5 class="text-orange-400 text-sm font-bold">Please select a work order above</h5>
             @endif
+            <div class="my-4">
+                {{ $workOrderDetails->links('vendor.livewire.pagination') }}
+            </div>
         </div>
     </div>
+
 </div>
 
 

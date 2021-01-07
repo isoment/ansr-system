@@ -7,9 +7,12 @@ use App\Models\Tenant;
 use App\Models\WorkDetails;
 use App\Models\WorkOrder;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EmployeeServiceRequestManage extends Component
 {
+    use WithPagination;
+
     public $request;
     public $currentWorkOrderId;
 
@@ -22,7 +25,7 @@ class EmployeeServiceRequestManage extends Component
         }
     }
 
-    public function displayWorkOrderDetails($workOrderID)
+    public function getWorkOrderDetails($workOrderID)
     {
         $this->currentWorkOrderId = $workOrderID;
     }
@@ -37,7 +40,7 @@ class EmployeeServiceRequestManage extends Component
     public function deleteWorkOrder($id)
     {
         $workOrder = WorkOrder::find($id);
-        
+
         if (! $workOrder->hasWorkDetails()) {
             $workOrder->delete();
         }
@@ -49,7 +52,8 @@ class EmployeeServiceRequestManage extends Component
 
             'workOrders' => WorkOrder::where('service_request_id', $this->request->id)->get(),
 
-            'workOrderDetails' => WorkDetails::where('work_order_id', $this->currentWorkOrderId)->get(),
+            'workOrderDetails' => WorkDetails::where('work_order_id', $this->currentWorkOrderId)
+                ->paginate(5),
 
         ]);
     }
