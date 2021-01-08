@@ -151,11 +151,14 @@
                 <div class="overflow-y-auto max-h-72">
                     @if ($workOrders->isNotEmpty())
                     @foreach ($workOrders as $workOrder)
-                        <a class="cursor-pointer"
-                           wire:click="getWorkOrderDetails({{$workOrder->id}})">
-                            <div class="my-3 font-light">
+                        <div class="my-3">
+                            <div class="font-light">
                                 <div class="flex items-center justify-center">
-                                    <div class="font-bold text-sm">Work Order ID: {{$workOrder->id}}</div>
+                                    <div class="font-bold text-sm">
+                                        Work Order ID: 
+                                        <a href="{{route('employee.manage-workorder', $workOrder->id)}}"
+                                            class="text-teal-300 bold">{{$workOrder->id}}</a>
+                                    </div>
                                     @if (! $workOrder->hasWorkDetails())
                                         <button type="button"
                                                 class="text-red-500 hover:text-red-700 rounded overflow-hidden 
@@ -183,7 +186,11 @@
                                     @endif
                                 </div>
                             </div>
-                        </a>
+                            @if ($workOrder->hasWorkDetails())
+                                <a class="cursor-pointer font-bold text-xs text-teal-400"
+                                wire:click="getWorkOrderDetails({{$workOrder->id}})">Click for Details</a>
+                            @endif
+                        </div>
                     @endforeach
                     @else 
                         <div class="my-3 font-light">

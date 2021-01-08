@@ -3,9 +3,10 @@
     {{-- Col 1 --}}
     <div class="break-words lg:col-span-2 bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-6 px-4 md:px-12 shadow-sm">
         <h5 class="text-xl font-bold text-center">Manage Work Order</h5>
+        <h6 class="font-bold text-xs text-center mt-1">Search below using name or ID</h6>
 
         <form wire:submit.prevent="submitForm({{$workOrder->id}})">
-            <div class="px-12">
+            <div class="md:px-12">
                 {{-- Assigned --}}
                 <div class="w-full mt-4 sm:mt-8">
                     <div class="flex justify-between items-center w-full">
@@ -47,28 +48,11 @@
                             wire:model.debounce.500ms="startdate"/>
                     </div>
                 </div>
-                {{-- End Date --}}
-                <div class="w-full mt-4 sm:mt-8">
-                    <div class="flex justify-between items-center w-full">
-                        <label for="enddate" class="text-xs text-gray-700 font-bold">End Date:</label>
-                        @error('enddate')
-                            <div class="text-orange-400 text-xs font-bold italic">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="flex items-center mt-1">
-                        <input type="date" id="enddate" name="enddate" placeholder="Assigned to"
-                            class="px-4 w-full border bg-white rounded py-2 text-gray-700 focus:outline-none
-                                @error('enddate') border-orange-400 @enderror" value="{{ old('enddate') }}" 
-                            wire:model.debounce.500ms="enddate"/>
-                    </div>
-                </div>
                 <div class="mt-4 text-center">
                     <button class="bg-teal-300 py-2 px-4 rounded-md text-white hover:bg-teal-400
                                 transition duration-200"
                             type="submit">
-                        Submit
+                        Update
                     </button>
                 </div>
             </div>
@@ -79,7 +63,7 @@
     {{-- Col 2 --}}
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
                shadow-sm flex flex-col">
-        <h5 class="font-bold text-center mb-6">Work Order Details</h5>
+        <h5 class="font-bold text-center mb-6">Work Order Information</h5>
         <div>
             <div class="my-2">
                 <span class="font-bold text-sm">Work Order ID:</span> 
@@ -108,15 +92,31 @@
             <div class="my-3">
                 <span class="font-bold">Start Date:</span>
                 <div class="text-sm font-light mt-1">
-                    {{\Carbon\Carbon::parse($workOrder->start_date)->toFormattedDateString()}}
+                    @if ($workOrder->start_date)
+                        {{\Carbon\Carbon::parse($workOrder->start_date)->toFormattedDateString()}}
+                    @else
+                        Not Started
+                    @endif
+                    
                 </div>
             </div>
             <div class="my-3">
                 <span class="font-bold">End Date:</span>
                 <div class="text-sm font-light mt-1">
-                    {{\Carbon\Carbon::parse($workOrder->end_date)->toFormattedDateString()}}
+                    @if ($workOrder->end_date)
+                        {{\Carbon\Carbon::parse($workOrder->end_date)->toFormattedDateString()}}
+                    @else
+                        Not Complete
+                    @endif
                 </div>
             </div>
+        </div>
+        <div class="my-2 text-center">
+            <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                           transition duration-200"
+                    wire:click="toggleEndDate">
+                {{$workOrder->end_date ? 'Reopen Work Order' : 'Complete Work Order'}}
+            </button>
         </div>
     </div>
 
