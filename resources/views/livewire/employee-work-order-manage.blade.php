@@ -73,8 +73,8 @@
                 <div>
                     <span class="font-bold text-sm">Belongs to service request:</span> 
                     <a href="{{route('employee.manage-request', $workOrder->service_request_id)}}">
-                        <div class="text-sm font-bold mt-1 text-teal-300">
-                            {{$workOrder->service_request_id}} <span class="text-xs">(LINK)</span>
+                        <div class="text-sm font-bold mt-1 text-teal-400">
+                            {{$workOrder->service_request_id}} <span class="text-xs"></span>
                         </div>
                     </a>
                 </div>
@@ -130,42 +130,45 @@
             <span class="font-bold text-xl">+</span>
         </button>
         <h6 class="font-bold text-xs text-center mt-1">Manage Details here</h6>
-            @if ($details->isNotEmpty())
-                @foreach ($details as $detail)
-                    <div class="{{$loop->last ? '' : 'border-b'}} border-gray-200">
-                        <div class="my-3">
-                            <div class="text-xs font-bold">Details:</div>
-                            <div>{{$detail->details}}</div>
-                        </div>
-                        <div class="my-3">
-                            <div class="text-xs font-bold">Tenant Notes:</div>
-                            <div>{{$detail->tenant_notes}}</div>
-                        </div>
-                        <div class="my-3">
-                            <div class="text-xs font-bold">Start Date:</div>
-                            @if ($detail->start_date)
-                                <div>{{\Carbon\Carbon::parse($detail->start_date)->toFormattedDateString()}}</div>
-                            @else
-                                <div class="text-orange-400 font-bold text-sm">Not Started Yet</div>
-                            @endif
-                            
-                        </div>
-                        <div class="my-3">
-                            <div class="text-xs font-bold">End Date:</div>
-                            @if ($detail->end_date)
-                                <div>{{\Carbon\Carbon::parse($detail->end_date)->toFormattedDateString()}}</div>
-                            @else
-                                <div class="text-orange-400 font-bold text-sm">Not Completed</div>
-                            @endif
-                            
-                        </div>
+        @if ($details->isNotEmpty())
+            @foreach ($details as $detail)
+                <div class="{{$loop->last ? '' : 'border-b'}} border-gray-200">
+                    <div class="my-3">
+                        <div class="text-xs font-bold">Details:</div>
+                        <div>{{$detail->details}}</div>
                     </div>
-                @endforeach
-            @else
-                <div class="my-4">
-                    No details for this work order yet.
+                    <div class="my-3">
+                        <div class="text-xs font-bold">Tenant Notes:</div>
+                        <div>{{$detail->tenant_notes}}</div>
+                    </div>
+                    <div class="my-3">
+                        <div class="text-xs font-bold">Start Date:</div>
+                        @if ($detail->start_date)
+                            <div>{{\Carbon\Carbon::parse($detail->start_date)->toFormattedDateString()}}</div>
+                        @else
+                            <div class="text-orange-400 font-bold text-sm">Not Started Yet</div>
+                        @endif
+                    </div>
+                    <div class="my-3">
+                        <div class="text-xs font-bold">End Date:</div>
+                        @if ($detail->end_date)
+                            <div>{{\Carbon\Carbon::parse($detail->end_date)->toFormattedDateString()}}</div>
+                        @else
+                            <div class="text-orange-400 font-bold text-sm">Not Completed</div>
+                        @endif
+                    </div>
+                    <div class="my-3">
+                        <a href="{{route('employee.manage-details', $detail->id)}}" class="font-bold text-sm text-teal-400">
+                            Manage this detail
+                        </a>
+                    </div>
                 </div>
-            @endif
+            @endforeach
+        @else
+            <div class="my-4">
+                No details for this work order yet.
+            </div>
+        @endif
     </div>
 
     {{-- New Detail Modal --}}

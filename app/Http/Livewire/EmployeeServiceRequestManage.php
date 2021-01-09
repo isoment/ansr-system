@@ -16,6 +16,9 @@ class EmployeeServiceRequestManage extends Component
     public $request;
     public $currentWorkOrderId;
 
+    /**
+     *  Toggle Complete
+     */
     public function toggleComplete()
     {
         if ($this->request->completed_date) {
@@ -25,11 +28,17 @@ class EmployeeServiceRequestManage extends Component
         }
     }
 
+    /**
+     *  Set the current work order id
+     */
     public function getWorkOrderDetails($workOrderID)
     {
         $this->currentWorkOrderId = $workOrderID;
     }
 
+    /**
+     *  Create new work order
+     */
     public function newWorkOrder()
     {
         WorkOrder::create([
@@ -37,6 +46,9 @@ class EmployeeServiceRequestManage extends Component
         ]);
     }
 
+    /**
+     *  Delete work order
+     */
     public function deleteWorkOrder($id)
     {
         $workOrder = WorkOrder::find($id);

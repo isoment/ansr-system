@@ -74,7 +74,10 @@ Route::middleware('can:isEmployee')->group(function() {
     Route::get('/employee/service-request/{request}/manage', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'manageRequest'])
         ->name('employee.manage-request');
 
-    // Show workorder
+    // Manage Work Orders
     Route::get('/employee/work-order/{workOrder}/manage', [\App\Http\Controllers\Employee\WorkOrderController::class, 'manageWorkOrder'])
         ->name('employee.manage-workorder');
+    // Manage Work Details
+    Route::get('/employee/work-detail/{workDetail}/manage', [\App\Http\Controllers\Employee\WorkOrderController::class, 'manageDetails'])
+        ->name('employee.manage-details');
 });

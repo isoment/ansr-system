@@ -14,7 +14,7 @@ class EmployeeWorkOrderManage extends Component
     use WithPagination;
 
     public $workOrder;
-
+    
     public $assignment;
     public $startdate;
     public $tenantNotes;
@@ -38,6 +38,9 @@ class EmployeeWorkOrderManage extends Component
         $this->validateOnly($propertyName);
     }
 
+    /**
+     *  Toggle complete
+     */
     public function toggleEndDate()
     {
         if ($this->workOrder->end_date) {
@@ -47,6 +50,9 @@ class EmployeeWorkOrderManage extends Component
         }
     }
 
+    /**
+     *  Edit work order
+     */
     public function editWorkOrder()
     {
         $this->validate([
@@ -63,6 +69,9 @@ class EmployeeWorkOrderManage extends Component
         $this->workOrder = $this->workOrder->fresh();
     }
 
+    /**
+     *  Create work order detail
+     */
     public function createWorkDetail()
     {
         $this->validate([
