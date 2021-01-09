@@ -1,11 +1,11 @@
-<div>
+<div x-data="{ showModal: false }">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {{-- Col 1 --}}
         <div class="break-words lg:col-span-2 bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-6 px-4 md:px-12 shadow-sm">
             <h5 class="text-xl font-bold text-center">Manage Work Order</h5>
             <h6 class="font-bold text-xs text-center mt-1">Search below using name or ID</h6>
     
-            <form wire:submit.prevent="submitForm">
+            <form wire:submit.prevent="editWorkOrder">
                 <div class="md:px-12">
                     {{-- Assigned --}}
                     <div class="w-full mt-4 sm:mt-8">
@@ -126,7 +126,7 @@
         <h5 class="text-xl font-bold text-center">Work Order Details</h5>
         <button class="bg-teal-300 py-1 px-2 rounded-md text-white hover:bg-teal-400
                         transition duration-200 absolute top-3 right-3"
-                wire:click="newDetail">
+                @click="showModal = true">
             <span class="font-bold text-xl">+</span>
         </button>
         <h6 class="font-bold text-xs text-center mt-1">Manage Details here</h6>
@@ -143,11 +143,20 @@
                         </div>
                         <div class="my-3">
                             <div class="text-xs font-bold">Start Date:</div>
-                            <div>{{\Carbon\Carbon::parse($detail->start_date)->toFormattedDateString()}}</div>
+                            @if ($detail->start_date)
+                                <div>{{\Carbon\Carbon::parse($detail->start_date)->toFormattedDateString()}}</div>
+                            @else
+                                <div class="text-orange-400 font-bold text-sm">Not Started Yet</div>
+                            @endif
+                            
                         </div>
                         <div class="my-3">
                             <div class="text-xs font-bold">End Date:</div>
-                            <div>{{\Carbon\Carbon::parse($detail->end_date)->toFormattedDateString()}}</div>
+                            @if ($detail->end_date)
+                                <div>{{\Carbon\Carbon::parse($detail->end_date)->toFormattedDateString()}}</div>
+                            @else
+                                <div class="text-orange-400 font-bold text-sm">Not Completed</div>
+                            @endif
                             
                         </div>
                     </div>
@@ -157,6 +166,73 @@
                     No details for this work order yet.
                 </div>
             @endif
+    </div>
+
+    {{-- New Detail Modal --}}
+    <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
+                items-center justify-center whitespace-normal"
+            x-show="showModal"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform"
+            x-transition:enter-end="opacity-100 transform"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 transform"
+            x-transition:leave-end="opacity-0 transform"
+            x-cloak>
+        <div class="w-11/12 md:w-3/4 xl:w-2/3 mx-auto rounded-md shadow-lg text-gray-700 whitespace-normal"
+                @click.away="showModal = false">
+            <div class="text-left bg-white px-6 py-6 rounded-b-md rounded-t-md">
+                <h5 class="text-xl font-bold text-center">Create New Detail</h5>
+                <div class="mt-4 lg:mx-20">
+                    <form wire:submit.prevent="createWorkDetail">
+                        {{-- Details --}}
+                        <div class="w-full mt-4 sm:mt-8">
+                            <div class="flex justify-between items-center w-full">
+                                <label for="formDetails" class="text-xs text-gray-700 font-bold">Details:</label>
+                                @error('formDetails')
+                                    <div class="text-orange-400 text-xs font-bold italic">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <textarea id="formDetails" name="formDetails" rows="8"
+                                    class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                                        @error('formDetails') border-orange-400 @enderror" required 
+                                    wire:model.debounce.500ms="formDetails"/>
+                                </textarea>
+                            </div>
+                        </div>
+                        {{-- Tenant Notes --}}
+                        <div class="w-full mt-4 sm:mt-8">
+                            <div class="flex justify-between items-center w-full">
+                                <label for="tenantNotes" class="text-xs text-gray-700 font-bold">Tenant Notes:</label>
+                                @error('tenantNotes')
+                                    <div class="text-orange-400 text-xs font-bold italic">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <textarea id="tenantNotes" name="tenantNotes" rows="4"
+                                    class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                                        @error('tenantNotes') border-orange-400 @enderror" required 
+                                    wire:model.debounce.500ms="tenantNotes"/>
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <button class="bg-teal-300 py-2 px-4 rounded-md text-white hover:bg-teal-400
+                                        transition duration-200"
+                                    type="submit"
+                                    @click="showModal = false">
+                                Create
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

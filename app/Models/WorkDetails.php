@@ -9,6 +9,8 @@ class WorkDetails extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      *  WorkOrder Relationship
      */

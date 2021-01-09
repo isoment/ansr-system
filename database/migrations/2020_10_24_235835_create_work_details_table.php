@@ -18,8 +18,8 @@ class CreateWorkDetailsTable extends Migration
             $table->unsignedBigInteger('work_order_id');
             $table->text('details');
             $table->text('tenant_notes');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->timestamps();
         });
     }

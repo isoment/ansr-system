@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Employee;
+use App\Models\WorkDetails;
 use App\Models\WorkOrder;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -16,10 +17,14 @@ class EmployeeWorkOrderManage extends Component
 
     public $assignment;
     public $startdate;
+    public $tenantNotes;
+    public $formDetails;
 
     protected $rules = [
         'assignment' => 'string|required',
         'startdate' => 'date',
+        'tenantNotes' => 'required',
+        'formDetails' => 'required',
     ];
 
     public function mount($workOrder)
@@ -42,14 +47,12 @@ class EmployeeWorkOrderManage extends Component
         }
     }
 
-    public function newDetail()
+    public function editWorkOrder()
     {
-        dd('TEST');
-    }
-
-    public function submitForm()
-    {
-        $this->validate();
+        $this->validate([
+            'assignment' => 'string|required',
+            'startdate' => 'date',
+        ]);
 
         $this->workOrder->update([
             'employee_id' => Employee::where('employee_id_number', $this->assignment)
@@ -58,6 +61,20 @@ class EmployeeWorkOrderManage extends Component
         ]);
 
         $this->workOrder = $this->workOrder->fresh();
+    }
+
+    public function createWorkDetail()
+    {
+        $this->validate([
+            'tenantNotes' => 'required',
+            'formDetails' => 'required',
+        ]);
+
+        WorkDetails::create([
+            'work_order_id' => $this->workOrder->id,
+            'details' => $this->formDetails,
+            'tenant_notes' => $this->tenantNotes,
+        ]);
     }
 
     /**
@@ -74,7 +91,7 @@ class EmployeeWorkOrderManage extends Component
 
             'employees' => Employee::orderBy('last_name', 'asc')->get(),
 
-            'details' => $this->workOrder->workDetails()->paginate(5),
+            'details' => $this->workOrder->workDetails()->orderBy('created_at', 'desc')->paginate(5),
 
         ]);
     }
