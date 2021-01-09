@@ -1,4 +1,5 @@
 <div>
+    
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
         {{-- Col 1 --}}
@@ -185,6 +186,13 @@
                                         No assignment yet
                                     @endif
                                 </div>
+                                <div class="text-xs {{$workOrder->end_date === NULL ? 'text-orange-400 font-bold' : ''}}">
+                                    @if ($workOrder->end_date === NULL)
+                                        Not Complete
+                                    @else
+                                        Completed
+                                    @endif
+                                </div>
                             </div>
                             @if ($workOrder->hasWorkDetails())
                                 <a class="cursor-pointer font-bold text-xs text-teal-400"
@@ -223,11 +231,11 @@
     
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-6 
                 shadow-sm">
-        <h3 class="text-lg font-bold mb-2">Work Order Details...</h3>
+        <h3 class="text-lg text-center font-bold mb-6">Work Order Details...</h3>
         <div>
             @if ($workOrderDetails->isNotEmpty())
                 @foreach ($workOrderDetails as $detail)
-                    <div class="{{$loop->last ? '' : 'border-b'}} border-teal-200 my-8">
+                    <div class="{{$loop->last ? '' : 'border-b'}} border-gray-200">
                         <div class="my-3">
                             <span class="font-bold">Detail description:</span>
                             <div class="text-sm font-light mt-1">
@@ -243,13 +251,13 @@
                         <div class="my-3">
                             <span class="font-bold">Start Date:</span>
                             <div class="text-sm font-light mt-1">
-                                {{\Carbon\Carbon::parse($request->start_date)->toFormattedDateString()}}
+                                {{\Carbon\Carbon::parse($detail->start_date)->toFormattedDateString()}}
                             </div>
                         </div>
                         <div class="my-3">
                             <span class="font-bold">End Date:</span> 
                             <div class="text-sm font-light mt-1">
-                                {{\Carbon\Carbon::parse($request->end_date)->toFormattedDateString()}}
+                                {{\Carbon\Carbon::parse($detail->end_date)->toFormattedDateString()}}
                             </div>
                         </div>
                     </div>

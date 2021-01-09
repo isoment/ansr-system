@@ -40,7 +40,7 @@ class WorkOrder extends Model
      */
     public function hasWorkDetails()
     {
-        if ($this->workDetails()->first()) {
+        if ($this->workDetails->first()) {
             return true;
         } else {
             return false;

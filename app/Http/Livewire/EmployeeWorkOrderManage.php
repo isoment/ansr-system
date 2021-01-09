@@ -6,9 +6,12 @@ use App\Models\Employee;
 use App\Models\WorkOrder;
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EmployeeWorkOrderManage extends Component
 {
+    use WithPagination;
+
     public $workOrder;
 
     public $assignment;
@@ -39,16 +42,19 @@ class EmployeeWorkOrderManage extends Component
         }
     }
 
-    public function submitForm($workOrderId)
+    public function newDetail()
+    {
+        dd('TEST');
+    }
+
+    public function submitForm()
     {
         $this->validate();
 
-        $workOrder = WorkOrder::find($workOrderId);
-
-        $workOrder->update([
+        $this->workOrder->update([
             'employee_id' => Employee::where('employee_id_number', $this->assignment)
                 ->first()->id,
-            'start_date' => $this->viewToMySQLDateConversion($this->startdate),
+            'start_date' => $this->startdate,
         ]);
 
         $this->workOrder = $this->workOrder->fresh();
@@ -62,19 +68,13 @@ class EmployeeWorkOrderManage extends Component
         return Carbon::parse($date)->toDateString();
     }
 
-    /**
-     *  Method to format the date to save in the database
-     */
-    private function viewToMySQLDateConversion($date)
-    {
-        return Carbon::parse($date)->toDateTimeString();
-    }
-
     public function render()
     {
         return view('livewire.employee-work-order-manage', [
 
             'employees' => Employee::orderBy('last_name', 'asc')->get(),
+
+            'details' => $this->workOrder->workDetails()->paginate(5),
 
         ]);
     }
