@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Employee;
 use App\Models\WorkDetails;
-use App\Models\WorkOrder;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -30,7 +29,7 @@ class EmployeeWorkOrderManage extends Component
     public function mount($workOrder)
     {
         $this->assignment = $workOrder->employee ? $workOrder->employee->employee_id_number : NULL;
-        $this->startdate = $this->mysqlToViewDateConversion($workOrder->start_date);
+        $this->startdate = $workOrder->start_date ? $this->mysqlToViewDateConversion($workOrder->start_date) : NULL;
     }
 
     public function updated($propertyName)
