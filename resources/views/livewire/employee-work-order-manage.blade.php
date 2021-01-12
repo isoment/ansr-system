@@ -5,6 +5,10 @@
             <h5 class="text-xl font-bold text-center">Manage Work Order</h5>
             <h6 class="font-bold text-xs text-center mt-1">Search below using name or ID</h6>
     
+            <div class="my-2">
+                @include('inc.livewire-success')
+            </div>
+
             <form wire:submit.prevent="editWorkOrder">
                 <div class="md:px-12">
                     {{-- Assigned --}}

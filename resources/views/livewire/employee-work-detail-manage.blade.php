@@ -5,6 +5,10 @@
         <div class="break-words lg:col-span-2 bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-6 px-4 md:px-12 shadow-sm">
             <h5 class="text-xl font-bold text-center">Manage Work Detail</h5>
 
+            <div class="my-2">
+                @include('inc.livewire-success')
+            </div>
+
             <form wire:submit.prevent="editWorkDetail">
                 <div class="md:px-6">
                     {{-- Details --}}
@@ -83,7 +87,7 @@
                     </div>
                 </div>
                 <div class="my-2">
-                    <span class="font-bold text-sm">Belongs to service request:</span> 
+                    <span class="font-bold text-sm">Belongs to Work Order:</span> 
                     <a href="{{route('employee.manage-workorder', $workDetail->work_order_id)}}">
                         <div class="text-sm font-bold mt-1 text-teal-400">
                             {{$workDetail->work_order_id}}

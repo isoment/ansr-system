@@ -59,6 +59,8 @@ class EmployeeWorkDetailManage extends Component
             'tenant_notes' => $this->tenantNotes,
             'start_date' => $this->startdate,
         ]);
+
+        session()->flash('success', 'Work detail updated');
     }
 
     /**

@@ -66,6 +66,8 @@ class EmployeeWorkOrderManage extends Component
         ]);
 
         $this->workOrder = $this->workOrder->fresh();
+
+        session()->flash('success', 'Work order updated');
     }
 
     /**
