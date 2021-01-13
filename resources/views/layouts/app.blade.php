@@ -148,7 +148,7 @@
         return {
             isSideMenuOpen: false,
             isProfileMenuOpen: false,
-            successAlertOpen: true,
+            alertOpen: true,
 
             toggleSideMenu() {
                 this.isSideMenuOpen = ! this.isSideMenuOpen;

@@ -22,7 +22,7 @@
                             @enderror
                         </div>
                         <div class="flex items-center mt-1">
-                            <textarea id="details" name="details" rows="6"
+                            <textarea id="details" name="details" rows="7"
                                 class="px-4 w-full border bg-white rounded py-2 text-gray-700 focus:outline-none
                                     @error('details') border-orange-400 @enderror" 
                                 wire:model.debounce.500ms="details"/>
@@ -40,7 +40,7 @@
                             @enderror
                         </div>
                         <div class="flex items-center mt-1">
-                            <textarea id="tenantNotes" name="tenantNotes" rows="3"
+                            <textarea id="tenantNotes" name="tenantNotes" rows="5"
                                 class="px-4 w-full border bg-white rounded py-2 text-gray-700 focus:outline-none
                                     @error('tenantNotes') border-orange-400 @enderror" 
                                 wire:model.debounce.500ms="tenantNotes"/>
@@ -126,9 +126,39 @@
 
     </div>
 
-    <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
-                shadow-sm">
-        File Uploads
+    <div class="my-2">
+        @include('inc.livewire-error')
     </div>
-    
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+        <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
+                    shadow-sm flex flex-col justify-between">
+            <h5 class="font-bold text-center mb-6">Upload Images</h5>
+            <div>
+                <form>
+                    <div class="flex flex-col">
+                        <div>
+                            <input type="file" multiple
+                                   wire:model="images">
+                            @error('image.*') <span class="text-red-400">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="text-center mt-6">
+                            <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400 transition duration-200" 
+                                    wire:click.prevent="storeImage">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="break-words lg:col-span-2 bg-white text-gray-700 sm:border-1 
+                    rounded-sm sm:rounded-md mb-4 py-6 px-4 md:px-12 shadow-sm">
+            TEST
+        </div>
+
+    </div>
+
 </div>

@@ -2,21 +2,28 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DetailImage;
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EmployeeWorkDetailManage extends Component
 {
+    use WithFileUploads;
+
     public $workDetail;
 
     public $details;
     public $tenantNotes;
     public $startdate;
 
+    public $images = [];
+
     protected $rules = [
         'details' => 'required',
         'tenantNotes' => 'required',
         'startdate' => 'date',
+        'images.*' => 'image|max:8000'
     ];
 
     public function mount($workDetail)
@@ -61,6 +68,34 @@ class EmployeeWorkDetailManage extends Component
         ]);
 
         session()->flash('success', 'Work detail updated');
+    }
+
+    /**
+     *  Store Image
+     */
+    public function storeImage()
+    {
+        $this->validate([
+            'images.*' => 'image|max:6000'
+        ]);
+
+        foreach ($this->images as $key => $image) {
+            $this->images[$key] = $image->store('images', 'public');
+        }
+
+        if ($this->images) {
+            foreach ($this->images as $image) {
+                DetailImage::create([
+                    'work_detail_id' => $this->workDetail->id,
+                    'image' => $image,
+                ]);
+            }
+            session()->flash('success', 'Photo(s) uploaded');
+        } else {
+            session()->flash('error', 'You must select at least one photo');
+        }
+
+
     }
 
     /**

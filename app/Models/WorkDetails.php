@@ -18,4 +18,12 @@ class WorkDetails extends Model
     {
         return $this->belongsTo(WorkOrder::class);
     }
+
+    /**
+     *  DetailImage Relationship
+     */
+    public function detailImages()
+    {
+        return $this->hasMany(DetailImage::class, 'work_detail_id');
+    }
 }

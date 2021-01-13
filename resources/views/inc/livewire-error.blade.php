@@ -1,12 +1,12 @@
-{{-- Success message --}}
-@if (session()->has('success'))
+{{-- Error message --}}
+@if (session()->has('error'))
 <div x-data="{ livewireFlash: true }"
         x-show="livewireFlash">
-    <div class="flex justify-between bg-green-50 rounded overflow-hidden p-2 space-x-1">
+    <div class="flex justify-between bg-red-50 rounded overflow-hidden p-2 space-x-1">
         <div class="flex items-baseline">
             <span class="bg-white rounded-full p-1">
             <svg
-                class="h-6 w-auto text-green-400"
+                class="h-6 w-auto text-red-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
             >
@@ -18,9 +18,9 @@
             </svg>
             </span>
         </div>
-        <div class="flex flex-grow items-center text-green-400">
+        <div class="flex flex-grow items-center text-red-400">
             <p class="leading-tight text-xs md:text-sm ml-3">
-                {{ session('success') }}
+                {{ session('error') }}
             </p>
         </div>
         <div>
