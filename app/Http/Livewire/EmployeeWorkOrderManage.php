@@ -101,7 +101,8 @@ class EmployeeWorkOrderManage extends Component
 
             'employees' => Employee::orderBy('last_name', 'asc')->get(),
 
-            'details' => $this->workOrder->workDetails()->orderBy('created_at', 'desc')->paginate(5),
+            'details' => $this->workOrder->workDetails()
+                ->orderBy('created_at', 'desc')->paginate(5),
 
         ]);
     }

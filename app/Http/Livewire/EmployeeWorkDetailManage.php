@@ -91,11 +91,10 @@ class EmployeeWorkDetailManage extends Component
                 ]);
             }
             session()->flash('success', 'Photo(s) uploaded');
+            $this->images = [];
         } else {
             session()->flash('error', 'You must select at least one photo');
         }
-
-
     }
 
     /**
@@ -108,6 +107,11 @@ class EmployeeWorkDetailManage extends Component
 
     public function render()
     {
-        return view('livewire.employee-work-detail-manage');
+        return view('livewire.employee-work-detail-manage', [
+
+            'savedFiles' => $this->workDetail->detailImages()
+                ->orderBy('created_at', 'desc')->paginate(12),
+
+        ]);
     }
 }

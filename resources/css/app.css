@@ -16,10 +16,35 @@
     display: none;
 }
 
+/* Custom CSS */
 .max-width-1375 {
     max-width: 1300px;
 }
 
 .tenant-index-modal-background {
     background-color: rgba(0, 0, 0, 0.50);
+}
+
+.work-detail-image-wrapper {
+    max-width: 75px;
+    max-height: 75px;
+}
+
+.image-sizing {
+    min-height: 80px;
+}
+
+/* Style for progress bar */
+progress {
+    border-radius: 7px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: lightgray;
+    border-radius: 7px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #fbc88d;
+    border-radius: 7px;
 }

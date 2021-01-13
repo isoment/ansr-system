@@ -132,31 +132,59 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
-        <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
-                    shadow-sm flex flex-col justify-between">
-            <h5 class="font-bold text-center mb-6">Upload Images</h5>
-            <div>
-                <form>
-                    <div class="flex flex-col">
-                        <div>
-                            <input type="file" multiple
-                                   wire:model="images">
-                            @error('image.*') <span class="text-red-400">{{ $message }}</span>@enderror
+        <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-6 px-4 
+                    shadow-sm flex flex-col justify-center">
+            <form>
+                <div class="flex flex-col">
+
+                    <div x-data="{ isUploading: false, progress: 0 }"
+                            x-on:livewire-upload-start="isUploading = true"
+                            x-on:livewire-upload-finish="isUploading = false"
+                            x-on:livewire-upload-error="isUploading = false"
+                            x-on:livewire-upload-progress="progress = $event.detail.progress">
+                        <h5 class="font-bold text-center mb-2">Upload</h5>
+                        <h6 class="text-xs font-bold mb-4 text-center">Please select the button below to upload files, once completed
+                            click 'Save' to attach them to this work detail.
+                        </h6>
+                        <div x-show="isUploading"
+                             x-cloak
+                             class="my-3">
+                            <progress max="100" x-bind:value="progress" class="w-full"></progress>
                         </div>
-                        <div class="text-center mt-6">
-                            <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400 transition duration-200" 
-                                    wire:click.prevent="storeImage">
-                                Save
-                            </button>
+                        <div class="px-4 py-2 border border-teal-300 text-teal-300 rounded-md text-sm font-bold
+                                    cursor-pointer text-center"
+                                @click="$refs.fileInput.click()">
+                            Choose Files...
                         </div>
+                        <input type="file" 
+                                multiple 
+                                class="hidden"
+                                wire:model="images"
+                                x-ref="fileInput">
+                        @error('image.*')<span class="text-orange-400">{{ $message }}</span>@enderror
                     </div>
-                </form>
-            </div>
+
+                    <div class="text-center mt-6">
+                        <button class="bg-teal-300 w-1/2 p-2 rounded-md text-white text-sm hover:bg-teal-400 transition duration-200" 
+                                wire:click.prevent="storeImage">
+                            Save
+                        </button>
+                    </div>
+
+                </div>
+            </form>
         </div>
 
         <div class="break-words lg:col-span-2 bg-white text-gray-700 sm:border-1 
-                    rounded-sm sm:rounded-md mb-4 py-6 px-4 md:px-12 shadow-sm">
-            TEST
+                    rounded-sm sm:rounded-md mb-4 py-6 px-4 md:px-8 shadow-sm">
+            <h5 class="font-bold text-center text-lg mb-6">Saved Images</h5>
+            <div class="grid grid-cols-3 lg:grid-cols-6 gap-3 justify-items-center">
+                @foreach ($savedFiles as $file)
+                    <div class="rounded-lg shadow-md overflow-hidden work-detail-image-wrapper">
+                        <img src="/storage/{{$file->image}}" alt="file" class="image-sizing">
+                    </div>
+                @endforeach
+            </div>
         </div>
 
     </div>
