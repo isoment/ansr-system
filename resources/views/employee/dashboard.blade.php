@@ -15,7 +15,7 @@
     </section>
 
     <div class="mb-8 shadow-md rounded-md"
-         x-show="successAlertOpen"
+         x-show="alertOpen"
          x-transition:leave="transition duration-200"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0">

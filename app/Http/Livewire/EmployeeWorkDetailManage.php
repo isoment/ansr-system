@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\DetailImage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -95,6 +96,18 @@ class EmployeeWorkDetailManage extends Component
         } else {
             session()->flash('error', 'You must select at least one photo');
         }
+    }
+
+    /**
+     *  Delete Image
+     */
+    public function deleteImage($imageID)
+    {
+        $currentImage = DetailImage::find($imageID);
+
+        Storage::disk('public')->delete($currentImage->image);
+        
+        $currentImage->delete();
     }
 
     /**
