@@ -76,12 +76,14 @@ class EmployeeWorkDetailManage extends Component
      */
     public function storeImage()
     {
+        $customMessage = ['image' => 'Only images allowed'];
+
         $this->validate([
             'images.*' => 'image|max:6000'
-        ]);
+        ], $customMessage);
 
         foreach ($this->images as $key => $image) {
-            $this->images[$key] = $image->store('images', 'public');
+            $this->images[$key] = $image->storeAs('images', $this->fileName($this->images[$key]), 'public');
         }
 
         if ($this->images) {
@@ -91,7 +93,6 @@ class EmployeeWorkDetailManage extends Component
                     'image' => $image,
                 ]);
             }
-            session()->flash('success', 'Photo(s) uploaded');
             $this->images = [];
         } else {
             session()->flash('error', 'You must select at least one photo');
@@ -116,6 +117,20 @@ class EmployeeWorkDetailManage extends Component
     private function mysqlToViewDateConversion($date) 
     {
         return Carbon::parse($date)->toDateString();
+    }
+
+    /**
+     *  Method to rename uploaded files
+     */
+    private function fileName($file)
+    {
+        $fileOriginalName = $file->getClientOriginalName();
+
+        $fileName = pathinfo($fileOriginalName, PATHINFO_FILENAME);
+
+        $fileExtension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
+
+        return $fileName . '-' . auth()->id() . rand() . '-' . time() . '.' . $fileExtension;
     }
 
     public function render()

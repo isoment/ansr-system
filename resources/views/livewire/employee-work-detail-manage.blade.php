@@ -141,7 +141,7 @@
                         x-on:livewire-upload-error="isUploading = false"
                         x-on:livewire-upload-progress="progress = $event.detail.progress">
                     <h5 class="font-bold text-center mb-2">Upload</h5>
-                    <h6 class="text-xs font-bold mb-4 text-center">Please select the button below to upload files, once completed
+                    <h6 class="text-xs font-bold mb-4 text-center">Please select the 'Choose Files' to upload files, once completed
                         click 'Save' to attach them to this work detail.
                     </h6>
                     <div x-show="isUploading"
@@ -149,6 +149,12 @@
                             class="my-3">
                         <progress max="100" x-bind:value="progress" class="w-full"></progress>
                     </div>
+
+                    @error('images.*')
+                        <div class="text-orange-400 text-center mb-3">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
                     <div class="flex items-center">
                         <div class="px-4 py-2 border border-teal-300 text-teal-300 rounded-md text-sm font-bold
@@ -170,7 +176,6 @@
                             class="hidden"
                             wire:model="images"
                             x-ref="fileInput">
-                    @error('image.*')<span class="text-orange-400">{{ $message }}</span>@enderror
                 </div>
             </form>
         </div>
@@ -189,7 +194,6 @@
                                 </div>
                             </a>
                             <a class="text-xs font-bold mt-1 text-red-400 hover:text-red-600 cursor-pointer"
-                               {{-- wire:click="deleteImage({{$file->id}})" --}}
                                @click="showModal = true"
                                >
                                 Delete
