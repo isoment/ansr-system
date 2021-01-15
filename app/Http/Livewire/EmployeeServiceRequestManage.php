@@ -24,7 +24,11 @@ class EmployeeServiceRequestManage extends Component
         if ($this->request->completed_date) {
             $this->request->update(['completed_date' => NULL]);
         } else {
-            $this->request->update(['completed_date' => now()]);
+            if ($this->request->allWorkOrdersComplete()) {
+                $this->request->update(['completed_date' => now()]);
+            } else {
+                session()->flash('error', 'All work orders must be completed to close this service request');
+            }
         }
     }
 
@@ -41,9 +45,16 @@ class EmployeeServiceRequestManage extends Component
      */
     public function newWorkOrder()
     {
-        WorkOrder::create([
-            'service_request_id' => $this->request->id,
-        ]);
+        if ( ! $this->request->completed_date) {
+            WorkOrder::create([
+                'service_request_id' => $this->request->id,
+            ]);
+
+            $this->request = $this->request->fresh();
+        } else {
+            session()->flash('error', 'You cannot add a new work order to a closed request');
+        }
+
     }
 
     /**
@@ -56,6 +67,8 @@ class EmployeeServiceRequestManage extends Component
         if (! $workOrder->hasWorkDetails()) {
             $workOrder->delete();
         }
+
+        $this->request = $this->request->fresh();
     }
 
     public function render()

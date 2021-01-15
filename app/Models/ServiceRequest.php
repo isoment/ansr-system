@@ -53,6 +53,16 @@ class ServiceRequest extends Model
     }
 
     /**
+     *  @return boolean A method to determine if associated work orders are complete
+     */
+    public function allWorkOrdersComplete()
+    {
+        return $this->workOrders->every(function($item, $key) {
+            return $item['end_date'] !== NULL;
+        });
+    }
+
+    /**
      *  @return String of current date time
      */
     private function getCurrentDateString()

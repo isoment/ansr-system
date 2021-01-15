@@ -208,25 +208,33 @@
                 </div>
             </div>
             <div class="text-center">
-                <div class="my-2">
-                    <h6 class="font-bold text-sm mb-2">Open or close the Service Request:</h6>
-                    <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
-                                   transition duration-200"
-                            wire:click="toggleComplete">
-                        {{$request->completed_date ? 'Reopen Request' : 'Complete Request'}}
-                    </button>
-                </div>
-                <div class="my-2">
-                    <h6 class="font-bold text-sm mb-2">Create New Work Order:</h6>
-                    <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
-                                   transition duration-200"
-                            wire:click="newWorkOrder">
-                        New Work Order
-                    </button>
-                </div>
+                @if (! $request->completed_date)
+                    <div class="my-2">
+                        <h6 class="font-bold text-sm mb-2">Create New Work Order:</h6>
+                        <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
+                                    transition duration-200"
+                                wire:click="newWorkOrder">
+                            New Work Order
+                        </button>
+                    </div>
+                @endif
+                @if ($request->allWorkOrdersComplete())
+                    <div class="my-2">
+                        <h6 class="font-bold text-sm mb-2">Open or Close the Request:</h6>
+                        <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                                    transition duration-200"
+                                wire:click="toggleComplete">
+                            {{$request->completed_date ? 'Reopen Request' : 'Complete Request'}}
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
 
+    </div>
+
+    <div class="mt-2 mb-4">
+        @include('inc.livewire-error')
     </div>
     
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-6 
