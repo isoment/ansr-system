@@ -45,7 +45,11 @@ class EmployeeWorkOrderManage extends Component
         if ($this->workOrder->end_date) {
             $this->workOrder->update(['end_date' => NULL]);
         } else {
-            $this->workOrder->update(['end_date' => now()]);
+            if ($this->workOrder->allDetailsCompleted()) {
+                $this->workOrder->update(['end_date' => now()]);
+            } else {
+                session()->flash('error', 'All details must be completed before completing this work order');
+            }
         }
     }
 
@@ -75,16 +79,22 @@ class EmployeeWorkOrderManage extends Component
      */
     public function createWorkDetail()
     {
-        $this->validate([
-            'tenantNotes' => 'required',
-            'formDetails' => 'required',
-        ]);
+        if ( ! $this->workOrder->end_date) {
+            $this->validate([
+                'tenantNotes' => 'required',
+                'formDetails' => 'required',
+            ]);
+    
+            WorkDetails::create([
+                'work_order_id' => $this->workOrder->id,
+                'details' => $this->formDetails,
+                'tenant_notes' => $this->tenantNotes,
+            ]);
 
-        WorkDetails::create([
-            'work_order_id' => $this->workOrder->id,
-            'details' => $this->formDetails,
-            'tenant_notes' => $this->tenantNotes,
-        ]);
+            $this->workOrder = $this->workOrder->fresh();
+        } else {
+            session()->flash('error', 'You cannot create new details for a completed work order');
+        }
     }
 
     /**

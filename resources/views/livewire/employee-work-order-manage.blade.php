@@ -114,25 +114,39 @@
                     </div>
                 </div>
             </div>
-            <div class="my-2 text-center">
-                <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
-                               transition duration-200"
-                        wire:click="toggleEndDate">
-                    {{$workOrder->end_date ? 'Reopen Work Order' : 'Complete Work Order'}}
-                </button>
-            </div>
+            @if ($workOrder->allDetailsCompleted())
+                <div class="my-2 text-center">
+                    <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                                transition duration-200"
+                            wire:click="toggleEndDate">
+                        {{$workOrder->end_date ? 'Reopen Work Order' : 'Complete Work Order'}}
+                    </button>
+                </div>
+            @else
+                <div class="text-sm font-bold my-4 text-center">
+                    Complete all details to close this order.
+                </div>
+            @endif
         </div>
     
+    </div>
+
+    <div class="mt-2 mb-4">
+        @include('inc.livewire-error')
     </div>
     
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
                shadow-sm relative">
         <h5 class="text-xl font-bold text-center">Work Order Details</h5>
+
+        @if (! $workOrder->end_date)
         <button class="bg-teal-300 py-1 px-2 rounded-md text-white hover:bg-teal-400
                         transition duration-200 absolute top-3 right-3"
                 @click="showModal = true">
             <span class="font-bold text-xl">+</span>
         </button>
+        @endif
+
         <h6 class="font-bold text-xs text-center mt-1">Manage Details here</h6>
         @if ($details->isNotEmpty())
             @foreach ($details as $detail)

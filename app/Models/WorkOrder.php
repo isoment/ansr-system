@@ -46,4 +46,14 @@ class WorkOrder extends Model
             return false;
         }
     }
+
+    /**
+     *  Method to check if all associated work details are completed
+     */
+    public function allDetailsCompleted()
+    {
+        return $this->workDetails->every(function($item, $key) {
+            return $item['end_date'] !== NULL;
+        });
+    }
 }
