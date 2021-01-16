@@ -1,7 +1,9 @@
 <ul class="mt-6">
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 
-                transition-colors duration-150 hover:text-gray-800 {{Route::current()->getName() == 'employee.dashboard' ? 'text-orange-400' : ''}}" 
+                transition-colors duration-150 hover:text-gray-800 
+                {{Route::current()->getName() == 'employee.dashboard' ? 'text-orange-400' : ''}}
+                " 
            href="{{route('employee.dashboard')}}">
         <svg
             class="w-5 h-5"
@@ -21,7 +23,13 @@
     </li>
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                duration-150 hover:text-gray-800" href="#">
+                duration-150 hover:text-gray-800
+                {{
+                    Route::current()->getName() == 'employee.manage-workorder' ||
+                    Route::current()->getName() == 'employee.manage-details' ? 'text-orange-400' : ''
+                }}
+                " 
+           href="#">
             <svg
                 class="w-5 h-5"
                 aria-hidden="true"
@@ -36,13 +44,18 @@
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                 ></path>
             </svg>
-            <span class="ml-4">My Work Orders</span>
+            <span class="ml-4">Work Orders</span>
         </a>
     </li>
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                duration-150 hover:text-gray-800 
-                {{Route::current()->getName() == 'employee.service-request-index' ? 'text-orange-400' : ''}}" 
+                duration-150 hover:text-gray-800
+                {{
+                    Route::current()->getName() == 'employee.service-request-index' ||
+                    Route::current()->getName() == 'employee.request-category' ||
+                    Route::current()->getName() == 'employee.manage-request' ? 'text-orange-400' : ''
+                }}
+                " 
            href="{{route('employee.service-request-index')}}">
             <svg
                 class="w-5 h-5"
@@ -105,8 +118,12 @@
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
                 duration-150 hover:text-gray-800 
-                {{Route::current()->getName() == 'employee.properties-index' || 
-                Route::current()->getName() == 'employee.region' ? 'text-orange-400' : ''}}" 
+                {{
+                    Route::current()->getName() == 'employee.properties-index' || 
+                    Route::current()->getName() == 'employee.properties-create' || 
+                    Route::current()->getName() == 'employee.properties-edit' || 
+                    Route::current()->getName() == 'employee.region' ? 'text-orange-400' : ''
+                }}" 
            href="{{route('employee.properties-index')}}">
             <svg
                 class="w-5 h-5"

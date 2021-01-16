@@ -20,7 +20,10 @@
             </div>
             
             <div class="mt-4"
-                 x-data="{ showModal: false }">
+                 x-data="{ 
+                     showModal: false,
+                     showChargesForm: false,
+                    }">
     
                 <div class="my-3">
                     <span class="font-bold">Request Created:</span> 
@@ -35,7 +38,7 @@
                             {{$request->tenant->first_name}} {{$request->tenant->last_name}}
                         </div>
                         <i class="text-sm far fa-question-circle text-orange-300 transition duration-200
-                                 hover:text-orange-400 ml-1 cursor-pointer"
+                                 hover:text-orange-400 ml-2 cursor-pointer"
                            @click="showModal = true">
                         </i>
                     </div>
@@ -72,12 +75,18 @@
                 </div>
                 <div class="my-3">
                     <span class="font-bold">Tenant Charges:</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{$request->tenant_charges ? '$'.$request->tenant_charges : 'N/A'}}
+                    <div class="flex items-center mt-1">
+                        <div class="text-sm font-light mt-1">
+                            {{$request->tenant_charges ? '$'.$request->tenant_charges : 'N/A'}}
+                        </div>
+                        <i class="text-sm far fa-edit text-orange-300 transition duration-200
+                                hover:text-orange-400 ml-2 cursor-pointer"
+                           @click="showChargesForm = true">
+                        </i>
                     </div>
                 </div>
     
-                {{-- Modal --}}
+                {{-- Tenant Modal --}}
                 <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
                             items-center justify-center whitespace-normal"
                         x-show="showModal"
@@ -141,6 +150,62 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- Charges Modal --}}
+                <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
+                            items-center justify-center whitespace-normal"
+                        x-show="showChargesForm"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform"
+                        x-transition:enter-end="opacity-100 transform"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 transform"
+                        x-transition:leave-end="opacity-0 transform"
+                        x-cloak>
+                    <div class="w-11/12 md:max-w-lg mx-auto rounded-md shadow-lg text-gray-700 whitespace-normal"
+                            @click.away="showChargesForm = false">
+                        <div class="text-left bg-white px-6 py-2 rounded-b-md rounded-t-md">
+                            <div class="flex items-center justify-between mt-4">
+                                <h5 class="text-xl font-bold">Tenant Charges</h5>
+                                <div>
+                                    <i class="fas fa-times text-lg cursor-pointer"
+                                        @click="showChargesForm = false">
+                                    </i>
+                                </div>
+                            </div>
+                            <div class="my-4">
+                                <form wire:submit.prevent="editTenantCharges">
+                                    <div class="w-full mt-4 sm:mt-8">
+                                        <div class="flex justify-between items-center w-full">
+                                            <label for="tenantCharges" class="text-xs text-gray-700 font-bold">Amount:</label>
+                                            @error('tenantCharges')
+                                                <div class="text-orange-400 text-xs font-bold italic">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="flex items-center mt-1">
+                                            <span class="font-bold text-lg mr-2">$</span>
+                                            <input name="tenantCharges" type="number" min="1" max="10000" step=".01"
+                                                class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                                                    @error('tenantCharges') border-orange-400 @enderror"
+                                                wire:model.debounce.1000="tenantCharges"/>
+                                        </div>
+                                    </div>
+                                    <div class="text-center my-4">
+                                        <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                                                        transition duration-200"
+                                                type="submit"
+                                                @click="showChargesForm = false">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     
@@ -235,6 +300,10 @@
 
     <div class="mt-2 mb-4">
         @include('inc.livewire-error')
+    </div>
+
+    <div class="mt-2 mb-4">
+        @include('inc.livewire-success')
     </div>
     
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-6 

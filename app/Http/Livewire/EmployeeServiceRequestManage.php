@@ -15,6 +15,21 @@ class EmployeeServiceRequestManage extends Component
 
     public $request;
     public $currentWorkOrderId;
+    public $tenantCharges;
+
+    protected $rules = [
+        'tenantCharges' => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/',
+    ];
+
+    public function mount($request) 
+    {
+        $this->tenantCharges = $request->tenant_charges ? $request->tenant_charges : NULL;
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     /**
      *  Toggle Complete
@@ -30,6 +45,22 @@ class EmployeeServiceRequestManage extends Component
                 session()->flash('error', 'All work orders must be completed to close this service request');
             }
         }
+    }
+
+    /**
+     *  Edit tenant charges
+     */
+    public function editTenantCharges()
+    {
+        $this->validate();
+
+        $this->request->update([
+            'tenant_charges' => $this->tenantCharges,
+        ]);
+
+        $this->request = $this->request->fresh();
+
+        session()->flash('success', 'Tenant charges updated');
     }
 
     /**

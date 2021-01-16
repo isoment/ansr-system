@@ -50,13 +50,11 @@ class EmployeePropertyEdit extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function submitForm($id)
+    public function submitForm()
     {
         $this->validate();
-
-        $property = Property::find($id);
         
-        $property->update([
+        $this->property->update([
             'name' => $this->name,
             'region_id' => $this->property->region->id,
             'street' => $this->street,

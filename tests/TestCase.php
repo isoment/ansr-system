@@ -18,10 +18,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function createTestingTenant()
     {
-        $region = Region::factory()->create([
-            'region_name' => 'Test Region',
-            'slug' => 'TST',
-        ]);
+        $region = Region::factory()->create();
 
         $property = Property::factory()->create([
             'region_id' => $region->id

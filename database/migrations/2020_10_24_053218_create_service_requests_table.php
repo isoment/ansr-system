@@ -20,7 +20,7 @@ class CreateServiceRequestsTable extends Migration
             $table->unsignedBigInteger('request_issue_id')->nullable();
             $table->string('issue');
             $table->text('description');
-            $table->decimal('tenant_charges')->nullable();
+            $table->decimal('tenant_charges', 5, 2)->nullable();
             $table->dateTime('assigned_date')->nullable();
             $table->dateTime('completed_date')->nullable();
             $table->timestamps();

@@ -9,7 +9,7 @@
         You can edit the property details using the form below.
     </h6>
 
-    <form wire:submit.prevent="submitForm({{$property->id}})">
+    <form wire:submit.prevent="submitForm">
 
         @csrf
 
@@ -110,7 +110,7 @@
                     @enderror
                 </div>
                 <div class="flex items-center mt-1">
-                    <input type="number" id="zip" name="zip" placeholder="Zip"
+                    <input id="zip" name="zip" placeholder="Zip"
                         class="pl-4 pr-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
                             @error('zip') border-orange-400 @enderror" value="{{ old('zip') }}" required 
                         wire:model.debounce.500ms="zip"/>

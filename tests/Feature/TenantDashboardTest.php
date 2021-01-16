@@ -26,26 +26,4 @@ class TenantDashboardTest extends TestCase
 
         $this->get(route('tenant.request-index'))->assertStatus(403);
     }
-
-    /**
-     *  @test
-     *  Only registered tenants should be able to post service requests
-     */
-    public function guests_cannot_submit_service_requests()
-    {
-        $tenant = $this->createTestingTenant();
-
-        // Create a service request, must be in array format NOT collection
-        $serviceRequest = ServiceRequest::factory()->create([
-            'tenant_id' => $tenant->userable->id,
-            'category_id' => RequestCategory::factory()->create()->id,
-            'issue' => 'New Request'
-        ])->toArray();
-
-        $this->post(route('tenant.service-request.store'), $serviceRequest)
-            ->assertStatus(403);
-
-        $this->post(route('replace.key.store'), $serviceRequest)
-            ->assertStatus(403);
-    }
 }
