@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Employee;
 use App\Models\Property;
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EmployeeFactory extends Factory
@@ -23,7 +24,7 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'property_id' => Property::all()->random()->id,
+            'region_id' => Region::all()->random()->id,
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'department' => function() {

@@ -58,8 +58,6 @@ class EmployeeServiceRequestManage extends Component
             'tenant_charges' => $this->tenantCharges,
         ]);
 
-        $this->request = $this->request->fresh();
-
         session()->flash('success', 'Tenant charges updated');
     }
 
@@ -77,11 +75,12 @@ class EmployeeServiceRequestManage extends Component
     public function newWorkOrder()
     {
         if ( ! $this->request->completed_date) {
+
             WorkOrder::create([
                 'service_request_id' => $this->request->id,
             ]);
-
             $this->request = $this->request->fresh();
+            
         } else {
             session()->flash('error', 'You cannot add a new work order to a closed request');
         }
@@ -106,7 +105,7 @@ class EmployeeServiceRequestManage extends Component
     {
         return view('livewire.employee-service-request-manage', [
 
-            'workOrders' => WorkOrder::where('service_request_id', $this->request->id)->get(),
+            'workOrders' => $this->request->workOrders,
 
             'workOrderDetails' => WorkDetails::where('work_order_id', $this->currentWorkOrderId)
                 ->paginate(5),

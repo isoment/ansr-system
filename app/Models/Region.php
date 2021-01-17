@@ -12,6 +12,14 @@ class Region extends Model
     protected $guarded = [];
 
     /**
+     *  Employee Relationship
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'region_id');
+    }
+
+    /**
      *  Property Relationship
      */
     public function properties()

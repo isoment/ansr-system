@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
+use App\Models\Region;
 use Illuminate\Database\Seeder;
 
 class EmployeeSeeder extends Seeder
@@ -16,6 +17,7 @@ class EmployeeSeeder extends Seeder
     {
         Employee::factory()->create([
             'id' => 1,
+            'region_id' => Region::all()->random()->id,
             'first_name' => 'Test',
             'last_name' => 'Employee',
             'employee_id_number' => 'a8839910',

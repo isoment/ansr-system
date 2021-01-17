@@ -12,14 +12,6 @@ class Property extends Model
     protected $guarded = [];
 
     /**
-     *  Employee Relationship
-     */
-    public function employees()
-    {
-        return $this->hasMany(Employee::class);
-    }
-
-    /**
      *  Property Relationship
      */
     public function region()

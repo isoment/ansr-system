@@ -20,9 +20,9 @@ class Employee extends Model
     /**
      *  Property Relationship
      */
-    public function property()
+    public function region()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsTo(Region::class, 'region_id');
     }
 
     /**
