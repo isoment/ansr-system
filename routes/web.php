@@ -80,4 +80,8 @@ Route::middleware('can:isEmployee')->group(function() {
     // Manage Work Details
     Route::get('/employee/work-detail/{workDetail}/manage', [\App\Http\Controllers\Employee\WorkOrderController::class, 'manageDetails'])
         ->name('employee.manage-details');
+
+    // Tenant Admin
+    Route::get('/employee/user-admin/tenant', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantIndex'])
+        ->name('employee.tenant-index');
 });

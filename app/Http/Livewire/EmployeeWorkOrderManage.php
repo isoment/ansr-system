@@ -109,7 +109,7 @@ class EmployeeWorkOrderManage extends Component
     {
         return view('livewire.employee-work-order-manage', [
 
-            'employees' => Employee::orderBy('last_name', 'asc')->get(),
+            'employees' => $this->workOrder->serviceRequest->tenant->lease->property->region->employees,
 
             'details' => $this->workOrder->workDetails()
                 ->orderBy('created_at', 'desc')->paginate(5),

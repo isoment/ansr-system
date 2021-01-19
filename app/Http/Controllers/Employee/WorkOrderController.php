@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class WorkOrderController extends Controller
 {
     /**
-     *  Display the manage work order page.
+     *  Display the manage work order page
      *
      * @return \Illuminate\Http\Response
      */

@@ -13,6 +13,8 @@ class TenantRequestIndex extends Component
     public $open = true;
     public $sortAsc = false;
 
+    protected $queryString = ['sortAsc', 'open'];
+
     public function sortDirection()
     {
         $this->sortAsc = ! $this->sortAsc;

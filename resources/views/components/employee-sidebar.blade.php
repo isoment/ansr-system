@@ -2,7 +2,9 @@
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 
                 transition-colors duration-150 hover:text-gray-800 
-                {{Route::current()->getName() == 'employee.dashboard' ? 'text-orange-400' : ''}}
+                {{
+                    Route::current()->getName() == 'employee.dashboard' ? 'text-orange-400' : ''
+                }}
                 " 
            href="{{route('employee.dashboard')}}">
         <svg
@@ -97,7 +99,12 @@
     </li>
     <li class="relative px-6 py-3">
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                duration-150 hover:text-gray-800" href="#">
+                duration-150 hover:text-gray-800
+                {{
+                    Route::current()->getName() == 'employee.tenant-index' ? 'text-orange-400' : ''
+                }}
+                " 
+           href="{{route('employee.tenant-index')}}">
             <svg
                 class="w-5 h-5"
                 aria-hidden="true"
@@ -112,7 +119,7 @@
                 d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
                 ></path>
             </svg>
-            <span class="ml-4">Tenant Administration</span>
+            <span class="ml-4">User Administration</span>
         </a>
     </li>
     <li class="relative px-6 py-3">
