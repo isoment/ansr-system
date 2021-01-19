@@ -16,6 +16,9 @@ class AdminTenantIndex extends Component
 
     protected $queryString = ['search', 'sortAscending', 'sortColumn'];
 
+    /**
+     *  Method to set column and sort order
+     */
     public function sortBy($column)
     {
         if ($this->sortColumn == $column) {

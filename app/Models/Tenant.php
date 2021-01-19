@@ -9,6 +9,8 @@ class Tenant extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      *  One to one polymorphic to User
      */

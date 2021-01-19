@@ -84,4 +84,7 @@ Route::middleware('can:isEmployee')->group(function() {
     // Tenant Admin
     Route::get('/employee/user-admin/tenant', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantIndex'])
         ->name('employee.tenant-index');
+    // Tenant Edit
+    Route::get('/employee/user-admin/tenant/{tenant}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantEdit'])
+        ->name('employee.tenant-edit');
 });

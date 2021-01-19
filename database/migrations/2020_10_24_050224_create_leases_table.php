@@ -17,7 +17,7 @@ class CreateLeasesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('property_id');
             $table->string('building')->nullable();
-            $table->string('unit');
+            $table->string('unit')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
