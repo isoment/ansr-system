@@ -55,9 +55,9 @@
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <div class="flex items-center">
-                                        <button wire:click="sortBy('lease_id')"
-                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Lease ID</button>
-                                        @if ($sortColumn != 'lease_id')
+                                        <button wire:click="sortBy('employee_id_number')"
+                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Employee ID</button>
+                                        @if ($sortColumn != 'employee_id_number')
                                             <span></span>
                                         @elseif ($sortAscending)
                                             <span>
@@ -84,32 +84,38 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     Phone
                                 </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    Region
+                                </th>
                                 <th class="px-6 py-3 bg-gray-50"></th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($tenants as $tenant)
+                            @foreach ($employees as $employee)
                             <tr>
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
                                     <div class="flex items-center">
                                         <div>
                                             <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$tenant->last_name}}, {{$tenant->first_name}}
+                                                {{$employee->last_name}}, {{$employee->first_name}}
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$tenant->lease_id}}</div>
+                                    <div class="text-sm leading-5 text-gray-900">{{$employee->employee_id_number}}</div>
                                 </td>
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$tenant->email}}</div>
+                                    <div class="text-sm leading-5 text-gray-900">{{$employee->email}}</div>
                                 </td>
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$tenant->phone}}</div>
+                                    <div class="text-sm leading-5 text-gray-900">{{$employee->phone}}</div>
+                                </td>
+                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
+                                    <div class="text-sm leading-5 text-gray-900">{{$employee->region->region_name}}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                    <a href="{{route('employee.tenant-edit', $tenant->id)}}" class="text-teal-400 hover:text-teal-600">Edit</a>
+                                    <a href="#" class="text-teal-400 hover:text-teal-600">Edit</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -121,9 +127,9 @@
         </div>
 
         <div class="my-4">
-            {{ $tenants->links('vendor.livewire.pagination') }}
+            {{ $employees->links('vendor.livewire.pagination') }}
         </div>
-        
+
     </div>
 
 </div>

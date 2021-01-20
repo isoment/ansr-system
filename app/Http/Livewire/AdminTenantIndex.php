@@ -9,30 +9,13 @@ use Livewire\WithPagination;
 class AdminTenantIndex extends Component
 {
     use WithPagination;
+    use SortColumns;
 
     public $search;
     public $sortAscending = true;
     public $sortColumn;
 
     protected $queryString = ['search', 'sortAscending', 'sortColumn'];
-
-    /**
-     *  Method to set column and sort order
-     */
-    public function sortBy($column)
-    {
-        if ($this->sortColumn == $column) {
-            $this->sortAscending = ! $this->sortAscending;
-        } else {
-            $this->sortAscending = true;
-        }
-        $this->sortColumn = $column;
-    }
-
-    public function upDatingSearch()
-    {
-        $this->resetPage();
-    }
 
     public function render()
     {

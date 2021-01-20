@@ -29,4 +29,14 @@ class UserAdminController extends Controller
             'tenant' => $tenant,
         ]);
     }
+
+    /**
+     *  Display a employee index
+     * 
+     *  @return \Illuminate\Http\Response
+     */
+    public function employeeIndex()
+    {
+        return view('employee.employee-index');
+    }
 }
