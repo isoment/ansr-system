@@ -27,9 +27,9 @@ class EmployeeFactory extends Factory
             'region_id' => Region::all()->random()->id,
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
-            'department' => function() {
-                $jobs = ['Leasing', 'Maintenance', 'Administrative'];
-                return array_rand(array_flip($jobs), 1);
+            'role' => function() {
+                $roles = ['Management', 'Maintenance', 'Administrative'];
+                return array_rand(array_flip($roles), 1);
             },
             'employee_id_number' => $this->faker->unique()->numerify('#####'),
             'phone' => $this->faker->phoneNumber,

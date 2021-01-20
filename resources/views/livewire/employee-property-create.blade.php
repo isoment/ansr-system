@@ -9,8 +9,6 @@
 
     <form wire:submit.prevent="submitForm">
 
-        @csrf
-
         {{-- Name & Region --}}
         <div class="flex flex-col sm:flex-row items-center">
             <div class="w-full sm:w-3/4">

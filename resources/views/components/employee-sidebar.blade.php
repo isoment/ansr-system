@@ -101,6 +101,9 @@
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
                 duration-150 hover:text-gray-800
                 {{
+                    Route::current()->getName() == 'employee.tenant-edit' ||
+                    Route::current()->getName() == 'employee.employee-create' ||
+                    Route::current()->getName() == 'employee.employee-index' ||
                     Route::current()->getName() == 'employee.tenant-index' ? 'text-orange-400' : ''
                 }}
                 " 

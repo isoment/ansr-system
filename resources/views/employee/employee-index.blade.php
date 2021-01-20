@@ -14,7 +14,7 @@
                 <a href="{{route('employee.tenant-index')}}" 
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200">Tenant Admin</a>
-                <a href="#"
+                <a href="{{route('employee.employee-create')}}"
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200 ml-2 lg:hidden">Add Employee</a>      
             </div>
@@ -23,7 +23,7 @@
 
     <div class="relative">
         <div class="flex items-center ml-4">
-            <a href="#"
+            <a href="{{route('employee.employee-create')}}"
                class="bg-teal-300 hover:bg-teal-400 transition-all duration-200 text-white px-4 
                       py-2 text-xs font-bold rounded-t-md absolute top-14 right-8 hidden lg:block">Add Employee</a>
         </div>

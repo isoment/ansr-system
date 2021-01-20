@@ -90,4 +90,10 @@ Route::middleware('can:isEmployee')->group(function() {
     // Employee Admin
     Route::get('/employee/user-admin/employee', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeIndex'])
         ->name('employee.employee-index');
+    // Employee Create
+    Route::get('/employee/user-admin/employee-create', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeCreate'])
+        ->name('employee.employee-create');
+    // Employee Edit
+    Route::get('/employee/user-admin/employee/{employee}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeEdit'])
+        ->name('employee.employee-edit');
 });
