@@ -14,6 +14,6 @@ class WorkOrderSeeder extends Seeder
      */
     public function run()
     {
-        WorkOrder::factory()->count(300)->create();
+        WorkOrder::factory()->count(250)->create(['end_date' => NULL]);
     }
 }

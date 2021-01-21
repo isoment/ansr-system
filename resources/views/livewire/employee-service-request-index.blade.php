@@ -46,7 +46,7 @@
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left">
                                 <div class="flex items-center">
-                                    <div class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Last Name</div>
+                                    <div class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</div>
                                 </div>
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left">
@@ -79,7 +79,7 @@
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
                                     <div class="flex items-center">
                                             <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$request->tenant->last_name}}
+                                                {{$request->tenant->last_name}}, {{$request->tenant->first_name}}
                                             </div>
                                         </div>
                                     </div>

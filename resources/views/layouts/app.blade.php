@@ -27,7 +27,7 @@
         x-data="mainAppDashboard()">
 
         {{-- Desktop Side Menu --}}
-        <aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
+        <aside class="z-20 hidden w-64 overflow-y-auto bg-white lg:block flex-shrink-0">
             <div class="py-4 text-gray-500">
                 <a @can('isEmployee') href="{{route('employee.dashboard')}}" 
                    @elsecan('isTenant') href="{{route('tenant.dashboard')}}" 
@@ -91,10 +91,10 @@
         {{-- Top Navigation --}}
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md">
-                <div class="flex items-center justify-between md:justify-end h-full px-6 mx-auto">
+                <div class="flex items-center justify-between lg:justify-end h-full px-6 mx-auto">
 
                     {{-- Mobile hamburger --}}
-                    <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-orange" 
+                    <button class="p-1 mr-5 -ml-1 rounded-md lg:hidden focus:outline-none focus:shadow-outline-orange" 
                             @click="toggleSideMenu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>

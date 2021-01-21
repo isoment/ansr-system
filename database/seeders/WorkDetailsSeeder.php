@@ -14,6 +14,6 @@ class WorkDetailsSeeder extends Seeder
      */
     public function run()
     {
-        WorkDetails::factory()->count(425)->create();
+        WorkDetails::factory()->count(425)->create(['end_date' => NULL]);
     }
 }

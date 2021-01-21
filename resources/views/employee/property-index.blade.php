@@ -11,9 +11,11 @@
                 Property Management
             <h3>
             <div class="flex items-center">
-                <a href="{{route('employee.region')}}" 
-                   class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
-                         text-xs p-2 rounded transition-all duration-200">Add Region</a>
+                @can('isManagement')
+                    <a href="{{route('employee.region')}}" 
+                       class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
+                             text-xs p-2 rounded transition-all duration-200">Add Region</a>
+                @endcan
                 <a href="{{route('employee.properties-create')}}"
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200 ml-2 lg:hidden">Add Property</a>      

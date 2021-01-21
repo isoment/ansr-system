@@ -14,6 +14,6 @@ class PropertySeeder extends Seeder
      */
     public function run()
     {
-        Property::factory()->times(25)->create();
+        Property::factory()->times(42)->create();
     }
 }

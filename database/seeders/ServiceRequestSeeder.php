@@ -14,6 +14,6 @@ class ServiceRequestSeeder extends Seeder
      */
     public function run()
     {
-        ServiceRequest::factory()->count(215)->create();
+        ServiceRequest::factory()->count(125)->create(['completed_date' => NULL]);
     }
 }

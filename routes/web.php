@@ -51,19 +51,6 @@ Route::middleware('can:isEmployee')->group(function() {
     Route::get('/employee/db', [\App\Http\Controllers\Employee\EmployeeDashboardController::class, 'index'])
         ->name('employee.dashboard');
 
-    // Properties
-    Route::get('/employee/properties', [\App\Http\Controllers\Employee\PropertyController::class, 'index'])
-        ->name('employee.properties-index');
-    // Create Properties
-    Route::get('/employee/properties/create', [\App\Http\Controllers\Employee\PropertyController::class, 'create'])
-        ->name('employee.properties-create');
-    // Edit Properties
-    Route::get('/employee/properties/{property}/edit', [\App\Http\Controllers\Employee\PropertyController::class, 'edit'])
-        ->name('employee.properties-edit');
-    // Regions
-    Route::get('/employee/regions', [\App\Http\Controllers\Employee\PropertyController::class, 'region'])
-        ->name('employee.region');
-
     // Service Requests
     Route::get('/employee/service-request', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'index'])
         ->name('employee.service-request-index');
@@ -81,19 +68,44 @@ Route::middleware('can:isEmployee')->group(function() {
     Route::get('/employee/work-detail/{workDetail}/manage', [\App\Http\Controllers\Employee\WorkOrderController::class, 'manageDetails'])
         ->name('employee.manage-details');
 
-    // Tenant Admin
-    Route::get('/employee/user-admin/tenant', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantIndex'])
+    // Management only
+    Route::middleware('can:isManagement')->group(function() {
+
+        // Regions
+        Route::get('/employee/regions', [\App\Http\Controllers\Employee\PropertyController::class, 'region'])
+            ->name('employee.region');
+
+        // Tenant Admin
+        Route::get('/employee/user-admin/tenant', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantIndex'])
         ->name('employee.tenant-index');
-    // Tenant Edit
-    Route::get('/employee/user-admin/tenant/{tenant}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantEdit'])
-        ->name('employee.tenant-edit');
-    // Employee Admin
-    Route::get('/employee/user-admin/employee', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeIndex'])
-        ->name('employee.employee-index');
-    // Employee Create
-    Route::get('/employee/user-admin/employee-create', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeCreate'])
-        ->name('employee.employee-create');
-    // Employee Edit
-    Route::get('/employee/user-admin/employee/{employee}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeEdit'])
-        ->name('employee.employee-edit');
+        // Tenant Edit
+        Route::get('/employee/user-admin/tenant/{tenant}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantEdit'])
+            ->name('employee.tenant-edit');
+        // Employee Admin
+        Route::get('/employee/user-admin/employee', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeIndex'])
+            ->name('employee.employee-index');
+        // Employee Create
+        Route::get('/employee/user-admin/employee-create', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeCreate'])
+            ->name('employee.employee-create');
+        // Employee Edit
+        Route::get('/employee/user-admin/employee/{employee}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeEdit'])
+            ->name('employee.employee-edit');
+
+    });
+
+    // Management and Administrative Employees
+    Route::middleware('can:isAdministrative')->group(function() {
+
+        // Properties
+        Route::get('/employee/properties', [\App\Http\Controllers\Employee\PropertyController::class, 'index'])
+            ->name('employee.properties-index');
+        // Create Properties
+        Route::get('/employee/properties/create', [\App\Http\Controllers\Employee\PropertyController::class, 'create'])
+            ->name('employee.properties-create');
+        // Edit Properties
+        Route::get('/employee/properties/{property}/edit', [\App\Http\Controllers\Employee\PropertyController::class, 'edit'])
+            ->name('employee.properties-edit');
+
+    });
+
 });

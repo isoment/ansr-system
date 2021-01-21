@@ -34,5 +34,15 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isTenant', function($user) {
             return $user->userable_type === 'App\Models\Tenant';
         });
+
+        // Management employee user role
+        Gate::define('isManagement', function($user) {
+            return $user->userable->role === 'Management';
+        });
+
+        // Management or Administrative employee user role
+        Gate::define('isAdministrative', function($user) {
+            return $user->userable->role === 'Management' || $user->userable->role === 'Administrative';
+        });
     }
 }
