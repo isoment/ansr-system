@@ -54,9 +54,6 @@ Route::middleware('can:isEmployee')->group(function() {
     // Service Requests
     Route::get('/employee/service-request', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'index'])
         ->name('employee.service-request-index');
-    // Requests Category
-    Route::get('/employee/request-category', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'requestCategory'])
-        ->name('employee.request-category');
     // Request Management
     Route::get('/employee/service-request/{request}/manage', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'manageRequest'])
         ->name('employee.manage-request');
@@ -68,12 +65,16 @@ Route::middleware('can:isEmployee')->group(function() {
     Route::get('/employee/work-detail/{workDetail}/manage', [\App\Http\Controllers\Employee\WorkOrderController::class, 'manageDetails'])
         ->name('employee.manage-details');
 
-    // Management only
+    // Management employees only
     Route::middleware('can:isManagement')->group(function() {
 
         // Regions
         Route::get('/employee/regions', [\App\Http\Controllers\Employee\PropertyController::class, 'region'])
             ->name('employee.region');
+
+        // Requests Category
+        Route::get('/employee/request-category', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'requestCategory'])
+            ->name('employee.request-category');
 
         // Tenant Admin
         Route::get('/employee/user-admin/tenant', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantIndex'])

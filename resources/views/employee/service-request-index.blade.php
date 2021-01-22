@@ -11,9 +11,11 @@
                 Service Requests
             <h3>
             <div class="flex items-center">
+                @can('isManagement')
                 <a href="{{route('employee.request-category')}}" 
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200">Add Category</a>
+                @endcan
                 <a href="#"
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200 ml-2 lg:hidden">New Request</a>      
