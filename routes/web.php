@@ -95,7 +95,7 @@ Route::middleware('can:isEmployee')->group(function() {
     });
 
     // Management and Administrative Employees
-    Route::middleware('can:isAdministrative')->group(function() {
+    Route::middleware('can:isAdministrativeOrManagement')->group(function() {
 
         // Properties
         Route::get('/employee/properties', [\App\Http\Controllers\Employee\PropertyController::class, 'index'])

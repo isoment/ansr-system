@@ -17,6 +17,9 @@
                 <div class="text-lg text-gray-700 uppercase tracking-wider mt-4">
                     This action is unauthorized.
                 </div>
+                <div class="text-orange-300 uppercase tracking-wider mt-2 font-bold">
+                    <a href="{{ url()->previous() }}">Go Back</a>
+                </div>
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Property;
 use App\Models\Region;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class EmployeePropertyCreate extends Component
@@ -33,7 +34,7 @@ class EmployeePropertyCreate extends Component
     {
         $this->validateOnly($propertyName);
     }
-    
+
     public function submitForm()
     {
         $this->validate();
@@ -41,7 +42,7 @@ class EmployeePropertyCreate extends Component
         Property::create([
             'name' => $this->name,
             'region_id' => Region::where('region_name', $this->region)
-                                ->first()->id,
+                ->first()->id,
             'street' => $this->street,
             'city' => $this->city,
             'state' => $this->state,

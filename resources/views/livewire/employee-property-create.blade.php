@@ -1,6 +1,8 @@
 <div class="flex flex-col">
 
-    @include('inc.livewire-success')
+    <div class="mb-4">
+        @include('inc.livewire-success')
+    </div>
 
     <h2 class="font-bold text:lg lg:text-2xl text-center">Add New Property</h2>
     <h6 class="font-bold text-sm mt-4 mb-8 text-center">Please fill out the form below with the relevant information in order
@@ -54,7 +56,7 @@
             </div>
             <div class="flex items-center mt-1">
                 <input type="text" id="street" name="street" placeholder="Street"
-                    class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                    class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                         @error('street') border-orange-400 @enderror" value="{{ old('street') }}" required 
                     wire:model.debounce.500ms="street"/>
             </div>
@@ -72,7 +74,7 @@
             </div>
             <div class="flex items-center mt-1">
                 <input type="text" id="city" name="city" placeholder="City"
-                    class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                    class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                         @error('city') border-orange-400 @enderror" value="{{ old('city') }}" required 
                     wire:model.debounce.500ms="city"/>
             </div>
@@ -91,7 +93,7 @@
                 </div>
                 <div class="flex items-center mt-1">
                     <input type="text" id="state" name="state" placeholder="State"
-                        class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                        class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('state') border-orange-400 @enderror" value="{{ old('state') }}" required 
                         wire:model.debounce.500ms="state"/>
                 </div>
@@ -106,8 +108,8 @@
                     @enderror
                 </div>
                 <div class="flex items-center mt-1">
-                    <input type="number" id="zip" name="zip" placeholder="Zip"
-                        class="pl-4 pr-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                    <input type="text" id="zip" name="zip" placeholder="Zip"
+                        class="pl-4 pr-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('zip') border-orange-400 @enderror" value="{{ old('zip') }}" required 
                         wire:model.debounce.500ms="zip"/>
                 </div>
@@ -127,7 +129,7 @@
                 </div>
                 <div class="flex items-center mt-1">
                     <input type="email" id="email" name="email" placeholder="Email"
-                        class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                        class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('email') border-orange-400 @enderror" value="{{ old('email') }}" required 
                         wire:model.debounce.500ms="email"/>
                 </div>
@@ -143,7 +145,7 @@
                 </div>
                 <div class="flex items-center mt-1">
                     <input type="text" id="phone" name="phone" placeholder="Phone Number"
-                        class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                        class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('phone') border-orange-400 @enderror" value="{{ old('phone') }}" required 
                         wire:model.debounce.500ms="phone"/>
                 </div>

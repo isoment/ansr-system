@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PropertyController extends Controller
 {
@@ -35,6 +36,10 @@ class PropertyController extends Controller
      */
     public function edit(Property $property) 
     {
+        if (Gate::denies('propertyAndUserHaveSameRegion', $property) && Gate::denies('isManagement')) {
+            abort(403);
+        }
+
         return view('employee.property-edit', [
             'property' => $property,
         ]);
