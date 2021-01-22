@@ -4,30 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\Property;
 use App\Models\Region;
-use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class EmployeePropertyCreate extends Component
 {
-    public $name;
-    public $region;
-    public $street;
-    public $city;
-    public $state;
-    public $zip;
-    public $email;
-    public $phone;
-
-    protected $rules = [
-        'name' => 'required',
-        'region' => 'required',
-        'street' => 'required',
-        'city' => 'required',
-        'state' => 'required',
-        'zip' => 'required',
-        'email' => 'required|email',
-        'phone' => 'required',
-    ];
+    use EmployeePropertyForms;
 
     /**
      *  Need to mount any values going into a select html element and
@@ -61,27 +42,6 @@ class EmployeePropertyCreate extends Component
         $this->formReset();
 
         session()->flash('success', 'Property successfully added');
-    }
-
-    /**
-     *  Method to determine if a user can select from multiple regions (Management)
-     *  or only their own (Administrative) based on role
-     */
-    private function determineRegionByRole()
-    {
-        if (Gate::allows('isManagement')) {
-            return Region::where('region_name', $this->region)->first()->id;
-        } else {
-            return auth()->user()->userable->region->id;
-        }
-    }
-
-    /**
-     *  Method to get current users region
-     */
-    private function currentUserRegion()
-    {
-        return auth()->user()->userable->region->region_name;
     }
 
     private function formReset() 

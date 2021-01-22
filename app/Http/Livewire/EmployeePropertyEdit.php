@@ -2,40 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Property;
 use App\Models\Region;
 use Livewire\Component;
 
 class EmployeePropertyEdit extends Component
 {
-    // Passed into livewire component
+    use EmployeePropertyForms;
+
     public $property;
-
-    // Form properties
-    public $name;
-    public $region;
-    public $street;
-    public $city;
-    public $state;
-    public $zip;
-    public $email;
-    public $phone;
-
-    protected $rules = [
-        'name' => 'required',
-        'region' => 'required',
-        'street' => 'required',
-        'city' => 'required',
-        'state' => 'required',
-        'zip' => 'required',
-        'email' => 'required|email',
-        'phone' => 'required',
-    ];
 
     public function mount($property)
     {
         $this->name = $property->name;
-        $this->region = Region::find($property->region_id)->region_name;
+        $this->region = $property->region->region_name;
         $this->street = $property->street;
         $this->city = $property->city;
         $this->state = $property->state;
@@ -56,7 +35,7 @@ class EmployeePropertyEdit extends Component
         
         $this->property->update([
             'name' => $this->name,
-            'region_id' => $this->property->region->id,
+            'region_id' => $this->determineRegionByRole(),
             'street' => $this->street,
             'city' => $this->city,
             'state' => $this->state,
@@ -73,6 +52,8 @@ class EmployeePropertyEdit extends Component
         return view('livewire.employee-property-edit', [
 
             'regions' => Region::all()->pluck('region_name'),
+
+            'currentUserRegion' => $this->currentUserRegion(),
 
         ]);
     }

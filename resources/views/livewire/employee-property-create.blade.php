@@ -47,7 +47,7 @@
                     @elsecan('isAdministrative')
                     <select class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none"
                             wire:model="region">
-                            <option value="{{$currentUserRegion}}">{{$currentUserRegion}}</option>
+                        <option value="{{$currentUserRegion}}">{{$currentUserRegion}}</option>
                     </select>
                     @endcan
 

@@ -11,8 +11,6 @@
 
     <form wire:submit.prevent="submitForm">
 
-        @csrf
-
         {{-- Name & Region --}}
         <div class="flex flex-col sm:flex-row items-center">
             <div class="w-full sm:w-3/4">
@@ -34,14 +32,19 @@
             <div class="w-full sm:w-1/4 sm:ml-8 mt-4 sm:mt-0">
                 <label for="region" class="text-xs text-gray-700 font-bold">Region:</label>
                 <div class="w-full mt-1">
-                    <select name="region" id="region" required
-                            class="text-sm pl-2 w-full border focus:border-teal-400 rounded py-2 bg-white focus:outline-none"
-                            wire:model.debounce.500ms="region">
-                        <option value="" disabled selected hidden>Select Region</option>
-                        @foreach ($regions as $region)
-                            <option value="{{$region}}" {{old('region') == $region ? 'selected' : ''}}>{{$region}}</option>
-                        @endforeach
-                    </select>
+                    @can('isManagement')
+                        <select class="text-sm pl-2 w-full border focus:border-teal-400 rounded py-2 bg-white focus:outline-none"
+                                wire:model.debounce.500ms="region">
+                            @foreach ($regions as $region)
+                                <option value="{{$region}}">{{$region}}</option>
+                            @endforeach
+                        </select>
+                    @elsecan('isAdministrative')
+                        <select class="text-sm pl-2 w-full border focus:border-teal-400 rounded py-2 bg-white focus:outline-none"
+                                wire:model.debounce.500ms="region">
+                            <option value="{{$currentUserRegion}}">{{$currentUserRegion}}</option>
+                        </select>
+                    @endcan
                 </div>
             </div>
         </div>
