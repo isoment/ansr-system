@@ -29,7 +29,15 @@ class EmployeePropertyCreate extends Component
         'phone' => 'required',
     ];
 
-    // Realtime validation
+    /**
+     *  Need to mount any values going into a select html element and
+     *  assign a default or else the default is null.
+     */
+    public function mount()
+    {
+        $this->region = $this->currentUserRegion();
+    }
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -41,8 +49,7 @@ class EmployeePropertyCreate extends Component
 
         Property::create([
             'name' => $this->name,
-            'region_id' => Region::where('region_name', $this->region)
-                ->first()->id,
+            'region_id' => $this->determineRegionByRole(),
             'street' => $this->street,
             'city' => $this->city,
             'state' => $this->state,
@@ -54,6 +61,27 @@ class EmployeePropertyCreate extends Component
         $this->formReset();
 
         session()->flash('success', 'Property successfully added');
+    }
+
+    /**
+     *  Method to determine if a user can select from multiple regions (Management)
+     *  or only their own (Administrative) based on role
+     */
+    private function determineRegionByRole()
+    {
+        if (Gate::allows('isManagement')) {
+            return Region::where('region_name', $this->region)->first()->id;
+        } else {
+            return auth()->user()->userable->region->id;
+        }
+    }
+
+    /**
+     *  Method to get current users region
+     */
+    private function currentUserRegion()
+    {
+        return auth()->user()->userable->region->region_name;
     }
 
     private function formReset() 
@@ -73,6 +101,8 @@ class EmployeePropertyCreate extends Component
         return view('livewire.employee-property-create', [
 
             'regions' => Region::all()->pluck('region_name'),
+
+            'currentUserRegion' => $this->currentUserRegion(),
 
         ]);
     }

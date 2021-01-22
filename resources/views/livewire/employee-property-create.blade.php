@@ -5,9 +5,14 @@
     </div>
 
     <h2 class="font-bold text:lg lg:text-2xl text-center">Add New Property</h2>
-    <h6 class="font-bold text-sm mt-4 mb-8 text-center">Please fill out the form below with the relevant information in order
+    <h6 class="font-bold text-sm mt-4 text-center @can('isManagement') mb-8 @endcan">Please fill out the form below with the relevant information in order
         to add a new property to the system.
     </h6>
+    @can('isAdministrative')
+        <h6 class="font-bold text-sm mt-2 mb-8 text-center text-orange-300">
+            You have an Administrative role, you can only create properties in your region.
+        </h6>
+    @endcan
 
     <form wire:submit.prevent="submitForm">
 
@@ -24,7 +29,7 @@
                 </div>
                 <div class="flex items-center mt-1">
                     <input type="text" id="name" name="name" placeholder="Property Name"
-                        class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                        class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('name') border-orange-400 @enderror" value="{{ old('name') }}" required 
                         wire:model.debounce.500ms="name"/>
                 </div>
@@ -32,14 +37,20 @@
             <div class="w-full sm:w-1/4 sm:ml-8 mt-4 sm:mt-0">
                 <label for="region" class="text-xs text-gray-700 font-bold">Region:</label>
                 <div class="w-full mt-1">
-                    <select name="region" id="region" required
-                            class="text-sm pl-2 w-full border focus:border-teal-400 rounded py-2 bg-white focus:outline-none"
-                            wire:model.debounce.500ms="region">
-                        <option value="" disabled selected hidden>Select Region</option>
-                        @foreach ($regions as $region)
-                            <option value="{{$region}}" {{old('region') == $region ? 'selected' : ''}}>{{$region}}</option>
-                        @endforeach
+                    @can('isManagement')
+                        <select class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none"
+                                wire:model="region">
+                            @foreach ($regions as $region)
+                                <option value="{{$region}}">{{$region}}</option>
+                            @endforeach
+                        </select>
+                    @elsecan('isAdministrative')
+                    <select class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none"
+                            wire:model="region">
+                            <option value="{{$currentUserRegion}}">{{$currentUserRegion}}</option>
                     </select>
+                    @endcan
+
                 </div>
             </div>
         </div>
