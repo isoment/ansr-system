@@ -4,6 +4,7 @@
 
         {{-- Search --}}
         <div class="max-w-lg w-full lg:max-w-xs mb-0">
+            <h5 class="font-bold text-xs mb-2 ml-2 text-gray-600">Search by last name, email or lease id</h5>
             <label for="search" class="sr-only">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

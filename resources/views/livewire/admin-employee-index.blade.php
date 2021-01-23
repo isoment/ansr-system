@@ -4,6 +4,7 @@
 
         {{-- Search --}}
         <div class="max-w-lg w-full lg:max-w-xs mb-0">
+            <h5 class="font-bold text-xs mb-2 ml-2 text-gray-600">Search by last name, email or employee id</h5>
             <label for="search" class="sr-only">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -78,11 +79,33 @@
                                         @endif
                                     </div>
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Email
+                                <th class="px-6 py-3 bg-gray-50 text-left">
+                                    <div class="flex items-center">
+                                        <button wire:click="sortBy('role')"
+                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Role</button>
+                                        @if ($sortColumn != 'role')
+                                            <span></span>
+                                        @elseif ($sortAscending)
+                                            <span>
+                                                <svg class="w-4 text-gray-500 ml-2" 
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+                                                    xmlns="http://www.w3.org/2000/svg"><path 
+                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                                </svg>
+                                            </span>
+                                        @else
+                                            <span>
+                                                <svg class="w-4 text-gray-500 ml-2" 
+                                                    fill="none" stroke="currentColor" 
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path 
+                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </span>
+                                        @endif
+                                    </div>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Phone
+                                    Email
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     Region
@@ -106,10 +129,10 @@
                                     <div class="text-sm leading-5 text-gray-900">{{$employee->employee_id_number}}</div>
                                 </td>
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$employee->email}}</div>
+                                    <div class="text-sm leading-5 text-gray-900">{{$employee->role}}</div>
                                 </td>
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$employee->phone}}</div>
+                                    <div class="text-sm leading-5 text-gray-900">{{$employee->email}}</div>
                                 </td>
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
                                     <div class="text-sm leading-5 text-gray-900">{{$employee->region->region_name}}</div>

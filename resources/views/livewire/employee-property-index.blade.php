@@ -2,6 +2,7 @@
 
     {{-- Search --}}
     <div class="max-w-lg w-full lg:max-w-xs mb-0">
+        <h5 class="font-bold text-xs mb-2 ml-2 text-gray-600">Search by property name, region or city</h5>
         <label for="search" class="sr-only">Search</label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -14,7 +15,7 @@
             <input wire:model="search"
                 id="search"
                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-300 focus:shadow-outline-blue sm:text-sm transition duration-150 ease-in-out"
-                placeholder="Search properties" 
+                placeholder="Search" 
                 type="search">
         </div>
     </div>
@@ -26,17 +27,11 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
-                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                <div class="flex items-center">
-                                    <button wire:click=""
-                                        class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</button>
-                                </div>
+                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Name
                             </th>
-                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                <div class="flex items-center">
-                                    <button wire:click=""
-                                        class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Region</button>
-                                </div>
+                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Region
                             </th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                 City

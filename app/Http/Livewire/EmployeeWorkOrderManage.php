@@ -44,13 +44,19 @@ class EmployeeWorkOrderManage extends Component
     public function toggleEndDate()
     {
         if ($this->workOrder->end_date) {
+
             $this->workOrder->update(['end_date' => NULL]);
+
         } else {
-            if ($this->workOrder->allDetailsCompleted()) {
+
+            if ($this->workOrder->allDetailsCompleted() && $this->workOrder->workDetails->isNotEmpty()) {
                 $this->workOrder->update(['end_date' => now()]);
+            } elseif ($this->workOrder->workDetails->isEmpty()) {
+                session()->flash('error', 'You cannot complete this work order until details are added');
             } else {
                 session()->flash('error', 'All details must be completed before completing this work order');
             }
+
         }
     }
 
