@@ -79,10 +79,12 @@
                         <div class="text-sm font-light mt-1">
                             {{$request->tenant_charges ? '$'.$request->tenant_charges : 'N/A'}}
                         </div>
-                        <i class="text-sm far fa-edit text-orange-300 transition duration-200
-                                hover:text-orange-400 ml-2 cursor-pointer"
-                           @click="showChargesForm = true">
-                        </i>
+                        @can('isAdministrativeOrManagement')
+                            <i class="text-sm far fa-edit text-orange-300 transition duration-200
+                                    hover:text-orange-400 ml-2 cursor-pointer"
+                                @click="showChargesForm = true">
+                            </i>
+                        @endcan
                     </div>
                 </div>
     
@@ -225,24 +227,26 @@
                                         <a href="{{route('employee.manage-workorder', $workOrder->id)}}"
                                             class="text-teal-300 bold">{{$workOrder->id}}</a>
                                     </div>
-                                    @if (! $workOrder->hasWorkDetails())
-                                        <button type="button"
-                                                class="text-red-500 hover:text-red-700 rounded overflow-hidden 
-                                                        p-1 focus:outline-none"
-                                                wire:click="deleteWorkOrder({{$workOrder->id}})">
-                                            <svg
-                                                class="h-3 w-3"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                            >
-                                                <path
-                                                fill-rule="evenodd"
-                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"
-                                                ></path>
-                                            </svg>
-                                        </button>
-                                    @endif
+                                    @can('isAdministrativeOrManagement')
+                                        @if (! $workOrder->hasWorkDetails())
+                                            <button type="button"
+                                                    class="text-red-500 hover:text-red-700 rounded overflow-hidden 
+                                                            p-1 focus:outline-none"
+                                                    wire:click="deleteWorkOrder({{$workOrder->id}})">
+                                                <svg
+                                                    class="h-3 w-3"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 20 20"
+                                                >
+                                                    <path
+                                                    fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"
+                                                    ></path>
+                                                </svg>
+                                            </button>
+                                        @endif
+                                    @endcan
                                 </div>
                                 <div>
                                     @if ($workOrder->employee_id)
@@ -272,28 +276,31 @@
                     @endif
                 </div>
             </div>
-            <div class="text-center">
-                @if (! $request->completed_date)
-                    <div class="my-2">
-                        <h6 class="font-bold text-sm mb-2">Create New Work Order:</h6>
-                        <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
-                                    transition duration-200"
-                                wire:click="newWorkOrder">
-                            New Work Order
-                        </button>
-                    </div>
-                @endif
-                @if ($request->allWorkOrdersComplete())
-                    <div class="my-2">
-                        <h6 class="font-bold text-sm mb-2">Open or Close the Request:</h6>
-                        <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
-                                    transition duration-200"
-                                wire:click="toggleComplete">
-                            {{$request->completed_date ? 'Reopen Request' : 'Complete Request'}}
-                        </button>
-                    </div>
-                @endif
-            </div>
+            @can('isAdministrativeOrManagement')
+                <div class="text-center">
+                    @if (! $request->completed_date)
+                        <div class="my-2">
+                            <h6 class="font-bold text-sm mb-2">Create New Work Order:</h6>
+                            <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
+                                        transition duration-200"
+                                    wire:click="newWorkOrder">
+                                New Work Order
+                            </button>
+                        </div>
+                    @endif
+                    @if ($request->allWorkOrdersComplete())
+                        <div class="my-2">
+                            <h6 class="font-bold text-sm mb-2">Open or Close the Request:</h6>
+                            <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                                        transition duration-200"
+                                    wire:click="toggleComplete">
+                                {{$request->completed_date ? 'Reopen Request' : 'Complete Request'}}
+                            </button>
+                        </div>
+                    @endif
+                </div>
+            @endcan
+
         </div>
 
     </div>

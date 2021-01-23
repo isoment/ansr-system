@@ -12,29 +12,31 @@
             <form wire:submit.prevent="editWorkOrder">
                 <div class="md:px-12">
                     {{-- Assigned --}}
-                    <div class="w-full mt-4 sm:mt-8">
-                        <div class="flex justify-between items-center w-full">
-                            <label for="assignment" class="text-xs text-gray-700 font-bold">Assigned To:</label>
-                            @error('assignment')
-                                <div class="text-orange-400 text-xs font-bold italic">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                    @can('isAdministrativeOrManagement')
+                        <div class="w-full mt-4 sm:mt-8">
+                            <div class="flex justify-between items-center w-full">
+                                <label for="assignment" class="text-xs text-gray-700 font-bold">Assigned To:</label>
+                                @error('assignment')
+                                    <div class="text-orange-400 text-xs font-bold italic">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <input list="employees" name="assignment" id="assignment"
+                                        class="px-4 w-full border bg-white rounded py-2 text-gray-700 focus:outline-none
+                                            @error('assignment') border-orange-400 @enderror" 
+                                        value="{{$assignment}}"
+                                        wire:model.lazy="assignment">
+                                <datalist id="employees">
+                                    @foreach ($employees as $employee)
+                                        <option value="{{$employee->employee_id_number}}">
+                                            {{$employee->last_name}}, {{$employee->first_name}}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
                         </div>
-                        <div class="flex items-center mt-1">
-                            <input list="employees" name="assignment" id="assignment"
-                                    class="px-4 w-full border bg-white rounded py-2 text-gray-700 focus:outline-none
-                                        @error('assignment') border-orange-400 @enderror" 
-                                    value="{{$assignment}}"
-                                    wire:model.debounce.500ms="assignment">
-                            <datalist id="employees">
-                                @foreach ($employees as $employee)
-                                    <option value="{{$employee->employee_id_number}}">
-                                        {{$employee->last_name}}, {{$employee->first_name}}</option>
-                                @endforeach
-                            </datalist>
-                        </div>
-                    </div>
+                    @endcan
                     {{-- Start Date --}}
                     <div class="w-full mt-4 sm:mt-8">
                         <div class="flex justify-between items-center w-full">
@@ -114,6 +116,7 @@
                     </div>
                 </div>
             </div>
+
             @if ($workOrder->allDetailsCompleted())
                 <div class="my-2 text-center">
                     <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
@@ -127,6 +130,7 @@
                     Complete all details to close this order.
                 </div>
             @endif
+
         </div>
     
     </div>

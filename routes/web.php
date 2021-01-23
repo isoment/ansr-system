@@ -65,6 +65,10 @@ Route::middleware('can:isEmployee')->group(function() {
     Route::get('/employee/work-detail/{workDetail}/manage', [\App\Http\Controllers\Employee\WorkOrderController::class, 'manageDetails'])
         ->name('employee.manage-details');
 
+    // Assigned work order
+    Route::get('/employee/my-work-orders', [\App\Http\Controllers\Employee\WorkOrderController::class, 'assignedWorkOrderIndex'])
+        ->name('employee.my-work-orders');
+
     // Management employees only
     Route::middleware('can:isManagement')->group(function() {
 

@@ -6,6 +6,7 @@ use App\Models\ServiceRequest;
 use App\Models\Tenant;
 use App\Models\WorkDetails;
 use App\Models\WorkOrder;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -36,14 +37,18 @@ class EmployeeServiceRequestManage extends Component
      */
     public function toggleComplete()
     {
-        if ($this->request->completed_date) {
-            $this->request->update(['completed_date' => NULL]);
-        } else {
-            if ($this->request->allWorkOrdersComplete()) {
-                $this->request->update(['completed_date' => now()]);
+        if (Gate::allows('isAdministrativeOrManagement')) {
+
+            if ($this->request->completed_date) {
+                $this->request->update(['completed_date' => NULL]);
             } else {
-                session()->flash('error', 'All work orders must be completed to close this service request');
+                if ($this->request->allWorkOrdersComplete()) {
+                    $this->request->update(['completed_date' => now()]);
+                } else {
+                    session()->flash('error', 'All work orders must be completed to close this service request');
+                }
             }
+            
         }
     }
 
@@ -52,13 +57,17 @@ class EmployeeServiceRequestManage extends Component
      */
     public function editTenantCharges()
     {
-        $this->validate();
+        if (Gate::allows('isAdministrativeOrManagement')) {
 
-        $this->request->update([
-            'tenant_charges' => $this->tenantCharges,
-        ]);
+            $this->validate();
 
-        session()->flash('success', 'Tenant charges updated');
+            $this->request->update([
+                'tenant_charges' => $this->tenantCharges,
+            ]);
+    
+            session()->flash('success', 'Tenant charges updated');
+
+        }
     }
 
     /**
@@ -74,17 +83,20 @@ class EmployeeServiceRequestManage extends Component
      */
     public function newWorkOrder()
     {
-        if ( ! $this->request->completed_date) {
+        if (Gate::allows('isAdministrativeOrManagement')) {
 
-            WorkOrder::create([
-                'service_request_id' => $this->request->id,
-            ]);
-            $this->request = $this->request->fresh();
-            
-        } else {
-            session()->flash('error', 'You cannot add a new work order to a closed request');
+            if ( ! $this->request->completed_date) {
+
+                WorkOrder::create([
+                    'service_request_id' => $this->request->id,
+                ]);
+                $this->request = $this->request->fresh();
+                
+            } else {
+                session()->flash('error', 'You cannot add a new work order to a closed request');
+            }
+
         }
-
     }
 
     /**
@@ -92,13 +104,17 @@ class EmployeeServiceRequestManage extends Component
      */
     public function deleteWorkOrder($id)
     {
-        $workOrder = WorkOrder::find($id);
+        if (Gate::allows('isAdministrativeOrManagement')) {
 
-        if (! $workOrder->hasWorkDetails()) {
-            $workOrder->delete();
+            $workOrder = WorkOrder::find($id);
+
+            if (! $workOrder->hasWorkDetails()) {
+                $workOrder->delete();
+            }
+
+            $this->request = $this->request->fresh();
+
         }
-
-        $this->request = $this->request->fresh();
     }
 
     public function render()

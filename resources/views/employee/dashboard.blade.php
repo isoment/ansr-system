@@ -37,7 +37,7 @@
                 </div>
             </a>    
         </div>
-        @can('isAdministrative')
+        @can('isAdministrativeOrManagement')
             <div>
                 <a href="{{route('employee.properties-index')}}">
                     <div class="h-full flex flex-col items-center justify-center text-center 
@@ -47,6 +47,16 @@
                         <p class="mt-4">
                             Here you can manage the properties of your organization and add new regions.
                         </p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <div class="h-full flex flex-col items-center justify-center text-center 
+                                shadow-md rounded-lg py-6 px-20 bg-white">
+                        <i class="text-orange-400 fas fa-copy text-6xl"></i>
+                        <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Leasing</h2>
+                        <p class="mt-4">Any issues related to leasing including renewals.</p>
                     </div>
                 </a>
             </div>
@@ -63,16 +73,6 @@
                 </a>
             </div>
         @endcan
-        <div>
-            <a href="#">
-                <div class="h-full flex flex-col items-center justify-center text-center 
-                            shadow-md rounded-lg py-6 px-20 bg-white">
-                    <i class="text-orange-400 fas fa-copy text-6xl"></i>
-                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Leasing</h2>
-                    <p class="mt-4">Any issues related to leasing including renewals.</p>
-                </div>
-            </a>
-        </div>
         <div>
             <a href="{{route('employee.service-request-index')}}">
                 <div class="h-full flex flex-col items-center justify-center text-center 

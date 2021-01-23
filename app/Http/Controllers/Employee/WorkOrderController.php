@@ -42,4 +42,12 @@ class WorkOrderController extends Controller
         ]);
     }
 
+    /**
+     *  Assigned work order index
+     */
+    public function assignedWorkOrderIndex()
+    {
+        return view('employee.my-work-orders');
+    }
+
 }

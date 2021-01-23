@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Employee;
 use App\Models\WorkDetails;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -58,20 +59,38 @@ class EmployeeWorkOrderManage extends Component
      */
     public function editWorkOrder()
     {
-        $this->validate([
-            'assignment' => 'string|required',
-            'startdate' => 'date',
-        ]);
+        if (Gate::allows('isAdministrativeOrManagement')) {
 
-        $this->workOrder->update([
-            'employee_id' => Employee::where('employee_id_number', $this->assignment)
-                ->first()->id,
-            'start_date' => $this->startdate,
-        ]);
+            $this->validate([
+                'assignment' => 'string|required',
+                'startdate' => 'date',
+            ]);
+    
+            $this->workOrder->update([
+                'employee_id' => Employee::where('employee_id_number', $this->assignment)
+                    ->first()->id,
+                'start_date' => $this->startdate,
+            ]);
+    
+            $this->workOrder = $this->workOrder->fresh();
+    
+            session()->flash('success', 'Work order updated');
 
-        $this->workOrder = $this->workOrder->fresh();
+        } else {
 
-        session()->flash('success', 'Work order updated');
+            $this->validate([
+                'startdate' => 'date',
+            ]);
+    
+            $this->workOrder->update([
+                'start_date' => $this->startdate,
+            ]);
+    
+            $this->workOrder = $this->workOrder->fresh();
+    
+            session()->flash('success', 'Work order updated');
+
+        }
     }
 
     /**
