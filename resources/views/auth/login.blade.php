@@ -12,11 +12,14 @@
             </a>
         </div>
 
-        <div class="text-sm border rounded text-teal-700 border-teal-600 text-center
-                bg-teal-100 px-3 py-4 mb-4 mx-4" role="alert">
-            <h2 class="mb-2 font-bold">Test Logins</h2>
-            <h6 class="text-xs mb-1">Email: employee@test.com, Password: password</h6>
-            <h6 class="text-xs">Email: tenant@test.com, Password: password</h6>
+        <div class="text-sm border rounded border-gray-200 text-center
+                   px-3 py-3 mb-6 mx-12 text-gray-700" role="alert">
+            <h2 class="mb-2 text-lg font-bold">Test Accounts...</h2>
+            <h6 class="text-xs mb-2">Tenant: <br><span class="font-bold text-teal-500">tenant@test.com</span></h6>
+            <h6 class="text-xs mb-2">Manager Employee: <br><span class="font-bold text-teal-500">manager@test.com</span></h6>
+            <h6 class="text-xs mb-2">Administrative Employee: <br><span class="font-bold text-teal-500">administrative@test.com</span></h6>
+            <h6 class="text-xs mb-2">Maintenance Employee: <br><span class="font-bold text-teal-500">maintenance@test.com</span></h6>
+            <h2 class="text-lg font-bold">Password: password</h2>
         </div>
 
         <div class="px-12 pb-10">
