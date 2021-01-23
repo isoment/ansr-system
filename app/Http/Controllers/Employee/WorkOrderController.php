@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\WorkDetails;
 use App\Models\WorkOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class WorkOrderController extends Controller
 {
@@ -16,6 +17,10 @@ class WorkOrderController extends Controller
      */
     public function manageWorkOrder(WorkOrder $workOrder)
     {
+        if (Gate::denies('workOrderAndUserHaveSameRegion', $workOrder) && Gate::denies('isManagement')) {
+            abort(403);
+        }
+
         return view('employee.work-order-manage', [
             'workOrder' => $workOrder,
         ]);
@@ -28,6 +33,10 @@ class WorkOrderController extends Controller
      */
     public function manageDetails(WorkDetails $workDetail)
     {
+        if (Gate::denies('workDetailAndUserHaveSameRegion', $workDetail) && Gate::denies('isManagement')) {
+            abort(403);
+        }
+
         return view('employee.work-details-manage', [
             'workDetail' => $workDetail,
         ]);

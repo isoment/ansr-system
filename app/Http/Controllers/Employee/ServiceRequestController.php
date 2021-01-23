@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\RequestCategory;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ServiceRequestController extends Controller
 {
@@ -41,6 +42,10 @@ class ServiceRequestController extends Controller
      */
     public function manageRequest(ServiceRequest $request)
     {
+        if (Gate::denies('requestAndUserHaveSameRegion', $request) && Gate::denies('isManagement')) {
+            abort(403);
+        }
+
         return view('employee.service-request-manage', [
             'request' => $request,
         ]);

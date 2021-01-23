@@ -34,4 +34,12 @@ class Employee extends Model
     {
         return $this->hasMany(WorkOrder::class, 'employee_id');
     }
+
+    /**
+     *  Employee region
+     */
+    public function employeeRegionName()
+    {
+        return $this->region->region_name;
+    }
 }

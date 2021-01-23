@@ -53,7 +53,9 @@ class EmployeePropertyIndex extends Component
     public function render()
     {
         return view('livewire.employee-property-index', [
+
             'properties' => $this->getPropertiesByRole(),
+
         ]);
     }
 }

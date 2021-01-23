@@ -60,5 +60,4 @@ class User extends Authenticatable
             ->only(['street', 'city', 'state', 'zipcode'])
             ->put('unit', $this->userable->lease->unit);
     }
-
 }
