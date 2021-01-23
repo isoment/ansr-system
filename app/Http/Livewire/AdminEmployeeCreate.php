@@ -26,6 +26,12 @@ class AdminEmployeeCreate extends Component
         'employeeId' => 'required|unique:employees,employee_id_number',
     ];
 
+    public function mount()
+    {
+        $this->region = auth()->user()->userable->region->region_name;
+        $this->role = 'Administrative';
+    }
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
