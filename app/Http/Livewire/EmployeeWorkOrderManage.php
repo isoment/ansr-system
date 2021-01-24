@@ -22,7 +22,7 @@ class EmployeeWorkOrderManage extends Component
 
     protected $rules = [
         'assignment' => 'string|required',
-        'startdate' => 'date',
+        'startdate' => 'date|required',
         'tenantNotes' => 'required',
         'formDetails' => 'required',
     ];
@@ -48,15 +48,19 @@ class EmployeeWorkOrderManage extends Component
             $this->workOrder->update(['end_date' => NULL]);
 
         } else {
+            if ($this->workOrder->allDetailsCompleted() && 
+                $this->workOrder->workDetails->isNotEmpty() && 
+                $this->workOrder->start_date !== NULL) {
 
-            if ($this->workOrder->allDetailsCompleted() && $this->workOrder->workDetails->isNotEmpty()) {
-                $this->workOrder->update(['end_date' => now()]);
+                    $this->workOrder->update(['end_date' => now()]);
+                    
             } elseif ($this->workOrder->workDetails->isEmpty()) {
-                session()->flash('error', 'You cannot complete this work order until details are added');
+                session()->flash('error', 'You cannot complete this order until details are added');
+            } elseif ($this->workOrder->start_date === NULL) {
+                session()->flash('error', 'You cannot complete this order without a start date');
             } else {
                 session()->flash('error', 'All details must be completed before completing this work order');
             }
-
         }
     }
 
