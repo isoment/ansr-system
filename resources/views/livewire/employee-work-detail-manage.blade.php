@@ -126,7 +126,7 @@
 
     </div>
 
-    <div class="my-2">
+    <div class="mb-3">
         @include('inc.livewire-error')
     </div>
 

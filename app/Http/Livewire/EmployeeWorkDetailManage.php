@@ -47,7 +47,11 @@ class EmployeeWorkDetailManage extends Component
         if ($this->workDetail->end_date) {
             $this->workDetail->update(['end_date' => NULL]);
         } else {
-            $this->workDetail->update(['end_date' => now()]);
+            if ($this->workDetail->start_date) {
+                $this->workDetail->update(['end_date' => now()]);
+            } else {
+                session()->flash('error', 'Please select a start date before completing');
+            }
         }
     }
 
