@@ -18,14 +18,14 @@
         <div class="w-full p-6 shadow-md">
 
             <div class="md:mt-4">
-                <h3 class="font-bold text-sm md:text-base leading-relaxed mb-4 md:mb-12">
+                <h3 class="font-bold text-sm md:text-base leading-relaxed mb-4 md:mb-6">
                     {{auth()->user()->name}}, you are requesting a new key for the specified unit.
                     By clicking the submit button below you agree to pay the fee of
                     <span class="text-orange-400">$20</span> per key as stipulated in your lease.
                     You can also specify a how many keys and any special instructions below.
                 </h3>
                 
-                <div class="my-4 text-sm md:text-base text-center text-gray-500 border-2 bg-teal-50 border-teal-400 rounded-lg py-6 font-bold font-prompt">
+                <div class="my-4 text-sm md:text-base text-center bg-gray-50 text-gray-600 tracking-wider shadow-sm rounded-lg py-6 font-bold font-prompt">
                     <div class="mb-2">{{$tenantDetails['street']}}, {{$tenantDetails['unit']}}</div>
                     <div>{{$tenantDetails['city']}}, {{$tenantDetails['state']}} {{$tenantDetails['zipcode']}}</div>
                 </div>
@@ -40,7 +40,7 @@
                         <div class="flex items-center">
                             <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-key'></i>
                             <input type="number" min="1" max="5" id="quantity" value="1" name="quantity" placeholder="Key Quantity"
-                                class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                                class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
                                     @error('quantity') border-orange-400 @enderror" value="{{ old('quantity') ? old('quantity') : 1 }}" required />
                         </div>
                         @error('quantity')
@@ -54,7 +54,7 @@
                     <label for="notes" class="text-sm font-bold mb-1">Notes:</label>
                     <div class="w-full mt-1">
                         <textarea name="notes" id="notes" cols="30" rows="5"
-                            class=" px-2 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                            class=" px-2 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('notes') border-orange-400 @enderror">{{ old('notes') }}</textarea>
                         @error('notes')
                             <p class="text-orange-400 text-xs italic mt-4">

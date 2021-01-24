@@ -26,7 +26,7 @@
                 <button type="button"
                         class="bg-red-200 bg-opacity-25 text-red-500 hover:text-red-700 rounded overflow-hidden 
                               p-1 lg:p-2 focus:outline-none"
-                        @click="successAlertOpen = false">
+                        @click="alertOpen = false">
                 <svg
                     class="h-4 w-auto"
                     fill="currentColor"

@@ -26,12 +26,7 @@
     @can ('isMaintenance')
         <li class="relative px-6 py-3">
             <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                    duration-150 hover:text-gray-800
-                    {{
-                        Route::current()->getName() == 'employee.manage-workorder' ||
-                        Route::current()->getName() == 'employee.manage-details' ? 'text-orange-400' : ''
-                    }}
-                    " 
+                    duration-150 hover:text-gray-800" 
             href="#">
                 <svg
                     class="w-5 h-5"
@@ -55,6 +50,8 @@
         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
                 duration-150 hover:text-gray-800
                 {{
+                    Route::current()->getName() == 'employee.manage-workorder' ||
+                    Route::current()->getName() == 'employee.manage-details' ||
                     Route::current()->getName() == 'employee.service-request-index' ||
                     Route::current()->getName() == 'employee.request-category' ||
                     Route::current()->getName() == 'employee.manage-request' ? 'text-orange-400' : ''

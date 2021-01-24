@@ -6,7 +6,7 @@
     <form class="w-full md:w-1/2 max-w-xl bg-white lg:border border-cool-gray-300 rounded-lg" method="POST" action="{{ route('login') }}">
         @csrf
 
-        <div class="flex font-bold justify-center mb-3 lg:mb-6 lg:mt-12">
+        <div class="flex font-bold justify-center mb-3 lg:mb-4 lg:mt-12">
             <a href="{{ route('landing') }}">
                 <img src="img/house.svg" alt="Logo" class="h-20 w-20 mb-4">
             </a>
@@ -15,11 +15,11 @@
         <div class="text-sm border rounded border-gray-200 text-center
                    px-3 py-3 mb-6 mx-12 text-gray-700" role="alert">
             <h2 class="mb-2 text-lg font-bold">Test Accounts...</h2>
-            <h6 class="text-xs mb-2">Tenant: <br><span class="font-bold text-teal-500">tenant@test.com</span></h6>
-            <h6 class="text-xs mb-2">Manager Employee: <br><span class="font-bold text-teal-500">manager@test.com</span></h6>
-            <h6 class="text-xs mb-2">Administrative Employee: <br><span class="font-bold text-teal-500">administrative@test.com</span></h6>
-            <h6 class="text-xs mb-2">Maintenance Employee: <br><span class="font-bold text-teal-500">maintenance@test.com</span></h6>
-            <h2 class="text-lg font-bold">Password: password</h2>
+            <h6 class="text-xs mb-2">Tenant: <br><span class="font-bold text-orange-400">tenant@test.com</span></h6>
+            <h6 class="text-xs mb-2">Manager Employee: <br><span class="font-bold text-orange-400">manager@test.com</span></h6>
+            <h6 class="text-xs mb-2">Administrative Employee: <br><span class="font-bold text-orange-400">administrative@test.com</span></h6>
+            <h6 class="text-xs mb-2">Maintenance Employee: <br><span class="font-bold text-orange-400">maintenance@test.com</span></h6>
+            <h2 class="text-md font-thin">Password for all accounts is <span class="text-orange-500">password</span></h2>
         </div>
 
         <div class="px-12 pb-10">
@@ -31,7 +31,7 @@
                 <div class="flex items-center">
                     <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-user'></i>
                     <input type="email" id="email" name="email" placeholder="Email"
-                        class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                        class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('email') border-orange-400 @enderror" value="{{ old('email') }}" required />
                 </div>
                 @error('email')
@@ -46,7 +46,7 @@
                 <div class="flex items-center">
                     <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-lock'></i>
                     <input name="password" type='password' id="password" placeholder="Password"
-                        class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                        class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('password') border-orange-400 @enderror"/>
                 </div>
                 @error('password')

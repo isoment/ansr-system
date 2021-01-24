@@ -18,13 +18,13 @@
         <div class="w-full p-6 shadow-md">
 
             <div class="md:mt-4">
-                <h3 class="font-bold text-sm md:text-base leading-relaxed mb-4 md:mb-12">
+                <h3 class="font-bold text-sm md:text-base leading-relaxed mb-4 md:mb-6">
                     {{auth()->user()->name}}, please fill out the form below to submit a service request
                     for the unit on your lease. Provide as many details about the issue and we will get back
                     to you as soon as we review it.
                 </h3>
                 
-                <div class="my-4 text-sm md:text-base text-center text-gray-500 border-2 bg-teal-50 border-teal-400 rounded-lg py-6 font-bold font-prompt">
+                <div class="my-4 text-sm md:text-base text-center text-gray-600 bg-gray-50 shadow-sm rounded-lg py-6 font-bold font-prompt">
                     <div class="mb-2">{{$tenantDetails['street']}}, {{$tenantDetails['unit']}}</div>
                     <div>{{$tenantDetails['city']}}, {{$tenantDetails['state']}} {{$tenantDetails['zipcode']}}</div>
                 </div>
@@ -37,7 +37,7 @@
                     <label for="category" class="text-sm font-bold">Please select the type of issue:</label>
                     <div class="w-full mb-4 mt-1">
                         <select name="category" id="category" required
-                                class="text-sm pl-2 w-full border focus:border-teal-400 rounded py-1 bg-white focus:outline-none">
+                                class="text-sm pl-2 w-full border rounded py-1 bg-white focus:outline-none">
                             @foreach ($requestCategories as $category)
                                 <option value="{{$category}}" {{old('category') == $category ? 'selected' : ''}}>{{$category}}</option>
                             @endforeach
@@ -48,7 +48,7 @@
                     <label for="issue" class="text-sm font-bold">Please tell us what the issue is:</label>
                     <div class="w-full mb-4 mt-1">
                         <input type="text" id="issue" name="issue"
-                            class="px-2 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                            class="px-2 w-full border rounded py-2 text-gray-700 focus:outline-none
                                 @error('issue') border-orange-400 @enderror" value="{{ old('issue') }}" required />
                         @error('issue')
                             <p class="text-orange-400 text-xs italic mt-4">
@@ -61,7 +61,7 @@
                     <label for="description" class="text-sm font-bold mb-1">Please enter a detailed description of the issue:</label>
                     <div class="w-full mt-1">
                         <textarea name="description" id="description" cols="30" rows="5" required
-                            class="px-2 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                            class="px-2 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('description') border-orange-400 @enderror">{{ old('description') }}</textarea>
                         @error('description')
                             <p class="text-orange-400 text-xs italic mt-4">

@@ -354,9 +354,9 @@
                     </div>
                 </div>
             </div>
-            <div class="max-width-1375 mx-auto">
+            <div class="max-width-1375 mx-auto text-gray-700">
                 <hr class="mb-4">
-                <div class="mb-4 text-center">&#169; 2020</div>
+                <div class="mb-4 font-bold text-center">&#169; <span class="font-bold font-prompt">{{date("Y")}}</span></div>
             </div>
         </footer>
 

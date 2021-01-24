@@ -113,23 +113,27 @@
                         </div>
 
                         {{-- Profile Dropdown --}}
-                        <div class="bg-gray-50 py-2 px-6 flex flex-col absolute top-14 right-9 rounded 
-                                    shadow-md font-bold text-sm text-gray-600 text-center"
+                        <div class="bg-white flex flex-col absolute top-14 right-9 rounded-lg 
+                                    shadow-lg font-bold text-sm text-gray-700 text-center border border-gray-400"
                              x-show="isProfileMenuOpen"
                              x-cloak>
-                            <span class="block py-2 px-4 text-teal-500 text-sm font-light">{{auth()->user()->name}}</span>
-                            @if (auth()->user()->userable->role)
-                                <span class="block py-2 px-4">Role: {{auth()->user()->userable->role}}</span>
-                            @endif
-                            <div class="block py-2 px-4 hover:bg-teal-100">
-                                <a href="{{ route('logout') }}" class="block"
-                                    onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                    {{ csrf_field() }}
-                                </form>
+
+                            <div class="rounded-lg">
+                                <div class="bg-gray-100 px-4 py-2 rounded-t-lg">{{auth()->user()->name}}</div>
+                                @if (auth()->user()->userable->role)
+                                    <div class="block py-2 px-4">Role: {{auth()->user()->userable->role}}</div>
+                                @endif
+                                <div class="block py-2 px-4 hover:text-orange-300">
+                                    <a href="{{ route('logout') }}" class="block"
+                                        onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
                             </div>
-                        </div>  
+
+                        </div>
 
                     </div>
                 </div>

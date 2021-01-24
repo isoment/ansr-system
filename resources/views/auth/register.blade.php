@@ -25,12 +25,12 @@
                             <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-user'></i>
                             <input name="name" type='text' id="name" placeholder="Name" 
                                 value="{{ old('name') }}" required autocomplete="name" autofocus
-                                class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                                class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
                                     @error('name') border-orange-400 @enderror"/>
                         </div>
                         <div class="w-1/3 ml-4">
                             <select name="account_type" id="account_type" form="register-form" required
-                                    class="text-sm pl-2 w-full border focus:border-teal-400 rounded py-1 bg-white focus:outline-none">
+                                    class="text-sm pl-2 w-full border rounded py-1 bg-white focus:outline-none">
                                 <option value="tenant" {{old('account_type') == 'tenant' ? 'selected' : ''}}>Tenant</option>
                                 <option value="employee" {{old('account_type') == 'employee' ? 'selected' : ''}}>Employee</option>
                             </select>
@@ -48,7 +48,7 @@
                     <div class="flex items-center">
                         <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-envelope-square'></i>
                         <input name="email" placeholder="Email" autocomplete="email" required value="{{ old('email') }}"
-                               class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                               class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
                                    @error('email') border-orange-400 @enderror"/>
                     </div>
                     @error('email')
@@ -63,7 +63,7 @@
                     <div class="flex items-center">
                         <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-passport'></i>
                         <input name="id" placeholder="Lease/Employee ID " autocomplete="id" required value="{{ old('id') }}"
-                               class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                               class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
                                    @error('id') border-orange-400 @enderror"/>
                     </div>
                     @error('id')
@@ -78,7 +78,7 @@
                     <div class="flex items-center">
                         <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-lock'></i>
                         <input name="password" type='password' id="password" placeholder="Password"
-                               class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                               class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none
                                    @error('password') border-orange-400 @enderror"/>
                     </div>
                     @error('password')
@@ -94,7 +94,7 @@
                         <i class='ml-3 fill-current text-teal-400 text-xs z-10 fas fa-lock'></i>
                         <input name="password_confirmation" type='password' id="password-confirm" placeholder="Confirm Password"
                             required autocomplete="new-password"
-                            class="-mx-6 px-8 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none" />
+                            class="-mx-6 px-8 w-full border rounded py-2 text-gray-700 focus:outline-none" />
                     </div>
                 </div>
             </div>
