@@ -16,7 +16,7 @@ class EmployeePropertyCreate extends Component
      */
     public function mount()
     {
-        $this->region = $this->currentUserRegion();
+        $this->region = users_region();
     }
 
     public function updated($propertyName)
@@ -62,7 +62,7 @@ class EmployeePropertyCreate extends Component
 
             'regions' => Region::all()->pluck('region_name'),
 
-            'currentUserRegion' => $this->currentUserRegion(),
+            'currentUserRegion' => users_region(),
 
         ]);
     }

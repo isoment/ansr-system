@@ -45,12 +45,4 @@ trait EmployeePropertyForms
             return auth()->user()->userable->region->id;
         }
     }
-
-    /**
-     *  Method to get current users region name
-     */
-    private function currentUserRegion()
-    {
-        return auth()->user()->userable->region->region_name;
-    }
 }

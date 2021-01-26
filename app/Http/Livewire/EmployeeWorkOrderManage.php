@@ -134,11 +134,25 @@ class EmployeeWorkOrderManage extends Component
         return Carbon::parse($date)->toDateString();
     }
 
+    /**
+     *  Method to get a list of employees
+     */
+    private function listEmployees()
+    {
+        if (Gate::allows('isManagement')) {
+            return Employee::get();
+        } else {
+            return Employee::whereHas('region', function($query) {
+                $query->where('region_name', users_region());
+            })->get();
+        }
+    }
+
     public function render()
     {
         return view('livewire.employee-work-order-manage', [
 
-            'employees' => $this->workOrder->serviceRequest->tenant->lease->property->region->employees,
+            'employees' => $this->listEmployees(),
 
             'details' => $this->workOrder->workDetails()
                 ->orderBy('created_at', 'desc')->paginate(5),

@@ -53,7 +53,7 @@ class EmployeePropertyEdit extends Component
 
             'regions' => Region::all()->pluck('region_name'),
 
-            'currentUserRegion' => $this->currentUserRegion(),
+            'currentUserRegion' => users_region(),
 
         ]);
     }
