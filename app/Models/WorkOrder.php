@@ -48,6 +48,22 @@ class WorkOrder extends Model
     }
 
     /**
+     *  Get employees in the same region as the work order
+     */
+    public function employeesInRegion()
+    {
+        return $this->serviceRequest->tenant->lease->property->region->employees;
+    }
+
+    /**
+     *  Get employee_id_numbers from the same region as the work order
+     */
+    public function getEmployeeIdsInRegion()
+    {
+        return $this->employeesInRegion()->pluck('employee_id_number');
+    }
+
+    /**
      *  Method to check if all associated work details are completed
      */
     public function allDetailsCompleted()

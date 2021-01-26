@@ -21,7 +21,7 @@ class EmployeeWorkOrderManage extends Component
     public $formDetails;
 
     protected $rules = [
-        'assignment' => 'string|required',
+        'assignment' => 'string|required|exists:employees,employee_id_number',
         'startdate' => 'date|required',
         'tenantNotes' => 'required',
         'formDetails' => 'required',
@@ -71,20 +71,28 @@ class EmployeeWorkOrderManage extends Component
     {
         if (Gate::allows('isAdministrativeOrManagement')) {
 
-            $this->validate([
-                'assignment' => 'string|required',
-                'startdate' => 'date',
-            ]);
-    
-            $this->workOrder->update([
-                'employee_id' => Employee::where('employee_id_number', $this->assignment)
-                    ->first()->id,
-                'start_date' => $this->startdate,
-            ]);
-    
-            $this->workOrder = $this->workOrder->fresh();
-    
-            session()->flash('success', 'Work order updated');
+            if ($this->workOrder->getEmployeeIdsInRegion()->contains($this->assignment)) {
+
+                $this->validate([
+                    'assignment' => 'string|required|exists:employees,employee_id_number', 
+                    'startdate' => 'date|required',
+                ]);
+        
+                $this->workOrder->update([
+                    'employee_id' => Employee::where('employee_id_number', $this->assignment)
+                        ->first()->id,
+                    'start_date' => $this->startdate,
+                ]);
+        
+                $this->workOrder = $this->workOrder->fresh();
+        
+                session()->flash('success', 'Work order updated');
+
+            } else {
+
+                session()->flash('error', 'You can only assign a work order to an employee in the same region');
+
+            }
 
         } else {
 
@@ -134,25 +142,11 @@ class EmployeeWorkOrderManage extends Component
         return Carbon::parse($date)->toDateString();
     }
 
-    /**
-     *  Method to get a list of employees
-     */
-    private function listEmployees()
-    {
-        if (Gate::allows('isManagement')) {
-            return Employee::get();
-        } else {
-            return Employee::whereHas('region', function($query) {
-                $query->where('region_name', users_region());
-            })->get();
-        }
-    }
-
     public function render()
     {
         return view('livewire.employee-work-order-manage', [
 
-            'employees' => $this->listEmployees(),
+            'employees' => $this->workOrder->employeesInRegion(),
 
             'details' => $this->workOrder->workDetails()
                 ->orderBy('created_at', 'desc')->paginate(5),
