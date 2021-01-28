@@ -1,5 +1,17 @@
 <div>
 
+    <div class="bg-white rounded mb-6 flex items-center">
+        <h5 class="shadow-sm rounded-md py-4 pl-6 pr-3 bg-white font-bold">Filter by:</h5>
+        <button class="font-bold text-sm rounded-md px-3 py-1 text-white bg-orange-300"
+                wire:click="toggleComplete">
+            {{$open ? 'Completed' : 'Open'}}
+        </button>
+        <button class="font-bold text-sm bg-orange-300 rounded-md px-3 py-1 text-white ml-3"
+                wire:click="toggleSortStart">
+            {{$startDateAsc ? 'Start Date Newest' : 'Start Date Oldest'}}
+        </button>
+    </div>
+
     <section class="text-gray-700 grid grid-cols-1 xl:grid-cols-3 gap-8">
 
         @foreach ($workOrders as $workOrder)
@@ -17,6 +29,14 @@
                         <div class="font-bold text-xs mb-1">Start Date:</div>
                         <div class="font-light text-md">{{\Carbon\Carbon::parse($workOrder->start_date)->toFormattedDateString()}}</div>
                     </div>
+                    <div class="mb-2">
+                        <div class="font-bold text-xs mb-1">End Date:</div>
+                        @if ($workOrder->end_date)
+                            <div class="font-light text-md">{{\Carbon\Carbon::parse($workOrder->end_date)->toFormattedDateString()}}</div>
+                        @else
+                            <div class="font-light text-md">Not Complete</div>
+                        @endif
+                    </div>
                 </div>
                 <a href="{{route('employee.manage-workorder', $workOrder->id)}}" class="text-teal-300 font-bold flex items-center justify-end">
                     <i class="fas fa-link text-sm mr-1"></i>
@@ -27,5 +47,11 @@
         @endforeach
 
     </section>
+
+    <div class="flex justify-between items-center">
+        <div class="my-4">
+            {{ $workOrders->links('vendor.livewire.pagination') }}
+        </div>
+    </div>
 
 </div>
