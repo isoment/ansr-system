@@ -17,7 +17,11 @@ class WorkOrderController extends Controller
      */
     public function manageWorkOrder(WorkOrder $workOrder)
     {
-        if (Gate::denies('workOrderAndUserHaveSameRegion', $workOrder) && Gate::denies('isManagement')) {
+        // We want to abort if the employee is not a manager, we also want to abort if
+        // the region of the work order is different than the employees OR the employee is not
+        // assigned to the work order. If a manager changes the employees region we still want
+        // them to have access to previous work orders.
+        if (! $workOrder->regionAndOwnerCheck() && Gate::denies('isManagement')) {
             abort(403);
         }
 

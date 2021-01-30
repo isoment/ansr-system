@@ -123,6 +123,9 @@
                                 @if (auth()->user()->userable->role)
                                     <div class="block py-2 px-4">Role: {{auth()->user()->userable->role}}</div>
                                 @endif
+                                @can('isEmployee')
+                                    <div class="block py-2 px-4">Region: {{users_region()}}</div>
+                                @endcan
                                 <div class="block py-2 px-4 hover:text-orange-300">
                                     <a href="{{ route('logout') }}" class="block"
                                         onclick="event.preventDefault();

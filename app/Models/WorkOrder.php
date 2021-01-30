@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 
 class WorkOrder extends Model
 {
@@ -71,5 +72,18 @@ class WorkOrder extends Model
         return $this->workDetails->every(function($item, $key) {
             return $item['end_date'] !== NULL;
         });
+    }
+
+    /**
+     *  Work order and user have same region OR work order is owned by current user
+     */
+    public function regionAndOwnerCheck()
+    {
+        if (Gate::allows('workOrderAndUserHaveSameRegion', $this) || 
+                $this->employee_id === auth()->user()->userable->id) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

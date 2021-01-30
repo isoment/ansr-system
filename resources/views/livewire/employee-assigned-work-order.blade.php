@@ -18,8 +18,21 @@
         <div>
             <div class="h-full flex flex-col justify-between shadow-md rounded-lg py-4 px-6 bg-white">
                 <div>
-                    <div class="mb-2 text-right">
+                    {{-- <div class="mb-2 text-right">
                         <div class="font-bold text-xs text-teal-700">ID: {{$workOrder->id}}</div>
+                    </div> --}}
+                    <div class="mb-2 text-right">
+                        @if ($workOrder->end_date)
+                            <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs 
+                                        font-medium leading-4 bg-green-100 text-green-400">
+                                Complete
+                            </div>
+                        @else
+                            <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                    bg-red-100 text-red-400">
+                                Open
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-2">
                         <div class="font-bold text-xs mb-1">Service Request Issue:</div>
