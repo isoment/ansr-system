@@ -16,13 +16,13 @@ class EmployeeWorkOrderManage extends Component
     public $workOrder;
     
     public $assignment;
-    public $startdate;
+    public $title;
     public $tenantNotes;
     public $formDetails;
 
     protected $rules = [
         'assignment' => 'string|required|exists:employees,employee_id_number',
-        'startdate' => 'date|required',
+        'title' => 'max:255|required',
         'tenantNotes' => 'required',
         'formDetails' => 'required',
     ];
@@ -30,7 +30,7 @@ class EmployeeWorkOrderManage extends Component
     public function mount($workOrder)
     {
         $this->assignment = $workOrder->employee ? $workOrder->employee->employee_id_number : NULL;
-        $this->startdate = $workOrder->start_date ? $this->mysqlToViewDateConversion($workOrder->start_date) : NULL;
+        $this->title = $workOrder->title ? $workOrder->title : NULL;
     }
 
     public function updated($propertyName)
@@ -75,13 +75,13 @@ class EmployeeWorkOrderManage extends Component
 
                 $this->validate([
                     'assignment' => 'string|required|exists:employees,employee_id_number', 
-                    'startdate' => 'date|required',
+                    'title' => 'max:255|required'
                 ]);
         
                 $this->workOrder->update([
                     'employee_id' => Employee::where('employee_id_number', $this->assignment)
                         ->first()->id,
-                    'start_date' => $this->startdate,
+                    'title' => $this->title,
                 ]);
         
                 $this->workOrder = $this->workOrder->fresh();
@@ -97,17 +97,30 @@ class EmployeeWorkOrderManage extends Component
         } else {
 
             $this->validate([
-                'startdate' => 'date',
+                'title' => 'max:255|required'
             ]);
     
             $this->workOrder->update([
-                'start_date' => $this->startdate,
+                'title' => $this->title,
             ]);
     
             $this->workOrder = $this->workOrder->fresh();
     
             session()->flash('success', 'Work order updated');
 
+        }
+    }
+
+    public function startWorkOrder()
+    {
+        if ($this->workOrder->start_date) {
+            session()->flash('error', 'Work order has already been started');
+        } else {
+            $this->workOrder->update([
+                'start_date' => now(),
+            ]);
+
+            session()->flash('success', 'Work order started');
         }
     }
 
@@ -135,7 +148,7 @@ class EmployeeWorkOrderManage extends Component
     }
 
     /**
-     *  Method to format the date from the database into a format for the form
+     *  Format the date from the database into a format for the form
      */
     private function mysqlToViewDateConversion($date) 
     {

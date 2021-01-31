@@ -17,6 +17,7 @@ class CreateWorkOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('service_request_id');
             $table->unsignedBigInteger('employee_id')->nullable();
+            $table->string('title')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->timestamps();

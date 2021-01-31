@@ -37,21 +37,21 @@
                             </div>
                         </div>
                     @endcan
-                    {{-- Start Date --}}
+                    {{-- Title --}}
                     <div class="w-full mt-4 sm:mt-8">
                         <div class="flex justify-between items-center w-full">
-                            <label for="startdate" class="text-xs text-gray-700 font-bold">Start Date:</label>
-                            @error('startdate')
+                            <label for="title" class="text-xs text-gray-700 font-bold">Title:</label>
+                            @error('title')
                                 <div class="text-orange-400 text-xs font-bold italic">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div class="flex items-center mt-1">
-                            <input type="date" id="startdate" name="startdate"
+                            <input type="text" id="title" name="title"
                                 class="px-4 w-full border bg-white rounded py-2 text-gray-700 focus:outline-none
-                                    @error('startdate') border-orange-400 @enderror" value="{{ old('startdate') }}" 
-                                wire:model.debounce.500ms="startdate"/>
+                                    @error('title') border-orange-400 @enderror"
+                                wire:model.debounce.500ms="title"/>
                         </div>
                     </div>
                     <div class="mt-6 text-center">
@@ -117,19 +117,33 @@
                 </div>
             </div>
 
-            @if ($workOrder->allDetailsCompleted())
-                <div class="my-2 text-center">
-                    <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
-                                transition duration-200"
-                            wire:click="toggleEndDate">
-                        {{$workOrder->end_date ? 'Reopen Work Order' : 'Complete Work Order'}}
-                    </button>
-                </div>
-            @else
-                <div class="text-sm font-bold my-4 text-center">
-                    Complete all details to close this order.
-                </div>
-            @endif
+            <div class="flex item-center justify-around">
+                @if ($workOrder->allDetailsCompleted())
+                    <div class="my-2 text-center">
+                        <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                                    transition duration-200"
+                                wire:click="toggleEndDate">
+                            {{$workOrder->end_date ? 'Reopen Work Order' : 'Complete Work Order'}}
+                        </button>
+                    </div>
+                @else
+                    <div class="my-2 text-center">
+                        <button class="bg-gray-300 p-2 rounded-md text-gray-100 text-sm cursor-not-allowed
+                                    transition duration-200" disabled>
+                            {{$workOrder->end_date ? 'Reopen Work Order' : 'Complete Work Order'}}
+                        </button>
+                    </div>
+                @endif
+                @if (is_null($workOrder->start_date))
+                    <div class="my-2">
+                        <button class="bg-orange-400 p-2 rounded-md text-white text-sm hover:bg-orange-500
+                                    transition duration-200"
+                                wire:click="startWorkOrder">
+                            Start Work Order
+                        </button>
+                    </div>
+                @endif
+            </div>
 
         </div>
     

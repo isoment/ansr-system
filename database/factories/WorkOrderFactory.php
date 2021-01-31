@@ -26,6 +26,7 @@ class WorkOrderFactory extends Factory
         return [
             'service_request_id' => ServiceRequest::all()->random()->id,
             'employee_id' => 0,
+            'title' => $this->faker->sentence(),
             'start_date' => $this->faker->dateTimeBetween('-10 days', '-6days', null),
             'end_date' => $this->faker->dateTimeBetween('-5days', 'now', null),
         ];
