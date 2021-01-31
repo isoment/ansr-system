@@ -65,7 +65,7 @@ class WorkOrder extends Model
     }
 
     /**
-     *  Method to check if all associated work details are completed
+     *  Check if all associated work details are completed
      */
     public function allDetailsCompleted()
     {
@@ -75,15 +75,24 @@ class WorkOrder extends Model
     }
 
     /**
-     *  Work order and user have same region OR work order is owned by current user
+     *  Check if owner
+     */
+    public function workOrderOwner()
+    {
+        return $this->employee_id === auth()->user()->userable->id;
+    }
+
+    /**
+     *  Work order and user have same region AND work order is owned by current user
      */
     public function regionAndOwnerCheck()
     {
-        if (Gate::allows('workOrderAndUserHaveSameRegion', $this) || 
+        if (Gate::allows('workOrderAndUserHaveSameRegion', $this) && 
                 $this->employee_id === auth()->user()->userable->id) {
             return true;
         } else {
             return false;
         }
     }
+
 }

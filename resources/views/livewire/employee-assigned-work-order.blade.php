@@ -18,9 +18,6 @@
         <div>
             <div class="h-full flex flex-col justify-between shadow-md rounded-lg py-4 px-6 bg-white">
                 <div>
-                    {{-- <div class="mb-2 text-right">
-                        <div class="font-bold text-xs text-teal-700">ID: {{$workOrder->id}}</div>
-                    </div> --}}
                     <div class="mb-2 text-right">
                         @if ($workOrder->end_date)
                             <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs 

@@ -27,7 +27,9 @@ class EmployeeAssignedWorkOrder extends Component
     {
         return view('livewire.employee-assigned-work-order', [
 
-            'workOrders' => WorkOrder::where('employee_id', auth()->user()->userable->id)
+            'workOrders' => WorkOrder::whereHas('serviceRequest.tenant.lease.property.region', function($query) {
+                $query->where('region_name', users_region());
+            })->where('employee_id', auth()->user()->userable->id)
                 ->where('end_date', $this->open ? '=' : '!=', null)
                 ->orderBy('start_date', $this->startDateAsc ? 'asc' : 'desc')
                 ->paginate(9),

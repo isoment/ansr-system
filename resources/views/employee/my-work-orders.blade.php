@@ -6,6 +6,7 @@
     
     <div class="font-bold text-xl text-center mb-8">
         <h5>My Work Orders</h5>
+        <h6 class="text-xs font-light mt-1">{{users_region()}} Region</h6>
     </div>
 
     <livewire:employee-assigned-work-order />
