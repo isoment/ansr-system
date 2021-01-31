@@ -75,14 +75,6 @@ class WorkOrder extends Model
     }
 
     /**
-     *  Check if owner
-     */
-    public function workOrderOwner()
-    {
-        return $this->employee_id === auth()->user()->userable->id;
-    }
-
-    /**
      *  Work order and user have same region AND work order is owned by current user
      */
     public function regionAndOwnerCheck()

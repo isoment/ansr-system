@@ -17,13 +17,13 @@ class WorkOrderController extends Controller
      */
     public function manageWorkOrder(WorkOrder $workOrder)
     {
-        // For maintenance employees if the employee isn't assigned the work order and
-        // they are not part of the same region abort.
+        // For maintenance employees: If the employee isn't assigned the work order and
+        // they are not part of the same region, abort.
         if (! $workOrder->regionAndOwnerCheck() && Gate::allows('isMaintenance')) {
             abort(403);
         }
 
-        // For administrative employee abort if the work order region and employee region
+        // For administrative employee: Abort if the work order region and employee region
         // are not the same.
         if (Gate::allows('isAdministrative') && Gate::denies('workOrderAndUserHaveSameRegion', $workOrder)) {
             abort(403);
@@ -41,7 +41,17 @@ class WorkOrderController extends Controller
      */
     public function manageDetails(WorkDetails $workDetail)
     {
-        if (Gate::denies('workDetailAndUserHaveSameRegion', $workDetail) && Gate::denies('isManagement')) {
+        $parentWorkOrder = $workDetail->workOrder;
+
+        // For maintenance employees: If the work detail doesn't belong to the employees assigned
+        // work order and they are not part of the same region, abort.
+        if (! $parentWorkOrder->regionAndOwnerCheck() && Gate::allows('isMaintenance')) {
+            abort(403);
+        }
+
+        // For administrative employee: Abort if the work detail parent work order and 
+        // region are not the same
+        if (Gate::allows('isAdministrative') && Gate::denies('workDetailAndUserHaveSameRegion', $workDetail)) {
             abort(403);
         }
 

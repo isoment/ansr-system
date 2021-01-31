@@ -10,9 +10,22 @@
                                 tracking-wider lg:text-5xl">
                         404                 
                     </div>
-                    <a href="/" class="flex items-center ml-6">
-                        <img src="/img/house.svg" alt="Logo" class="h-10 w-10">
-                    </a>
+                    @guest
+                            <a href="/" class="flex items-center ml-6">
+                                <img src="/img/house.svg" alt="Logo" class="h-10 w-10">
+                            </a>
+                    @endguest
+                    @auth
+                        @can('isEmployee')
+                            <a href="{{route('employee.dashboard')}}" class="flex items-center ml-6">
+                                <img src="/img/house.svg" alt="Logo" class="h-10 w-10">
+                            </a>
+                        @elsecan('isTenant')
+                            <a href="{{route('tenant.dashboard')}}" class="flex items-center ml-6">
+                                <img src="/img/house.svg" alt="Logo" class="h-10 w-10">
+                            </a>
+                        @endcan
+                    @endauth
                 </div>
                 <div class="text-lg text-gray-700 uppercase tracking-wider mt-4">
                     Requested page not found.
