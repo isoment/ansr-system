@@ -155,7 +155,7 @@
                     @enderror
                 </div>
                 <div class="flex items-center mt-1">
-                    <input type="text" id="phone" name="phone" placeholder="Phone Number"
+                    <input type="text" id="phone" name="phone" placeholder="xxx-xxx-xxxx"
                         class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('phone') border-orange-400 @enderror" value="{{ old('phone') }}" required 
                         wire:model.debounce.500ms="phone"/>

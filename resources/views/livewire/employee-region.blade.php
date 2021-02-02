@@ -22,7 +22,7 @@
                     </div>
                     <div class="flex items-center mt-1">
                         <input type="text" id="name" name="name"
-                            class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                            class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                                 @error('name') border-orange-400 @enderror" value="{{old('name')}}" required 
                             wire:model.debounce.500ms="name"/>
                     </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="flex items-center mt-1">
                         <input type="text" id="abbreviation" name="abbreviation"
-                            class="px-4 w-full border focus:border-teal-400 rounded py-2 text-gray-700 focus:outline-none
+                            class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                                 @error('abbreviation') border-orange-400 @enderror" value="{{old('abbreviation')}}" required 
                             wire:model.debounce.500ms="abbreviation"/>
                     </div>

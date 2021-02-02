@@ -14,10 +14,14 @@ class EmployeeRegion extends Component
     public $name;
     public $abbreviation;
 
-    protected $rules = [
-        'name' => 'required|unique:regions,region_name',
-        'abbreviation' => 'required|alpha|min:3|max:3|unique:regions,slug',
-    ];
+    // When using custom validators we need to use a rules method instead of a property
+    public function rules()
+    {
+        return [
+            'name' => 'required|unique:regions,region_name',
+            'abbreviation' => ['required', 'alpha', 'min:3', 'max:3', 'unique:regions,slug', new Uppercase],
+        ];
+    }
 
     // Realtime validation
     public function updated($propertyName)

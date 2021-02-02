@@ -157,7 +157,7 @@
                shadow-sm relative">
         <h5 class="text-xl font-bold text-center">Work Order Details</h5>
 
-        @if (! $workOrder->end_date)
+        @if (is_null($workOrder->end_date))
         <button class="bg-teal-300 py-1 px-2 rounded-md text-white hover:bg-teal-400
                         transition duration-200 absolute top-3 right-3"
                 @click="showModal = true">

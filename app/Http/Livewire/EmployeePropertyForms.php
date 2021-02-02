@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Gate;
 use App\Models\Region;
+use App\Rules\PhoneNumber;
 
 trait EmployeePropertyForms
 {
@@ -22,16 +23,19 @@ trait EmployeePropertyForms
     /**
      *  Validation rules
      */
-    protected $rules = [
-        'name' => 'required',
-        'region' => 'required',
-        'street' => 'required',
-        'city' => 'required',
-        'state' => 'required',
-        'zip' => 'required',
-        'email' => 'required|email',
-        'phone' => 'required',
-    ];
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'region' => 'required',
+            'street' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => ['required', 'digits:5'],
+            'email' => ['required', 'email'],
+            'phone' => ['required', new PhoneNumber],
+        ];
+    }
 
     /**
      *  Method to determine if a user can select from multiple regions (Management)
