@@ -2,10 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ServiceRequest;
-use App\Models\Tenant;
 use App\Models\WorkDetails;
 use App\Models\WorkOrder;
+use App\Rules\Currency;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,6 +16,13 @@ class EmployeeServiceRequestManage extends Component
     public $request;
     public $currentWorkOrderId;
     public $tenantCharges;
+
+    public function rules()
+    {
+        return [
+            'tenantCharges' => [new Currency],
+        ];
+    }
 
     protected $rules = [
         'tenantCharges' => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/',

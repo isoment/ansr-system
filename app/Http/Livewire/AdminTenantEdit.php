@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Rules\PhoneNumber;
 use Livewire\Component;
 
 class AdminTenantEdit extends Component
@@ -11,6 +12,16 @@ class AdminTenantEdit extends Component
     public $lastName;
     public $phone;
     public $email;
+
+    public function rules()
+    {
+        return [
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'phone' => ['required', new PhoneNumber],
+            'email' => 'required',
+        ];
+    }
 
     protected $rules = [
         'firstName' => 'required',

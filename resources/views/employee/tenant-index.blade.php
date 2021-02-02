@@ -25,7 +25,9 @@
         <div class="flex items-center ml-4">
             <a href="#"
                class="bg-teal-300 hover:bg-teal-400 transition-all duration-200 text-white px-4 
-                      py-2 text-xs font-bold rounded-t-md absolute top-14 right-8 hidden lg:block">Add Tenant</a>
+                      py-2 text-xs font-bold rounded-t-md absolute index-data-table-button-position right-8 hidden lg:block">
+                Add Tenant
+            </a>
         </div>
     </div>
 

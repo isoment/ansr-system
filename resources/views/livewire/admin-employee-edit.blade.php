@@ -4,8 +4,9 @@
         @include('inc.livewire-success')
     </div>
     
-
     <h2 class="font-bold text:lg lg:text-2xl text-center">Edit Employee</h2>
+    <h5 class="font-bold text-sm mt-2 text-center">{{$employee->first_name}} {{$employee->last_name}}</h5>
+    <h5 class="font-bold text-sm mb-2 text-center">ID: {{$employee->employee_id_number}}</h5>
     <h6 class="font-bold text-sm mt-4 mb-8 text-center">You may edit this employee below. 
         All fields are required.
     </h6>
@@ -109,24 +110,6 @@
                         <option value="Maintenance">Maintenance</option>
                     </select>
                 </div>
-            </div>
-        </div>
-
-        {{-- Employee Id --}}
-        <div class="w-full mt-4 sm:mt-8">
-            <div class="flex justify-between items-center w-full">
-                <label for="employeeId" class="text-xs text-gray-700 font-bold">Employee ID:</label>
-                @error('employeeId')
-                    <div class="text-orange-400 text-xs font-bold italic">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="flex items-center mt-1">
-                <input type="text" id="employeeId" name="employeeId" placeholder="Employee ID"
-                    class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
-                        @error('employeeId') border-orange-400 @enderror" required 
-                    wire:model.debounce.500ms="employeeId"/>
             </div>
         </div>
 

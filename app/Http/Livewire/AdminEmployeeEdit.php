@@ -14,7 +14,6 @@ class AdminEmployeeEdit extends Component
     public $email;
     public $region;
     public $role;
-    public $employeeId;
 
     protected $rules = [
         'firstName' => 'required',
@@ -23,7 +22,6 @@ class AdminEmployeeEdit extends Component
         'email' => 'required|email',
         'region' => 'required',
         'role' => 'required',
-        'employeeId' => 'required',
     ];
 
     public function updated($propertyName)
@@ -39,7 +37,6 @@ class AdminEmployeeEdit extends Component
         $this->email = $employee->email;
         $this->role = $employee->role;
         $this->region = Region::find($employee->region_id)->region_name;
-        $this->employeeId = $employee->employee_id_number;
     }
 
     public function editEmployee()
@@ -51,7 +48,6 @@ class AdminEmployeeEdit extends Component
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'role' => $this->role,
-            'employee_id_number' => $this->employeeId,
             'phone' => $this->phone,
             'email' => $this->email,
         ]);

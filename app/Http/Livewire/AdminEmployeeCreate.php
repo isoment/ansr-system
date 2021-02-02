@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Employee;
 use App\Models\Region;
+use App\Rules\PhoneNumber;
 use Livewire\Component;
 
 class AdminEmployeeCreate extends Component
@@ -16,15 +17,18 @@ class AdminEmployeeCreate extends Component
     public $role;
     public $employeeId;
 
-    protected $rules = [
-        'firstName' => 'required',
-        'lastName' => 'required',
-        'phone' => 'required',
-        'email' => 'required|email|unique:employees',
-        'region' => 'required',
-        'role' => 'required',
-        'employeeId' => 'required|unique:employees,employee_id_number',
-    ];
+    public function rules()
+    {
+        return [
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'phone' => ['required', new PhoneNumber],
+            'email' => 'required|email|unique:employees',
+            'region' => 'required',
+            'role' => 'required',
+            'employeeId' => 'required|unique:employees,employee_id_number',
+        ];
+    }
 
     public function mount()
     {
