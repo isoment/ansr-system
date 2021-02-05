@@ -21,6 +21,10 @@
     max-width: 1300px;
 }
 
+.input-icon-padding-6px {
+    padding-left: 6px;
+}
+
 .tenant-index-modal-background {
     background-color: rgba(0, 0, 0, 0.50);
 }

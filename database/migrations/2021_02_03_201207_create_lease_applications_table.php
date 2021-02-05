@@ -36,7 +36,7 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('emergency_contact');
             $table->string('contact_relationship');
             $table->string('contact_phone');
-            $table->string('contact_email');
+            $table->string('contact_email')->nullable();
 
             // Previous Residence
             $table->string('current_address');
@@ -45,11 +45,11 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('zip');
             $table->boolean('rental');
             $table->decimal('monthly_payment');
-            $table->string('years_lived_at');
-            $table->string('landlord_name');
-            $table->string('landlord_phone_number');
-            $table->string('landlord_email');
-            $table->string('lease_end');
+            $table->string('living_duration');
+            $table->string('landlord_name')->nullable();
+            $table->string('landlord_phone_number')->nullable();
+            $table->string('landlord_email')->nullable();
+            $table->date('lease_end')->nullable();
             $table->text('moving_reason');
 
             // Employer
