@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Lease Application
+Route::get('/lease-application', [\App\Http\Controllers\GuestFeatureController::class, 'leaseApplication'])
+    ->name('lease-application');
+
 // Tenant Routes
 Route::middleware('can:isTenant')->group(function() {
 

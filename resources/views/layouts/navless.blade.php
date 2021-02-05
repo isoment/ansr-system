@@ -19,7 +19,7 @@
     <script src="/alpine.min.js" defer></script>
 </head>
 
-<body class="w-full h-screen antialiased leading-none font-sans">
+<body class="w-full h-screen antialiased leading-none font-nunito">
     @yield('content')
     @livewireScripts
 </body>

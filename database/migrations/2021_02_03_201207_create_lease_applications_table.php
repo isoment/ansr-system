@@ -16,6 +16,10 @@ class CreateLeaseApplicationsTable extends Migration
         Schema::create('lease_applications', function (Blueprint $table) {
             $table->id();
 
+            // Property
+            $table->unsignedBigInteger('property_id');
+
+            // Personal Info
             $table->string('first_name');
             $table->string('last_name');
             $table->string('SSN');
@@ -34,7 +38,7 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('contact_phone');
             $table->string('contact_email');
 
-            // Previous residence
+            // Previous Residence
             $table->string('current_address');
             $table->string('city');
             $table->string('state');
@@ -53,8 +57,7 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('employer_email');
             $table->string('employer_address');
             $table->string('employer_phone');
-            $table->date('employment_start');
-            $table->date('employment_start');
+            $table->date('employment_duration');
             $table->decimal('gross_monthly_income');
 
             // Income Monthly
@@ -69,8 +72,6 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('ref_one_name');
             $table->string('ref_one_email');
             $table->string('ref_one_phone');
-
-            // References
             $table->string('ref_two_name');
             $table->string('ref_two_email');
             $table->string('ref_two_phone');

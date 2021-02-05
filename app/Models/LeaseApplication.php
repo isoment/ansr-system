@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class LeaseApplication extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }
