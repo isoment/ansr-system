@@ -56,3 +56,25 @@ progress::-webkit-progress-value {
     background-color: #fbc88d;
     border-radius: 7px;
 }
+
+
+
+/* Lease application status bar */
+.progress-bar .step:last-child .bullet:before,
+.progress-bar .step:last-child .bullet:after {
+    display: none;
+}
+
+.progress-bar .step .bullet:before,
+.progress-bar .step .bullet:after {
+    position: absolute;
+    content: '';
+    height: 2px;
+    width: 45px;
+    background: #c8cbd0;
+    left: 40px;
+}
+
+.check-hidden {
+    display: none !important;
+}

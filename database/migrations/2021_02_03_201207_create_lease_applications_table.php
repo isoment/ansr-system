@@ -43,7 +43,6 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('zip');
-            $table->boolean('rental');
             $table->decimal('monthly_payment');
             $table->string('living_duration');
             $table->string('landlord_name')->nullable();
@@ -54,7 +53,7 @@ class CreateLeaseApplicationsTable extends Migration
 
             // Employer
             $table->string('current_employer');
-            $table->string('employer_email');
+            $table->string('employer_email')->nullable();
             $table->string('employer_address');
             $table->string('employer_phone');
             $table->date('employment_duration');
@@ -63,26 +62,26 @@ class CreateLeaseApplicationsTable extends Migration
             // Income Monthly
             $table->text('income_other');
             $table->decimal('gross_income_other');
-            $table->decimal('gross_income_total');
             $table->decimal('child_support');
             $table->decimal('alimony');
             $table->decimal('car_payment');
 
-            // References
+            // References & Pets
             $table->string('ref_one_name');
-            $table->string('ref_one_email');
+            $table->string('ref_one_email')->nullable();
             $table->string('ref_one_phone');
             $table->string('ref_two_name');
-            $table->string('ref_two_email');
+            $table->string('ref_two_email')->nullable();
             $table->string('ref_two_phone');
+            $table->text('pets');
 
             // Misc
             $table->text('criminal_conviction');
             $table->text('bankruptcy');
             $table->text('eviction');
-            $table->text('pets');
-
             $table->boolean('agree_terms');
+            $table->string('signature');
+            $table->string('signature_date');
 
             $table->timestamps();
         });
