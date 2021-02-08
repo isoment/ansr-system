@@ -7,6 +7,7 @@ use App\Models\LeaseApplication;
 use App\Rules\Currency;
 use App\Rules\PhoneNumber;
 use App\Rules\SSN;
+use Illuminate\Support\Facades\Crypt;
 use Livewire\Component;
 
 class LeaseApplicationForm extends Component
@@ -205,7 +206,7 @@ class LeaseApplicationForm extends Component
             'property_id' => Property::where('name', $this->propertyId)->first()->id,
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
-            'SSN' => $this->ssn,
+            'SSN' => $this->encryptSSN($this->ssn),
             'birth_date' => $this->birthDate,
             'phone_number' => $this->phone,
             'email' => $this->email,
@@ -258,14 +259,28 @@ class LeaseApplicationForm extends Component
         return redirect()->to(route('lease-application-confirmation'));
     }
 
+    /**
+     *  Method to return to previous step
+     */
+    public function back($step)
+    {
+        $this->step = $step;
+    }
+
+    /**
+     *  Method to generate a confirmation number
+     */
     private function generateConfirmation()
     {
         return $this->firstName[0] . $this->lastName[0] . time() . rand(1000, 9999);
     }
 
-    public function back($step)
+    /**
+     *  Method to encrypt SSN
+     */
+    private function encryptSSN($string)
     {
-        $this->step = $step;
+        return Crypt::encryptString($string);
     }
 
     public function render()
