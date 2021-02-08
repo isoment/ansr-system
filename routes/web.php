@@ -23,6 +23,10 @@ Auth::routes();
 Route::get('/lease-application', [\App\Http\Controllers\GuestFeatureController::class, 'leaseApplication'])
     ->name('lease-application');
 
+// Lease Application Confirmation
+Route::get('/lease-application-confirmation', [\App\Http\Controllers\GuestFeatureController::class, 'leaseApplicationConfirmation'])
+    ->name('lease-application-confirmation');
+
 // Tenant Routes
 Route::middleware('can:isTenant')->group(function() {
 

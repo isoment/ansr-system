@@ -49,10 +49,11 @@
         </div>
     </div>
 
-    <h3 class="font-bold text-lg">Step: {{$step}}</h3>
+    
 
     {{-- Step 1 --}}
     @if ($step === 1)
+    <h3 class="font-bold text-lg">Step 1: Personal Information</h3>
     <div>
         {{-- Name --}}
         <div class="flex flex-col sm:flex-row items-center sm:mt-8">
@@ -191,6 +192,7 @@
 
     {{-- Step 2 --}}
     @if ($step === 2)
+    <h3 class="font-bold text-lg">Step 2: Drivers License & Emrgency Contact</h3>
     <div>
 
         {{-- Drivers License # --}}
@@ -339,6 +341,7 @@
 
     {{-- Step 3 --}}
     @if ($step === 3)
+    <h3 class="font-bold text-lg">Step 3: Previous Residence</h3>
     <div>
 
         {{-- Rental --}}
@@ -570,7 +573,8 @@
     @endif
 
     @if ($step === 4)
-
+    <h3 class="font-bold text-lg">Step 4: Sources of Income</h3>
+    <div>
         {{-- Employer and Duration --}}
         <div class="flex flex-col sm:flex-row items-center sm:mt-8">
             <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
@@ -686,7 +690,7 @@
         <div class="flex flex-col sm:flex-row items-center sm:mt-8">
             <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
                 <div class="flex justify-between items-center w-full">
-                    <label for="grossMonthlyIncome" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Employment Gross Income:</label>
+                    <label for="grossMonthlyIncome" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Job gross monthly income:</label>
                     @error('grossMonthlyIncome')
                         <div class="text-orange-400 text-xs font-bold italic">
                             {{ $message }} 
@@ -703,7 +707,7 @@
             </div>
             <div class="w-full sm:w-1/2 sm:ml-4 mt-4 sm:mt-0">
                 <div class="flex justify-between items-center w-full">
-                    <label for="grossIncomeOther" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Income Other:</label>
+                    <label for="grossIncomeOther" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Monthly income Other:</label>
                     @error('grossIncomeOther')
                         <div class="text-orange-400 text-xs font-bold italic">
                             {{ $message }} 
@@ -787,11 +791,13 @@
                 Next
             </button>
         </div>
-        
+
+    </div>
     @endif
 
     @if ($step === 5)
-
+    <h3 class="font-bold text-lg">Step 5: References and Pets</h3>
+    <div>
         {{-- Reference One --}}
         <div class="flex flex-col sm:flex-row items-center sm:mt-8">
             <div class="w-full mt-4 sm:mt-0">
@@ -935,11 +941,12 @@
                 Next
             </button>
         </div>
-        
+    </div>  
     @endif
 
     @if ($step === 6)
-
+    <h3 class="font-bold text-lg">Step 6: Background Check Authorization</h3>
+    <div>
         {{-- Criminal History --}}
         <div class="w-full mt-4 sm:mt-8">
             <div class="flex justify-between items-center w-full">
@@ -1059,7 +1066,7 @@
             @endif
 
         </div>
-        
+    </div>
     @endif
 
 </div>

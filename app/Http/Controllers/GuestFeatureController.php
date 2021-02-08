@@ -15,4 +15,12 @@ class GuestFeatureController extends Controller
     {
         return view('guest.lease-application');
     }
+
+    /**
+     *  Show the lease application confirmation
+     */
+    public function leaseApplicationConfirmation()
+    {
+        return view('guest.lease-application-confirmation');
+    }
 }

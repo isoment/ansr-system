@@ -56,7 +56,7 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('employer_email')->nullable();
             $table->string('employer_address');
             $table->string('employer_phone');
-            $table->date('employment_duration');
+            $table->string('employment_duration');
             $table->decimal('gross_monthly_income');
 
             // Income Monthly
@@ -76,12 +76,12 @@ class CreateLeaseApplicationsTable extends Migration
             $table->text('pets');
 
             // Misc
-            $table->text('criminal_conviction');
-            $table->text('bankruptcy');
             $table->text('eviction');
+            $table->text('criminal');
             $table->boolean('agree_terms');
             $table->string('signature');
             $table->string('signature_date');
+            $table->string('confirmation_number');
 
             $table->timestamps();
         });

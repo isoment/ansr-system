@@ -11,12 +11,16 @@
     box-sizing: border-box;
 }
 
+
 /* For Alpine.js */
+/*****************/
 [x-cloak] {
     display: none;
 }
 
+
 /* Custom CSS */
+/**************/
 .max-width-1375 {
     max-width: 1300px;
 }
@@ -42,7 +46,9 @@
     top: 78px;
 }
 
-/* Style for progress bar */
+
+/* Style for upload progress bar */
+/*********************************/
 progress {
     border-radius: 7px;
 }
@@ -58,8 +64,8 @@ progress::-webkit-progress-value {
 }
 
 
-
 /* Lease application status bar */
+/********************************/
 .progress-bar .step:last-child .bullet:before,
 .progress-bar .step:last-child .bullet:after {
     display: none;
