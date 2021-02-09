@@ -10,4 +10,13 @@ class LeaseApplication extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    /**
+     *  Property Relationship
+     */
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
 }

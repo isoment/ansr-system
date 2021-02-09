@@ -26,4 +26,12 @@ class Property extends Model
     {
         return $this->hasMany(Lease::class);
     }
+
+    /**
+     *  Lease Application Relationship
+     */
+    public function leaseApplications()
+    {
+        return $this->hasMany(LeaseApplication::class);
+    }
 }

@@ -55,8 +55,8 @@
                     <div class="h-full flex flex-col items-center justify-center text-center 
                                 shadow-md rounded-lg py-6 px-20 bg-white">
                         <i class="text-orange-400 fas fa-copy text-6xl"></i>
-                        <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Leasing</h2>
-                        <p class="mt-4">Any issues related to leasing including renewals.</p>
+                        <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Lease Applications</h2>
+                        <p class="mt-4">View and manage lease applications</p>
                     </div>
                 </a>
             </div>

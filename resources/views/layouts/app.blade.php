@@ -104,7 +104,6 @@
 
                         {{-- Profile menu --}}
                         <div class="relative"
-                             @click.away="isProfileMenuOpen = false"
                              @keydown.escape="isProfileMenuOpen = false">
                             <button class="align-middle rounded-full focus:shadow-outline-orange focus:outline-none"
                                     @click="toggleProfileMenu">
@@ -117,6 +116,7 @@
                         <div class="bg-white flex flex-col absolute top-14 right-9 rounded-lg 
                                     shadow-lg font-bold text-sm text-gray-700 text-center border border-gray-400"
                              x-show="isProfileMenuOpen"
+                             @click.away="isProfileMenuOpen = false"
                              x-cloak>
 
                             <div class="rounded-lg">

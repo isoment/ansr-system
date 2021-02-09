@@ -252,6 +252,7 @@ class LeaseApplicationForm extends Component
             'signature' => $this->signature,
             'signature_date' => $this->dateSigned,
             'confirmation_number' => $confirmationNumber,
+            'status' => 'open',
         ]);
 
         session()->flash('confirmation_number', $confirmationNumber);

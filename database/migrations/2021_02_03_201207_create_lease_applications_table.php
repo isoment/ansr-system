@@ -82,6 +82,7 @@ class CreateLeaseApplicationsTable extends Migration
             $table->string('signature');
             $table->string('signature_date');
             $table->string('confirmation_number');
+            $table->string('status');
 
             $table->timestamps();
         });
