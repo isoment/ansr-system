@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use App\Models\LeaseApplication;
 use Illuminate\Http\Request;
 
 class LeaseController extends Controller
@@ -15,5 +16,17 @@ class LeaseController extends Controller
     public function leaseApplicationIndex()
     {
         return view('employee.lease-application-index');
+    }
+
+    /**
+     * Show lease application
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function leaseApplicationManange(LeaseApplication $leaseApplication)
+    {
+        return view('employee.lease-application-manage', [
+            'leaseApplication' => $leaseApplication,
+        ]);
     }
 }
