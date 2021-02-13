@@ -235,7 +235,7 @@ class LeaseApplicationForm extends Component
             'employment_duration' => $this->employmentDuration,
             'gross_monthly_income' => $this->grossMonthlyIncome,
             'income_other' => $this->incomeOther,
-            'gross_income_other' => $this->grossMonthlyIncome,
+            'gross_income_other' => $this->grossIncomeOther,
             'child_support' => $this->childSupport,
             'alimony' => $this->alimony,
             'car_payment' => $this->carPayment,
