@@ -19,4 +19,20 @@ class LeaseApplication extends Model
         return $this->belongsTo(Property::class);
     }
 
+    /**
+     *  Application is Reopenable
+     */
+    public function reopenable()
+    {
+        return $this->status === 'approved' || $this->status === 'denied';
+    }
+
+    /**
+     *  Application is open
+     */
+    public function isOpen()
+    {
+        return $this->status === 'open';
+    }
+
 }

@@ -136,21 +136,32 @@
                 <div class="my-2">
                     <span class="font-bold">Signature Date</span> 
                     <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->signature_date}}
+                        {{\Carbon\Carbon::parse($leaseApplication->signature_date)->toFormattedDateString()}}
                     </div>
                 </div>
             </div>
-            <div class="flex items-center justify-around">
-                <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
-                               transition duration-200 w-1/3">
-                    Approve
-                </button>
-                <button class="bg-red-300 p-2 rounded-md text-white text-sm hover:bg-red-400
-                               transition duration-200 w-1/3">
-                    Deny
-                </button>
-            </div>
-
+            @if ($leaseApplication->isOpen())
+                <div class="flex items-center justify-around">
+                    <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
+                                   transition duration-200 w-1/3"
+                            wire:click="approveLease">
+                        Approve
+                    </button>
+                    <button class="bg-red-300 p-2 rounded-md text-white text-sm hover:bg-red-400
+                                   transition duration-200 w-1/3"
+                            wire:click="denyLease">
+                        Deny
+                    </button>
+                </div>
+            @else
+                <div class="text-center">
+                    <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
+                                   transition duration-200 w-1/3"
+                            wire:click="reopenLease">
+                        Reopen
+                    </button>
+                </div>
+            @endif
         </div>
 
     </div>
@@ -209,7 +220,7 @@
                 <div class="my-2">
                     <span class="font-bold">Lease End</span> 
                     <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->lease_end}}
+                        {{ Carbon\Carbon::parse($leaseApplication->lease_end)->toFormattedDateString()}}
                     </div>
                 </div>
                 @endif
