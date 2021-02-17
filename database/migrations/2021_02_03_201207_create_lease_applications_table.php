@@ -15,9 +15,8 @@ class CreateLeaseApplicationsTable extends Migration
     {
         Schema::create('lease_applications', function (Blueprint $table) {
             $table->id();
-
-            // Property
-            $table->unsignedBigInteger('property_id');
+            $table->unsignedBigInteger('property_listing_id');
+            $table->unsignedBigInteger('lease_id')->nullable();
 
             // Personal Info
             $table->string('first_name');

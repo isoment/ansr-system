@@ -161,8 +161,12 @@
         </li>
         <li class="relative px-6 py-3">
             <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                    duration-150 hover:text-gray-800" 
-               href="#">
+                    duration-150 hover:text-gray-800
+                    {{
+                        Route::current()->getName() == 'employee.lease-application-index' ||
+                        Route::current()->getName() == 'employee.lease-application-manage' ? 'text-orange-400' : ''
+                    }}" 
+               href="{{route('employee.lease-application-index')}}">
                 <svg
                     class="w-5 h-5"
                     aria-hidden="true"

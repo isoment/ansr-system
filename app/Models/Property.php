@@ -28,10 +28,18 @@ class Property extends Model
     }
 
     /**
+     *  PropertyListing Relationship
+     */
+    public function propertyListings()
+    {
+        return $this->hasMany(PropertyListing::class);
+    }
+
+    /**
      *  Lease Application Relationship
      */
-    public function leaseApplications()
-    {
-        return $this->hasMany(LeaseApplication::class);
-    }
+    // public function leaseApplications()
+    // {
+    //     return $this->hasMany(LeaseApplication::class);
+    // }
 }

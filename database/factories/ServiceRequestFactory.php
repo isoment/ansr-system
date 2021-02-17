@@ -27,9 +27,6 @@ class ServiceRequestFactory extends Factory
         return [
             'tenant_id' => Tenant::all()->random()->id,
             'category_id' => RequestCategory::all()->random()->id,
-            'request_issue_id' => function() {
-                return RequestIssue::factory()->create()->id;
-            },
             'issue' => $this->faker->sentence(3, true),
             'description' => $this->faker->text(300),
             'tenant_charges' => $this->faker->randomFloat(2, 20, 200),

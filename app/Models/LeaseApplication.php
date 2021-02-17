@@ -14,9 +14,17 @@ class LeaseApplication extends Model
     /**
      *  Property Relationship
      */
-    public function property()
+    public function propertyListing()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsTo(PropertyListing::class);
+    }
+
+    /**
+     *  Lease Relationship
+     */
+    public function lease()
+    {
+        return $this->belongsTo(Lease::class);
     }
 
     /**

@@ -157,7 +157,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                    <a href=""
+                                    <a href="{{route('employee.lease-application-manage', $lease->id)}}"
                                        class="text-teal-400 hover:text-teal-600 cursor-pointer">Manage</a>
                                 </td>
                             </tr>

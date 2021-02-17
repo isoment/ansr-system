@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequestIssuesTable extends Migration
+class CreateListingImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRequestIssuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('request_issues', function (Blueprint $table) {
+        Schema::create('listing_images', function (Blueprint $table) {
             $table->id();
-            $table->string('is_billable');
-            $table->string('bill_amount');
-            $table->text('note')->nullable();
+            $table->unsignedBigInteger('property_listing_id');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateRequestIssuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request_issues');
+        Schema::dropIfExists('listing_images');
     }
 }

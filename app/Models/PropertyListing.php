@@ -5,9 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lease extends Model
+class PropertyListing extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    /**
+     *  ListingImage Relationship
+     */
+    public function listingImages()
+    {
+        return $this->hasMany(ListingImage::class);
+    }
 
     /**
      *  Property Relationship
@@ -15,14 +25,6 @@ class Lease extends Model
     public function property()
     {
         return $this->belongsTo(Property::class);
-    }
-
-    /**
-     *  Tenant Relationship
-     */
-    public function tenants()
-    {
-        return $this->hasMany(Tenant::class);
     }
 
     /**
