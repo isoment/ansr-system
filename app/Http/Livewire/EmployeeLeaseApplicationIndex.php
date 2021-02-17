@@ -26,7 +26,7 @@ class EmployeeLeaseApplicationIndex extends Component
     {
         if (Gate::allows('isManagement')) {
 
-            return LeaseApplication::whereHas('property.region', function($query) {
+            return LeaseApplication::whereHas('propertyListing.property.region', function($query) {
 
                 $query->where('last_name', 'like', '%'.$this->search.'%')
                     ->orWhere('region_name', 'like', '%'.$this->search.'%')
@@ -37,7 +37,7 @@ class EmployeeLeaseApplicationIndex extends Component
 
         } else {
 
-            return LeaseApplication::whereHas('property.region', function($query) {
+            return LeaseApplication::whereHas('propertyListing.property.region', function($query) {
 
                 $query->where('region_name', users_region());
 

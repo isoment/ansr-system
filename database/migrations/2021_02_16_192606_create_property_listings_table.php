@@ -22,7 +22,7 @@ class CreatePropertyListingsTable extends Migration
             $table->unsignedInteger('bedrooms');
             $table->unsignedInteger('bathrooms');
             $table->unsignedInteger('sqft');
-            $table->decimal('rent');
+            $table->unsignedInteger('rent');
             $table->timestamps();
         });
     }

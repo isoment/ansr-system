@@ -27,6 +27,9 @@ Route::get('/lease-application', [\App\Http\Controllers\GuestFeatureController::
 Route::get('/lease-application-confirmation', [\App\Http\Controllers\GuestFeatureController::class, 'leaseApplicationConfirmation'])
     ->name('lease-application-confirmation');
 
+Route::get('/property-listings', [\App\Http\Controllers\GuestFeatureController::class, 'propertyListingsIndex'])
+    ->name('property-listings');
+
 // Tenant Routes
 Route::middleware('can:isTenant')->group(function() {
 

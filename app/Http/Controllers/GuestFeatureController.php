@@ -23,4 +23,12 @@ class GuestFeatureController extends Controller
     {
         return view('guest.lease-application-confirmation');
     }
+
+    /**
+     *  Display a listing of available properties
+     */
+    public function propertyListingsIndex()
+    {
+        return view('guest.property-listings-index');
+    }
 }

@@ -25,12 +25,25 @@ class PropertyFactory extends Factory
         return [
             'region_id' => Region::all()->random()->id,
             'name' => $this->faker->sentence(3),
-            'street' => $this->faker->streetAddress,
+            'street' => function() {
+                return $this->faker->buildingNumber . ' ' . $this->faker->streetName 
+                    . ' ' . $this->randomSuffix();
+            },
             'city' => $this->faker->city,
             'state' => $this->faker->stateAbbr,
-            'zipcode' => $this->faker->postcode,
+            'zipcode' => $this->faker->numberBetween(10000, 90000),
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->email,
         ];
+    }
+
+    /**
+     *  Choose random street suffix
+     */
+    private function randomSuffix()
+    {
+        $array = array('St', 'Ln', 'Way', 'Rd', 'Blvd', 'Ave');
+        $index = array_rand($array);
+        return $array[$index];
     }
 }

@@ -39,7 +39,7 @@ class WorkOrderFactory extends Factory
     {
         return $this->afterCreating(function(WorkOrder $workOrder) {
 
-            // Get employees form the region of the work order
+            // Get employees from the region of the work order
             $employees = $workOrder->employeesInRegion();
 
             $workOrder->update([
