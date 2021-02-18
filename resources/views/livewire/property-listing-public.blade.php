@@ -26,11 +26,12 @@
         <div>{{$totalProperties}} Properties for rent now</div>
         <div class="flex items-center">
             <span class="mr-1 font-light tracking-wider">Sort:</span>
-            <select name="sort" class="border bg-gray-50 border-gray-200 text-teal-600 rounded-md px-2">
-                <option value="One">Price (Lo-Hi)</option>
-                <option value="Two">Price (Hi-Lo)</option>
-                <option value="Three">Newest</option>
-                <option value="Four">Square Feet</option>
+            <select name="sort" class="border bg-gray-50 border-gray-200 text-teal-600 rounded-md px-2"
+                    wire:model="sortSelect">
+                <option value="newest">Newest</option>
+                <option value="price-lo-hi">Price (Lo-Hi)</option>
+                <option value="price-hi-lo">Price (Hi-Lo)</option>
+                <option value="square-feet">Square Feet</option>
             </select>
         </div>
     </div>
@@ -72,6 +73,9 @@
                 </div>
                 <div class="mt-1">
                     <div class="mb-1">{{$property->property->street}}</div>
+                    @if ($property->unit)
+                        <div class="mb-1">Unit {{$property->unit}}</div>
+                    @endif
                     <div><span>{{$property->property->city}}, </span><span>{{$property->property->state}}</span></div>
                 </div>
             </div>
