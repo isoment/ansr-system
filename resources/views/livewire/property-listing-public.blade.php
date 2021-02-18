@@ -1,6 +1,7 @@
 <div class="pt-6 pb-12"
      x-data="{
          rentalTypeOpen: false,
+         bathCountOpen: false,
      }">
 
     <div class="relative">
@@ -13,26 +14,28 @@
                     Region
                 </button>
                 <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"">
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2">
                     Beds
                 </button>
                 <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"">
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"
+                        @click="bathCountOpen = !bathCountOpen">
                     Baths
                 </button>
                 <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
                             hover:bg-gray-200 hover:border-gray-200 transition duration-200"
                         @click="rentalTypeOpen = !rentalTypeOpen">
-                    Home Type
+                    Rental Type
                 </button>
             </div>
         </div>
 
+        {{-- Rental Type --}}
         <div class="px-6 py-4 rounded-lg absolute right-0 top-12 shadow-lg bg-white z-10"
              x-show.transition="rentalTypeOpen"
              x-cloak
              @click.away="rentalTypeOpen = false">
-            <form>
+            <div>
                 <div class="flex items-center my-2">
                     <input type="checkbox" name="apartment"
                            class="h-5 w-5 text-teal-300 mr-1"
@@ -51,8 +54,39 @@
                            wire:model="types.townhouse">
                     <label for="town-house">Townhouse</label>
                 </div>
-            </form>
+            </div>
         </div>
+
+        {{-- Baths --}}
+        <div class="rounded-lg absolute shadow-lg bg-white z-10 right-24 top-12"
+             x-show.transition="bathCountOpen"
+             x-cloak
+             @click.away="bathCountOpen = false">
+            <div class="py-2 px-2 flex items-center">
+                <button class="px-3 py-3 border rounded-tl-lg 
+                               rounded-bl-lg font-bold focus:outline-none
+                               {{$bathCount === 1 ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                               
+                               "
+                        wire:click="filterBaths(1)">
+                    1+
+                </button>
+                <button class="px-3 py-3 border-t border-b font-bold focus:outline-none
+                               {{($bathCount === 2) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                               "
+                        wire:click="filterBaths(2)">
+                    2+
+                </button>
+                <button class="px-3 py-3 border-t border-b border-l border-r rounded-r-lg border-gray-300 
+                               font-bold focus:outline-none
+                               {{($bathCount === 3) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                               "
+                        wire:click="filterBaths(3)">
+                    3+
+                </button>
+            </div>
+        </div>
+
     </div>
 
     <div class="flex justify-between items-center mt-6">

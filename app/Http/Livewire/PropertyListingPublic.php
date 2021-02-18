@@ -12,6 +12,7 @@ class PropertyListingPublic extends Component
 
     public $sortSelect = 'newest';
     public $types = [];
+    public $bathCount = 1;
 
     /**
      *  A method to return an array of rental types based on input checkboxes
@@ -44,6 +45,16 @@ class PropertyListingPublic extends Component
         }
     }
 
+    /**
+     *  Method to determine number of bathrooms to filter by
+     */
+    public function filterBaths($number)
+    {
+        if (is_numeric($number) && $number > 0) {
+            $this->bathCount = $number;
+        }
+    }
+
     public function render()
     {
         return view('livewire.property-listing-public', [
@@ -51,6 +62,7 @@ class PropertyListingPublic extends Component
             'totalProperties' => PropertyListing::count(),
 
             'properties' => PropertyListing::with('property')
+                ->where('bathrooms', '>=', $this->bathCount)
                 ->whereIn('type', $this->rentalType())
                 ->when($this->sortSelect === 'newest', function($query) {
                     $query->orderBy('created_at', 'desc');
