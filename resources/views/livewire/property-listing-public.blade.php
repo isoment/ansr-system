@@ -1,24 +1,57 @@
-<div class="pt-6 pb-12">
-    {{-- Filter Bar --}}
-    <div class="flex items-center justify-between mt-2">
-        <h2 class="font-bold text-xl tracking tracking-widest text-gray-600">Available Properties</h2>
-        <div>
-            <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                          hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2">
-                Region
-            </button>
-            <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                          hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"">
-                Beds
-            </button>
-            <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                          hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"">
-                Baths
-            </button>
-            <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                          hover:bg-gray-200 hover:border-gray-200 transition duration-200">
-                Home Type
-            </button>
+<div class="pt-6 pb-12"
+     x-data="{
+         rentalTypeOpen: false,
+     }">
+
+    <div class="relative">
+        {{-- Filter Bar --}}
+        <div class="flex items-center justify-between mt-2">
+            <h2 class="font-bold text-xl tracking tracking-widest text-gray-600">Available Properties</h2>
+            <div>
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2">
+                    Region
+                </button>
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"">
+                    Beds
+                </button>
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"">
+                    Baths
+                </button>
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200"
+                        @click="rentalTypeOpen = !rentalTypeOpen">
+                    Home Type
+                </button>
+            </div>
+        </div>
+
+        <div class="px-6 py-4 rounded-lg absolute right-0 top-12 shadow-lg bg-white z-10"
+             x-show.transition="rentalTypeOpen"
+             x-cloak
+             @click.away="rentalTypeOpen = false">
+            <form>
+                <div class="flex items-center my-2">
+                    <input type="checkbox" name="apartment"
+                           class="h-5 w-5 text-teal-300 mr-1"
+                           wire:model="types.apartment">
+                    <label for="apartment">Apartment</label>
+                </div>
+                <div class="flex items-center my-2">
+                    <input type="checkbox" name="house"
+                           class="h-5 w-5 text-teal-300 mr-1"
+                           wire:model="types.house">
+                    <label for="house">House</label>
+                </div>
+                <div class="flex items-center my-2">
+                    <input type="checkbox" name="townhouse"
+                           class="h-5 w-5 text-teal-300 mr-1"
+                           wire:model="types.townhouse">
+                    <label for="town-house">Townhouse</label>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -50,7 +83,10 @@
             </div>
             {{-- Details --}}
             <div class="mt-3">
-                <h4 class="font-bold text-lg tracking-wider">${{$property->rent}}/mo</h4>
+                <div class="flex items-center justify-between">
+                    <h4 class="font-bold text-lg tracking-wider">${{$property->rent}}/mo</h4>
+                    <h6 class="text-sm capitalize">{{$property->type}}</h6>
+                </div>
                 <div class="flex mt-1">
                     <div class="flex items-center mr-2">
                         <svg class="svg h-5 w-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
