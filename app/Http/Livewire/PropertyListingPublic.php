@@ -17,7 +17,7 @@ class PropertyListingPublic extends Component
     public $bedCount = 1;
     public $regionList;
     public $filterByRegion = false;
-    public $regionToFilter;
+    public $regionToFilter = 'All';
 
     public function mount()
     {
@@ -83,6 +83,7 @@ class PropertyListingPublic extends Component
     {
         if ($region === 'All') {
             $this->filterByRegion = false;
+            $this->regionToFilter = 'All';
         }
 
         if (in_array($region, $this->regionList)) {
