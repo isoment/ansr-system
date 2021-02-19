@@ -2,6 +2,8 @@
      x-data="{
          rentalTypeOpen: false,
          bathCountOpen: false,
+         bedCountOpen: false,
+         regionOpen: false,
      }">
 
     <div class="relative">
@@ -9,20 +11,22 @@
         <div class="flex items-center justify-between mt-2">
             <h2 class="font-bold text-xl tracking tracking-widest text-gray-600">Available Properties</h2>
             <div>
-                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2">
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg focus:outline-none
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"
+                        @click="regionOpen = !regionOpen">
                     Region
                 </button>
-                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
-                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2">
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg focus:outline-none
+                            hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"
+                        @click="bedCountOpen = !bedCountOpen">
                     Beds
                 </button>
-                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg focus:outline-none
                             hover:bg-gray-200 hover:border-gray-200 transition duration-200 mr-2"
                         @click="bathCountOpen = !bathCountOpen">
                     Baths
                 </button>
-                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg
+                <button class="border border-grey-600 text-gray-600 font-bold px-6 py-3 rounded-lg focus:outline-none
                             hover:bg-gray-200 hover:border-gray-200 transition duration-200"
                         @click="rentalTypeOpen = !rentalTypeOpen">
                     Rental Type
@@ -36,21 +40,21 @@
              x-cloak
              @click.away="rentalTypeOpen = false">
             <div>
-                <div class="flex items-center my-2">
+                <div class="flex items-center my-3">
                     <input type="checkbox" name="apartment"
-                           class="h-5 w-5 text-teal-300 mr-1"
+                           class="form-checkbox text-teal-300 h-5 w-5 mr-1"
                            wire:model="types.apartment">
                     <label for="apartment">Apartment</label>
                 </div>
-                <div class="flex items-center my-2">
+                <div class="flex items-center my-3">
                     <input type="checkbox" name="house"
-                           class="h-5 w-5 text-teal-300 mr-1"
+                           class="form-checkbox h-5 w-5 text-teal-300 mr-1"
                            wire:model="types.house">
                     <label for="house">House</label>
                 </div>
-                <div class="flex items-center my-2">
+                <div class="flex items-center my-3">
                     <input type="checkbox" name="townhouse"
-                           class="h-5 w-5 text-teal-300 mr-1"
+                           class="form-checkbox h-5 w-5 text-teal-300 mr-1"
                            wire:model="types.townhouse">
                     <label for="town-house">Townhouse</label>
                 </div>
@@ -63,10 +67,8 @@
              x-cloak
              @click.away="bathCountOpen = false">
             <div class="py-2 px-2 flex items-center">
-                <button class="px-3 py-3 border rounded-tl-lg 
-                               rounded-bl-lg font-bold focus:outline-none
+                <button class="px-4 py-3 border rounded-tl-lg rounded-bl-lg font-bold focus:outline-none
                                {{$bathCount === 1 ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
-                               
                                "
                         wire:click="filterBaths(1)">
                     1+
@@ -87,10 +89,70 @@
             </div>
         </div>
 
+        {{-- Beds --}}
+        <div class="rounded-lg absolute shadow-lg bg-white z-10 right-40 top-12"
+             x-show.transition="bedCountOpen"
+             x-cloak
+             @click.away="bedCountOpen = false">
+            <div class="py-2 px-2 flex items-center">
+                <button class="px-4 py-3 border rounded-tl-lg 
+                                rounded-bl-lg font-bold focus:outline-none
+                                {{$bedCount === 1 ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                "
+                        wire:click="filterBeds(1)">
+                    1+
+                </button>
+                <button class="px-3 py-3 border-t border-b font-bold focus:outline-none
+                                {{($bedCount === 2) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                "
+                        wire:click="filterBeds(2)">
+                    2+
+                </button>
+                <button class="px-3 py-3 border-t border-b border-l font-bold focus:outline-none
+                                {{($bedCount === 3) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                "
+                        wire:click="filterBeds(3)">
+                    3+
+                </button>
+                <button class="px-3 py-3 border-t border-b border-l border-r rounded-r-lg border-gray-300 
+                                font-bold focus:outline-none
+                                {{($bedCount === 4) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                "
+                        wire:click="filterBeds(4)">
+                    4+
+                </button>
+            </div>
+        </div>
+
+        {{-- Region --}}
+        <div class="rounded-lg absolute shadow-lg bg-white z-10 right-0 top-12"
+             x-show.transition="regionOpen"
+             x-cloak
+             @click.away="regionOpen = false">
+            <div class="py-2 px-2 max-w-sm">
+                <div class="flex items-center flex-wrap justify-center">
+                    <button class="border border-teal-500 text-teal-500 hover:bg-teal-500 text-sm font-semibold
+                                  hover:border-teal-500 hover:text-white transition duration-200 
+                                  p-1 rounded-md m-1 focus:outline-none"
+                            wire:click="regionFilter('All')">
+                        All
+                    </button>
+                    @foreach ($regions as $region)
+                        <button class="border border-teal-500 text-teal-500 hover:bg-teal-500 text-sm font-semibold
+                                      hover:border-teal-500 hover:text-white transition duration-200 
+                                      p-1 rounded-md m-1 focus:outline-none"
+                                wire:click="regionFilter('{{$region}}')">
+                            {{$region}}
+                        </button>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="flex justify-between items-center mt-6">
-        <div>{{$totalProperties}} Properties for rent now</div>
+        <div>{{$totalProperties}} Rental Properties</div>
         <div class="flex items-center">
             <span class="mr-1 font-light tracking-wider">Sort:</span>
             <select name="sort" class="border bg-gray-50 border-gray-200 text-teal-600 rounded-md px-2"
@@ -107,7 +169,7 @@
 
         @foreach ($properties as $property)
         {{-- Property Card --}}
-        <a href="">
+        <a href="{{$property->id}}">
             {{-- Background Image --}}
             <div class="h-48 rounded-lg relative"
                 style="background-image: url('https://www.trulia.com/pictures/thumbs_3/zillowstatic/fp/23e98bb7154ed7532d6a1cc925b598a6-full.webp');
