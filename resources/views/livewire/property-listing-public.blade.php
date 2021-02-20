@@ -4,7 +4,7 @@
          bathCountOpen: false,
          bedCountOpen: false,
          regionOpen: false,
-         mobileFilterMenu: true,
+         mobileFilterMenu: false,
      }">
 
     <div class="relative">
@@ -31,7 +31,8 @@
                 <div class="absolute right-0 top-12 bg-white z-10 w-72 sm:w-80 rounded-lg shadow-2xl
                             p-4"
                      x-show.transition="mobileFilterMenu"
-                     x-cloak>
+                     x-cloak
+                     @click.away="mobileFilterMenu = false">
                      {{-- Region --}}
                     <div class="my-4">
                         <h4 class="text-gray-400 font-md text">Region:</h4>
@@ -307,7 +308,7 @@
 
         @foreach ($properties as $property)
         {{-- Property Card --}}
-        <a href="{{$property->id}}">
+        <a href="{{route('property-listing-show', $property->id)}}">
             {{-- Background Image --}}
             <div class="h-48 rounded-lg relative"
                 style="background-image: url('https://www.trulia.com/pictures/thumbs_3/zillowstatic/fp/23e98bb7154ed7532d6a1cc925b598a6-full.webp');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\PropertyListing;
 
 class GuestFeatureController extends Controller
 {
@@ -11,9 +11,11 @@ class GuestFeatureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function leaseApplication()
+    public function leaseApplication(PropertyListing $propertyListing)
     {
-        return view('guest.lease-application');
+        return view('guest.lease-application', [
+            'propertyListing' => $propertyListing,
+        ]);
     }
 
     /**
@@ -30,5 +32,15 @@ class GuestFeatureController extends Controller
     public function propertyListingsIndex()
     {
         return view('guest.property-listings-index');
+    }
+
+    /**
+     *  Show the property listing
+     */
+    public function propertyListingShow(PropertyListing $propertyListing)
+    {
+        return view('guest.property-listing-show', [
+            'propertyListing' => $propertyListing,
+        ]);
     }
 }

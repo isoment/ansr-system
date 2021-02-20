@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // Lease Application
-Route::get('/lease-application', [\App\Http\Controllers\GuestFeatureController::class, 'leaseApplication'])
+Route::get('/lease-application/{propertyListing}', [\App\Http\Controllers\GuestFeatureController::class, 'leaseApplication'])
     ->name('lease-application');
 
 // Lease Application Confirmation
@@ -29,6 +29,9 @@ Route::get('/lease-application-confirmation', [\App\Http\Controllers\GuestFeatur
 
 Route::get('/property-listings', [\App\Http\Controllers\GuestFeatureController::class, 'propertyListingsIndex'])
     ->name('property-listings');
+
+Route::get('/property-listings/{propertyListing}', [\App\Http\Controllers\GuestFeatureController::class, 'propertyListingShow'])
+    ->name('property-listing-show');
 
 // Tenant Routes
 Route::middleware('can:isTenant')->group(function() {

@@ -19,6 +19,8 @@ class PropertyListingPublic extends Component
     public $filterByRegion = false;
     public $regionToFilter = 'All';
 
+    protected $queryString = ['sortSelect', 'types', 'bathCount', 'bedCount', 'regionToFilter'];
+
     public function mount()
     {
         $this->regionList = Region::all()->pluck('region_name')->toArray();
@@ -35,7 +37,6 @@ class PropertyListingPublic extends Component
             return ['apartment', 'house', 'townhouse'];
         }
 
-        // Create an array to store checked values
         $newArray = array();
 
         // Loop over types input checkbox values, when checkbox is true

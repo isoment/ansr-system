@@ -31,7 +31,7 @@
             {{-- Brand --}}
             <div x-show="! navShow">
                 <a href='/' class="flex items-center">
-                    <img src="img/house.svg" alt="Logo" class="h-8 w-8">
+                    <img src="/img/house.svg" alt="Logo" class="h-8 w-8">
                     <span class="text-xl font-bold ml-2">ANSR</span>
                 </a>
             </div>
@@ -56,7 +56,7 @@
                     <div class="px-5 pt-4 flex items-center justify-between">
                         <div>
                             <a href='/' class="flex items-center">
-                                <img src="img/house.svg" alt="Logo" class="h-6 w-6">
+                                <img src="/img/house.svg" alt="Logo" class="h-6 w-6">
                                 <span class="text-xl font-bold ml-2">ANSR</span>
                             </a>
                         </div>

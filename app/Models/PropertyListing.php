@@ -34,4 +34,16 @@ class PropertyListing extends Model
     {
         return $this->hasMany(LeaseApplication::class);
     }
+
+    /**
+     *  Method to determine singular or plural for the bedroom
+     *  and bathroom count
+     */
+    public function isPlural($field)
+    {
+        if ($field > 1) {
+            return true;
+        }
+        return false;
+    }
 }
