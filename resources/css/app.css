@@ -46,6 +46,10 @@
     top: 78px;
 }
 
+.max-height-property-images {
+    max-height: 462px;
+}
+
 
 /* Style for upload progress bar */
 /*********************************/
