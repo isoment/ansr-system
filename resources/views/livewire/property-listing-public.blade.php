@@ -291,7 +291,7 @@
     </div>
 
     <div class="flex justify-between items-center mt-6">
-        <div>{{$totalProperties}} Rental Properties</div>
+        <div>{{$properties->total()}} Rental Properties</div>
         <div class="flex items-center">
             <span class="mr-1 font-light tracking-wider">Sort:</span>
             <select name="sort" class="border bg-gray-50 border-gray-200 text-teal-600 rounded-md px-2"

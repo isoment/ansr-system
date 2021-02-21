@@ -12,8 +12,10 @@ use Livewire\Component;
 
 class LeaseApplicationForm extends Component
 {
+    public $propertyListing;
+
     // Step One: Property and Personal Info
-    public $propertyId, $firstName, $lastName, $ssn, $birthDate, $phone, $email;
+    public $firstName, $lastName, $ssn, $birthDate, $phone, $email;
 
     // Step Two: License and emergency contact
     public $driversLicenseNumber, $driversLicenseState, $driversLicenseExp, $emergencyContact,
@@ -46,7 +48,6 @@ class LeaseApplicationForm extends Component
             'phone' => ['required', new PhoneNumber],
             'birthDate' => ['required', 'date'],
             'ssn' => ['required', new SSN],
-            'propertyId' => 'required',
             'driversLicenseNumber' => 'required',
             'driversLicenseState' => 'required',
             'driversLicenseExp' => ['required', 'date'],
@@ -100,7 +101,6 @@ class LeaseApplicationForm extends Component
             'phone' => ['required', new PhoneNumber],
             'birthDate' => ['required', 'date'],
             'ssn' => ['required', new SSN],
-            'propertyId' => 'required',
         ]);
 
         $this->step = 2;
@@ -203,7 +203,7 @@ class LeaseApplicationForm extends Component
         $confirmationNumber = $this->generateConfirmation();
 
         LeaseApplication::create([
-            'property_id' => Property::where('name', $this->propertyId)->first()->id,
+            'property_listing_id' => $this->propertyListing->id,
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'SSN' => $this->encryptSSN($this->ssn),

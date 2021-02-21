@@ -49,11 +49,23 @@
         </div>
     </div>
 
-    
-
     {{-- Step 1 --}}
     @if ($step === 1)
     <h3 class="font-bold text-lg">Step 1: Personal Information</h3>
+    <div class="mt-3 text-gray-600">
+        <h6 class="font-bold mb-1">Application For</h6>
+        <div>
+            {{$propertyListing->property->street}}
+        </div>
+        @if ($propertyListing->unit)
+            <div>
+                {{$propertyListing->unit}}
+            </div>
+        @endif
+        <div>
+            {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}
+        </div>
+    </div>
     <div>
         {{-- Name --}}
         <div class="flex flex-col sm:flex-row items-center sm:mt-8">
@@ -159,22 +171,6 @@
                         class="pl-4 pr-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
                             @error('ssn') border-orange-400 @enderror" required 
                         wire:model.debounce.500ms="ssn"/>
-                </div>
-            </div>
-        </div>
-
-        {{-- Property --}}
-        <div class="flex flex-col sm:flex-row items-center">
-            <div class="w-full sm:w-full mt-4 sm:mt-8">
-                <label for="propertyId" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>What property are you instrested in?</label>
-                <div class="w-full mt-1">
-                    <select name="propertyId" required
-                            class="text-sm pl-2 w-full border-2 rounded-lg py-2 bg-white focus:outline-none"
-                            wire:model.debounce.500ms="propertyId">
-                        @foreach ($properties as $property)
-                            <option value="{{$property}}">{{$property}}</option>
-                        @endforeach
-                    </select>
                 </div>
             </div>
         </div>

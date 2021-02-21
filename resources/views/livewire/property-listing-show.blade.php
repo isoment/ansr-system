@@ -17,7 +17,7 @@
         <div class="col-span-2 p-4 bg-white shadow-md rounded-md">
             <img src="https://www.photoartistweb.nl/wp-content/uploads/2014/09/Real-Estate-Interior-030.jpg">
         </div>
-        <div class="col-span-1 mt-4 lg:mt-0 p-4 text-center">
+        <div class="col-span-1 mt-4 lg:mt-0 p-4 text-center bg-white shadow-md rounded-md">
             Photo Thumbnails
         </div>
     </div>
@@ -66,7 +66,7 @@
             <div class="lg:text-right flex items-center justify-between mt-4 lg:mt-0 lg:block">
                 <div>
                     <div class="text-2xl font-bold">
-                        {{number_format($propertyListing->rent)}}/mo
+                        ${{number_format($propertyListing->rent)}}/mo
                     </div>
                     <div class="font-thin mt-1 capitalize">{{$propertyListing->type}}</div>
                 </div>
@@ -80,20 +80,38 @@
             </div>
 
         </div>
+
+        {{-- Contact Form --}}
         <div class="col-span-1 mt-4 lg:mt-0 p-4 bg-white shadow-lg rounded-lg">
             <h4 class="text-teal-500 font-bold text-lg">Request Info</h4>
-            <div class="w-full mt-4">
-                <div class="w-full">
-                    @error('name')
-                        <div class="text-orange-400 text-xs font-bold italic mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
+            <div class="w-full mt-4 flex flex-col sm:flex-row">
+                <div class="w-full sm:w-1/2">
+                    <div class="w-full">
+                        @error('name')
+                            <div class="text-orange-400 text-xs font-bold italic mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mt-1">
+                        <input type="text" name="name" placeholder="Name"
+                               class="px-2 w-full text-sm border rounded-lg py-2 text-gray-700 focus:outline-none
+                               @error('name') border-orange-400 @enderror" required>
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <input type="text" name="name" placeholder="Name"
-                           class="px-2 w-full text-sm border rounded-lg py-1 text-gray-700 focus:outline-none
-                           @error('phone') border-orange-400 @enderror" required>
+                <div class="w-full sm:w-1/2 mt-1 sm:mt-0 sm:ml-2">
+                    <div class="w-full">
+                        @error('phone')
+                            <div class="text-orange-400 text-xs font-bold italic mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mt-1">
+                        <input type="text" name="phone" placeholder="Phone"
+                               class="px-2 w-full text-sm border rounded-lg py-2 text-gray-700 focus:outline-none
+                               @error('phone') border-orange-400 @enderror" required>
+                    </div>
                 </div>
             </div>
             <div class="w-full mt-2">
@@ -106,24 +124,28 @@
                 </div>
                 <div class="mt-1">
                     <input type="text" name="email" placeholder="Email"
-                           class="px-2 w-full text-sm border rounded-lg py-1 text-gray-700 focus:outline-none
-                           @error('phone') border-orange-400 @enderror" required>
+                           class="px-2 w-full text-sm border rounded-lg py-2 text-gray-700 focus:outline-none
+                           @error('email') border-orange-400 @enderror" required>
                 </div>
             </div>
             <div class="w-full mt-2">
                 <div class="w-full">
-                    @error('phone')
+                    @error('message')
                         <div class="text-orange-400 text-xs font-bold italic mt-1">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
                 <div class="mt-1">
-                    <input type="text" name="phone" placeholder="Phone"
-                           class="px-2 w-full text-sm border rounded-lg py-1 text-gray-700 focus:outline-none
-                           @error('phone') border-orange-400 @enderror" required>
+                    <textarea name="message" rows="5" 
+                              class="px-2 w-full text-sm border rounded-lg py-2 text-gray-700 focus:outline-none resize-none
+                              @error('message') border-orange-400 @enderror" required
+                              >I am interested in {{$propertyListing->property->street}} {{$propertyListing->unit ? 'Unit ' . $propertyListing->unit : ''}}, {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}</textarea>
                 </div>
             </div>
+            <button class="w-full bg-orange-500 text-white rounded-lg py-2 mt-3">
+                Request Info
+            </button>
         </div>
     </div>
 
