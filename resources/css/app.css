@@ -50,6 +50,18 @@
     max-height: 462px;
 }
 
+.image-thumbnail-property-gallery {
+    width: 7.3rem;
+    height: 7.3rem;
+}
+
+@media screen and (max-width: 360px) {
+    .image-thumbnail-property-gallery {
+        width: 5.75rem;
+        height: 5.75rem;
+    }
+}
+
 
 /* Style for upload progress bar */
 /*********************************/

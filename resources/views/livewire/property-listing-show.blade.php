@@ -15,50 +15,49 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 my-4">
         <div class="col-span-2 p-4 bg-white shadow-md rounded-md">
-            <img src="https://www.photoartistweb.nl/wp-content/uploads/2014/09/Real-Estate-Interior-030.jpg">
+            <img src="https://www.photoartistweb.nl/wp-content/uploads/2014/09/Real-Estate-Interior-030.jpg"
+                 class="max-h-full max-w-full">
         </div>
-        <div class="col-span-1 mt-4 lg:mt-0 p-4 text-center bg-white shadow-md rounded-md
-                    grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-2 gap-4 overflow-y-scroll max-height-property-images">
+        <div class="col-span-1 mt-4 lg:mt-0 p-4 text-center bg-white shadow-md rounded-md max-height-property-images
+                    justify-center">
+ 
+            <div class="overflow-y-auto max-h-full">
 
-            <div class="rounded-md">
-                <img src="https://si.wsj.net/public/resources/images/MN-AM523_WHITE_P_20160718171125.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://www.digitalphotomentor.com/photography/2018/09/real-estate-living-room-photo-2.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://si.wsj.net/public/resources/images/MN-AM523_WHITE_P_20160718171125.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://www.digitalphotomentor.com/photography/2018/09/real-estate-living-room-photo-2.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://si.wsj.net/public/resources/images/MN-AM523_WHITE_P_20160718171125.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://www.digitalphotomentor.com/photography/2018/09/real-estate-living-room-photo-2.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://si.wsj.net/public/resources/images/MN-AM523_WHITE_P_20160718171125.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://www.digitalphotomentor.com/photography/2018/09/real-estate-living-room-photo-2.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://si.wsj.net/public/resources/images/MN-AM523_WHITE_P_20160718171125.jpg"
-                     class="rounded-md">
-            </div>
-            <div class="rounded-md">
-                <img src="https://www.digitalphotomentor.com/photography/2018/09/real-estate-living-room-photo-2.jpg"
-                     class="rounded-md">
+                <div class="flex flex-wrap">
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://si.wsj.net/public/resources/images/MN-AM523_WHITE_P_20160718171125.jpg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://3yp5us4by0qtff0mh18rhst7-wpengine.netdna-ssl.com/wp-content/uploads/2015/01/best-listing-photos-travis-mark-urban.jpg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://www.hauteresidence.com/wp-content/uploads/2018/08/imagereader-11.aspx_5.jpeg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://i.pinimg.com/originals/5e/8c/f5/5e8cf5d8c3966b3b9f4d1c7184ba383e.jpg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://i.pinimg.com/736x/99/4c/8d/994c8dfa971578d3116a3a318cbfb84d.jpg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://3yp5us4by0qtff0mh18rhst7-wpengine.netdna-ssl.com/wp-content/uploads/2015/01/best-listing-photos-travis-mark-urban.jpg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://www.hauteresidence.com/wp-content/uploads/2018/08/imagereader-11.aspx_5.jpeg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                    <div class="image-thumbnail-property-gallery m-2">
+                        <img src="https://i.pinimg.com/originals/5e/8c/f5/5e8cf5d8c3966b3b9f4d1c7184ba383e.jpg"
+                             class="h-full w-full object-cover rounded-md">
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -67,7 +66,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 my-4">
         <div class="col-span-2 p-4 lg:ml-2 flex flex-col lg:flex-row justify-between">
             <div>
-                <div class="text-2xl font-bold">
+                <div class="text-lg md:text-2xl font-bold">
                     {{$propertyListing->property->street}}
                 </div>
                 @if ($propertyListing->unit)
@@ -78,7 +77,7 @@
                 <div class="font-thin mt-1">
                     {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}
                 </div>
-                <div class="my-4 flex items-center">
+                <div class="my-4 flex flex-col md:flex-row md:items-center">
                     <div class="flex items-center">
                         <div>
                             <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +86,7 @@
                         </div>
                         <div class="ml-1">{{$propertyListing->bedrooms}} {{$propertyListing->isPlural($propertyListing->bedrooms) ? 'Beds' : 'Bed'}}</div>
                     </div>
-                    <div class="flex items-center ml-2">
+                    <div class="flex items-center md:ml-2">
                         <div>
                             <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M23.981 15.947H26.6v1.33a9.31 9.31 0 0 1-9.31 9.31h-2.66a9.31 9.31 0 0 1-9.31-9.31v-1.33h16.001V9.995a2.015 2.015 0 0 0-2.016-2.015h-.67c-.61 0-1.126.407-1.29.965a2.698 2.698 0 0 1 1.356 2.342H13.3a2.7 2.7 0 0 1 1.347-2.337 4.006 4.006 0 0 1 3.989-3.63h.67a4.675 4.675 0 0 1 4.675 4.675v5.952z" fill="#869099"></path>
@@ -95,7 +94,7 @@
                         </div>
                         <div class="ml-1">{{$propertyListing->bathrooms}} {{$propertyListing->isPlural($propertyListing->bathrooms) ? 'Beds' : 'Bed'}}</div>
                     </div>
-                    <div class="flex items-center ml-2">
+                    <div class="flex items-center md:ml-2">
                         <div>
                             <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13.748 21.276l-3.093-3.097v3.097h3.093zm12.852 5.32H10.655v.004h-5.32v-.004H5.32v-5.32h.015V5.32L26.6 26.596z" fill="#869099"></path>
@@ -107,7 +106,7 @@
             </div>
             <div class="lg:text-right flex items-center justify-between mt-4 lg:mt-0 lg:block">
                 <div>
-                    <div class="text-2xl font-bold">
+                    <div class="text-lg md:text-2xl font-bold">
                         ${{number_format($propertyListing->rent)}}/mo
                     </div>
                     <div class="font-thin mt-1 capitalize">{{$propertyListing->type}}</div>
@@ -115,12 +114,11 @@
                 <div class="lg:mt-6">
                     <a href="{{route('lease-application', $propertyListing->id)}}" 
                        class="bg-teal-500 hover:bg-gray-50 border border-teal-500 font-bold
-                              hover:text-teal-500 text-white rounded-lg px-4 py-2 transition duration-200">
+                              hover:text-teal-500 text-white rounded-lg px-2 py-1 md:px-4 md:py-2 transition duration-200">
                         Lease Application
                     </a>
                 </div>
             </div>
-
         </div>
 
         {{-- Contact Form --}}
