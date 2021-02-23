@@ -12,7 +12,6 @@ class WorkOrderController extends Controller
 {
     /**
      *  Display the manage work order page
-     *
      * @return \Illuminate\Http\Response
      */
     public function manageWorkOrder(WorkOrder $workOrder)
@@ -36,7 +35,6 @@ class WorkOrderController extends Controller
 
     /**
      *  Display the manage details page
-     * 
      *  @return \Illuminate\Http\Response
      */
     public function manageDetails(WorkDetails $workDetail)
@@ -62,6 +60,7 @@ class WorkOrderController extends Controller
 
     /**
      *  Assigned work order index
+     *  @return \Illuminate\Http\Response
      */
     public function assignedWorkOrderIndex()
     {

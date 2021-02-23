@@ -120,7 +120,7 @@
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
                                     <div class="flex items-center">
                                             <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$lease->property->region->region_name}}
+                                                {{$lease->propertyListing->property->region->region_name}}
                                             </div>
                                         </div>
                                     </div>

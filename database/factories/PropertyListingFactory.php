@@ -30,6 +30,8 @@ class PropertyListingFactory extends Factory
             'bathrooms' => $this->faker->numberBetween(1, 3),
             'sqft' => $this->faker->numberBetween(750, 3500),
             'rent' => $this->faker->numberBetween(800, 3500),
+            'available' => TRUE,
+            'description' => $this->faker->text(500),
         ];
     }
 
@@ -50,7 +52,7 @@ class PropertyListingFactory extends Factory
     {
         return $this->afterCreating(function(PropertyListing $propertyListing) {
 
-            if ($propertyListing->type == 'house') {
+            if ($propertyListing->type === 'house') {
                 $propertyListing->update([
                     'unit' => NULL
                 ]);

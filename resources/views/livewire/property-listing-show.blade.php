@@ -183,7 +183,8 @@
                               >I am interested in {{$propertyListing->property->street}} {{$propertyListing->unit ? 'Unit ' . $propertyListing->unit : ''}}, {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}</textarea>
                 </div>
             </div>
-            <button class="w-full bg-orange-500 text-white rounded-lg py-2 mt-3">
+            <button class="w-full bg-orange-500 hover:bg-orange-600 transition 
+                           duration-200 text-white rounded-lg py-2 mt-3">
                 Request Info
             </button>
         </div>

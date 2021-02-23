@@ -124,12 +124,17 @@ Route::middleware('can:isEmployee')->group(function() {
         // Edit Properties
         Route::get('/employee/properties/{property}/edit', [\App\Http\Controllers\Employee\PropertyController::class, 'edit'])
             ->name('employee.properties-edit');
+
         // Lease Applications Index
         Route::get('/employee/lease-applications', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseApplicationIndex'])
             ->name('employee.lease-application-index');
         // Lease Application Management
         Route::get('/employee/lease-application/{leaseApplication}/manage', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseApplicationManange'])
             ->name('employee.lease-application-manage');
+            
+        // Property Listing Create
+        Route::get('/employee/create-property-listing', [\App\Http\Controllers\Employee\PropertyController::class, 'createPropertyListing'])
+            ->name('employee.create-property-listing');
 
     });
 

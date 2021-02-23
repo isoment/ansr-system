@@ -47,6 +47,9 @@ class EmployeeLeaseApplicationManage extends Component
         }
     }
 
+    /**
+     *  Decrypt SSN
+     */
     private function decryptSSN()
     {
         return Crypt::decryptString($this->leaseApplication->SSN);

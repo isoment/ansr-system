@@ -10,7 +10,6 @@ class LeaseController extends Controller
 {
     /**
      * Show index of lease applications
-     *
      * @return \Illuminate\Http\Response
      */
     public function leaseApplicationIndex()
@@ -20,7 +19,6 @@ class LeaseController extends Controller
 
     /**
      * Show lease application
-     *
      * @return \Illuminate\Http\Response
      */
     public function leaseApplicationManange(LeaseApplication $leaseApplication)

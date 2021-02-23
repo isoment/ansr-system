@@ -16,13 +16,14 @@ class CreatePropertyListingsTable extends Migration
         Schema::create('property_listings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('property_id');
-            $table->string('building')->nullable();
             $table->string('unit')->nullable();
             $table->string('type');
             $table->unsignedInteger('bedrooms');
             $table->unsignedInteger('bathrooms');
             $table->unsignedInteger('sqft');
             $table->unsignedInteger('rent');
+            $table->boolean('available');
+            $table->text('description');
             $table->timestamps();
         });
     }

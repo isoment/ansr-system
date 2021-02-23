@@ -12,7 +12,6 @@ class ServiceRequestController extends Controller
 {
     /**
      * Display service request index
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -27,7 +26,6 @@ class ServiceRequestController extends Controller
 
     /**
      *  Display request category page
-     * 
      *  @return \Illuminate\Http\Response
      */
     public function requestCategory()
@@ -37,7 +35,6 @@ class ServiceRequestController extends Controller
 
     /**
      *  Display request management
-     * 
      *  @return \Illuminate\Http\Response
      */
     public function manageRequest(ServiceRequest $request)

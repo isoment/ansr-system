@@ -11,7 +11,6 @@ class UserAdminController extends Controller
 {
     /**
      *  Display tenant index
-     *
      * @return \Illuminate\Http\Response
      */
     public function tenantIndex()
@@ -21,7 +20,6 @@ class UserAdminController extends Controller
 
     /**
      *  Display tenant edit
-     *
      * @return \Illuminate\Http\Response
      */
     public function tenantEdit(Tenant $tenant)
@@ -33,7 +31,6 @@ class UserAdminController extends Controller
 
     /**
      *  Display employee index
-     * 
      *  @return \Illuminate\Http\Response
      */
     public function employeeIndex()
@@ -43,7 +40,6 @@ class UserAdminController extends Controller
 
     /**
      *  Display create employee
-     * 
      *  @return \Illuminate\Http\Response
      */
     public function employeeCreate()
@@ -53,7 +49,6 @@ class UserAdminController extends Controller
 
     /**
      *  Display edit employee
-     * 
      *  @return \Illuminate\Http\Response
      */
     public function employeeEdit(Employee $employee)

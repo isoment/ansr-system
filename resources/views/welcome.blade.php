@@ -76,11 +76,6 @@
                             <div class="px-2 pt-2 pb-3 space-y-1">
                                 <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:text-gray-900 hover:bg-orange-50">Demo</a>
                                 <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:text-gray-900 hover:bg-orange-50">About Us</a>
-                                <a href="{{route('lease-application')}}" 
-                                   class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:text-gray-900 
-                                        hover:bg-orange-50">
-                                    Lease Application
-                                </a>
                             </div>
                             <div>
                                 <ul class="text-center">
@@ -121,10 +116,6 @@
                     <ul class="flex flex-col sm:flex-row">
                         <li><a href="#" class="sm:px-4 py-2 block">Demo</a></li>
                         <li><a href="#" class="sm:px-4 py-2 sm:hidden lg:block">About Us</a></li>
-                        <li><a href="{{route('lease-application')}}" 
-                               class="sm:px-4 py-2 sm:hidden md:block">Lease Application
-                            </a>
-                        </li>
                         @if(Route::has('login'))
                             @auth
                                 @can('isEmployee')

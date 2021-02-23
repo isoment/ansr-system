@@ -139,6 +139,18 @@
                         {{\Carbon\Carbon::parse($leaseApplication->signature_date)->toFormattedDateString()}}
                     </div>
                 </div>
+                <div class="my-2">
+                    <span class="font-bold">Property</span> 
+                    <div class="text-sm font-light mt-1">
+                        <div>{{$leaseApplication->propertyListing->property->street}}</div>
+                        @if ($leaseApplication->propertyListing->unit)
+                            <div>{{$leaseApplication->propertyListing->unit}}</div>
+                        @endif
+                        <div>
+                            {{$leaseApplication->propertyListing->property->city}}, {{$leaseApplication->propertyListing->property->state}} {{$leaseApplication->propertyListing->property->zipcode}}
+                        </div>
+                    </div>
+                </div>
             </div>
             @if ($leaseApplication->isOpen())
                 <div class="flex items-center justify-around">

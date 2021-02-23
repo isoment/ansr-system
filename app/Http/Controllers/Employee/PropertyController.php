@@ -11,7 +11,6 @@ class PropertyController extends Controller
 {
     /**
      * Display property index.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -21,7 +20,6 @@ class PropertyController extends Controller
 
     /**
      * Create a new property.
-     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -31,7 +29,6 @@ class PropertyController extends Controller
 
     /**
      * Display a property edit form.
-     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Property $property) 
@@ -47,11 +44,19 @@ class PropertyController extends Controller
 
     /**
      * Display region page
-     *
      * @return \Illuminate\Http\Response
      */
     public function region()
     {
         return view('employee.region');
+    }
+
+    /**
+     *  Dsiplay property listing create page
+     *  @return \Illuminate\Http\Response
+     */
+    public function createPropertyListing()
+    {
+        return view('employee.property-listing-create');
     }
 }
