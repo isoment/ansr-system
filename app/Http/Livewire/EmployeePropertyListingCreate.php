@@ -2,13 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ListingImage;
 use App\Models\Property;
 use App\Models\PropertyListing;
 use App\Models\Region;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EmployeePropertyListingCreate extends Component
 {
+    use WithFileUploads;
+    use FileNameable;
+
     public $regionList = [];
     public $propertyList = [];
     public $region;
@@ -22,6 +27,8 @@ class EmployeePropertyListingCreate extends Component
     public $rent;
     public $description;
 
+    public $images = [];
+
     public function rules()
     {
         return [
@@ -33,6 +40,7 @@ class EmployeePropertyListingCreate extends Component
             'available' => 'required',
             'rent' => 'required|numeric',
             'description' => 'required',
+            'images.*' => 'required|image|max:8000'
         ];
     }
 
@@ -55,6 +63,9 @@ class EmployeePropertyListingCreate extends Component
         $this->available = 1;
     }
 
+    /**
+     *  Realtime validation
+     */
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -69,13 +80,23 @@ class EmployeePropertyListingCreate extends Component
     }
 
     /**
-     *  Create listing
+     *  Remove an  image from the images array
+     */
+    public function removeImage($image)
+    {
+        array_splice($this->images, $image, 1);
+    }
+
+    /**
+     *  Create property listing
      */
     public function createListing()
     {
+        // $customMessage = ['image' => 'Only images allowed'];
+
         $this->validate();
 
-        PropertyListing::create([
+        $createdListing = PropertyListing::create([
             'property_id' => Property::where('name', $this->property)->first()->id,
             'bedrooms' => $this->bedrooms,
             'bathrooms' => $this->bathrooms,
@@ -87,13 +108,25 @@ class EmployeePropertyListingCreate extends Component
             'description' => $this->description
         ]);
 
-        $this->bedrooms = '';
-        $this->bathrooms = '';
-        $this->sqft = '';
-        $this->type = '';
-        $this->available = '';
-        $this->rent = '';
-        $this->description = '';
+        // Loop over images and store
+        foreach ($this->images as $key => $image) {
+            $this->images[$key] = $image->storeAs('property-listings', $this->fileName($this->images[$key]), 'public');
+        }
+
+        // Create rows in database referencing images
+        if ($this->images) {
+            foreach ($this->images as $image) {
+                ListingImage::create([
+                    'property_listing_id' => $createdListing->id,
+                    'image' => $image,
+                ]);
+            }
+            $this->images = [];
+        }
+
+        session()->flash('success', 'Property listing created');
+
+        return redirect()->to(route('employee.dashboard'));
     }
 
     /**

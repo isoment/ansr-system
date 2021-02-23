@@ -74,10 +74,10 @@
                         @enderror
                     </div>
                     <div class="flex items-center mt-1">
-                        <input type="text" id="unit" name="unit"
+                        <input type="text" id="unit" name="unit" placeholder="Unit or Location"
                             class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                                 @error('unit') border-orange-400 @enderror" required 
-                            wire:model.debounce.500ms="unit"/>
+                            wire:model.lazy="unit"/>
                     </div>
                 </div>
             @endif
@@ -93,11 +93,11 @@
                     @enderror
                 </div>
                 <div class="flex items-center mt-1">
-                    <div class="font-prompt text-lg mr-2 z-10 input-icon-padding-6px">$</div>
-                    <input type="number" id="rent" name="rent" min="1" max="100000" step="1"
+                    <div class="font-prompt text-lg -mr-4 z-10 input-icon-padding-6px">$</div>
+                    <input type="number" id="rent" name="rent" min="1" max="100000" step="1" placeholder="Amount"
                         class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none text-right
                             @error('rent') border-orange-400 @enderror" required 
-                        wire:model.debounce.500ms="rent"/>
+                        wire:model.lazy="rent"/>
                 </div>
             </div>
 
@@ -113,10 +113,10 @@
                         @enderror
                     </div>
                     <div class="flex items-center mt-1">
-                        <input type="text" id="bedrooms" name="bedrooms"
+                        <input type="text" id="bedrooms" name="bedrooms" placeholder="Beds"
                             class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                                 @error('bedrooms') border-orange-400 @enderror" required 
-                            wire:model.debounce.500ms="bedrooms"/>
+                            wire:model.lazy="bedrooms"/>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/3 sm:ml-4 mt-4 sm:mt-6">
@@ -129,10 +129,10 @@
                         @enderror
                     </div>
                     <div class="flex items-center mt-1">
-                        <input type="text" id="bathrooms" name="bathrooms"
+                        <input type="text" id="bathrooms" name="bathrooms" placeholder="Baths"
                             class="pl-4 pr-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                                 @error('bathrooms') border-orange-400 @enderror" required 
-                            wire:model.debounce.500ms="bathrooms"/>
+                            wire:model.lazy="bathrooms"/>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/3 sm:ml-4 mt-4 sm:mt-6">
@@ -145,10 +145,10 @@
                         @enderror
                     </div>
                     <div class="flex items-center mt-1">
-                        <input type="text" id="sqft" name="sqft"
+                        <input type="text" id="sqft" name="sqft" placeholder="Sqft"
                             class="pl-4 pr-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                                 @error('sqft') border-orange-400 @enderror" required 
-                            wire:model.debounce.500ms="sqft"/>
+                            wire:model.lazy="sqft"/>
                     </div>
                 </div>
             </div>
@@ -164,10 +164,10 @@
                     @enderror
                 </div>
                 <div class="flex items-center mt-1">
-                    <textarea name="description" rows="5"
+                    <textarea name="description" rows="5" placeholder="Description"
                         class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
                             @error('description') border-orange-400 @enderror" required 
-                        wire:model.debounce.500ms="description">
+                        wire:model.lazy="description">
                     </textarea>
                 </div>
             </div>
@@ -182,9 +182,42 @@
                     
         </div>
 
-        <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm 
-                    sm:rounded-md mb-4 py-6 px-4 shadow-sm">
-            <h3 class="font-bold text-lg text-center">Photos</h3>
+        <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm max-height-property-image-upload
+                    sm:rounded-md mb-4 py-6 px-4 shadow-sm flex flex-col justify-between">
+            <div class="overflow-y-auto max-h-full">
+                <div class="flex flex-wrap">
+                    @if ($images)
+                        @foreach ($images as $image)
+                            <div class="w-32 h-32 m-2 relative"
+                                    wire:key="{{$loop->index}}">
+                                <img src="{{ $image->temporaryUrl() }}"
+                                    class="h-full w-full object-cover rounded-md">
+                                <i class="bg-white px-2 py-1 rounded-lg text-red-500 fas fa-times 
+                                            absolute top-2 right-2 cursor-pointer"
+                                   wire:click="removeImage({{$loop->index}})"></i>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+
+            <div class="text-center my-4"
+                wire:loading>
+                <i class="fas fa-spinner fa-spin text-2xl"></i>
+            </div>
+
+            <div class="flex items-center justify-center mt-3">
+                <div class="px-4 py-2 border border-teal-300 text-teal-300 rounded-md text-sm font-bold
+                            cursor-pointer text-center w-1/2 mr-2"
+                        @click="$refs.fileInput.click()">
+                    Choose Files...
+                </div>
+                <input type="file" 
+                       multiple 
+                       class="hidden"
+                       wire:model="images"
+                       x-ref="fileInput">
+            </div>
 
         </div>
 

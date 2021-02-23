@@ -11,6 +11,7 @@ use Livewire\WithFileUploads;
 class EmployeeWorkDetailManage extends Component
 {
     use WithFileUploads;
+    use FileNameable;
 
     public $workDetail;
 
@@ -87,7 +88,7 @@ class EmployeeWorkDetailManage extends Component
         ], $customMessage);
 
         foreach ($this->images as $key => $image) {
-            $this->images[$key] = $image->storeAs('images', $this->fileName($this->images[$key]), 'public');
+            $this->images[$key] = $image->storeAs('work-details', $this->fileName($this->images[$key]), 'public');
         }
 
         if ($this->images) {
@@ -121,20 +122,6 @@ class EmployeeWorkDetailManage extends Component
     private function mysqlToViewDateConversion($date) 
     {
         return Carbon::parse($date)->toDateString();
-    }
-
-    /**
-     *  Method to rename uploaded files
-     */
-    private function fileName($file)
-    {
-        $fileOriginalName = $file->getClientOriginalName();
-
-        $fileName = pathinfo($fileOriginalName, PATHINFO_FILENAME);
-
-        $fileExtension = pathinfo($fileOriginalName, PATHINFO_EXTENSION);
-
-        return $fileName . '-' . auth()->id() . rand() . '-' . time() . '.' . $fileExtension;
     }
 
     public function render()
