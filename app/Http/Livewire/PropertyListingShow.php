@@ -9,7 +9,6 @@ use Livewire\Component;
 class PropertyListingShow extends Component
 {
     public $propertyListing;
-
     public $currentImage;
 
     public function mount()
@@ -30,6 +29,7 @@ class PropertyListingShow extends Component
         return view('livewire.property-listing-show', [
 
             'relatedRentals' => PropertyListing::where('available', true)
+                ->where('id', '!=', $this->propertyListing->id)
                 ->whereHas('property.region', function($query) {
                     $query->where('region_name', $this->propertyListing->property->region->region_name);
                 })->inRandomOrder()->take(4)->get(),
