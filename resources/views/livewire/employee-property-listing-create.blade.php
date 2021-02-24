@@ -178,18 +178,41 @@
                 </div>
             </div>
 
-            <div class="mt-6 mb-2 text-center">
-                <button class="bg-teal-300 py-2 px-4 rounded-md text-white hover:bg-teal-400
-                            transition duration-200"
-                        wire:click="createListing">
-                    Create Listing
-                </button>
+            <div class="flex justify-between items-center">
+                <div class="mt-6 mb-2 text-center">
+                    <button class="bg-teal-300 py-2 px-4 rounded-md text-white hover:bg-teal-400
+                                transition duration-200"
+                            wire:click="createListing">
+                        Create Listing
+                    </button>
+                </div>
+                <div class="flex flex-col items-center justify-center mt-3">
+                    <div class="px-4 py-2 border border-teal-300 text-teal-300 rounded-md text-sm font-bold
+                                cursor-pointer text-center"
+                            @click="$refs.fileInput.click()">
+                        Choose Images...
+                    </div>
+                    <input type="file" 
+                            multiple 
+                            class="hidden"
+                            wire:model="images"
+                            x-ref="fileInput">
+                </div>
             </div>
                     
         </div>
 
         <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm max-height-property-image-upload
-                    sm:rounded-md mb-4 py-6 px-4 shadow-sm flex flex-col justify-between">
+                    sm:rounded-md mb-4 py-6 px-4 shadow-sm flex flex-col">
+
+            <div>
+                <h4 class="font-bold text-lg text-center">Listing Images</h4>
+            </div>
+
+            <div class="my-2">
+                @include('inc.livewire-error')
+            </div>
+
             <div class="overflow-y-auto max-h-full">
                 <div class="flex flex-wrap">
                     @if ($images)
@@ -200,24 +223,11 @@
                                     class="h-full w-full object-cover rounded-md">
                                 <i class="bg-white px-2 py-1 rounded-lg text-red-500 fas fa-times 
                                             absolute top-2 right-2 cursor-pointer"
-                                   wire:click="removeImage({{$loop->index}})"></i>
+                                    wire:click="removeImage({{$loop->index}})"></i>
                             </div>
                         @endforeach
                     @endif
                 </div>
-            </div>
-
-            <div class="flex items-center justify-center mt-3">
-                <div class="px-4 py-2 border border-teal-300 text-teal-300 rounded-md text-sm font-bold
-                            cursor-pointer text-center w-1/2 mr-2"
-                        @click="$refs.fileInput.click()">
-                    Choose Files...
-                </div>
-                <input type="file" 
-                       multiple 
-                       class="hidden"
-                       wire:model="images"
-                       x-ref="fileInput">
             </div>
 
         </div>
