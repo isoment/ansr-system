@@ -54,6 +54,10 @@
     max-height: 462px;
 }
 
+.max-height-property-image {
+    max-height: 450px;
+}
+
 .max-height-property-image-upload {
     max-height: 674px;
 }

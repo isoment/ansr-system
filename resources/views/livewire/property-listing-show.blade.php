@@ -18,7 +18,7 @@
         <div class="col-span-2 p-4 bg-white shadow-md rounded-md max-height-property-image-box 
                     flex items-center justify-center">
             <img src="/storage/{{$currentImage}}"
-                 class="max-h-full max-w-full">
+                 class="max-w-full max-height-property-image">
         </div>
         <div class="col-span-1 mt-4 lg:mt-0 p-4 text-center bg-white shadow-md rounded-md max-height-property-images
                     justify-center">
@@ -37,60 +37,65 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 my-4">
-        <div class="col-span-2 p-4 lg:ml-2 flex flex-col lg:flex-row justify-between">
-            <div>
-                <div class="text-lg md:text-2xl font-bold">
-                    {{$propertyListing->property->street}}
-                </div>
-                @if ($propertyListing->unit)
+        <div class="col-span-2 p-4 lg:ml-2">
+            <div class="flex flex-col lg:flex-row justify-between">
+                <div>
+                    <div class="text-lg md:text-2xl font-bold">
+                        {{$propertyListing->property->street}}
+                    </div>
+                    @if ($propertyListing->unit)
+                        <div class="font-thin mt-1">
+                            Unit {{$propertyListing->unit}}
+                        </div>
+                    @endif
                     <div class="font-thin mt-1">
-                        Unit {{$propertyListing->unit}}
+                        {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}
                     </div>
-                @endif
-                <div class="font-thin mt-1">
-                    {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}
+                    <div class="my-4 flex flex-col md:flex-row md:items-center">
+                        <div class="flex items-center">
+                            <div>
+                                <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.196 14.603h15.523v.027h1.995v10.64h-3.99v-4.017H9.196v4.017h-3.99V6.65h3.99v7.953zm2.109-1.968v-2.66h4.655v2.66h-4.655z" fill="#869099"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-1">{{$propertyListing->bedrooms}} {{$propertyListing->isPlural($propertyListing->bedrooms) ? 'Beds' : 'Bed'}}</div>
+                        </div>
+                        <div class="flex items-center md:ml-2">
+                            <div>
+                                <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M23.981 15.947H26.6v1.33a9.31 9.31 0 0 1-9.31 9.31h-2.66a9.31 9.31 0 0 1-9.31-9.31v-1.33h16.001V9.995a2.015 2.015 0 0 0-2.016-2.015h-.67c-.61 0-1.126.407-1.29.965a2.698 2.698 0 0 1 1.356 2.342H13.3a2.7 2.7 0 0 1 1.347-2.337 4.006 4.006 0 0 1 3.989-3.63h.67a4.675 4.675 0 0 1 4.675 4.675v5.952z" fill="#869099"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-1">{{$propertyListing->bathrooms}} {{$propertyListing->isPlural($propertyListing->bathrooms) ? 'Beds' : 'Bed'}}</div>
+                        </div>
+                        <div class="flex items-center md:ml-2">
+                            <div>
+                                <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.748 21.276l-3.093-3.097v3.097h3.093zm12.852 5.32H10.655v.004h-5.32v-.004H5.32v-5.32h.015V5.32L26.6 26.596z" fill="#869099"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-1">{{$propertyListing->sqft}} sqft</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="my-4 flex flex-col md:flex-row md:items-center">
-                    <div class="flex items-center">
-                        <div>
-                            <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.196 14.603h15.523v.027h1.995v10.64h-3.99v-4.017H9.196v4.017h-3.99V6.65h3.99v7.953zm2.109-1.968v-2.66h4.655v2.66h-4.655z" fill="#869099"></path>
-                            </svg>
+                <div class="lg:text-right flex items-center justify-between mt-4 lg:mt-0 lg:block">
+                    <div>
+                        <div class="text-lg md:text-2xl font-bold">
+                            ${{number_format($propertyListing->rent)}}/mo
                         </div>
-                        <div class="ml-1">{{$propertyListing->bedrooms}} {{$propertyListing->isPlural($propertyListing->bedrooms) ? 'Beds' : 'Bed'}}</div>
+                        <div class="font-thin mt-1 capitalize">{{$propertyListing->type}}</div>
                     </div>
-                    <div class="flex items-center md:ml-2">
-                        <div>
-                            <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.981 15.947H26.6v1.33a9.31 9.31 0 0 1-9.31 9.31h-2.66a9.31 9.31 0 0 1-9.31-9.31v-1.33h16.001V9.995a2.015 2.015 0 0 0-2.016-2.015h-.67c-.61 0-1.126.407-1.29.965a2.698 2.698 0 0 1 1.356 2.342H13.3a2.7 2.7 0 0 1 1.347-2.337 4.006 4.006 0 0 1 3.989-3.63h.67a4.675 4.675 0 0 1 4.675 4.675v5.952z" fill="#869099"></path>
-                            </svg>
-                        </div>
-                        <div class="ml-1">{{$propertyListing->bathrooms}} {{$propertyListing->isPlural($propertyListing->bathrooms) ? 'Beds' : 'Bed'}}</div>
-                    </div>
-                    <div class="flex items-center md:ml-2">
-                        <div>
-                            <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13.748 21.276l-3.093-3.097v3.097h3.093zm12.852 5.32H10.655v.004h-5.32v-.004H5.32v-5.32h.015V5.32L26.6 26.596z" fill="#869099"></path>
-                            </svg>
-                        </div>
-                        <div class="ml-1">{{$propertyListing->sqft}} sqft</div>
+                    <div class="lg:mt-6">
+                        <a href="{{route('lease-application', $propertyListing->id)}}" 
+                           class="bg-teal-500 hover:bg-gray-50 border border-teal-500 font-bold
+                                  hover:text-teal-500 text-white rounded-lg px-2 py-1 md:px-4 md:py-2 transition duration-200">
+                            Lease Application
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="lg:text-right flex items-center justify-between mt-4 lg:mt-0 lg:block">
-                <div>
-                    <div class="text-lg md:text-2xl font-bold">
-                        ${{number_format($propertyListing->rent)}}/mo
-                    </div>
-                    <div class="font-thin mt-1 capitalize">{{$propertyListing->type}}</div>
-                </div>
-                <div class="lg:mt-6">
-                    <a href="{{route('lease-application', $propertyListing->id)}}" 
-                       class="bg-teal-500 hover:bg-gray-50 border border-teal-500 font-bold
-                              hover:text-teal-500 text-white rounded-lg px-2 py-1 md:px-4 md:py-2 transition duration-200">
-                        Lease Application
-                    </a>
-                </div>
+            <div class="font-thin tracking-wide mt-8">
+                {{$propertyListing->description}}
             </div>
         </div>
 

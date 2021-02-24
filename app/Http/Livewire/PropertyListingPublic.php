@@ -101,7 +101,8 @@ class PropertyListingPublic extends Component
 
             'regions' => $this->regionList,
 
-            'properties' => PropertyListing::whereHas('property.region', function($query) {
+            'properties' => PropertyListing::where('available', true)
+                ->whereHas('property.region', function($query) {
                     $query->when($this->filterByRegion, function($query) {
                         $query->where('region_name', $this->regionToFilter);
                     });

@@ -29,10 +29,9 @@ class PropertyListingShow extends Component
     {
         return view('livewire.property-listing-show', [
 
-            'relatedRentals' => PropertyListing::whereHas('property.region', function($query) {
-
+            'relatedRentals' => PropertyListing::where('available', true)
+                ->whereHas('property.region', function($query) {
                     $query->where('region_name', $this->propertyListing->property->region->region_name);
-
                 })->inRandomOrder()->take(4)->get(),
 
             'photos' => $this->propertyListing->listingImages,

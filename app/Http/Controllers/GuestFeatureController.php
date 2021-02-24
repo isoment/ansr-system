@@ -13,6 +13,10 @@ class GuestFeatureController extends Controller
      */
     public function leaseApplication(PropertyListing $propertyListing)
     {
+        if (! $propertyListing->available) {
+            abort(403);
+        }
+
         return view('guest.lease-application', [
             'propertyListing' => $propertyListing,
         ]);
@@ -39,6 +43,10 @@ class GuestFeatureController extends Controller
      */
     public function propertyListingShow(PropertyListing $propertyListing)
     {
+        if (! $propertyListing->available) {
+            abort(403);
+        }
+
         return view('guest.property-listing-show', [
             'propertyListing' => $propertyListing,
         ]);
