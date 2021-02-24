@@ -50,8 +50,12 @@
     max-height: 462px;
 }
 
+.max-height-property-image-box {
+    max-height: 462px;
+}
+
 .max-height-property-image-upload {
-    max-height: 670px;
+    max-height: 674px;
 }
 
 .image-thumbnail-property-gallery {

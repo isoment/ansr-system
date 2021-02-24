@@ -291,7 +291,12 @@
     </div>
 
     <div class="flex justify-between items-center mt-6">
-        <div>{{$properties->total()}} Rental Properties</div>
+        @if ($properties->total() === 1)
+            <div>{{$properties->total()}} Rental Property</div>
+        @else
+            <div>{{$properties->total()}} Rental Properties</div>
+        @endif
+        
         <div class="flex items-center">
             <span class="mr-1 font-light tracking-wider">Sort:</span>
             <select name="sort" class="border bg-gray-50 border-gray-200 text-teal-600 rounded-md px-2"
@@ -311,7 +316,7 @@
         <a href="{{route('property-listing-show', $property->id)}}">
             {{-- Background Image --}}
             <div class="h-48 rounded-lg relative"
-                style="background-image: url('https://www.trulia.com/pictures/thumbs_3/zillowstatic/fp/23e98bb7154ed7532d6a1cc925b598a6-full.webp');
+                style="background-image: url('/storage/{{$property->getAnImage()}}');
                     background-size: cover;
                     background-position: 50% 50%;">
                 <div class="bg-white text-xs font-bold px-1 py-1 absolute top-2 left-2 rounded-lg">NEW</div>

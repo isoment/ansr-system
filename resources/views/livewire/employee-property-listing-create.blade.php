@@ -5,7 +5,13 @@
         <div class="break-words lg:col-span-2 bg-white text-gray-700 sm:border-1 rounded-sm 
                     sm:rounded-md mb-4 py-6 px-4 md:px-12 shadow-sm">
             
-            <h3 class="font-bold text-lg">New Rental Listing</h3>
+            <div class="relative">
+                <h3 class="font-bold text-lg">New Rental Listing</h3>
+                <div class="absolute top-0 right-0"
+                     wire:loading>
+                    <i class="fas fa-spinner fa-spin text-xl text-teal-500"></i>
+                </div>
+            </div>
 
             {{-- Region and Property --}}
             <div class="flex flex-col sm:flex-row items-center">
@@ -75,7 +81,7 @@
                     </div>
                     <div class="flex items-center mt-1">
                         <input type="text" id="unit" name="unit" placeholder="Unit or Location"
-                            class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                            class="px-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none
                                 @error('unit') border-orange-400 @enderror" required 
                             wire:model.lazy="unit"/>
                     </div>
@@ -95,7 +101,7 @@
                 <div class="flex items-center mt-1">
                     <div class="font-prompt text-lg -mr-4 z-10 input-icon-padding-6px">$</div>
                     <input type="number" id="rent" name="rent" min="1" max="100000" step="1" placeholder="Amount"
-                        class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none text-right
+                        class="px-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none text-right
                             @error('rent') border-orange-400 @enderror" required 
                         wire:model.lazy="rent"/>
                 </div>
@@ -114,7 +120,7 @@
                     </div>
                     <div class="flex items-center mt-1">
                         <input type="text" id="bedrooms" name="bedrooms" placeholder="Beds"
-                            class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                            class="px-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none
                                 @error('bedrooms') border-orange-400 @enderror" required 
                             wire:model.lazy="bedrooms"/>
                     </div>
@@ -130,7 +136,7 @@
                     </div>
                     <div class="flex items-center mt-1">
                         <input type="text" id="bathrooms" name="bathrooms" placeholder="Baths"
-                            class="pl-4 pr-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                            class="pl-4 pr-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none
                                 @error('bathrooms') border-orange-400 @enderror" required 
                             wire:model.lazy="bathrooms"/>
                     </div>
@@ -146,7 +152,7 @@
                     </div>
                     <div class="flex items-center mt-1">
                         <input type="text" id="sqft" name="sqft" placeholder="Sqft"
-                            class="pl-4 pr-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                            class="pl-4 pr-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none
                                 @error('sqft') border-orange-400 @enderror" required 
                             wire:model.lazy="sqft"/>
                     </div>
@@ -165,7 +171,7 @@
                 </div>
                 <div class="flex items-center mt-1">
                     <textarea name="description" rows="5" placeholder="Description"
-                        class="px-4 w-full border rounded py-2 text-gray-700 focus:outline-none
+                        class="px-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none
                             @error('description') border-orange-400 @enderror" required 
                         wire:model.lazy="description">
                     </textarea>
@@ -199,11 +205,6 @@
                         @endforeach
                     @endif
                 </div>
-            </div>
-
-            <div class="text-center my-4"
-                wire:loading>
-                <i class="fas fa-spinner fa-spin text-2xl"></i>
             </div>
 
             <div class="flex items-center justify-center mt-3">

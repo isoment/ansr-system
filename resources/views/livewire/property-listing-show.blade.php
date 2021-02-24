@@ -1,7 +1,7 @@
 <div>
 
     <div class="flex justify-between">
-        <a href="{{ url()->previous() }}"
+        <a href="{{route('property-listings')}}"
             class="flex items-center text-teal-500">
             <i class="fas fa-arrow-left text-sm"></i>
             <span class="font-bold text-sm ml-1">Back to Listing</span>
@@ -13,53 +13,26 @@
         </div>
     </div>
 
+    {{-- Images --}}
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-4 my-4">
-        <div class="col-span-2 p-4 bg-white shadow-md rounded-md">
-            <img src="https://www.photoartistweb.nl/wp-content/uploads/2014/09/Real-Estate-Interior-030.jpg"
+        <div class="col-span-2 p-4 bg-white shadow-md rounded-md max-height-property-image-box 
+                    flex items-center justify-center">
+            <img src="/storage/{{$currentImage}}"
                  class="max-h-full max-w-full">
         </div>
         <div class="col-span-1 mt-4 lg:mt-0 p-4 text-center bg-white shadow-md rounded-md max-height-property-images
                     justify-center">
- 
             <div class="overflow-y-auto max-h-full">
-
                 <div class="flex flex-wrap">
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://si.wsj.net/public/resources/images/MN-AM523_WHITE_P_20160718171125.jpg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://3yp5us4by0qtff0mh18rhst7-wpengine.netdna-ssl.com/wp-content/uploads/2015/01/best-listing-photos-travis-mark-urban.jpg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://www.hauteresidence.com/wp-content/uploads/2018/08/imagereader-11.aspx_5.jpeg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://i.pinimg.com/originals/5e/8c/f5/5e8cf5d8c3966b3b9f4d1c7184ba383e.jpg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://i.pinimg.com/736x/99/4c/8d/994c8dfa971578d3116a3a318cbfb84d.jpg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://3yp5us4by0qtff0mh18rhst7-wpengine.netdna-ssl.com/wp-content/uploads/2015/01/best-listing-photos-travis-mark-urban.jpg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://www.hauteresidence.com/wp-content/uploads/2018/08/imagereader-11.aspx_5.jpeg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
-                    <div class="image-thumbnail-property-gallery m-2">
-                        <img src="https://i.pinimg.com/originals/5e/8c/f5/5e8cf5d8c3966b3b9f4d1c7184ba383e.jpg"
-                             class="h-full w-full object-cover rounded-md">
-                    </div>
+                    @foreach ($photos as $photo)
+                        <div class="image-thumbnail-property-gallery m-2 cursor-pointer"
+                             wire:click="selectImage({{$photo->id}})">
+                            <img src="/storage/{{$photo->image}}"
+                                class="h-full w-full object-cover rounded-md">
+                        </div>
+                    @endforeach
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -199,7 +172,7 @@
             <a href="{{route('property-listing-show', $property->id)}}">
                 {{-- Background Image --}}
                 <div class="h-48 rounded-lg relative"
-                    style="background-image: url('https://www.trulia.com/pictures/thumbs_3/zillowstatic/fp/23e98bb7154ed7532d6a1cc925b598a6-full.webp');
+                    style="background-image: url('/storage/{{$property->getAnImage()}}');
                         background-size: cover;
                         background-position: 50% 50%;">
                     <div class="bg-white text-xs font-bold px-1 py-1 absolute top-2 left-2 rounded-lg">NEW</div>

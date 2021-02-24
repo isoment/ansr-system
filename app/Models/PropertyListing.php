@@ -46,4 +46,12 @@ class PropertyListing extends Model
         }
         return false;
     }
+
+    /**
+     *  Method to get an image associated with listing
+     */
+    public function getAnImage()
+    {
+        return $this->listingImages->first()->image;
+    }
 }
