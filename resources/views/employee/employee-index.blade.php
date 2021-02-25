@@ -7,7 +7,7 @@
     <div class="break-words bg-white text-gray-700 sm:border-1 sm:rounded-md
                 mb-8">
         <div class="w-full px-6 py-3 mb-8 md:mb-8 shadow-md flex flex-col sm:flex-row justify-between items-center">
-            <h3 class="font-bold text:lg lg:text-2xl text-center mb-2 sm:mb-0">
+            <h3 class="font-bold text-lg lg:text-xl text-center mb-2 sm:mb-0">
                 Employee Administration
             <h3>
             <div class="flex items-center">

@@ -52,11 +52,20 @@ class PropertyController extends Controller
     }
 
     /**
-     *  Dsiplay property listing create page
+     *  Display property listing create page
      *  @return \Illuminate\Http\Response
      */
     public function createPropertyListing()
     {
         return view('employee.property-listing-create');
+    }
+
+    /**
+     *  Display property listing index page
+     *  @return \Illuminate\Http\Response
+     */
+    public function propertyListingIndex()
+    {
+        return view('employee.property-listing-index');
     }
 }

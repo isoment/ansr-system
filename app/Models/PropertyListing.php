@@ -43,10 +43,7 @@ class PropertyListing extends Model
      */
     public function isPlural($field)
     {
-        if ($field > 1) {
-            return true;
-        }
-        return false;
+        return $field > 1 ? true : false;
     }
 
     /**
@@ -59,18 +56,13 @@ class PropertyListing extends Model
     }
 
     /**
-     *  Method to determine if listing is new,
-     *  created within last 24 hours.
+     *  Method to determine if listing was
+     *  created within last 24 hours. Carbon instance
+     *  is returned when using $this->created_at
      *  @return boolean
      */
     public function listingIsNew()
     {
-        $compareDate = Carbon::now()->subDays(1);
-
-        if ($this->created_at->gt($compareDate)) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->created_at->gt(Carbon::now()->subDays(1)) ? true : false;
     }
 }

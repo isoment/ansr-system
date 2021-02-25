@@ -132,6 +132,9 @@ Route::middleware('can:isEmployee')->group(function() {
         Route::get('/employee/lease-application/{leaseApplication}/manage', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseApplicationManange'])
             ->name('employee.lease-application-manage');
 
+        // Property Listing Index
+        Route::get('/employee/property-listing-index', [\App\Http\Controllers\Employee\PropertyController::class, 'propertyListingIndex'])
+            ->name('employee.property-listing-index');
         // Property Listing Create
         Route::get('/employee/create-property-listing', [\App\Http\Controllers\Employee\PropertyController::class, 'createPropertyListing'])
             ->name('employee.create-property-listing');
