@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class EmployeePropertyEdit extends Component
 {
-    use EmployeePropertyForms;
+    use PropertyFormable;
 
     public $property;
 

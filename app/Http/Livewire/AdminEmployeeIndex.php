@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class AdminEmployeeIndex extends Component
 {
     use WithPagination;
-    use SortColumns;
+    use ColumnSortable;
 
     public $search;
     public $sortAscending = true;

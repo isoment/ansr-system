@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-trait SortColumns
+trait ColumnSortable
 {
     public function upDatingSearch()
     {

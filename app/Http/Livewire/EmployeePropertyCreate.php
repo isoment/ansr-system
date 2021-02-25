@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class EmployeePropertyCreate extends Component
 {
-    use EmployeePropertyForms;
+    use PropertyFormable;
 
     /**
      *  Need to mount any values going into a select html element and

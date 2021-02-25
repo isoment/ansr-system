@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Region;
 use App\Rules\PhoneNumber;
 
-trait EmployeePropertyForms
+trait PropertyFormable
 {
     /**
      *  Form related properties
