@@ -29,9 +29,15 @@
                 </div>
                 <div class="w-full sm:w-1/2 sm:ml-4 mt-4 sm:mt-6">
                     <label for="property" class="text-xs text-gray-700 font-bold">Property:</label>
+                    @error('property')
+                        <div class="text-orange-400 text-xs font-bold italic">
+                            {{ $message }}
+                        </div>
+                    @enderror
                     <div class="w-full mt-1">
                         <select name="property" required
-                                class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none"
+                                class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none
+                                      @error('property') border-orange-400 @enderror"
                                 wire:model="property">
                             @foreach ($properties as $property)
                                 <option value="{{$property}}">{{$property}}</option>
@@ -170,7 +176,7 @@
                     @enderror
                 </div>
                 <div class="flex items-center mt-1">
-                    <textarea name="description" rows="5" placeholder="Description"
+                    <textarea name="description" rows="7" placeholder="Description"
                         class="px-4 w-full border rounded-lg py-2 text-gray-700 focus:outline-none
                             @error('description') border-orange-400 @enderror" required 
                         wire:model.lazy="description">

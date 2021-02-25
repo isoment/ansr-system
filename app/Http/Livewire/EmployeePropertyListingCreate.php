@@ -6,6 +6,8 @@ use App\Models\ListingImage;
 use App\Models\Property;
 use App\Models\PropertyListing;
 use App\Models\Region;
+use App\Rules\PropertyInUsersRegion;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -29,21 +31,24 @@ class EmployeePropertyListingCreate extends Component
 
     public $images = [];
 
-    protected $rules = [
-        'property' => 'required',
-        'bedrooms' => 'required|numeric',
-        'bathrooms' => 'required|numeric',
-        'sqft' => 'required|numeric',
-        'type' => 'required',
-        'available' => 'required',
-        'rent' => 'required|numeric',
-        'description' => 'required',
-        'images.*' => 'image|max:8000'
-    ];
+    public function rules()
+    {
+        return [
+            'property' => ['required', new PropertyInUsersRegion],
+            'bedrooms' => 'required|numeric',
+            'bathrooms' => 'required|numeric',
+            'sqft' => 'required|numeric',
+            'type' => 'required',
+            'available' => 'required',
+            'rent' => 'required|numeric',
+            'description' => 'required',
+            'images.*' => 'image|max:8000'
+        ];
+    }
 
     public function mount()
     {
-        $this->regionList = Region::pluck('region_name');
+        $this->regionList = $this->regionListSet();
 
         // Initialize the region to the same as that of the auth user
         $this->region = $this->regionList->first(function($value, $key) {
@@ -117,7 +122,6 @@ class EmployeePropertyListingCreate extends Component
         ]);
 
         if ($this->images) {
-
             $createdListing = PropertyListing::create([
                 'property_id' => Property::where('name', $this->property)->first()->id,
                 'bedrooms' => $this->bedrooms,
@@ -147,11 +151,20 @@ class EmployeePropertyListingCreate extends Component
             session()->flash('success', 'Property listing created');
     
             return redirect()->to(route('employee.dashboard'));
-
         } else {
-
             session()->flash('error', 'Please select at least one image');
+        }
+    }
 
+    /**
+     *  Set the list of region depending on role
+     */
+    private function regionListSet()
+    {
+        if (Gate::allows('isManagement')) {
+            return Region::pluck('region_name');
+        } else {
+            return Region::where('region_name', users_region())->pluck('region_name');
         }
     }
 
