@@ -4,7 +4,7 @@
     <div class="flex items-end justify-between">
         {{-- Search --}}
         <div class="max-w-lg w-full lg:max-w-xs mb-0">
-            <h5 class="font-bold text-xs mb-2 ml-2 text-gray-600">Search by...</h5>
+            <h5 class="font-bold text-xs mb-2 ml-2 text-gray-600">Search Address</h5>
             <label for="search" class="sr-only">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -28,7 +28,7 @@
         <div class="relative">
 
             <button class="flex items-center border border-gray-300 px-3 py-2 focus:outline-none
-                        rounded-lg hover:border-gray-200 hover:bg-gray-200"
+                        rounded-lg hover:border-gray-200 hover:bg-gray-200 ml-2"
                     @click="filterOpen = !filterOpen">
                 <div>
                     <svg class="svg w-5 h-5" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -46,12 +46,137 @@
                  x-show.transition="filterOpen"
                  x-cloak
                  @click.away="filterOpen = false">
-                TEST
-            </div>
 
+                @can('isManagement')
+                    {{-- Region --}}
+                    <div class="my-4">
+                    <h4 class="text-gray-400 font-md text">Region:</h4>
+                    <div class="py-2 px-2 max-w-sm">
+                        <div class="flex items-center flex-wrap justify-center">
+                            <button class="border border-teal-500 hover:bg-teal-500 text-sm font-semibold
+                                            hover:border-teal-500 hover:text-white transition duration-200 
+                                            p-1 rounded-md m-1 focus:outline-none
+                                            {{$regionToFilter === 'All' ? 'bg-teal-500 text-white' : 'text-teal-500'}}
+                                            "
+                                    wire:click="regionFilter('All')">
+                                All
+                            </button>
+                            @foreach ($regions as $region)
+                                <button class="border border-teal-500 hover:bg-teal-500 text-sm font-semibold
+                                                hover:border-teal-500 hover:text-white transition duration-200 
+                                                p-1 rounded-md m-1 focus:outline-none
+                                                {{$regionToFilter === $region ? 'bg-teal-500 text-white' : 'text-teal-500'}}
+                                                "
+                                        wire:click="regionFilter('{{$region}}')">
+                                    {{$region}}
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endcan
+
+                {{-- Bedrooms --}}
+                <div class="my-4">
+                    <h4 class="text-gray-400 font-md text">Bedrooms:</h4>
+                    <div class="py-2 px-2 flex items-center justify-center">
+                        <button class="px-4 py-3 border rounded-tl-lg 
+                                        rounded-bl-lg font-bold focus:outline-none
+                                        {{$bedCount === 1 ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                        "
+                                wire:click="filterBeds(1)">
+                            1+
+                        </button>
+                        <button class="px-3 py-3 border-t border-b font-bold focus:outline-none
+                                        {{($bedCount === 2) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                        "
+                                wire:click="filterBeds(2)">
+                            2+
+                        </button>
+                        <button class="px-3 py-3 border-t border-b border-l font-bold focus:outline-none
+                                        {{($bedCount === 3) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                        "
+                                wire:click="filterBeds(3)">
+                            3+
+                        </button>
+                        <button class="px-3 py-3 border-t border-b border-l border-r rounded-r-lg border-gray-300 
+                                        font-bold focus:outline-none
+                                        {{($bedCount === 4) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                        "
+                                wire:click="filterBeds(4)">
+                            4+
+                        </button>
+                    </div>
+                </div>
+
+                {{-- Bathrooms --}}
+                <div class="my-4">
+                    <h4 class="text-gray-400 font-md text">Bathrooms:</h4>
+                    <div class="py-2 px-2 flex items-center justify-center">
+                        <button class="px-4 py-3 border rounded-tl-lg rounded-bl-lg font-bold focus:outline-none
+                                        {{$bathCount === 1 ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                        "
+                                wire:click="filterBaths(1)">
+                            1+
+                        </button>
+                        <button class="px-3 py-3 border-t border-b font-bold focus:outline-none
+                                        {{($bathCount === 2) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                        "
+                                wire:click="filterBaths(2)">
+                            2+
+                        </button>
+                        <button class="px-3 py-3 border-t border-b border-l border-r rounded-r-lg border-gray-300 
+                                        font-bold focus:outline-none
+                                        {{($bathCount === 3) ? 'border-teal-500 bg-teal-500 text-white' : 'border-gray-300'}}
+                                        "
+                                wire:click="filterBaths(3)">
+                            3+
+                        </button>
+                    </div>
+                </div>
+
+                {{-- Rental Type --}}
+                <div class="my-4">
+                    <h4 class="text-gray-400 font-md text">Rental Type:</h4>
+                    <div>
+                        <div class="flex items-center my-3">
+                            <input type="checkbox" name="apartment"
+                                    class="form-checkbox text-teal-300 h-5 w-5 mr-1"
+                                    wire:model="types.apartment">
+                            <label for="apartment">Apartment</label>
+                        </div>
+                        <div class="flex items-center my-3">
+                            <input type="checkbox" name="house"
+                                    class="form-checkbox h-5 w-5 text-teal-300 mr-1"
+                                    wire:model="types.house">
+                            <label for="house">House</label>
+                        </div>
+                        <div class="flex items-center my-3">
+                            <input type="checkbox" name="townhouse"
+                                    class="form-checkbox h-5 w-5 text-teal-300 mr-1"
+                                    wire:model="types.townhouse">
+                            <label for="town-house">Townhouse</label>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Availability --}}
+                <div class="mb-4 mt-6">
+                    <h4 class="text-gray-400 font-md text">Rental Type:</h4>
+                    <select class="bg-white px-3 py-2 rounded-lg mt-1 border border-gray-300
+                                    focus:outline-none w-full" 
+                            name="availability"
+                            wire:model="availabilityInput">
+                        <option value="all">All</option>
+                        <option value="available">Available</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
+                </div>
+
+            </div>
         </div>
     </div>
-    
+
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4">
