@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Gate;
-
 trait PropertyListingFilterable
 {
     public $regionList;

@@ -65,4 +65,19 @@ class PropertyListing extends Model
     {
         return $this->created_at->gt(Carbon::now()->subDays(1)) ? true : false;
     }
+
+    /**
+     *  Method to get some related properties
+     *  @return collection
+     */
+    public function relatedRentals()
+    {
+        return PropertyListing::where('available', true)
+            ->where('id', '!=', $this->id)
+            ->whereHas('property.region', function($query) {
+
+                $query->where('region_name', $this->property->region->region_name);
+                
+            })->inRandomOrder()->take(4)->get();
+    }
 }

@@ -48,7 +48,11 @@ class GuestFeatureController extends Controller
         }
 
         return view('guest.property-listing-show', [
+
             'propertyListing' => $propertyListing,
+
+            'relatedRentals' => $propertyListing->relatedRentals(),
+
         ]);
     }
 }

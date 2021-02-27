@@ -168,18 +168,4 @@
         </div>
     </div>
 
-    {{-- Related Rentals --}}
-    @if ($relatedRentals->isNotEmpty())
-    <div class="py-6">
-        <h3 class="text-lg font-bold">Similar Rentals You May Like</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-
-            @foreach ($relatedRentals as $property)
-                <x-property-listing-card :property="$property" />
-            @endforeach
-            
-        </div>
-    </div>    
-    @endif
-    
 </div>

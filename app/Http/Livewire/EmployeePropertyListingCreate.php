@@ -13,8 +13,7 @@ use Livewire\WithFileUploads;
 
 class EmployeePropertyListingCreate extends Component
 {
-    use WithFileUploads;
-    use FileNameable;
+    use WithFileUploads, FileNameable, PropertyListingManageable;
 
     public $regionList = [];
     public $propertyList = [];
@@ -28,7 +27,6 @@ class EmployeePropertyListingCreate extends Component
     public $available;
     public $rent;
     public $description;
-
     public $images = [];
 
     public function rules()
@@ -66,45 +64,6 @@ class EmployeePropertyListingCreate extends Component
     }
 
     /**
-     *  When we try to preview non image files after upload an error is thrown
-     *  because livewire does not allow this. Lets filter over the images each
-     *  time the property is updated and remove any non images.
-     */
-    public function updatedImages($value)
-    {
-        foreach ($value as $key => $value) {
-            $extension = pathinfo($value->getFileName(), PATHINFO_EXTENSION);
-            if (! in_array($extension, ['jpg', 'jpeg', 'gif', 'bmp', 'png'])) {
-                unset($this->images[$key]);
-            }
-        }
-    }
-
-    /**
-     *  Realtime validation
-     */
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    /**
-     *  When a region is seleced filter properties to that region
-     */
-    public function updatedRegion()
-    {
-        $this->propertyList = $this->propertyListSet();
-    }
-
-    /**
-     *  Remove an  image from the images array
-     */
-    public function removeImage($image)
-    {
-        array_splice($this->images, $image, 1);
-    }
-
-    /**
      *  Create property listing
      */
     public function createListing()
@@ -122,6 +81,7 @@ class EmployeePropertyListingCreate extends Component
         ]);
 
         if ($this->images) {
+
             $createdListing = PropertyListing::create([
                 'property_id' => Property::where('name', $this->property)->first()->id,
                 'bedrooms' => $this->bedrooms,
@@ -134,48 +94,17 @@ class EmployeePropertyListingCreate extends Component
                 'description' => $this->description
             ]);
     
-            // Loop over images and store
-            foreach ($this->images as $key => $image) {
-                $this->images[$key] = $image->storeAs('property-listings', $this->fileName($this->images[$key]), 'public');
-            }
-    
-            // Create rows in database referencing images
-            foreach ($this->images as $image) {
-                ListingImage::create([
-                    'property_listing_id' => $createdListing->id,
-                    'image' => $image,
-                ]);
-            }
-            $this->images = [];
+            $this->storeImage($createdListing->id);
 
             session()->flash('success', 'Property listing created');
     
             return redirect()->to(route('employee.dashboard'));
+
         } else {
+
             session()->flash('error', 'Please select at least one image');
-        }
-    }
 
-    /**
-     *  Set the list of region depending on role
-     */
-    private function regionListSet()
-    {
-        if (Gate::allows('isManagement')) {
-            return Region::pluck('region_name');
-        } else {
-            return Region::where('region_name', users_region())->pluck('region_name');
         }
-    }
-
-    /**
-     *  Set the list of properties based on selected region
-     */
-    private function propertyListSet()
-    {
-        return Property::whereHas('region', function($query) {
-            $query->where('region_name', $this->region);
-        })->pluck('name');
     }
 
     public function render()

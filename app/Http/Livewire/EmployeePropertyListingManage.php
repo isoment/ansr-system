@@ -4,19 +4,17 @@ namespace App\Http\Livewire;
 
 use App\Models\ListingImage;
 use Livewire\Component;
-use Illuminate\Support\Facades\Gate;
 use App\Models\Property;
-use App\Models\Region;
 use App\Rules\PropertyInUsersRegion;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
 class EmployeePropertyListingManage extends Component
 {
-    use WithFileUploads;
-    use FileNameable;
+    use WithFileUploads, FileNameable, PropertyListingManageable;
 
     public $propertyListing;
+    public $currentImages;
 
     public $regionList = [];
     public $propertyList = [];
@@ -30,8 +28,6 @@ class EmployeePropertyListingManage extends Component
     public $available;
     public $rent;
     public $description;
-
-    public $currentImages;
     public $images = [];
 
     public function rules()
@@ -81,45 +77,6 @@ class EmployeePropertyListingManage extends Component
     }
 
     /**
-     *  When we try to preview non image files after upload an error is thrown
-     *  because livewire does not allow this. Lets filter over the images each
-     *  time the property is updated and remove any non images.
-     */
-    public function updatedImages($value)
-    {
-        foreach ($value as $key => $value) {
-            $extension = pathinfo($value->getFileName(), PATHINFO_EXTENSION);
-            if (! in_array($extension, ['jpg', 'jpeg', 'gif', 'bmp', 'png'])) {
-                unset($this->images[$key]);
-            }
-        }
-    }
-
-    /**
-     *  Realtime validation
-     */
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    /**
-     *  When a region is seleced filter properties to that region
-     */
-    public function updatedRegion()
-    {
-        $this->propertyList = $this->propertyListSet();
-    }
-
-    /**
-     *  Remove an  image from the images array
-     */
-    public function removeImage($image)
-    {
-        array_splice($this->images, $image, 1);
-    }
-
-    /**
      *  Update a property listing
      */
     public function updatePropertyListing()
@@ -148,46 +105,12 @@ class EmployeePropertyListingManage extends Component
             'description' => $this->description
         ]);
 
-        // Loop over images and store
-        foreach ($this->images as $key => $image) {
-            $this->images[$key] = $image->storeAs('property-listings', $this->fileName($this->images[$key]), 'public');
-        }
-
-        // Create rows in database referencing images
-        foreach ($this->images as $image) {
-            ListingImage::create([
-                'property_listing_id' => $this->propertyListing->id,
-                'image' => $image,
-            ]);
-        }
-        $this->images = [];
+        $this->storeImage($this->propertyListing->id);
 
         session()->flash('success', 'Property listing updated');
 
         $this->currentImages = ListingImage::where('property_listing_id', $this->propertyListing->id)
             ->get();
-    }
-
-    /**
-     *  Set the list of region depending on role
-     */
-    private function regionListSet()
-    {
-        if (Gate::allows('isManagement')) {
-            return Region::pluck('region_name');
-        } else {
-            return Region::where('region_name', users_region())->pluck('region_name');
-        }
-    }
-
-    /**
-     *  Set the list of properties based on selected region
-     */
-    private function propertyListSet()
-    {
-        return Property::whereHas('region', function($query) {
-            $query->where('region_name', $this->region);
-        })->pluck('name');
     }
 
     /**
