@@ -17,10 +17,14 @@ class EmployeePropertyListingIndex extends Component
     public $filterByAvailability = false;
     public $available;
 
-
     public function mount()
     {
         $this->regionList = Region::all()->pluck('region_name')->toArray();
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
     }
 
     public function updatedAvailabilityInput()

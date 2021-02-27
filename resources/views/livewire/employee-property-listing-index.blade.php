@@ -258,7 +258,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                    <a href=""
+                                    <a href="{{route('employee.property-listing-manage', $property->id)}}"
                                        class="text-teal-400 hover:text-teal-600 cursor-pointer">Details</a>
                                 </td>
                             </tr>

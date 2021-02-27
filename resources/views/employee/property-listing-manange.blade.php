@@ -10,7 +10,7 @@
                   py-2 text-xs font-bold rounded-t-md">Property Listings</a>
     </div>
 
-    <livewire:employee-property-listing-create>
+    <livewire:employee-property-listing-manage :propertyListing="$propertyListing">
 
 </div>
 

@@ -1,7 +1,7 @@
 {{-- Success message --}}
 @if (session()->has('success'))
 <div x-data="{ livewireFlash: true }"
-        x-show="livewireFlash">
+     x-show="livewireFlash">
     <div class="flex justify-between bg-green-50 rounded overflow-hidden p-2 space-x-1">
         <div class="flex items-baseline">
             <span class="bg-white rounded-full p-1">

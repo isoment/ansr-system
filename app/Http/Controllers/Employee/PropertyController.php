@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Property;
+use App\Models\PropertyListing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -67,5 +68,16 @@ class PropertyController extends Controller
     public function propertyListingIndex()
     {
         return view('employee.property-listing-index');
+    }
+
+    /**
+     *  Display property listing manage page
+     *  @return \Illuminate\Http\Response
+     */
+    public function propertyListingManange(PropertyListing $propertyListing)
+    {
+        return view('employee.property-listing-manange', [
+            'propertyListing' => $propertyListing,
+        ]);
     }
 }

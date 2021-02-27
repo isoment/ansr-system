@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -138,6 +139,9 @@ Route::middleware('can:isEmployee')->group(function() {
         // Property Listing Create
         Route::get('/employee/create-property-listing', [\App\Http\Controllers\Employee\PropertyController::class, 'createPropertyListing'])
             ->name('employee.create-property-listing');
+        // Property Listing Manage
+        Route::get('/employee/property-listing/{propertyListing}/manage', [\App\Http\Controllers\Employee\PropertyController::class, 'propertyListingManange'])
+            ->name('employee.property-listing-manage');
 
     });
 
