@@ -55,7 +55,9 @@ class EmployeeLeaseApplicationIndex extends Component
     public function render()
     {
         return view('livewire.employee-lease-application-index', [
+
             'leases' => $this->getLeaseApplicationsByRole(),
+            
         ]);
     }
 }

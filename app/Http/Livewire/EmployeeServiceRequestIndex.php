@@ -63,7 +63,9 @@ class EmployeeServiceRequestIndex extends Component
     public function render()
     {
         return view('livewire.employee-service-request-index', [
+
             'requests' => $this->getRequestsByRole(),
+            
         ]);
     }
 }
