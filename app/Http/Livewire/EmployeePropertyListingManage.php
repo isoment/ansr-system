@@ -114,8 +114,20 @@ class EmployeePropertyListingManage extends Component
     }
 
     /**
-     *  Get related
+     *  Delete property listing
      */
+    public function deleteListing()
+    {
+        // Get ids of related listing images and delete them
+        $listingIds = $this->propertyListing->listingImages->pluck('id');
+        ListingImage::whereIn('id', $listingIds)->delete();
+
+        $this->propertyListing->delete();
+
+        session()->flash('success', 'Property listing deleted');
+    
+        return redirect()->to(route('employee.property-listing-index'));
+    }
 
     public function render()
     {

@@ -10,10 +10,43 @@
             </div>
             
             <div class="relative">
-                <h3 class="font-bold text-lg">New Rental Listing</h3>
+                <h3 class="font-bold text-lg">Manage Listing</h3>
                 <div class="absolute top-0 right-0"
                      wire:loading>
                     <i class="fas fa-spinner fa-spin text-xl text-teal-500"></i>
+                </div>
+            </div>
+            <div class="mt-2"
+                 x-data="{ showModal: false }">
+                <button class="bg-red-400 text-white text-xs font-bold px-3 py-1 rounded-md 
+                               hover:bg-red-500 transition duration-200 focus:outline-none"
+                        @click="showModal = true">
+                    Delete Listing
+                </button>
+                {{-- Modal --}}
+                <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
+                            items-center justify-center whitespace-normal"
+                        x-show="showModal"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform"
+                        x-transition:enter-end="opacity-100 transform"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 transform"
+                        x-transition:leave-end="opacity-0 transform"
+                        x-cloak>
+                    <div class="w-3/4 md:max-w-lg mx-auto rounded-md shadow-lg text-gray-700 whitespace-normal"
+                            @click.away="showModal = false">
+                        <div class="px-4 py-2 bg-white rounded-md text-center">
+                            <h2 class="text-xl font-bold font-prompt my-4">Delete This Listing?</h2>
+                            <button class="bg-red-400 py-2 px-4 rounded-md text-white text-sm hover:bg-red-500 
+                                            transition duration-200 my-4" 
+                                    wire:click="deleteListing"
+                                    @click="showModal = false"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

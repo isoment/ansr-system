@@ -98,7 +98,7 @@ class EmployeePropertyListingCreate extends Component
 
             session()->flash('success', 'Property listing created');
     
-            return redirect()->to(route('employee.dashboard'));
+            return redirect()->to(route('employee.property-listing-index'));
 
         } else {
 

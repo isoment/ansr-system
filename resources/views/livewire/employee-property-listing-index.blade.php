@@ -41,7 +41,7 @@
             </button>
 
             {{-- Filter Menu --}}
-            <div class="absolute right-0 top-12 bg-white z-10 w-72 sm:w-80 rounded-lg shadow-2xl
+            <div class="absolute right-2 top-12 bg-white z-10 w-72 sm:w-80 rounded-lg shadow-2xl
                         p-4"
                  x-show.transition="filterOpen"
                  x-cloak

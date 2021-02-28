@@ -92,6 +92,7 @@ class EmployeePropertyListingIndex extends Component
                 })->where('bedrooms', '>=', $this->bedCount)
                     ->where('bathrooms', '>=', $this->bathCount)
                     ->whereIn('type', $this->rentalType())
+                    ->orderBy('created_at', 'desc')
                     ->paginate(10),
 
         ]);

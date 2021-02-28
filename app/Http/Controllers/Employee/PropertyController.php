@@ -76,6 +76,11 @@ class PropertyController extends Controller
      */
     public function propertyListingManange(PropertyListing $propertyListing)
     {
+        if (Gate::denies('propertyAndUserHaveSameRegion', $propertyListing->property) 
+                && Gate::denies('isManagement')) {
+            abort(403);
+        }
+
         return view('employee.property-listing-manange', [
             'propertyListing' => $propertyListing,
         ]);
