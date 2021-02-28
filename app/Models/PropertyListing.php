@@ -57,13 +57,22 @@ class PropertyListing extends Model
 
     /**
      *  Method to determine if listing was
-     *  created within last 24 hours. Carbon instance
+     *  created recently. Carbon instance
      *  is returned when using $this->created_at
      *  @return boolean
      */
     public function listingIsNew()
     {
-        return $this->created_at->gt(Carbon::now()->subDays(1)) ? true : false;
+        return $this->created_at->gt(Carbon::now()->subDays(4)) ? true : false;
+    }
+
+    /**
+     *  Method to determine if the property listing was recently updated
+     *  @return boolean
+     */
+    public function listingIsUpdated()
+    {
+        return $this->updated_at->gt(Carbon::now()->subDays(1)) ? true : false;
     }
 
     /**

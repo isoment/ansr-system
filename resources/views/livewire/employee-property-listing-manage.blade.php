@@ -50,59 +50,13 @@
                 </div>
             </div>
 
-            {{-- Region and Property --}}
-            <div class="flex flex-col sm:flex-row items-center">
-                <div class="w-full sm:w-1/2 mt-4 sm:mt-6">
-                    <label for="region" class="text-xs text-gray-700 font-bold">Region:</label>
-                    <div class="w-full mt-1">
-                        <select name="region" required
-                                class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none"
-                                wire:model="region">
-                            @foreach ($regions as $region)
-                                <option value="{{$region}}">{{$region}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="w-full sm:w-1/2 sm:ml-4 mt-4 sm:mt-6">
-                    <label for="property" class="text-xs text-gray-700 font-bold">Property:</label>
-                    @error('property')
-                        <div class="text-orange-400 text-xs font-bold italic">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                    <div class="w-full mt-1">
-                        <select name="property" required
-                                class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none
-                                      @error('property') border-orange-400 @enderror"
-                                wire:model="property">
-                            @foreach ($properties as $property)
-                                <option value="{{$property}}">{{$property}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-            </div>
-
             {{-- Type and Availability --}}
             <div class="flex flex-col sm:flex-row items-center">
-                <div class="w-full sm:w-1/2 mt-4 sm:mt-6">
-                    <label for="type" class="text-xs text-gray-700 font-bold">Property Type:</label>
-                    <div class="w-full mt-1">
-                        <select name="type" required
-                                class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none"
-                                wire:model="type">
-                            <option value="apartment">Apartment</option>
-                            <option value="house">House</option>
-                            <option value="townhouse">Townhouse</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="w-full sm:w-1/2 sm:ml-4 mt-4 sm:mt-6">
+                <div class="w-full mt-4 sm:mt-6">
                     <label for="available" class="text-xs text-gray-700 font-bold">Available:</label>
                     <div class="w-full mt-1">
                         <select name="available" required
-                                class="text-sm pl-2 w-full border rounded py-2 bg-white focus:outline-none"
+                                class="text-sm pl-2 w-full border rounded-lg py-2 bg-white focus:outline-none"
                                 wire:model="available">
                             <option value="1">Available</option>
                             <option value="0">Unavailable</option>

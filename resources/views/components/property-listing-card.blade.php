@@ -6,10 +6,15 @@
                 background-size: cover;
                 background-position: 50% 50%;">
             @if ($property->listingIsNew())
-                <div class="bg-white text-xs font-bold px-1 py-1 absolute 
+                <div class="bg-white text-xs font-bold px-1 py-1 absolute shadow-lg
                             top-2 left-2 rounded-lg">
                     NEW
                 </div>
+            @elseif ($property->listingIsUpdated())
+            <div class="bg-white text-xs font-bold px-1 py-1 absolute shadow-lg
+                        top-2 left-2 rounded-lg">
+                UPDATED
+            </div>
             @endif
         </div>
         {{-- Details --}}
