@@ -2,13 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Gate;
-use App\Models\Region;
-use App\Models\Property;
 use App\Models\ListingImage;
+use Intervention\Image\Facades\Image;
 
 trait PropertyListingManageable
 {
+    /**
+     *  Realtime validation
+     */
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     /**
      *  When we try to preview non image files after upload an error is thrown
      *  because livewire does not allow this. Lets filter over the images each
@@ -30,44 +36,6 @@ trait PropertyListingManageable
     public function removeImage($image)
     {
         array_splice($this->images, $image, 1);
-    }
-
-    /**
-     *  Realtime validation
-     */
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    /**
-     *  When a region is seleced filter properties to that region
-     */
-    public function updatedRegion()
-    {
-        $this->propertyList = $this->propertyListSet();
-    }
-
-    /**
-     *  Set the list of region depending on role
-     */
-    private function regionListSet()
-    {
-        if (Gate::allows('isManagement')) {
-            return Region::pluck('region_name');
-        } else {
-            return Region::where('region_name', users_region())->pluck('region_name');
-        }
-    }
-
-    /**
-     *  Set the list of properties based on selected region
-     */
-    private function propertyListSet()
-    {
-        return Property::whereHas('region', function($query) {
-            $query->where('region_name', $this->region);
-        })->pluck('name');
     }
 
     /**

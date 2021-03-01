@@ -53,7 +53,8 @@ class ServiceRequest extends Model
     }
 
     /**
-     *  @return boolean A method to determine if associated work orders are complete
+     *  A method to determine if associated work orders are complete
+     *  @return boolean
      */
     public function allWorkOrdersComplete()
     {

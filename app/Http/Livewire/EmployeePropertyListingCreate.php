@@ -10,6 +10,7 @@ use App\Rules\PropertyInUsersRegion;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Intervention\Image\Facades\Image;
 
 class EmployeePropertyListingCreate extends Component
 {
@@ -64,6 +65,14 @@ class EmployeePropertyListingCreate extends Component
     }
 
     /**
+     *  When a region is seleced filter properties to that region
+     */
+    public function updatedRegion()
+    {
+        $this->propertyList = $this->propertyListSet();
+    }
+
+    /**
      *  Create property listing
      */
     public function createListing()
@@ -105,6 +114,28 @@ class EmployeePropertyListingCreate extends Component
             session()->flash('error', 'Please select at least one image');
 
         }
+    }
+
+    /**
+     *  Set the list of region depending on role
+     */
+    private function regionListSet()
+    {
+        if (Gate::allows('isManagement')) {
+            return Region::pluck('region_name');
+        } else {
+            return Region::where('region_name', users_region())->pluck('region_name');
+        }
+    }
+
+    /**
+     *  Set the list of properties based on selected region
+     */
+    private function propertyListSet()
+    {
+        return Property::whereHas('region', function($query) {
+            $query->where('region_name', $this->region);
+        })->pluck('name');
     }
 
     public function render()
