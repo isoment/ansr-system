@@ -76,17 +76,17 @@ class AuthServiceProvider extends ServiceProvider
 
         // User and service request have same region
         Gate::define('requestAndUserHaveSameRegion', function($user, ServiceRequest $serviceRequest) {
-            return $user->userable->region->region_name === $serviceRequest->tenant->lease->property->region->region_name;
+            return $user->userable->region->region_name === $serviceRequest->lease->property->region->region_name;
         });
 
         // User and work order have the same region
         Gate::define('workOrderAndUserHaveSameRegion', function($user, WorkOrder $workOrder) {
-            return $user->userable->region->region_name === $workOrder->serviceRequest->tenant->lease->property->region->region_name;
+            return $user->userable->region->region_name === $workOrder->serviceRequest->lease->property->region->region_name;
         });
 
         // User and work detail have the same region
         Gate::define('workDetailAndUserHaveSameRegion', function($user, WorkDetails $workDetail) {
-            return $user->userable->region->region_name === $workDetail->workOrder->serviceRequest->tenant->lease->property->region->region_name;
+            return $user->userable->region->region_name === $workDetail->workOrder->serviceRequest->lease->property->region->region_name;
         });
     }
 }

@@ -142,6 +142,9 @@ Route::middleware('can:isEmployee')->group(function() {
         Route::get('/employee/property-listing/{propertyListing}/manage', [\App\Http\Controllers\Employee\PropertyController::class, 'propertyListingManange'])
             ->name('employee.property-listing-manage');
 
+        // Lease show
+        Route::get('/employee/lease/{lease}', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseShow'])
+            ->name('employee.lease-show');
     });
 
 });

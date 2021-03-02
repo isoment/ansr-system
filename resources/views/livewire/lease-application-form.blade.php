@@ -52,18 +52,32 @@
     {{-- Step 1 --}}
     @if ($step === 1)
     <h3 class="font-bold text-lg">Step 1: Personal Information</h3>
-    <div class="mt-3 text-gray-600">
-        <h6 class="font-bold mb-1">Application For</h6>
+    <div class="mt-3 text-gray-600 flex flex-col sm:flex-row sm:justify-between sm:items-center">
         <div>
-            {{$propertyListing->property->street}}
-        </div>
-        @if ($propertyListing->unit)
+            <h6 class="font-bold mb-1">Application For</h6>
             <div>
-                {{$propertyListing->unit}}
+                {{$propertyListing->property->street}}
             </div>
-        @endif
-        <div>
-            {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}
+            @if ($propertyListing->unit)
+                <div>
+                    {{$propertyListing->unit}}
+                </div>
+            @endif
+            <div>
+                {{$propertyListing->property->city}}, {{$propertyListing->property->state}} {{$propertyListing->property->zipcode}}
+            </div>
+        </div>
+        <div class="flex sm:flex-col justify-between items-center mt-2 sm:mt-0">
+            <div class="sm:mb-2 font-bold">
+                Previous Renter
+            </div>
+            <div class="sm:w-full">
+                <select name="" id="" class="sm:w-full bg-white border border-gray-300 rounded-lg px-2 py-2"
+                        wire:model="previousRenter">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
         </div>
     </div>
     <div>

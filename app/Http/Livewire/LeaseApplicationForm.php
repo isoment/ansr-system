@@ -15,7 +15,7 @@ class LeaseApplicationForm extends Component
     public $propertyListing;
 
     // Step One: Property and Personal Info
-    public $firstName, $lastName, $ssn, $birthDate, $phone, $email;
+    public $firstName, $lastName, $ssn, $birthDate, $phone, $email, $previousRenter;
 
     // Step Two: License and emergency contact
     public $driversLicenseNumber, $driversLicenseState, $driversLicenseExp, $emergencyContact,
@@ -38,6 +38,11 @@ class LeaseApplicationForm extends Component
 
     public $step = 1;
 
+    public function mount()
+    {
+        $this->previousRenter = 0;
+    }
+
     // Realtime validation
     public function updated($propertyName)
     {
@@ -48,6 +53,7 @@ class LeaseApplicationForm extends Component
             'phone' => ['required', new PhoneNumber],
             'birthDate' => ['required', 'date'],
             'ssn' => ['required', new SSN],
+            'previousRenter' => 'required',
             'driversLicenseNumber' => 'required',
             'driversLicenseState' => 'required',
             'driversLicenseExp' => ['required', 'date'],
@@ -101,6 +107,7 @@ class LeaseApplicationForm extends Component
             'phone' => ['required', new PhoneNumber],
             'birthDate' => ['required', 'date'],
             'ssn' => ['required', new SSN],
+            'previousRenter' => 'required',
         ]);
 
         $this->step = 2;
@@ -210,6 +217,7 @@ class LeaseApplicationForm extends Component
             'birth_date' => $this->birthDate,
             'phone_number' => $this->phone,
             'email' => $this->email,
+            'previous_renter' => $this->previousRenter,
             'drivers_license_number' => $this->driversLicenseNumber,
             'drives_license_state' => $this->driversLicenseState,
             'drives_license_exp' => $this->driversLicenseExp,

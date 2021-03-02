@@ -2,49 +2,61 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Lease;
 use Illuminate\Support\Facades\Crypt;
 use Livewire\Component;
 
 class EmployeeLeaseApplicationManage extends Component
 {
     public $leaseApplication;
+    public $leaseStatus;
+    public $startDate;
+    public $endDate;
+
+    public function mount()
+    {
+        $this->leaseStatus = $this->leaseApplication->status;
+    }
 
     /**
-     *  Method to approve a lease application
+     *  When the select element is changed update the application status
      */
-    public function approveLease()
+    public function updatedLeaseStatus($value)
     {
-        if ($this->leaseApplication->isOpen()) {
-            $this->leaseApplication->update([
-                'status' => 'approved'
-            ]);
+        if ($this->leaseApplication->lease) {
+            session()->flash('error', 'You cannot change the status after creating a lease');
+            return;
+        }
 
-            // Eventually create a new lease in leases table
+        if (in_array($value, ['open', 'approved', 'denied'])) {
+            $this->leaseApplication->update([
+                'status' => $value,
+            ]);
         }
     }
 
     /**
-     *  Method to deny a lease application
+     *  Create a new lease
      */
-    public function denyLease()
+    public function newLease()
     {
-        if ($this->leaseApplication->isOpen()) {
-            $this->leaseApplication->update([
-                'status' => 'denied'
-            ]);
+        if ($this->leaseApplication->lease) {
+            session()->flash('error', 'A lease has already been created');
+            return;
         }
-    }
 
-    /**
-     *  Method to reopen a lease application
-     */
-    public function reopenLease()
-    {
-        if ($this->leaseApplication->reopenable()) {
-            $this->leaseApplication->update([
-                'status' => 'open'
-            ]);
-        }
+        $newLease = Lease::create([
+            'property_id' => $this->leaseApplication->propertyListing->property->id,
+            'unit' => $this->leaseApplication->propertyListing->unit,
+            'start_date' => $this->startDate,
+            'end_date' => $this->endDate,
+        ]);
+
+        $this->leaseApplication->update([
+            'lease_id' => $newLease->id,
+        ]);
+
+        session()->flash('success', 'Lease created successfully');
     }
 
     /**

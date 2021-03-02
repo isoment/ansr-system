@@ -9,6 +9,8 @@ class Lease extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      *  Property Relationship
      */

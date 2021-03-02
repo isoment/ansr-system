@@ -32,6 +32,12 @@
                         </div>
                     </div>
                     <div class="my-2">
+                        <span class="font-bold">Previous Renter</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->previous_renter ? 'Yes' : 'No'}}
+                        </div>
+                    </div>
+                    <div class="my-2">
                         <span class="font-bold">SSN</span> 
                         <div class="text-sm font-light mt-1">
                             {{$ssn}}
@@ -108,7 +114,8 @@
         </div>
 
         <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
-                    shadow-sm flex flex-col justify-between">
+                    shadow-sm flex flex-col justify-between"
+             x-data="{ showModal: false }">
             <div class="text-center">
                 <h4 class="text-center font-bold text-xl mb-4 opacity-75">Lease Applicant</h4>
                 <div class="my-2">
@@ -152,29 +159,98 @@
                     </div>
                 </div>
             </div>
-            @if ($leaseApplication->isOpen())
-                <div class="flex items-center justify-around">
-                    <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
-                                   transition duration-200 w-1/3"
-                            wire:click="approveLease">
-                        Approve
-                    </button>
-                    <button class="bg-red-300 p-2 rounded-md text-white text-sm hover:bg-red-400
-                                   transition duration-200 w-1/3"
-                            wire:click="denyLease">
-                        Deny
-                    </button>
-                </div>
-            @else
-                <div class="text-center">
-                    <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
-                                   transition duration-200 w-1/3"
-                            wire:click="reopenLease">
-                        Reopen
-                    </button>
+            @if (is_null($leaseApplication->lease))
+                <div>
+                    <div class="mx-4 my-2">
+                        <div class="text-xs font-bold mb-1">Lease Application Status</div>
+                        <select class="bg-white py-1 px-2 border border-gray-300 rounded-lg 
+                                        w-full focus:outline-none"
+                                wire:model="leaseStatus">
+                            <option value="open">Open</option>
+                            <option value="approved">Approved</option>
+                            <option value="denied">Denied</option>
+                        </select>
+                    </div>
+                    @if ($leaseApplication->status === "approved")
+                        <div class="mx-4">
+                            <button class="bg-teal-300 p-2 rounded-md text-white text-sm hover:bg-teal-400
+                                        transition duration-200 w-full"
+                                    @click="showModal = true"">
+                                New Lease
+                            </button>
+                        </div>
+                    @endif
                 </div>
             @endif
+
+
+
+            {{-- Modal --}}
+            <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
+                        items-center justify-center whitespace-normal"
+                    x-show="showModal"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 transform"
+                    x-transition:enter-end="opacity-100 transform"
+                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave-start="opacity-100 transform"
+                    x-transition:leave-end="opacity-0 transform"
+                    x-cloak>
+                <div class="w-3/4 md:max-w-lg mx-auto rounded-md shadow-lg text-gray-700 whitespace-normal"
+                        @click.away="showModal = false">
+                    <div class="px-4 py-2 bg-white rounded-md text-center">
+                        <h2 class="text-xl font-bold font-prompt my-4">Create New Lease?</h2>
+                        <h6 class="font-thin my-2">Once you create a lease you cannot change the applications status!</h6>
+                        <div>
+                            <div class="flex flex-col sm:flex-row items-center sm:mt-8">
+                                <div class="w-full sm:w-1/2 mt-4 sm:mt-0 sm:mr-1">
+                                    <div class="flex justify-between items-center w-full">
+                                        <label for="startDate" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Start Date:</label>
+                                        @error('startDate')
+                                            <div class="text-orange-400 text-xs font-bold italic">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="flex items-center mt-1">
+                                        <input type="date" id="startDate" name="startDate"
+                                            class="px-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
+                                                @error('startDate') border-orange-400 @enderror" required 
+                                            wire:model.debounce.500ms="startDate"/>
+                                    </div>
+                                </div>
+                                <div class="w-full sm:w-1/2 mt-4 sm:mt-0 sm:ml-1">
+                                    <div class="flex justify-between items-center w-full">
+                                        <label for="endDate" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>End Date:</label>
+                                        @error('endDate')
+                                            <div class="text-orange-400 text-xs font-bold italic">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="flex items-center mt-1">
+                                        <input type="date" id="endDate" name="endDate"
+                                            class="px-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
+                                                @error('endDate') border-orange-400 @enderror" required 
+                                            wire:model.debounce.500ms="endDate"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="bg-orange-300 py-2 px-4 rounded-md text-white text-sm hover:bg-orange-400 
+                                        transition duration-200 my-4" 
+                                wire:click="newLease"
+                                @click="showModal = false"
+                        >
+                            Create Lease
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+
 
     </div>
 
@@ -253,25 +329,25 @@
                         </div>
                     </div>
                     <div class="my-2">
-                        <span class="font-bold">Current Email</span> 
+                        <span class="font-bold">Employer Email</span> 
                         <div class="text-sm font-light mt-1">
                             {{$leaseApplication->employer_email}}
                         </div>
                     </div>
                     <div class="my-2">
-                        <span class="font-bold">Current Address</span> 
+                        <span class="font-bold">Employer Address</span> 
                         <div class="text-sm font-light mt-1">
                             {{$leaseApplication->employer_address}}
                         </div>
                     </div>
                     <div class="my-2">
-                        <span class="font-bold">Current Phone</span> 
+                        <span class="font-bold">Employer Phone</span> 
                         <div class="text-sm font-light mt-1">
                             {{$leaseApplication->employer_phone}}
                         </div>
                     </div>
                     <div class="my-2">
-                        <span class="font-bold">Current Address</span> 
+                        <span class="font-bold">Employement Duration</span> 
                         <div class="text-sm font-light mt-1">
                             {{$leaseApplication->employment_duration}}
                         </div>
