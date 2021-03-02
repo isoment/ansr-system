@@ -25,6 +25,7 @@ class CreateLeaseApplicationsTable extends Migration
             $table->date('birth_date');
             $table->string('phone_number');
             $table->string('email');
+            $table->boolean('previous_renter');
 
             // Drivers License
             $table->string('drivers_license_number');

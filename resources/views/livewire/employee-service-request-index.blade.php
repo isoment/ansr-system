@@ -88,7 +88,7 @@
                                 <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
                                     <div class="flex items-center">
                                             <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$request->tenant->lease_id}}
+                                                {{$request->lease->id}}
                                             </div>
                                         </div>
                                     </div>

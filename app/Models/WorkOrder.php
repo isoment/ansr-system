@@ -53,7 +53,7 @@ class WorkOrder extends Model
      */
     public function employeesInRegion()
     {
-        return $this->serviceRequest->tenant->lease->property->region->employees;
+        return $this->serviceRequest->lease->property->region->employees;
     }
 
     /**

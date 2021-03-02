@@ -16,6 +16,7 @@ class CreateServiceRequestsTable extends Migration
         Schema::create('service_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tenant_id');
+            $table->unsignedBigInteger('lease_id');
             $table->unsignedBigInteger('category_id');
             $table->string('issue');
             $table->text('description');

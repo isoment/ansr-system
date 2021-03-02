@@ -29,14 +29,6 @@ class ServiceRequest extends Model
     }
 
     /**
-     *  RequestIssue Relationship
-     */
-    public function requestIssue()
-    {
-        return $this->belongsTo(RequestIssue::class);
-    }
-
-    /**
      *  WorkOrder Relationship
      */
     public function workOrders()
@@ -50,6 +42,14 @@ class ServiceRequest extends Model
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    /**
+     *  Lease Relationship
+     */
+    public function lease()
+    {
+        return $this->belongsTo(Lease::class, 'lease_id');
     }
 
     /**

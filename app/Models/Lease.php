@@ -32,4 +32,12 @@ class Lease extends Model
     {
         return $this->hasMany(LeaseApplication::class);
     }
+
+    /**
+     *  ServiceRequest Relationship
+     */
+    public function serviceRequests()
+    {
+        return $this->hasMany(ServiceRequest::class, 'lease_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Lease;
 use App\Models\RequestCategory;
 use App\Models\RequestIssue;
 use App\Models\ServiceRequest;
@@ -26,6 +27,7 @@ class ServiceRequestFactory extends Factory
     {
         return [
             'tenant_id' => Tenant::all()->random()->id,
+            'lease_id' => 0,
             'category_id' => RequestCategory::all()->random()->id,
             'issue' => $this->faker->sentence(3, true),
             'description' => $this->faker->text(300),
@@ -33,5 +35,16 @@ class ServiceRequestFactory extends Factory
             'assigned_date' => $this->faker->dateTimeBetween('-15 days', '-5 days', null),
             'completed_date' => $this->faker->dateTimeBetween('-4 days', 'now', null),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function(ServiceRequest $serviceRequest) {
+            
+            $serviceRequest->update([
+                'lease_id' => $serviceRequest->tenant->lease->id,
+            ]);
+
+        });
     }
 }

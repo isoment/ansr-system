@@ -52,7 +52,7 @@
                 <div>
                     <span class="font-bold">Lease ID:</span> 
                     <div class="text-sm font-light mt-1">
-                        {{$request->tenant->lease->id}}
+                        {{$request->lease->id}}
                     </div>
                 </div>
                 <div class="my-3">
@@ -132,20 +132,20 @@
                                 <div class="my-3">
                                     <span class="font-bold">Tenant Address:</span> 
                                     <div class="text-sm font-light mt-1">
-                                        {{$request->tenant->lease->property->street}}
+                                        {{$request->lease->property->street}}
                                     </div>
                                     @if ($request->tenant->lease->unit)
                                         <div class="text-sm font-light mt-1">
-                                            Unit: {{$request->tenant->lease->unit}}
+                                            Unit: {{$request->lease->unit}}
                                         </div>
                                     @endif
                                     @if ($request->tenant->lease->building)
                                         <div class="text-sm font-light mt-1">
-                                            Building: {{$request->tenant->lease->building}}
+                                            Building: {{$request->lease->building}}
                                         </div>
                                     @endif
                                     <div class="text-sm font-light mt-1">
-                                        {{$request->tenant->lease->property->city}}, {{$request->tenant->lease->property->state}} {{$request->tenant->lease->property->zipcode}}
+                                        {{$request->lease->property->city}}, {{$request->lease->property->state}} {{$request->lease->property->zipcode}}
                                     </div>
                                 </div>
                             </div>
