@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,5 +42,14 @@ class Lease extends Model
     public function serviceRequests()
     {
         return $this->hasMany(ServiceRequest::class, 'lease_id');
+    }
+
+    /**
+     *  Method to determine if a lease is active
+     *  @return boolean
+     */
+    public function leaseIsActive()
+    {
+        return Carbon::parse($this->end_date)->gt(Carbon::now()) ? true : false;
     }
 }

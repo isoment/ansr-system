@@ -14,8 +14,6 @@ class LeaseSeeder extends Seeder
      */
     public function run()
     {
-        Lease::factory()->times(175)->create();
-
-        Lease::factory()->times(95)->create(['end_date' => NULL]);
+        Lease::factory()->times(225)->create();
     }
 }

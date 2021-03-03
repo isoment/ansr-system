@@ -12,6 +12,12 @@ class EmployeeLeaseApplicationManage extends Component
     public $leaseStatus;
     public $startDate;
     public $endDate;
+    public $toggleModal = false;
+
+    protected $rules = [
+        'startDate' => 'required|date',
+        'endDate' => 'required|date',
+    ];
 
     public function mount()
     {
@@ -45,6 +51,8 @@ class EmployeeLeaseApplicationManage extends Component
             return;
         }
 
+        $this->validate();
+
         $newLease = Lease::create([
             'property_id' => $this->leaseApplication->propertyListing->property->id,
             'unit' => $this->leaseApplication->propertyListing->unit,
@@ -55,6 +63,10 @@ class EmployeeLeaseApplicationManage extends Component
         $this->leaseApplication->update([
             'lease_id' => $newLease->id,
         ]);
+
+        $this->toggleModal = false;
+
+        $this->leaseApplication = $this->leaseApplication->fresh();
 
         session()->flash('success', 'Lease created successfully');
     }

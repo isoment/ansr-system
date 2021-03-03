@@ -115,7 +115,7 @@
 
         <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4 py-3 px-4 
                     shadow-sm flex flex-col justify-between"
-             x-data="{ showModal: false }">
+             x-data="{ showModal: @entangle('toggleModal') }">
             <div class="text-center">
                 <h4 class="text-center font-bold text-xl mb-4 opacity-75">Lease Applicant</h4>
                 <div class="my-2">
@@ -204,7 +204,7 @@
                         <div>
                             <div class="flex flex-col sm:flex-row items-center sm:mt-8">
                                 <div class="w-full sm:w-1/2 mt-4 sm:mt-0 sm:mr-1">
-                                    <div class="flex justify-between items-center w-full">
+                                    <div class="flex flex-col items-start w-full">
                                         <label for="startDate" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Start Date:</label>
                                         @error('startDate')
                                             <div class="text-orange-400 text-xs font-bold italic">
@@ -220,7 +220,7 @@
                                     </div>
                                 </div>
                                 <div class="w-full sm:w-1/2 mt-4 sm:mt-0 sm:ml-1">
-                                    <div class="flex justify-between items-center w-full">
+                                    <div class="flex flex-col items-start w-full">
                                         <label for="endDate" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>End Date:</label>
                                         @error('endDate')
                                             <div class="text-orange-400 text-xs font-bold italic">
@@ -239,9 +239,7 @@
                         </div>
                         <button class="bg-orange-300 py-2 px-4 rounded-md text-white text-sm hover:bg-orange-400 
                                         transition duration-200 my-4" 
-                                wire:click="newLease"
-                                @click="showModal = false"
-                        >
+                                wire:click="newLease">
                             Create Lease
                         </button>
                     </div>
@@ -266,61 +264,102 @@
                 shadow-sm py-6 px-4 md:px-12">
         <div class="grid grid-cols-1 md:grid-cols-3 md:gap-8">
             <div>
-                <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">Residence</h5>
-                <div class="my-2">
-                    <span class="font-bold">Address</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->current_address}}<br>
-                        {{$leaseApplication->city}}, {{$leaseApplication->state}} {{$leaseApplication->zip}}
+                <div>
+                    <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">Residence</h5>
+                    <div class="my-2">
+                        <span class="font-bold">Address</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->current_address}}<br>
+                            {{$leaseApplication->city}}, {{$leaseApplication->state}} {{$leaseApplication->zip}}
+                        </div>
+                    </div>
+                    <div class="my-2">
+                        <span class="font-bold">Monthly Payment</span> 
+                        <div class="text-sm font-light mt-1">
+                            ${{$leaseApplication->monthly_payment}}
+                        </div>
+                    </div>
+                    <div class="my-2">
+                        <span class="font-bold">Durarion</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->living_duration}}
+                        </div>
+                    </div>
+                    @if ($leaseApplication->landlord_name)
+                    <div class="my-2">
+                        <span class="font-bold">Landlord Name</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->landlord_name}}
+                        </div>
+                    </div>
+                    <div class="my-2">
+                        <span class="font-bold">Landlord Phone</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->landlord_phone_number}}
+                        </div>
+                    </div>
+                    <div class="my-2">
+                        <span class="font-bold">Landlord Email</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->landlord_email ? $leaseApplication->landlord_email : 'N/A'}}
+                        </div>
+                    </div>
+                    <div class="my-2">
+                        <span class="font-bold">Lease End</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{ Carbon\Carbon::parse($leaseApplication->lease_end)->toFormattedDateString() }}
+                        </div>
+                    </div>
+                    @endif
+                    <div class="my-2">
+                        <span class="font-bold">Reason for Moving</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->moving_reason}}
+                        </div>
                     </div>
                 </div>
-                <div class="my-2">
-                    <span class="font-bold">Monthly Payment</span> 
-                    <div class="text-sm font-light mt-1">
-                        ${{$leaseApplication->monthly_payment}}
+                <div class="mt-8">
+                    <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">References</h5>
+                    <div class="my-2">
+                        <span class="font-bold">Reference One</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->ref_one_name}}
+                        </div>
                     </div>
-                </div>
-                <div class="my-2">
-                    <span class="font-bold">Durarion</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->living_duration}}
+                    <div class="my-2">
+                        <span class="font-bold">Reference Phone</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->ref_one_phone}}
+                        </div>
                     </div>
-                </div>
-                @if ($leaseApplication->landlord_name)
-                <div class="my-2">
-                    <span class="font-bold">Landlord Name</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->landlord_name}}
+                    <div class="my-2">
+                        <span class="font-bold">Reference Email</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->ref_one_email}}
+                        </div>
                     </div>
-                </div>
-                <div class="my-2">
-                    <span class="font-bold">Landlord Phone</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->landlord_phone_number}}
+                    <div class="my-2">
+                        <span class="font-bold">Reference Two</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->ref_two_name}}
+                        </div>
                     </div>
-                </div>
-                <div class="my-2">
-                    <span class="font-bold">Landlord Email</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->landlord_email ? $leaseApplication->landlord_email : 'N/A'}}
+                    <div class="my-2">
+                        <span class="font-bold">Reference Phone</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->ref_two_phone}}
+                        </div>
                     </div>
-                </div>
-                <div class="my-2">
-                    <span class="font-bold">Lease End</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{ Carbon\Carbon::parse($leaseApplication->lease_end)->toFormattedDateString()}}
-                    </div>
-                </div>
-                @endif
-                <div class="my-2">
-                    <span class="font-bold">Reason for Moving</span> 
-                    <div class="text-sm font-light mt-1">
-                        {{$leaseApplication->moving_reason}}
+                    <div class="my-2">
+                        <span class="font-bold">Reference Email</span> 
+                        <div class="text-sm font-light mt-1">
+                            {{$leaseApplication->ref_two_email}}
+                        </div>
                     </div>
                 </div>
             </div>
             <div>
-                <div>
+                <div class="mt-8 md:mt-0">
                     <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">Employer</h5>
                     <div class="my-2">
                         <span class="font-bold">Current Employer</span> 
@@ -394,46 +433,7 @@
                 </div>
             </div>
             <div>
-                <div>
-                    <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">References</h5>
-                    <div class="my-2">
-                        <span class="font-bold">Reference One</span> 
-                        <div class="text-sm font-light mt-1">
-                            {{$leaseApplication->ref_one_name}}
-                        </div>
-                    </div>
-                    <div class="my-2">
-                        <span class="font-bold">Reference Phone</span> 
-                        <div class="text-sm font-light mt-1">
-                            {{$leaseApplication->ref_one_phone}}
-                        </div>
-                    </div>
-                    <div class="my-2">
-                        <span class="font-bold">Reference Email</span> 
-                        <div class="text-sm font-light mt-1">
-                            {{$leaseApplication->ref_one_email}}
-                        </div>
-                    </div>
-                    <div class="my-2">
-                        <span class="font-bold">Reference Two</span> 
-                        <div class="text-sm font-light mt-1">
-                            {{$leaseApplication->ref_two_name}}
-                        </div>
-                    </div>
-                    <div class="my-2">
-                        <span class="font-bold">Reference Phone</span> 
-                        <div class="text-sm font-light mt-1">
-                            {{$leaseApplication->ref_two_phone}}
-                        </div>
-                    </div>
-                    <div class="my-2">
-                        <span class="font-bold">Reference Email</span> 
-                        <div class="text-sm font-light mt-1">
-                            {{$leaseApplication->ref_two_email}}
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
+                <div class="mt-8 md:mt-0">
                     <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">Other</h5>
                     <div class="my-2">
                         <span class="font-bold">Pets</span> 
@@ -454,6 +454,37 @@
                         </div>
                     </div>
                 </div>
+                @if ($leaseApplication->lease)
+                    <div class="mt-8">
+                        <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">Associated Lease</h5>
+                        <div class="bg-gray-100 rounded-md shadow-md p-2 flex flex-col">
+                            <div class="my-1">
+                                <div class="text-xs font-bold">
+                                    Lease ID
+                                </div>
+                                <div class="font-thin">
+                                    {{ $leaseApplication->lease->id }}
+                                </div>
+                            </div>
+                            <div class="my-1">
+                                <div class="text-xs font-bold">
+                                    Start Date
+                                </div>
+                                <div class="font-thin">
+                                    {{ Carbon\Carbon::parse($leaseApplication->lease->start_date)->toFormattedDateString() }}
+                                </div>
+                            </div>
+                            <div class="my-1">
+                                <div class="text-xs font-bold">
+                                    End Date
+                                </div>
+                                <div class="font-thin">
+                                    {{ Carbon\Carbon::parse($leaseApplication->lease->end_date)->toFormattedDateString() }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

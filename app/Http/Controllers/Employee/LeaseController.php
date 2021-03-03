@@ -33,10 +33,8 @@ class LeaseController extends Controller
      * Show lease
      * @return \Illuminate\Http\Response
      */
-    public function leaseShow(Lease $lease)
+    public function leaseManage()
     {
-        return view('employee.lease-application-manage', [
-            'lease' => $lease,
-        ]);
+        return view('employee.lease-manage');
     }
 }

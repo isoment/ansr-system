@@ -41,7 +41,7 @@ class EmployeePropertyListingCreate extends Component
             'available' => 'required',
             'rent' => 'required|numeric',
             'description' => 'required',
-            'images.*' => 'image|max:8000'
+            'images.*' => 'image|max:5000'
         ];
     }
 
@@ -86,7 +86,7 @@ class EmployeePropertyListingCreate extends Component
             'available' => 'required',
             'rent' => 'required|numeric',
             'description' => 'required',
-            'images.*' => 'image|max:8000'
+            'images.*' => 'image|max:5000'
         ]);
 
         if ($this->images) {
