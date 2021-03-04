@@ -1,7 +1,8 @@
 <?php
 
 /**
- *  @return string logged in users region
+ *  Get the logged in users region
+ *  @return string 
  */
 function users_region()
 {

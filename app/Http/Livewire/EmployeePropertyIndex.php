@@ -37,8 +37,7 @@ class EmployeePropertyIndex extends Component
 
             return Property::whereHas('region', function($query) {
 
-                $currentEmployeeRegion = auth()->user()->userable->region->region_name;
-                $query->where('region_name', $currentEmployeeRegion);
+                $query->where('region_name', users_region());
 
             })->where(function($query) {
 
