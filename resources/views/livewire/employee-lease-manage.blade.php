@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="text-teal-300 font-bold flex items-center justify-end">
+                <a href="#" class="text-gray-500 font-bold flex items-center justify-end">
                     <i class="fas fa-link text-sm mr-1"></i>
                     <div class="font-prompt text-sm">Tenants</div>
                 </a>

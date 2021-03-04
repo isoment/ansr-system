@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Lease;
 use App\Models\Property;
+use App\Rules\DuplicateLease;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,19 +13,21 @@ class EmployeeLeaseManage extends Component
     use WithPagination;
 
     public $search;
-    public $showCreateModal = 'false';
+    public $showCreateModal = false;
     public $propertySearch;
     public $selectedProperty;
     public $unit;
     public $startDate;
     public $endDate;
 
-    protected $rules = [
-        'selectedProperty' => 'required',
-        'unit' => 'required',
-        'startDate' => 'required|date',
-        'endDate' => 'required|date',
-    ];
+    protected function rules() {
+        return [
+            'selectedProperty' => 'required',
+            'unit' => ['required', new DuplicateLease($this->selectedProperty)],
+            'startDate' => ['required','date'],
+            'endDate' => ['required', 'date'],
+        ];
+    }
 
     public function updated($propertyName)
     {
