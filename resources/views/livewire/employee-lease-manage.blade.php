@@ -1,7 +1,117 @@
 <div>
     
-    <div class="my-4 flex flex-col sm:flex-row sm:justify-between sm:items-center">
-        <h3 class="text-2xl font-bold text-gray-500">Property Leases</h3>
+    <div class="my-4 flex flex-col sm:flex-row sm:justify-between sm:items-center"
+         x-data="{ leaseCreateModal: @entangle('showCreateModal') }">
+        <div class="flex items-center">
+            <div class="bg-teal-300 px-1 font-bold text-lg rounded-md mr-2 text-white cursor-pointer"
+                 @click="leaseCreateModal = true">
+                +
+            </div>
+                {{-- Modal --}}
+                <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
+                            items-center justify-center whitespace-normal"
+                        x-show="leaseCreateModal"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform"
+                        x-transition:enter-end="opacity-100 transform"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 transform"
+                        x-transition:leave-end="opacity-0 transform"
+                        x-cloak>
+                    <div class="w-3/4 md:max-w-lg mx-auto rounded-md shadow-lg text-gray-700 whitespace-normal"
+                            @click.away="leaseCreateModal = false">
+                        <div class="px-4 py-2 bg-white rounded-md text-center">
+                            <h2 class="text-xl font-bold font-prompt my-4">Create New Lease</h2>
+                            <div>
+                                <div>
+                                    <input type="text" class="border rounded-lg bg-white px-2 py-1 focus:outline-none w-full"
+                                           placeholder="Search properties"
+                                           wire:model.debounce.500ms="propertySearch">
+                                    <div class="text-xs top-10 right-0">
+                                        @if ($propertyResult->count() > 0)
+                                            <div class="flex flex-wrap justify-center mt-3">
+                                                @foreach ($propertyResult as $property)
+                                                    <div class="border rounded-md border-orange-300 p-1 my-1 mx-1 cursor-pointer"
+                                                         wire:click="setProperty({{$property}})">
+                                                        {{$property->street}}, {{$property->city}}
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <div>No Results</div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="my-2">
+                                    @error('selectedProperty')
+                                        <div class="text-orange-400 text-xs font-bold italic sm:text-left mb-1">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                    <div class="flex flex-col sm:flex-row items-center text-xs text-gray-700 font-bold">
+                                        <div class="mr-1">Selected Property:</div>
+                                        <div class="text-orange-400">{{isset($selectedProperty) ? $selectedProperty['street'] . ', ' . $selectedProperty['city'] : 'N/A'}}</div>
+                                    </div>
+                                </div>
+                                <div class="w-full mt-4">
+                                    <div class="flex justify-between items-center w-full">
+                                        <label for="unit" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Unit:</label>
+                                        @error('unit')
+                                            <div class="text-orange-400 text-xs font-bold italic">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="flex items-center mt-1">
+                                        <input type="text" id="unit" name="unit"
+                                            class="px-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
+                                                @error('unit') border-orange-400 @enderror" required 
+                                            wire:model.debounce.500ms="unit"/>
+                                    </div>
+                                </div>
+                                <div class="w-full mt-4">
+                                    <div class="flex justify-between items-center w-full">
+                                        <label for="startDate" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>Start Date:</label>
+                                        @error('startDate')
+                                            <div class="text-orange-400 text-xs font-bold italic">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="flex items-center mt-1">
+                                        <input type="date" id="startDate" name="startDate" placeholder="First Name"
+                                            class="px-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
+                                                @error('startDate') border-orange-400 @enderror" required 
+                                            wire:model.debounce.500ms="startDate"/>
+                                    </div>
+                                </div>
+                                <div class="w-full mt-4">
+                                    <div class="flex justify-between items-center w-full">
+                                        <label for="endDate" class="text-xs text-gray-700 font-bold"><span class="text-orange-300 mr-1">&#9913;</span>End Date:</label>
+                                        @error('endDate')
+                                            <div class="text-orange-400 text-xs font-bold italic">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="flex items-center mt-1">
+                                        <input type="date" id="endDate" name="endDate" placeholder="First Name"
+                                            class="px-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
+                                                @error('endDate') border-orange-400 @enderror" required 
+                                            wire:model.debounce.500ms="endDate"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="bg-red-400 py-2 px-4 rounded-md text-white text-sm hover:bg-red-500 
+                                            transition duration-200 my-4" 
+                                    wire:click="createLease">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <h3 class="text-2xl font-bold font-prompt tracking-wider text-gray-700">Property Leases</h3>
+        </div>
         <div class="mt-2 sm:mt-0">
             <label for="search" class="sr-only">Search</label>
             <div class="relative">
@@ -21,6 +131,10 @@
                     type="search">
             </div>
         </div>
+    </div>
+
+    <div class="my-2">
+        @include('inc.livewire-success')
     </div>
 
     <section class="text-gray-700 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -58,12 +172,20 @@
                     </div>
                     <div class="mb-2">
                         <div class="font-bold text-xs mb-1">End Date:</div>
-                            <div class="font-light text-md">{{\Carbon\Carbon::parse($lease->end_date)->toFormattedDateString()}}</div>
+                        <div class="flex items-center">
+                            <div class="font-light text-md">
+                                {{\Carbon\Carbon::parse($lease->end_date)->toFormattedDateString()}}
+                            </div>
+                            <div class="ml-2"
+                                 >
+                                <i class="far fa-edit text-sm text-orange-300"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <a href="#" class="text-teal-300 font-bold flex items-center justify-end">
                     <i class="fas fa-link text-sm mr-1"></i>
-                    <div class="font-prompt text-sm">Lease</div>
+                    <div class="font-prompt text-sm">Tenants</div>
                 </a>
             </div>
         </div>

@@ -16,7 +16,6 @@ class CreateLeasesTable extends Migration
         Schema::create('leases', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('property_id');
-            $table->string('building')->nullable();
             $table->string('unit')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
