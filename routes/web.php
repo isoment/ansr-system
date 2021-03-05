@@ -145,6 +145,10 @@ Route::middleware('can:isEmployee')->group(function() {
         // Lease Manage
         Route::get('/employee/lease-manage', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseManage'])
             ->name('employee.lease-manage');
+        // Lease Show
+        Route::get('/employee/lease/{lease}/show', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseShow'])
+            ->name('employee.lease-show');
+            
     });
 
 });

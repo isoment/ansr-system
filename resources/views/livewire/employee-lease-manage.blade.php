@@ -7,6 +7,7 @@
                  @click="leaseCreateModal = true">
                 +
             </div>
+
                 {{-- Modal --}}
                 <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
                             items-center justify-center whitespace-normal"
@@ -38,7 +39,7 @@
                                                 @endforeach
                                             </div>
                                         @else
-                                            <div>No Results</div>
+                                            <div class="mt-3">No Results</div>
                                         @endif
                                     </div>
                                 </div>
@@ -109,7 +110,9 @@
                             </button>
                         </div>
                     </div>
+
                 </div>
+                
             <h3 class="text-2xl font-bold font-prompt tracking-wider text-gray-700">Property Leases</h3>
         </div>
         <div class="mt-2 sm:mt-0">
@@ -183,9 +186,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="text-gray-500 font-bold flex items-center justify-end">
-                    <i class="fas fa-link text-sm mr-1"></i>
-                    <div class="font-prompt text-sm">Tenants</div>
+                <a href="{{route('employee.lease-show', $lease->id)}}" class="text-gray-500 font-bold flex items-center justify-end">
+                    <i class="fas fa-external-link-alt text-sm mr-1"></i>
+                    <div class="font-prompt text-sm">Lease</div>
                 </a>
             </div>
         </div>

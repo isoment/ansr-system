@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\Lease;
 use App\Models\LeaseApplication;
-use Illuminate\Http\Request;
 
 class LeaseController extends Controller
 {
@@ -30,11 +29,22 @@ class LeaseController extends Controller
     }
 
     /**
-     * Show lease
+     * Manage lease
      * @return \Illuminate\Http\Response
      */
     public function leaseManage()
     {
         return view('employee.lease-manage');
+    }
+
+    /**
+     *  Show lease
+     *  @return \Illuminate\Http\Response
+     */
+    public function leaseShow(Lease $lease)
+    {
+        return view('employee.lease-show', [
+            'lease' => $lease,
+        ]);
     }
 }

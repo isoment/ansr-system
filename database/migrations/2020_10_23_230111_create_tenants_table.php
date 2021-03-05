@@ -15,7 +15,7 @@ class CreateTenantsTable extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lease_id');
+            $table->unsignedBigInteger('lease_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');
