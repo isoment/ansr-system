@@ -14,7 +14,7 @@
                 <a href="{{route('employee.employee-index')}}" 
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200">Employee Admin</a>
-                <a href="#"
+                <a href="{{route('employee.lease-manage')}}"
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200 ml-2 lg:hidden">Add Tenant</a>      
             </div>
@@ -23,7 +23,7 @@
 
     <div class="relative">
         <div class="flex items-center ml-4">
-            <a href="#"
+            <a href="{{route('employee.lease-manage')}}"
                class="bg-teal-300 hover:bg-teal-400 transition-all duration-200 text-white px-4 
                       py-2 text-xs font-bold rounded-t-md absolute index-data-table-button-position right-8 hidden lg:block">
                 Add Tenant

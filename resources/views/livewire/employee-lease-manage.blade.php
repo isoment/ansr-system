@@ -1,6 +1,6 @@
 <div>
     
-    <div class="my-4 flex flex-col sm:flex-row sm:justify-between sm:items-center"
+    <div class="mt-4 mb-2 flex flex-col sm:flex-row sm:justify-between sm:items-center"
          x-data="{ leaseCreateModal: @entangle('showCreateModal') }">
         <div class="flex items-center">
             <div class="bg-teal-300 px-1 font-bold text-lg rounded-md mr-2 text-white cursor-pointer"
@@ -80,7 +80,7 @@
                                         @enderror
                                     </div>
                                     <div class="flex items-center mt-1">
-                                        <input type="date" id="startDate" name="startDate" placeholder="First Name"
+                                        <input type="date" id="startDate" name="startDate"
                                             class="px-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
                                                 @error('startDate') border-orange-400 @enderror" required 
                                             wire:model.debounce.500ms="startDate"/>
@@ -96,7 +96,7 @@
                                         @enderror
                                     </div>
                                     <div class="flex items-center mt-1">
-                                        <input type="date" id="endDate" name="endDate" placeholder="First Name"
+                                        <input type="date" id="endDate" name="endDate"
                                             class="px-4 w-full border-2 rounded-lg py-2 text-gray-700 focus:outline-none
                                                 @error('endDate') border-orange-400 @enderror" required 
                                             wire:model.debounce.500ms="endDate"/>
@@ -112,7 +112,7 @@
                     </div>
 
                 </div>
-                
+
             <h3 class="text-2xl font-bold font-prompt tracking-wider text-gray-700">Property Leases</h3>
         </div>
         <div class="mt-2 sm:mt-0">
@@ -134,6 +134,10 @@
                     type="search">
             </div>
         </div>
+    </div>
+
+    <div class="text-sm font-thin">
+        To create a new tenant first select a lease
     </div>
 
     <div class="my-2">
