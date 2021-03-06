@@ -11,9 +11,11 @@
                 Tenant Administration
             <h3>
             <div class="flex items-center">
-                <a href="{{route('employee.employee-index')}}" 
-                   class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
-                         text-xs p-2 rounded transition-all duration-200">Employee Admin</a>
+                @can('isManagement')
+                    <a href="{{route('employee.employee-index')}}" 
+                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
+                            text-xs p-2 rounded transition-all duration-200">Employee Admin</a>
+                @endcan
                 <a href="{{route('employee.lease-manage')}}"
                    class="bg-teal-300 hover:bg-teal-400 text-white font-bold 
                          text-xs p-2 rounded transition-all duration-200 ml-2 lg:hidden">Add Tenant</a>      

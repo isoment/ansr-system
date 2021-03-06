@@ -62,16 +62,19 @@
                     but the tenant has rented with us before, use "Add Existing Tenant." Note, this will remove the 
                     tenant from the old lease and add them to this lease.
                 </div>
-                <button class="bg-teal-300 hover:bg-teal-400 transition duration-200 
+                @if ($lease->leaseIsActive())
+                    <button class="bg-teal-300 hover:bg-teal-400 transition duration-200 
+                                    px-3 py-1 text-white rounded-md text-sm my-1 focus:outline-none"
+                            @click="newTenantModal = true">
+                        New Tenant
+                    </button>
+                    <button class="bg-teal-300 hover:bg-teal-400 transition duration-200 
                                 px-3 py-1 text-white rounded-md text-sm my-1 focus:outline-none"
-                        @click="newTenantModal = true">
-                    New Tenant
-                </button>
-                <button class="bg-teal-300 hover:bg-teal-400 transition duration-200 
-                               px-3 py-1 text-white rounded-md text-sm my-1 focus:outline-none"
-                        @click="existingTenantModal = true">
-                    Add Existing Tenant
-                </button>
+                            @click="existingTenantModal = true">
+                        Add Existing Tenant
+                    </button>
+                @endif
+
                 <button class="bg-orange-300 hover:bg-orange-400 transition duration-200 
                                px-3 py-1 text-white rounded-md text-sm my-1 focus:outline-none"
                         @click="extendLeaseModal = true">
@@ -316,7 +319,7 @@
                                     </div>
                                 </div>
                                 <div class="my-1 text-left">
-                                    <span class="font-bold">Tenant Since:</span> 
+                                    <span class="font-bold">Tenant Registered:</span> 
                                     <div class="text-sm font-light mt-1">
                                         {{\Carbon\Carbon::parse($lease->create_at)->toFormattedDateString()}}
                                     </div>

@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="my-2">
-                <span class="font-bold">Address:</span> 
+                <span class="font-bold">Current Address:</span> 
                 <div class="text-sm font-light mt-1">
                     {{$tenant->lease->property->street}}<br>
                     @if ($tenant->lease->building)

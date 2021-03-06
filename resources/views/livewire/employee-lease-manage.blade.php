@@ -179,13 +179,9 @@
                     </div>
                     <div class="mb-2">
                         <div class="font-bold text-xs mb-1">End Date:</div>
-                        <div class="flex items-center">
+                        <div>
                             <div class="font-light text-md">
                                 {{\Carbon\Carbon::parse($lease->end_date)->toFormattedDateString()}}
-                            </div>
-                            <div class="ml-2"
-                                 >
-                                <i class="far fa-edit text-sm text-orange-300"></i>
                             </div>
                         </div>
                     </div>

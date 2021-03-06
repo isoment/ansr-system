@@ -78,16 +78,20 @@ class EmployeeLeaseShow extends Component
      */
     public function addExistingTenant()
     {
-        $tenantToUpdate = Tenant::where('id', $this->selectedTenant['id'])
-            ->first();
+        if ($this->lease->leaseIsActive()) {
 
-        $tenantToUpdate->update([
-            'lease_id' => $this->lease->id,
-        ]);
+            $tenantToUpdate = Tenant::where('id', $this->selectedTenant['id'])
+                ->first();
 
-        $this->showExistingTenantModal = false;
+            $tenantToUpdate->update([
+                'lease_id' => $this->lease->id,
+            ]);
 
-        session()->flash('success', 'Tenant removed from previous lease and added to this lease');
+            $this->showExistingTenantModal = false;
+
+            session()->flash('success', 'Tenant removed from previous lease and added to this lease');
+
+        }
     }
 
     /**
@@ -95,24 +99,28 @@ class EmployeeLeaseShow extends Component
      */
     public function createTenant()
     {
-        $this->validate([
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'email' => ['required', 'email'],
-            'phone' => ['required', new PhoneNumber],
-        ]);
+        if ($this->lease->leaseIsActive()) {
 
-        Tenant::create([
-            'lease_id' => $this->lease->id,
-            'first_name' => $this->firstName,
-            'last_name' => $this->lastName,
-            'email' => $this->email,
-            'phone' => $this->phone,
-        ]);
+            $this->validate([
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'email' => ['required', 'email'],
+                'phone' => ['required', new PhoneNumber],
+            ]);
+    
+            Tenant::create([
+                'lease_id' => $this->lease->id,
+                'first_name' => $this->firstName,
+                'last_name' => $this->lastName,
+                'email' => $this->email,
+                'phone' => $this->phone,
+            ]);
+    
+            $this->showTenantModal = false;
+    
+            session()->flash('success', 'Tenant created and attached to lease');
 
-        $this->showTenantModal = false;
-
-        session()->flash('success', 'Tenant created and attached to lease');
+        }
     }
 
     public function render()

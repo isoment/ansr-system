@@ -57,6 +57,12 @@ class AdminTenantEdit extends Component
             'email' => $this->email,
         ]);
 
+        if ($this->tenant->user) {
+            $this->tenant->user->update([
+                'email' => $this->email
+            ]);
+        }
+
         session()->flash('success', 'Tenant updated successfully');
     }
 

@@ -100,7 +100,7 @@
             <span class="ml-4">Statistics</span>
         </a>
     </li>
-    @can('isManagement')
+    @can('isAdministrativeOrManagement')
         <li class="relative px-6 py-3">
             <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
                     duration-150 hover:text-gray-800
@@ -161,8 +161,12 @@
         </li>
         <li class="relative px-6 py-3">
             <a class="inline-flex items-center w-full text-sm font-semibold transition-colors 
-                    duration-150 hover:text-gray-800" 
-               href="#">
+                    duration-150 hover:text-gray-800
+                    {{
+                        Route::current()->getName() == 'employee.lease-manage' ||
+                        Route::current()->getName() == 'employee.lease-show' ? 'text-orange-400' : ''
+                    }}" 
+               href="{{route('employee.lease-manage')}}">
                 <svg fill="none" 
                      viewBox="0 0 24 24" 
                      stroke="currentColor" 

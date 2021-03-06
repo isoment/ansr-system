@@ -52,6 +52,12 @@ class AdminEmployeeEdit extends Component
             'email' => $this->email,
         ]);
 
+        if ($this->employee->user) {
+            $this->employee->user->update([
+                'email' => $this->email,
+            ]);
+        }
+
         session()->flash('success', 'Employee updated successfully');
     }
 

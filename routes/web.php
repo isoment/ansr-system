@@ -94,12 +94,6 @@ Route::middleware('can:isEmployee')->group(function() {
         Route::get('/employee/request-category', [\App\Http\Controllers\Employee\ServiceRequestController::class, 'requestCategory'])
             ->name('employee.request-category');
 
-        // Tenant Admin
-        Route::get('/employee/user-admin/tenant', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantIndex'])
-        ->name('employee.tenant-index');
-        // Tenant Edit
-        Route::get('/employee/user-admin/tenant/{tenant}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantEdit'])
-            ->name('employee.tenant-edit');
         // Employee Admin
         Route::get('/employee/user-admin/employee', [\App\Http\Controllers\Employee\UserAdminController::class, 'employeeIndex'])
             ->name('employee.employee-index');
@@ -142,13 +136,20 @@ Route::middleware('can:isEmployee')->group(function() {
         Route::get('/employee/property-listing/{propertyListing}/manage', [\App\Http\Controllers\Employee\PropertyController::class, 'propertyListingManange'])
             ->name('employee.property-listing-manage');
 
+        // Tenant Admin
+        Route::get('/employee/user-admin/tenant', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantIndex'])
+            ->name('employee.tenant-index');
+        // Tenant Edit
+        Route::get('/employee/user-admin/tenant/{tenant}/edit', [\App\Http\Controllers\Employee\UserAdminController::class, 'tenantEdit'])
+            ->name('employee.tenant-edit');
+
         // Lease Manage
         Route::get('/employee/lease-manage', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseManage'])
             ->name('employee.lease-manage');
         // Lease Show
         Route::get('/employee/lease/{lease}/show', [\App\Http\Controllers\Employee\LeaseController::class, 'leaseShow'])
             ->name('employee.lease-show');
-            
+
     });
 
 });
