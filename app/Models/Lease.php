@@ -52,4 +52,12 @@ class Lease extends Model
     {
         return Carbon::parse($this->end_date)->gt(Carbon::now()) ? true : false;
     }
+
+    /**
+     *  Format date as a string for passing into HTML inputs
+     */
+    public function endDateStringFormat()
+    {
+        return Carbon::parse($this->end_date)->toDateString();
+    }
 }
