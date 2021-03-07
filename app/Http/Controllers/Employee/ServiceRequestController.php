@@ -47,4 +47,13 @@ class ServiceRequestController extends Controller
             'request' => $request,
         ]);
     }
+
+    /**
+     *  Display request history
+     *  @return \Illuminate\Http\Response
+     */
+    public function requestHistory()
+    {
+        return view('employee.service-request-history');
+    }
 }

@@ -58,6 +58,7 @@
                     Route::current()->getName() == 'employee.manage-details' ||
                     Route::current()->getName() == 'employee.service-request-index' ||
                     Route::current()->getName() == 'employee.request-category' ||
+                    Route::current()->getName() == 'employee.request-history' ||
                     Route::current()->getName() == 'employee.manage-request' ? 'text-orange-400' : ''
                 }}
                 " 

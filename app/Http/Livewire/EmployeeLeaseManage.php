@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 class EmployeeLeaseManage extends Component
 {
     use WithPagination;
+    use PropertySelectable;
 
     public $search;
     public $showCreateModal = false;
@@ -33,32 +34,6 @@ class EmployeeLeaseManage extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-    }
-
-    /**
-     *  Set the selected property
-     */
-    public function setProperty($property)
-    {
-        // Get an array of property ids based on role
-        if (Gate::allows('isManagement')) {
-
-            $propertyIds = Property::pluck('id')->toArray();
-
-        } else {
-
-            $propertyIds = Property::whereHas('region', function($query) {
-                $query->where('region_name', users_region());
-            })->pluck('id')->toArray();
-
-        }
-
-        // Check to make sure the property that is passed in is valid
-        if (in_array($property['id'], $propertyIds)) {
-
-            $this->selectedProperty = $property;
-
-        }
     }
 
     /**
