@@ -66,9 +66,9 @@ class EmployeeLeaseApplicationManage extends Component
 
         $this->toggleModal = false;
 
-        $this->leaseApplication = $this->leaseApplication->fresh();
-
         session()->flash('success', 'Lease created successfully');
+
+        return redirect()->to(route('employee.lease-application-manage', $this->leaseApplication->id));
     }
 
     /**
@@ -82,7 +82,11 @@ class EmployeeLeaseApplicationManage extends Component
     public function render()
     {
         return view('livewire.employee-lease-application-manage', [
+
             'ssn' => $this->decryptSSN(),
+
+            'associatedLease' => $this->leaseApplication->lease,
+
         ]);
     }
 }

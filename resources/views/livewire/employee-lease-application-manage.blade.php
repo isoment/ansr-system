@@ -4,6 +4,15 @@
 
         <div class="break-words lg:col-span-2 bg-white text-gray-700 sm:border-1 rounded-sm 
                     sm:rounded-md mb-4 py-6 px-4 md:px-12 shadow-sm">
+
+            <div class="mt-2 mb-4">
+                @include('inc.livewire-error')
+            </div>
+        
+            <div class="mt-2 mb-4">
+                @include('inc.livewire-success')
+            </div>
+
             <div class="text-lg font-bold flex items-center justify-between">
                 <h5 class="font-prompt tracking-widest opacity-75">Personal Details</h5>
                 @if ($leaseApplication->status === 'open')
@@ -159,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            @if (is_null($leaseApplication->lease))
+            @if (empty($associatedLease))
                 <div>
                     <div class="mx-4 my-2">
                         <div class="text-xs font-bold mb-1">Lease Application Status</div>
@@ -182,8 +191,6 @@
                     @endif
                 </div>
             @endif
-
-
 
             {{-- Modal --}}
             <div class="tenant-index-modal-background overflow-auto absolute inset-0 z-30 flex 
@@ -248,16 +255,6 @@
 
         </div>
 
-
-
-    </div>
-
-    <div class="mt-2 mb-4">
-        @include('inc.livewire-error')
-    </div>
-
-    <div class="mt-2 mb-4">
-        @include('inc.livewire-success')
     </div>
 
     <div class="break-words bg-white text-gray-700 sm:border-1 rounded-sm sm:rounded-md mb-4  
@@ -454,35 +451,37 @@
                         </div>
                     </div>
                 </div>
-                @if ($leaseApplication->lease)
+                @if ($associatedLease)
                     <div class="mt-8">
                         <h5 class="font-prompt tracking-widest opacity-75 text-lg font-bold mb-4">Associated Lease</h5>
-                        <div class="bg-gray-100 rounded-md shadow-md p-2 flex flex-col">
-                            <div class="my-1">
-                                <div class="text-xs font-bold">
-                                    Lease ID
+                        <a href="{{route('employee.lease-show', $associatedLease->id)}}">
+                            <div class="bg-gray-100 rounded-md shadow-md p-2 flex flex-col">
+                                <div class="my-1">
+                                    <div class="text-xs font-bold">
+                                        Lease ID
+                                    </div>
+                                    <div class="font-thin">
+                                        {{ $associatedLease->id }}
+                                    </div>
                                 </div>
-                                <div class="font-thin">
-                                    {{ $leaseApplication->lease->id }}
+                                <div class="my-1">
+                                    <div class="text-xs font-bold">
+                                        Start Date
+                                    </div>
+                                    <div class="font-thin">
+                                        {{ Carbon\Carbon::parse($associatedLease->start_date)->toFormattedDateString() }}
+                                    </div>
+                                </div>
+                                <div class="my-1">
+                                    <div class="text-xs font-bold">
+                                        End Date
+                                    </div>
+                                    <div class="font-thin">
+                                        {{ Carbon\Carbon::parse($associatedLease->end_date)->toFormattedDateString() }}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="my-1">
-                                <div class="text-xs font-bold">
-                                    Start Date
-                                </div>
-                                <div class="font-thin">
-                                    {{ Carbon\Carbon::parse($leaseApplication->lease->start_date)->toFormattedDateString() }}
-                                </div>
-                            </div>
-                            <div class="my-1">
-                                <div class="text-xs font-bold">
-                                    End Date
-                                </div>
-                                <div class="font-thin">
-                                    {{ Carbon\Carbon::parse($leaseApplication->lease->end_date)->toFormattedDateString() }}
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 @endif
             </div>
