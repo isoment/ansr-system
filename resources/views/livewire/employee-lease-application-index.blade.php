@@ -74,97 +74,68 @@
         </div>
     </div>
 
-    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead>
-                        <tr>
-                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                <div class="flex items-center">
-                                    <div class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</div>
+    <div class="w-full overflow-hidden rounded-lg shadow-xs my-4">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full whitespace-no-wrap">
+                <thead>
+                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase 
+                              border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        <th class="px-4 py-3">
+                            Name
+                        </th>
+                        <th class="px-4 py-3">
+                            Confirmation #
+                        </th>
+                        <th class="px-4 py-3">
+                            Date
+                        </th>
+                        <th class="px-4 py-3">
+                            Status
+                        </th>
+                        <th class="px-4 py-3"></th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                    @foreach ($leases as $lease)
+                        <tr class="text-gray-700 dark:text-gray-400">
+                            <td class="px-4 py-3 text-sm">
+                                <div class="flex flex-col">
+                                    <div>{{$lease->last_name}}, {{$lease->first_name}}</div>
+                                    <div class="text-xxs text-gray-600">{{$lease->propertyListing->property->region->region_name}}</div>
                                 </div>
-                            </th>
-                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                <div class="flex items-center">
-                                    <div class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Region</div>
-                                </div>
-                            </th>
-                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                <div class="flex items-center">
-                                    <div class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Confirmation #</div>
-                                </div>
-                            </th>
-                            <th class="px-6 py-3 bg-gray-50 text-left">
-                                <div class="flex items-center">
-                                    <div class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date</div>
-                                </div>
-                            </th>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Status
-                            </th>
-                            <th class="px-6 py-3 bg-gray-50"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($leases as $lease)
-                            <tr>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="flex items-center">
-                                            <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$lease->last_name}}, {{$lease->first_name}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="flex items-center">
-                                            <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$lease->propertyListing->property->region->region_name}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="flex items-center">
-                                            <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$lease->confirmation_number}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">
-                                            {{\Carbon\Carbon::parse($lease->created_at)->toFormattedDateString()}}
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap">
-                                    @if ($lease->status === 'open')
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 text-teal-400">
-                                            Open
-                                        </span>
-                                    @elseif ($lease->status === 'approved')
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-green-100 text-green-400">
-                                            Approved
-                                        </span>
-                                    @else
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-red-100 text-red-400">
-                                            Denied
-                                        </span>
-                                    @endif
-                                </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                    <a href="{{route('employee.lease-application-manage', $lease->id)}}"
-                                       class="text-teal-400 hover:text-teal-600 cursor-pointer">Manage</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                            </td>
+                            <td class="px-2 py-3 text-sm">
+                                {{$lease->confirmation_number}}
+                            </td>
+                            <td class="px-2 py-3">
+                                {{\Carbon\Carbon::parse($lease->created_at)->toFormattedDateString()}}
+                            </td>
+                            <td class="px-2 py-3">
+                                @if ($lease->status === 'open')
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 text-teal-400">
+                                        Open
+                                    </span>
+                                @elseif ($lease->status === 'approved')
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-green-100 text-green-400">
+                                        Approved
+                                    </span>
+                                @else
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-red-100 text-red-400">
+                                        Denied
+                                    </span>
+                                @endif
+                            </td>
+                            <td class="px-2 py-3 text-sm">
+                                <a href="{{route('employee.lease-application-manage', $lease->id)}}"
+                                    class="text-teal-400 hover:text-teal-600 cursor-pointer">Manage</a>
+                            </td>
+                        </tr>  
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 

@@ -21,7 +21,7 @@
             </div>
         </div>
         {{-- Checkbox --}}
-        <div class="relative flex items-start">
+        <div class="relative flex items-start mt-4">
             <div class="ml-2 md:ml-12 mr-1 text-sm leading-5">
                 <label for="open" class="font-bold text-xs text-gray-700">Open:</label>
             </div>
@@ -49,8 +49,16 @@
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     @foreach ($requests as $request)
                         <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-2 py-3 text-sm">
-                                {{Str::limit($request->issue, 20)}}
+                            <td class="px-4 py-3 text-sm">
+                                <div class="flex flex-col">
+                                    <div>
+                                        {{Str::limit($request->issue, 20)}}
+                                    </div>
+                                    <div class="text-xs">
+                                        Lease ID: {{$request->lease->id}}
+                                    </div>
+                                </div>
+                                
                             </td>
                             <td class="px-2 py-3 text-sm">
                                 {{$request->tenant->last_name}}, {{$request->tenant->first_name}}

@@ -21,103 +21,90 @@
                     type="search">
             </div>
         </div>
-    
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-4">
-    
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead>
-                            <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <div class="flex items-center">
-                                        <button wire:click="sortBy('last_name')"
-                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</button>
-                                        @if ($sortColumn != 'last_name')
-                                            <span></span>
-                                        @elseif ($sortAscending)
-                                            <span>
-                                                <svg class="w-4 text-gray-500 ml-2" 
-                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24" 
-                                                    xmlns="http://www.w3.org/2000/svg"><path 
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
-                                                </svg>
-                                            </span>
-                                        @else 
-                                            <span>
-                                                <svg class="w-4 text-gray-500 ml-2" 
-                                                    fill="none" stroke="currentColor" 
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path 
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                                </svg>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <div class="flex items-center">
-                                        <button wire:click="sortBy('lease_id')"
-                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Lease ID</button>
-                                        @if ($sortColumn != 'lease_id')
-                                            <span></span>
-                                        @elseif ($sortAscending)
-                                            <span>
-                                                <svg class="w-4 text-gray-500 ml-2" 
-                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24" 
-                                                    xmlns="http://www.w3.org/2000/svg"><path 
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
-                                                </svg>
-                                            </span>
-                                        @else
-                                            <span>
-                                                <svg class="w-4 text-gray-500 ml-2" 
-                                                    fill="none" stroke="currentColor" 
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path 
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                                </svg>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Email
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    Phone
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($tenants as $tenant)
-                            <tr>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="flex items-center">
-                                        <div>
-                                            <div class="text-sm leading-5 font-medium text-gray-900">
-                                                {{$tenant->last_name}}, {{$tenant->first_name}}
-                                            </div>
-                                        </div>
-                                    </div>
+
+        <div class="w-full overflow-hidden rounded-lg shadow-xs my-4">
+            <div class="w-full overflow-x-auto">
+                <table class="w-full whitespace-no-wrap">
+                    <thead>
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase 
+                                  border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            <th class="px-4 py-3">
+                                <div class="flex items-center">
+                                    <button wire:click="sortBy('last_name')" 
+                                            class="font-bold uppercase">Name</button>
+                                    @if ($sortColumn != 'last_name')
+                                        <span></span>
+                                    @elseif ($sortAscending)
+                                        <span>
+                                            <svg class="w-4 text-gray-500 ml-2" 
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+                                                xmlns="http://www.w3.org/2000/svg"><path 
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                            </svg>
+                                        </span>
+                                    @else 
+                                        <span>
+                                            <svg class="w-4 text-gray-500 ml-2" 
+                                                fill="none" stroke="currentColor" 
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path 
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </span>
+                                    @endif
+                                </div>
+                            </th>
+                            <th class="px-4 py-3">
+                                <div class="flex items-center">
+                                    <button wire:click="sortBy('lease_id')"
+                                            class="font-bold uppercase">Lease ID</button>
+                                    @if ($sortColumn != 'lease_id')
+                                        <span></span>
+                                    @elseif ($sortAscending)
+                                        <span>
+                                            <svg class="w-4 text-gray-500 ml-2" 
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+                                                xmlns="http://www.w3.org/2000/svg"><path 
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                                            </svg>
+                                        </span>
+                                    @else
+                                        <span>
+                                            <svg class="w-4 text-gray-500 ml-2" 
+                                                fill="none" stroke="currentColor" 
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path 
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </span>
+                                    @endif
+                                </div>
+                            </th>
+                            <th class="px-4 py-3">Email</th>
+                            <th class="px-4 py-3">Phone</th>
+                            <th class="px-4 py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        @foreach ($tenants as $tenant)
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3 text-sm">
+                                    {{$tenant->last_name}}, {{$tenant->first_name}}
                                 </td>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$tenant->lease_id}}</div>
+                                <td class="px-2 py-3 text-sm">
+                                    {{$tenant->lease_id}}
                                 </td>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$tenant->email}}</div>
+                                <td class="px-2 py-3 text-sm">
+                                    {{$tenant->email}}
                                 </td>
-                                <td class="w-4/12 px-6 py-4 whitespace-no-wrap">
-                                    <div class="text-sm leading-5 text-gray-900">{{$tenant->phone}}</div>
+                                <td class="px-2 py-3">
+                                    {{$tenant->phone}}
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                <td class="px-2 py-3 text-sm">
                                     <a href="{{route('employee.tenant-edit', $tenant->id)}}" class="text-teal-400 hover:text-teal-600">Edit</a>
                                 </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-    
+                            </tr>  
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
 
