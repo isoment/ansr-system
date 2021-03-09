@@ -19,7 +19,8 @@ class ValidateTenant implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Verify that the email and lease id are valid entries
+     * in the tenants table.
      *
      * @param  string  $attribute
      * @param  mixed  $value

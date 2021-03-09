@@ -18,7 +18,8 @@ class ValidateEmployee implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Verify that the email and employee id the user enters
+     * match an entry from the employees table.
      *
      * @param  string  $attribute
      * @param  mixed  $value

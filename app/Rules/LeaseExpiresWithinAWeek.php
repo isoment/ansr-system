@@ -15,11 +15,12 @@ class LeaseExpiresWithinAWeek implements Rule
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
-     * Determine if the validation rule passes.
+     * If the user is a manager we allow them to put a tenant on another
+     * lease at any time, otherwise only if the lease will be ending soon.
      *
      * @param  string  $attribute
      * @param  mixed  $value
@@ -27,12 +28,20 @@ class LeaseExpiresWithinAWeek implements Rule
      */
     public function passes($attribute, $value)
     {
-        $tenant = Tenant::where('id', $value['id'])->first();
+        if (Gate::allows('isManagement')) {
 
-        if ($tenant->lease->endingInAWeek()) {
-            return true;
+            return true; 
+
         } else {
-            return false;
+
+            $tenant = Tenant::where('id', $value['id'])->first();
+
+            if ($tenant->lease->endingInAWeek()) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
     }
 

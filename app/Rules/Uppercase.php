@@ -17,7 +17,7 @@ class Uppercase implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Determine if the $value is uppercase
      *
      * @param  string  $attribute
      * @param  mixed  $value

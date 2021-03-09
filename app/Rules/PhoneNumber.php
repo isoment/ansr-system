@@ -17,7 +17,7 @@ class PhoneNumber implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Validate the phone number against the regex
      *
      * @param  string  $attribute
      * @param  mixed  $value

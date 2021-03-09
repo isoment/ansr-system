@@ -236,6 +236,9 @@
                             <div class="my-4">
                                 <h2 class="text-xl font-bold font-prompt">Add Existing Tenant to Lease</h2>
                                 <h5 class="font-thin text-sm mt-2">By adding the selected tenant to this lease you will remove them from any existing lease.</h5>
+                                @can('isAdministrative')
+                                    <h5 class="font-thin text-xs mt-2">You can only add tenants whose leases are about to end.</h5>
+                                @endcan
                             </div>
                             <div>
                                 <input type="text" class="border rounded-lg bg-white px-2 py-1 focus:outline-none w-full"

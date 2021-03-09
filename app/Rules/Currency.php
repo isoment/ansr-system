@@ -17,7 +17,7 @@ class Currency implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Rule passes if the $value matches currency regex
      *
      * @param  string  $attribute
      * @param  mixed  $value

@@ -19,7 +19,9 @@ class PropertyInUsersRegion implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * If the user is a manager make sure that the full property list
+     * contains the $value. For other user roles only get the properties
+     * in their region.
      *
      * @param  string  $attribute
      * @param  mixed  $value

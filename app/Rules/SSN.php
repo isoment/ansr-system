@@ -17,7 +17,7 @@ class SSN implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * Determine if the $value is a valid SSN
      *
      * @param  string  $attribute
      * @param  mixed  $value
