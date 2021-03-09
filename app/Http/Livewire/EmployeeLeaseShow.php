@@ -3,7 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Tenant;
+use App\Rules\LeaseExpiresWithinAWeek;
 use App\Rules\PhoneNumber;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,7 +19,6 @@ class EmployeeLeaseShow extends Component
     public $email;
     public $phone;
     public $endDate;
-
     public $tenantSearch;
     public $selectedTenant;
 
@@ -36,6 +37,7 @@ class EmployeeLeaseShow extends Component
             'email' => ['required', 'email'],
             'phone' => ['required', new PhoneNumber],
             'endDate' => ['required', 'date'],
+            'selectedTenant' => [new LeaseExpiresWithinAWeek],
         ];
     }
 
@@ -79,6 +81,10 @@ class EmployeeLeaseShow extends Component
     public function addExistingTenant()
     {
         if ($this->lease->leaseIsActive()) {
+
+            $this->validate([
+                'selectedTenant' => [new LeaseExpiresWithinAWeek],
+            ]);
 
             $tenantToUpdate = Tenant::where('id', $this->selectedTenant['id'])
                 ->first();

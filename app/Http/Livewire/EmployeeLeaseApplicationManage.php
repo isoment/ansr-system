@@ -64,6 +64,10 @@ class EmployeeLeaseApplicationManage extends Component
             'lease_id' => $newLease->id,
         ]);
 
+        $this->leaseApplication->propertyListing->update([
+            'available' => false,
+        ]);
+
         $this->toggleModal = false;
 
         session()->flash('success', 'Lease created successfully');

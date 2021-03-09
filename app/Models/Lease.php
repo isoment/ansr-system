@@ -54,6 +54,19 @@ class Lease extends Model
     }
 
     /**
+     *  Method to determine if a lease is expiring within a week
+     *  @return boolean
+     */
+    public function endingInAWeek()
+    {
+        $now = Carbon::now()->toDateTimeString();
+        
+        $addAWeek = Carbon::now()->addDays(7)->toDateTimeString();
+
+        return Carbon::parse($this->end_date)->between($now, $addAWeek);
+    }
+
+    /**
      *  Format date as a string for passing into HTML inputs
      */
     public function endDateStringFormat()

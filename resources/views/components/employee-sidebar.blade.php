@@ -207,6 +207,7 @@
                     duration-150 hover:text-gray-800
                     {{
                         Route::current()->getName() == 'employee.property-listing-index' ||
+                        Route::current()->getName() == 'employee.property-listing-manage' ||
                         Route::current()->getName() == 'employee.create-property-listing' ? 'text-orange-400' : ''
                     }}
                     " 

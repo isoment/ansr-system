@@ -36,6 +36,11 @@ class EmployeeLeaseManage extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     /**
      *  Create a new lease
      */

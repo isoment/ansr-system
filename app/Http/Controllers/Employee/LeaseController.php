@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use App\Models\Lease;
 use App\Models\LeaseApplication;
+use Illuminate\Support\Facades\Gate;
 
 class LeaseController extends Controller
 {
@@ -43,6 +44,11 @@ class LeaseController extends Controller
      */
     public function leaseShow(Lease $lease)
     {
+        if (Gate::denies('propertyAndUserHaveSameRegion', $lease->property)
+                && Gate::denies('isManagement')) {
+            abort(403);
+        }
+
         return view('employee.lease-show', [
             'lease' => $lease,
         ]);
