@@ -17,7 +17,7 @@ class EmployeeServiceRequestHistory extends Component
     public $selectedProperty;
     public $unitSearch;
 
-    public function updatingSearch()
+    public function updating()
     {
         $this->resetPage();
     }

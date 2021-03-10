@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 trait ColumnSortable
 {
-    public function upDatingSearch()
+    public function updatingSearch()
     {
         $this->resetPage();
     }
@@ -19,6 +19,7 @@ trait ColumnSortable
         } else {
             $this->sortAscending = true;
         }
+        
         $this->sortColumn = $column;
     }
 

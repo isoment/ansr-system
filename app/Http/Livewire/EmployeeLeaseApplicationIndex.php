@@ -17,7 +17,7 @@ class EmployeeLeaseApplicationIndex extends Component
 
     protected $queryString = ['search', 'status'];
 
-    public function updatingSearch()
+    public function updating()
     {
         $this->resetPage();
     }

@@ -16,7 +16,7 @@ class EmployeeServiceRequestIndex extends Component
 
     protected $queryString = ['search', 'open'];
 
-    public function updatingSearch()
+    public function updating()
     {
         $this->resetPage();
     }

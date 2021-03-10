@@ -23,7 +23,7 @@ class EmployeePropertyListingIndex extends Component
         $this->regionList = Region::all()->pluck('region_name')->toArray();
     }
 
-    public function updatingSearch()
+    public function updating()
     {
         $this->resetPage();
     }
