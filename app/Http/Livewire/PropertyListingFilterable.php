@@ -11,6 +11,11 @@ trait PropertyListingFilterable
     public $bedCount = 1;
     public $types = [];
 
+    public function updating()
+    {
+        $this->resetPage();
+    }
+
     /**
      *  Method to determine if we will filter by region and if so
      *  which region

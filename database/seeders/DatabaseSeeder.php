@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             WorkOrderSeeder::class,
             WorkDetailsSeeder::class,
             UserSeeder::class,
-            // PropertyListingSeeder::class,
+            PropertyListingSeeder::class,
         ]);
     }
 }

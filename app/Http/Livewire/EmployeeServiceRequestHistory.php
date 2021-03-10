@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Property;
 use App\Models\ServiceRequest;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,6 +16,11 @@ class EmployeeServiceRequestHistory extends Component
     public $propertySearch;
     public $selectedProperty;
     public $unitSearch;
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     /**
      *  Method to return service requests
@@ -41,13 +47,31 @@ class EmployeeServiceRequestHistory extends Component
      */
     public function getPropertyList()
     {
-        return Property::where(function($query) {
+        if (Gate::allows('isManagement')) {
 
-            $query->where('street', 'like', '%'.$this->propertySearch.'%')
-                ->orWhere('city', 'like', '%'.$this->propertySearch.'%')
-                ->orWhere('zipcode', 'like', '%'.$this->propertySearch.'%');
+            return Property::where(function($query) {
 
-        })->limit(8)->get();
+                $query->where('street', 'like', '%'.$this->propertySearch.'%')
+                    ->orWhere('city', 'like', '%'.$this->propertySearch.'%')
+                    ->orWhere('zipcode', 'like', '%'.$this->propertySearch.'%');
+    
+            })->limit(8)->get();
+
+        } else {
+
+            return Property::whereHas('region', function($query) {
+
+                $query->where('region_name', users_region());
+
+            })->where(function($query) {
+
+                $query->where('street', 'like', '%'.$this->propertySearch.'%')
+                    ->orWhere('city', 'like', '%'.$this->propertySearch.'%')
+                    ->orWhere('zipcode', 'like', '%'.$this->propertySearch.'%');
+
+            })->limit(8)->get();
+
+        }
     }
 
     public function render()

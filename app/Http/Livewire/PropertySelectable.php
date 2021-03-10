@@ -27,6 +27,7 @@ trait PropertySelectable
         }
 
         // Check to make sure the property that is passed in is valid
+        // Then set it to the slectedProperty
         if (in_array($property['id'], $propertyIds)) {
 
             $this->selectedProperty = $property;
