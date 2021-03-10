@@ -6,7 +6,7 @@
 
     <div class="break-words bg-white text-gray-700 sm:border-1 sm:rounded-md
                 mb-8">
-        <div class="w-full p-6 shadow-md">
+        <div class="w-full p-4 shadow-md">
             <h3 class="font-bold text:lg lg:text-2xl text-center">
                 Request A Key Replacement
             <h3>

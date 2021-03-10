@@ -45,6 +45,7 @@ class ServiceRequestController extends Controller
 
             ServiceRequest::create([
                 'tenant_id' => auth()->user()->userable->id,
+                'lease_id' => auth()->user()->userable->lease->id,
                 'category_id' => $category->id,
                 'issue' => 'Tenant requests new key.',
                 'description' => 'Tenant Notes: ' . $validated['notes'],
@@ -90,6 +91,7 @@ class ServiceRequestController extends Controller
 
             ServiceRequest::create([
                 'tenant_id' => auth()->user()->userable->id,
+                'lease_id' => auth()->user()->userable->lease->id,
                 'category_id' => $categoryId,
                 'issue' => $validated['issue'],
                 'description' => $validated['description'],
