@@ -125,12 +125,12 @@
                             @can('isEmployee')
                                 <li>
                                     <a href="{{route('employee.dashboard')}}" class="sm:px-4 py-2 block bg-teal-300 hover:bg-teal-400 
-                                        text-white rounded-lg ml-4">Dashboard</a>
+                                        transition duration-200 text-white rounded-lg ml-4">Dashboard</a>
                                 </li>
                             @elsecan('isTenant')
                                 <li>
                                     <a href="{{route('tenant.dashboard')}}" class="sm:px-4 py-2 block bg-teal-300 hover:bg-teal-400 
-                                        text-white rounded-lg ml-4">Dashboard</a>
+                                        transition duration-200 text-white rounded-lg ml-4">Dashboard</a>
                                 </li>
                             @endcan
                         @else
@@ -154,6 +154,7 @@
 
     @yield('content')
     @livewireScripts
+    
 </body>
 
 </html>
