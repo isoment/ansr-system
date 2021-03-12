@@ -11,11 +11,23 @@ class TenantRequestShow extends Component
     public $serviceRequest;
     public $selectedWorkOrder;
 
+    /**
+     *  Set selected id, validate that it belongs to this tenant
+     */
     public function selectWorkOrder($workOrderId)
     {
-        $this->selectedWorkOrder = $workOrderId;
+        $validWorkOrderIds = $this->serviceRequest->workOrders->pluck('id');
+
+        if ($validWorkOrderIds->contains($workOrderId)) {
+
+            $this->selectedWorkOrder = $workOrderId;
+
+        }
     }
 
+    /**
+     *  Count open or closed work details
+     */
     public function workDetailCount($operator)
     {
         return WorkDetails::whereHas('workOrder.serviceRequest', function($query) {

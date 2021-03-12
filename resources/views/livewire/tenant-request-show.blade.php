@@ -99,7 +99,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="mt-1">
+                        <div class="mt-3 sm:mt-1">
                             {{$currentWorkOrder->title}}
                         </div>
                         <div class="mt-4 overflow-y-auto max-h-80 pr-2">
