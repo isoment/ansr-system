@@ -111,4 +111,22 @@ class ServiceRequestController extends Controller
     {
         return view('tenant.request-index');
     }
+
+    /**
+     *  Show service request
+     *  
+     *  @return \Illuminate\Http\Response
+     */
+    public function serviceRequestShow(ServiceRequest $serviceRequest)
+    {
+        if (Gate::denies('requestBelongsToTenant', $serviceRequest)) {
+            abort(403);
+        }
+
+        return view('tenant.request-show', [
+
+            'serviceRequest' => $serviceRequest,
+
+        ]);
+    }
 }

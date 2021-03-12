@@ -17,10 +17,12 @@ class TenantRequestIndex extends Component
     public function render()
     {
         return view('livewire.tenant-request-index', [
+
             'requests' => ServiceRequest::where('tenant_id', auth()->user()->userable->id)
-                                ->where('completed_date', $this->open ? '=' : '!=', null)
-                                ->orderBy('created_at', 'desc')
-                                ->paginate(9)
+                ->where('completed_date', $this->open ? '=' : '!=', null)
+                ->orderBy('created_at', 'desc')
+                ->paginate(9)
+
         ]);
     }
 }

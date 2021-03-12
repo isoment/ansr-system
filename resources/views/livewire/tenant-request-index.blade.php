@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="text-gray-500 font-bold flex items-center justify-end">
+                <a href="{{route('tenant.request-show', $request->id)}}" class="text-gray-500 font-bold flex items-center justify-end">
                     <i class="fas fa-external-link-alt text-sm mr-1"></i>
                     <div class="font-prompt text-sm">Request</div>
                 </a>

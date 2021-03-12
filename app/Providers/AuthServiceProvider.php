@@ -8,6 +8,7 @@ use App\Models\WorkDetails;
 use App\Models\WorkOrder;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\ServerBag;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -42,6 +43,16 @@ class AuthServiceProvider extends ServiceProvider
         // Tenant user role
         Gate::define('isTenant', function($user) {
             return $user->userable_type === 'App\Models\Tenant';
+        });
+
+
+        /************
+         *  TENANT  *
+         ************/
+
+        // Service Request belongs to tenant
+        Gate::define('requestBelongsToTenant', function($user, ServiceRequest $serviceRequest) {
+            return $user->userable->id === $serviceRequest->tenant_id;
         });
 
 

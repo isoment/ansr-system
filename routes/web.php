@@ -55,7 +55,10 @@ Route::middleware('can:isTenant')->group(function() {
     // Service request index
     Route::get('tenant/my-requests', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'index'])
         ->name('tenant.request-index');
-
+    // Service request show
+    Route::get('tenant/service-request/{serviceRequest}', [\App\Http\Controllers\Tenant\ServiceRequestController::class, 'serviceRequestShow'])
+        ->name('tenant.request-show');
+        
 });
 
 // Employee Routes
