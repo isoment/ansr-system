@@ -74,7 +74,10 @@
             @keydown.escape="closeSideMenu">
 
             <div class="py-4 text-gray-500">
-                <a href='{{ route('tenant.dashboard') }}' class="flex items-center ml-6">
+                <a @can('isEmployee') href="{{route('employee.dashboard')}}" 
+                   @elsecan('isTenant') href="{{route('tenant.dashboard')}}" 
+                   @endcan  
+                    class="flex items-center ml-6">
                     <img src="/img/house.svg" alt="Logo" class="h-8 w-8">
                     <span class="text-xl font-bold ml-2">ANSR</span>
                 </a>

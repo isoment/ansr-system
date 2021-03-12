@@ -13,7 +13,12 @@ trait PropertySelectable
      */
     public function setProperty($property)
     {
-        // Get an array of property ids based on role
+        // Check if param is array
+        if (!is_array($property)) {
+            return;
+        }
+
+        // Get an array of allowed property ids based on role
         if (Gate::allows('isManagement')) {
 
             $propertyIds = Property::pluck('id')->toArray();

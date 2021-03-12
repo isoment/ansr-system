@@ -73,9 +73,10 @@
                             </div>
                         </div>
                         <div class="flex flex-col">
-                            <div class="px-2 pt-2 pb-3 space-y-1">
+                            <div class="text-center">
                                 <a href="{{route('property-listings')}}"
-                                   class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:text-gray-900 hover:bg-orange-50">
+                                   class="block px-3 py-2 uppercase tracking-wide border border-teal-300 
+                                          rounded-md text-teal-300 mx-8 my-4">
                                     Available Properties
                                 </a>
                             </div>
@@ -85,24 +86,34 @@
                                         @auth
                                             @can('isEmployee')
                                                 <li>
-                                                    <a href="{{route('employee.dashboard')}}" class="bg-teal-300 
-                                                        text-white block px-3 py-2">Dashboard</a>
+                                                    <a href="{{route('employee.dashboard')}}" 
+                                                    class="block px-3 py-2 tracking-wide 
+                                                            bg-teal-300 rounded-md text-white
+                                                    mx-8 mb-4">Dashboard</a>
                                                 </li>
                                             @elsecan('isTenant')
                                                 <li>
-                                                    <a href="{{route('tenant.dashboard')}}" class="bg-teal-300 
-                                                        text-white block px-3 py-2">Dashboard</a>
+                                                    <a href="{{route('tenant.dashboard')}}" 
+                                                    class="block px-3 py-2 tracking-wide 
+                                                            bg-teal-300 rounded-md text-white
+                                                    mx-8 mb-4">Dashboard</a>
                                                 </li>
                                             @endcan
                                         @else
                                             <li>
-                                                <a href="{{route('login')}}" class="bg-teal-300 
-                                                text-white block px-3 py-2 uppercase font-bold font-prompt tracking-wider border-b border-gray-50">Login</a>
+                                                <a href="{{route('login')}}" 
+                                                class="block px-3 py-2 uppercase tracking-wide border border-teal-300 rounded-md text-teal-300
+                                                        mx-8 mb-4">
+                                                Login
+                                                </a>
                                             </li>
                                             @if (Route::has('register'))
                                                 <li>
-                                                    <a href="{{route('register')}}" class="bg-teal-300 
-                                                    text-white block px-3 py-2 uppercase font-bold font-prompt tracking-wider">Register</a>
+                                                    <a href="{{route('register')}}" 
+                                                    class="block px-3 py-2 uppercase tracking-wide bg-teal-300 rounded-md text-white
+                                                            mx-8 my-4">
+                                                        Register
+                                                    </a>
                                                 </li>
                                             @endif
                                         @endauth
