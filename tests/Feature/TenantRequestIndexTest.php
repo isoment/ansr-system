@@ -9,10 +9,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Tests\Userable;
 
 class TenantRequestIndexTest extends TestCase
 {
     use RefreshDatabase;
+    use Userable;
 
     /**
      *  @test
@@ -61,7 +63,8 @@ class TenantRequestIndexTest extends TestCase
     /**
      *  @test
      * 
-     *  The livewire component shows the tenants service requests
+     *  The livewire component shows the tenants service requests.
+     *  Also asserts that the open requests toggle works
      */
     public function tenant_service_requests_are_shown()
     {
@@ -88,55 +91,6 @@ class TenantRequestIndexTest extends TestCase
             ->set('open', false)
             ->assertSee($requestTwo->issue)
             ->assertDontSee($requestOne->issue);
-    }
-
-    /**
-     *  @test
-     * 
-     *  The requests can be sorted in asc or desc when column is clicked
-     */
-    public function request_are_displayed_in_asc_or_desc_order_by_created_date()
-    {
-        $tenant = $this->createTestingTenant();
-
-        $this->actingAs($tenant);
-
-        $requestOne = ServiceRequest::factory()->create([
-            'tenant_id' => $tenant->userable->id,
-            'category_id' => RequestCategory::factory()->create()->id,
-            'issue' => 'anterior-91',
-            'completed_date' => NULL,
-            'created_at' => '2020-12-10 21:19:32'
-        ]);
-
-        $requestTwo = ServiceRequest::factory()->create([
-            'tenant_id' => $tenant->userable->id,
-            'category_id' => RequestCategory::factory()->create()->id,
-            'issue' => 'suspicious-772',
-            'completed_date' => NULL,
-            'created_at' => '2020-12-12 09:12:22'
-        ]);
-
-        $requestThree = ServiceRequest::factory()->create([
-            'tenant_id' => $tenant->userable->id,
-            'category_id' => RequestCategory::factory()->create()->id,
-            'issue' => 'structure-125',
-            'completed_date' => NULL,
-            'created_at' => '2020-12-14 11:07:02'
-        ]);
-
-        Livewire::test(TenantRequestIndex::class)
-            ->assertSeeInOrder([
-                $requestThree->issue,
-                $requestTwo->issue,
-                $requestOne->issue
-            ])
-            ->call('sortDirection')
-            ->assertSeeInOrder([
-                $requestOne->issue,
-                $requestTwo->issue,
-                $requestThree->issue
-            ]);
     }
 
 }

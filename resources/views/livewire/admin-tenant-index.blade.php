@@ -93,10 +93,10 @@
                                     {{$tenant->lease_id}}
                                 </td>
                                 <td class="px-2 py-3 text-sm">
-                                    {{$tenant->email}}
+                                    {{Str::limit($tenant->email, 20, '...')}}
                                 </td>
-                                <td class="px-2 py-3">
-                                    {{$tenant->phone}}
+                                <td class="px-2 py-3 text-xs">
+                                    {{Str::limit($tenant->phone, 15, '...')}}
                                 </td>
                                 <td class="px-2 py-3 text-sm">
                                     <a href="{{route('employee.tenant-edit', $tenant->id)}}" class="text-teal-400 hover:text-teal-600">Edit</a>

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Models\RequestCategory;
 use App\Models\ServiceRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class ServiceRequestController extends Controller

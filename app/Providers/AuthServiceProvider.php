@@ -52,7 +52,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Service Request belongs to tenant
         Gate::define('requestBelongsToTenant', function($user, ServiceRequest $serviceRequest) {
-            return $user->userable->id === $serviceRequest->tenant_id;
+            return $user->userable->id === $serviceRequest->tenant->id;
         });
 
 

@@ -124,9 +124,7 @@ class ServiceRequestController extends Controller
         }
 
         return view('tenant.request-show', [
-
             'serviceRequest' => $serviceRequest,
-
         ]);
     }
 }

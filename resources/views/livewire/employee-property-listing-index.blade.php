@@ -296,7 +296,7 @@
                             <td class="px-4 py-3 text-sm">
                                 <div class="flex flex-col">
                                     <div class="text-sm leading-5 font-medium text-gray-900">
-                                        {{Str::limit($property->property->street, 30, '...')}} {{$property->unit ? 'Unit ' . $property->unit : ''}}
+                                        {{Str::limit($property->property->street, 20, '...')}} {{$property->unit ? 'Unit ' . $property->unit : ''}}
                                     </div>
                                     <div class="text-xs font-thin">
                                         {{$property->property->city}}, {{$property->property->state}} {{$property->property->zipcode}}

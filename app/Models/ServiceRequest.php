@@ -93,7 +93,8 @@ class ServiceRequest extends Model
      */
     public function scopeOpenRequests($query)
     {
-        return $query->where('completed_date', '=', null)->count();
+        return $query->whereBetween('created_at', [$this->aYearAgoString(), $this->getCurrentDateString()])
+            ->where('completed_date', '=', null)->count();
     }
 
     /**

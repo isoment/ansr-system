@@ -10,10 +10,11 @@ trait PropertySelectable
     /**
      *  Set the property based on input and
      *  verify that the property exists
+     *  @param array
      */
     public function setProperty($property)
     {
-        // Check if param is array
+        // Check if parameter is array
         if (!is_array($property)) {
             return;
         }
@@ -34,9 +35,7 @@ trait PropertySelectable
         // Check to make sure the property that is passed in is valid
         // Then set it to the slectedProperty
         if (in_array($property['id'], $propertyIds)) {
-
             $this->selectedProperty = $property;
-
         }
     }
 }
