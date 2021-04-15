@@ -13,7 +13,7 @@ trait Userable
     /**
      *  A helper to create a tenant and associated models
      */
-    protected function createTestingTenant()
+    public function createTestingTenant()
     {
         $region = Region::factory()->create();
 

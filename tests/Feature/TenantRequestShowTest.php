@@ -2,17 +2,20 @@
 
 namespace Tests\Feature;
 
-use App\Models\RequestCategory;
-use App\Models\ServiceRequest;
+use App\Http\Livewire\TenantRequestShow;
+use App\Models\Employee;
+use App\Models\WorkOrder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Livewire\Livewire;
+use Tests\ServiceRequestable;
 use Tests\TestCase;
 use Tests\Userable;
+use Tests\WorkOrderable;
 
 class TenantRequestShowTest extends TestCase
 {
-    use RefreshDatabase;
-    use Userable;
+    use RefreshDatabase, Userable, ServiceRequestable, WorkOrderable;
 
     /**
      *  @test
@@ -23,12 +26,7 @@ class TenantRequestShowTest extends TestCase
     {
         $tenant = $this->createTestingTenant();
 
-        $serviceRequest = ServiceRequest::factory()->create([
-            'tenant_id' => $tenant->userable->id,
-            'category_id' => RequestCategory::factory()->create()->id,
-            'issue' => 'randomString39r8uidojewqf',
-            'completed_date' => NULL,
-        ]);
+        $serviceRequest = $this->createServiceRequest($tenant->userable->id);
 
         $this->actingAs($tenant);
 
@@ -48,16 +46,31 @@ class TenantRequestShowTest extends TestCase
 
         $tenantTwo = $this->createTestingTenant();
 
-        $tenantOneRequest = ServiceRequest::factory()->create([
-            'tenant_id' => $tenantOne->userable->id,
-            'category_id' => RequestCategory::factory()->create()->id,
-            'issue' => 'T3nantOneR3que$t',
-            'completed_date' => NULL,
-        ]);
+        $tenantOneRequest = $this->createServiceRequest($tenantOne->userable->id);
 
         $this->actingAs($tenantTwo);
 
         $this->get(route('tenant.request-show', $tenantOneRequest->id))
             ->assertForbidden();
+    }
+
+    /**
+     *  @test
+     * 
+     *  The tenant should be able to see service request and work orders
+     */
+    public function tenant_should_be_able_to_see_work_orders()
+    {
+        $tenant = $this->createTestingTenant();
+
+        $request = $this->createServiceRequest($tenant->userable->id);
+
+        $workOrder = $this->createWorkOrderFromServiceRequest($request->id);
+
+        $this->actingAs($tenant);
+
+        Livewire::test(TenantRequestShow::class, ['serviceRequest' => $request,])
+            ->assertSee($request->issue)
+            ->assertSee($workOrder->title);
     }
 }
