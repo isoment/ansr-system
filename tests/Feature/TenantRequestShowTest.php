@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\TenantRequestShow;
 use App\Models\Employee;
+use App\Models\WorkDetails;
 use App\Models\WorkOrder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -69,8 +70,28 @@ class TenantRequestShowTest extends TestCase
 
         $this->actingAs($tenant);
 
-        Livewire::test(TenantRequestShow::class, ['serviceRequest' => $request,])
+        Livewire::test(TenantRequestShow::class, ['serviceRequest' => $request])
             ->assertSee($request->issue)
             ->assertSee($workOrder->title);
+    }
+
+    /**
+     *  @test
+     * 
+     *  The tenant should be able to view details for the work order.
+     */
+    public function tenant_can_view_work_details()
+    {
+        $tenant = $this->createTestingTenant();
+
+        $request = $this->createServiceRequest($tenant->userable->id);
+
+        $workOrder = $this->createWorkOrderFromServiceRequest($request->id);
+
+        $workDetail = $this->createWorkDetailFromWorkOrder($workOrder->id);
+
+        Livewire::test(TenantRequestShow::class, ['serviceRequest' => $request])
+            ->call('selectWorkOrder', $workOrder->id)
+            ->assertSee($workDetail->tenant_notes);
     }
 }
