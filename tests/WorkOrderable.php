@@ -9,7 +9,7 @@ use App\Models\WorkOrder;
 trait WorkOrderable
 {
     /**
-     *  Create a work order from on a service request
+     *  Create a work order from a service request
      * 
      *  @param integer $requestId
      *  @return object

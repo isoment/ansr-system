@@ -70,4 +70,14 @@ class User extends Authenticatable
             return $this->userable->lease->property->region;
         }
     }
+
+    /**
+     *  Tenants current property
+     */
+    public function tenantProperty()
+    {
+        if ($this->userable_type === 'App\Models\Tenant') {
+            return $this->userable->lease->property;
+        }
+    }
 }

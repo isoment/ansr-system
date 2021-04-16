@@ -42,14 +42,12 @@
 
     <div class="relative">
         <div class="flex items-center ml-4">
-            @can('isAdministrativeOrManagement')
-                <a href="{{route('employee.request-history')}}"
-                   class="bg-teal-300 hover:bg-teal-400 transition-all duration-200 text-white px-4 
-                         py-2 text-xs font-bold rounded-t-md absolute index-data-table-button-position 
-                         right-8 hidden lg:block">
-                    Request History
-                </a>
-            @endcan
+            <a href="{{route('employee.request-history')}}"
+                class="bg-teal-300 hover:bg-teal-400 transition-all duration-200 text-white px-4 
+                        py-2 text-xs font-bold rounded-t-md absolute index-data-table-button-position 
+                        right-8 hidden lg:block">
+                Request History
+            </a>
         </div>
     </div>
 

@@ -151,6 +151,10 @@ class EmployeeServiceRequestIndexTest extends TestCase
             ->set('search', uniqid())
             ->assertDontSee(
                 $this->stringLimitOrNot($tenantRequests[2]['issue'], 20)
-            );
+            )
+            ->set('search', $tenant->userable->last_name)
+            ->assertSee($tenant->userable->last_name)
+            ->set('search', uniqid())
+            ->assertDontSee($tenant->userable->last_name);
     }
 }
