@@ -60,4 +60,14 @@ class User extends Authenticatable
             ->only(['street', 'city', 'state', 'zipcode'])
             ->put('unit', $this->userable->lease->unit);
     }
+
+    /**
+     *  Region tenant belongs to
+     */
+    public function tenantRegion()
+    {
+        if ($this->userable_type === 'App\Models\Tenant') {
+            return $this->userable->lease->property->region;
+        }
+    }
 }

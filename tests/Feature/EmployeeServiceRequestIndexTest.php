@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\EmployeeServiceRequestIndex;
-use App\Models\Tenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -11,11 +10,11 @@ use Tests\ServiceRequestable;
 use Tests\TestCase;
 use Tests\Userable;
 use Tests\WorkOrderable;
-use Illuminate\Support\Str;
+use Tests\TestHelpable;
 
 class EmployeeServiceRequestIndexTest extends TestCase
 {
-    use RefreshDatabase, Userable, ServiceRequestable, WorkOrderable;
+    use RefreshDatabase, Userable, ServiceRequestable, WorkOrderable, TestHelpable;
 
     /**
      *  @test
@@ -46,20 +45,57 @@ class EmployeeServiceRequestIndexTest extends TestCase
      */
     public function management_user_can_see_all_service_requests()
     {
+        // Create 3 users, all different regions
         $tenantOne = $this->createTestingTenant();
         $tenantTwo = $this->createTestingTenant();
         $tenantThree = $this->createTestingTenant();
 
         $manager = $this->createEmployee('Management');
 
-        $tenantOneRequests = $this->createMultipleServiceRequests($tenantOne->id, 8);
-        $tenantTwoRequests = $this->createMultipleServiceRequests($tenantTwo->id, 6);
-        $tenantThreeRequests = $this->createMultipleServiceRequests($tenantThree->id, 9);
+        $tenantOneRequests = $this->createMultipleServiceRequests($tenantOne->id, 2);
+        $tenantTwoRequests = $this->createMultipleServiceRequests($tenantTwo->id, 2);
+        $tenantThreeRequests = $this->createMultipleServiceRequests($tenantThree->id, 2);
 
         $this->actingAs($manager);
 
         Livewire::withQueryParams(['open' => 'true'])
             ->test(EmployeeServiceRequestIndex::class)
-            ->assertSee(Str::limit($tenantOneRequests->shuffle()->first()->issue, 20));
+            ->assertSee(
+                $this->stringLimitOrNot($tenantOneRequests->shuffle()->first()->issue, 20)
+            )
+            ->assertSee(
+                $this->stringLimitOrNot($tenantTwoRequests->shuffle()->first()->issue, 20)
+            )
+            ->assertSee(
+                $this->stringLimitOrNot($tenantThreeRequests->shuffle()->first()->issue, 20)
+            );
+    }
+
+    /**
+     *  @test
+     * 
+     *  Administrative user can only see service requests within their region
+     */
+    public function administrative_can_only_see_requests_from_their_region()
+    {
+        $tenantOne = $this->createTestingTenant();
+        $tenantTwo = $this->createTestingTenant();
+
+        // Create an administrative user in the same region as $tenantOne 
+        $administrative = $this->createEmployeeSpecifyRegion('Administrative', $tenantOne->tenantRegion());
+
+        $tenantOneRequests = $this->createMultipleServiceRequests($tenantOne->id, 3);
+        $tenantTwoRequests = $this->createMultipleServiceRequests($tenantTwo->id, 3);
+
+        $this->actingAs($administrative);
+
+        Livewire::withQueryParams(['open' => 'true'])
+            ->test(EmployeeServiceRequestIndex::class)
+            ->assertSee(
+                $this->stringLimitOrNot($tenantOneRequests->shuffle()->first()->issue, 20)
+            )
+            ->assertDontSee(
+                $this->stringLimitOrNot($tenantTwoRequests->shuffle()->first()->issue, 20)
+            );
     }
 }

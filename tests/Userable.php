@@ -65,4 +65,26 @@ trait Userable
         ]);
     }
 
+    /**
+     *  Create an employee in a specific region
+     * 
+     *  @param string $role
+     *  @param object $region
+     *  @return object
+     */
+    public function createEmployeeSpecifyRegion(string $role, object $region)
+    {
+        $employee = Employee::factory()->create([
+            'region_id' => $region->id,
+            'role' => $role,
+        ]);
+
+        return User::create([
+            'name' => 'TestMananger',
+            'email' => $employee->email,
+            'userable_type' => 'App\Models\Employee',
+            'userable_id' => $employee->id,
+            'password' => bcrypt('password'),
+        ]);
+    }
 }
