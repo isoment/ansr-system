@@ -98,4 +98,59 @@ class EmployeeServiceRequestIndexTest extends TestCase
                 $this->stringLimitOrNot($tenantTwoRequests->shuffle()->first()->issue, 20)
             );
     }
+
+    /**
+     *  @test
+     * 
+     *  Service requests can be filtered by completion status
+     */
+    public function requests_can_be_filtered_by_completion_status()
+    {
+        $tenantOne = $this->createTestingTenant();
+
+        $employee = $this->createEmployee('Management');
+
+        $openRequest = $this->createServiceRequest($tenantOne->id);
+
+        $closedRequest = $this->createClosedServiceRequest($tenantOne->id);
+
+        $this->actingAs($employee);
+
+        Livewire::test(EmployeeServiceRequestIndex::class)
+            ->set('open', true)
+            ->assertSee(
+                $this->stringLimitOrNot($openRequest->issue, 20)
+            )
+            ->set('open', false)
+            ->assertSee(
+                $this->stringLimitOrNot($closedRequest->issue, 20)
+            );
+    }
+
+    /**
+     *  @test
+     * 
+     *  The search works and returns expected results
+     */
+    public function the_search_works_and_returns_expected_results()
+    {
+        $tenant = $this->createTestingTenant();
+
+        $employee = $this->createEmployee('Management');
+
+        $tenantRequests = $this->createMultipleServiceRequests($tenant->id, 8);
+
+        $this->actingAs($employee);
+
+        Livewire::withQueryParams(['open' => 'true'])
+            ->test(EmployeeServiceRequestIndex::class)
+            ->set('search', $tenantRequests[2]['issue'])
+            ->assertSee(
+                $this->stringLimitOrNot($tenantRequests[2]['issue'], 20)
+            )
+            ->set('search', uniqid())
+            ->assertDontSee(
+                $this->stringLimitOrNot($tenantRequests[2]['issue'], 20)
+            );
+    }
 }

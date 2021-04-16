@@ -17,7 +17,9 @@ trait ServiceRequestable
     {
         return ServiceRequest::factory()->create([
             'tenant_id' => $tenantId,
-            'category_id' => RequestCategory::factory()->create()->id,
+            'category_id' => RequestCategory::factory()->create([
+                'name' => uniqid(),
+            ])->id,
             'completed_date' => NULL,
         ]);
     }
@@ -32,7 +34,9 @@ trait ServiceRequestable
     {
         return ServiceRequest::factory()->create([
             'tenant_id' => $tenantId,
-            'category_id' => RequestCategory::factory()->create()->id,
+            'category_id' => RequestCategory::factory()->create([
+                'name' => uniqid(),
+            ])->id,
         ]);
     }
 
@@ -47,7 +51,9 @@ trait ServiceRequestable
     {
         return ServiceRequest::factory()->count($count)->create([
             'tenant_id' => $tenantId,
-            'category_id' => RequestCategory::factory()->create()->id,
+            'category_id' => RequestCategory::factory()->create([
+                'name' => uniqid(),
+            ])->id,
             'completed_date' => NULL,
         ]);
     }
