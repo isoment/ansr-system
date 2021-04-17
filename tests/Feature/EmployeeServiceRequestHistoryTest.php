@@ -90,4 +90,78 @@ class EmployeeServiceRequestHistoryTest extends TestCase
             ->assertDontSee($tenantOne->tenantProperty()->street)
             ->assertDontSee($tenantThree->tenantProperty()->street);
     }
+
+    /**
+     *  @test
+     * 
+     *  The property search works as expected
+     */
+    public function the_property_search_works_as_expected()
+    {
+        // Create three tenants, each with a different property and region
+        $tenantOne = $this->createTestingTenant();
+        $tenantTwo = $this->createTestingTenant();
+        $tenantThree = $this->createTestingTenant();
+
+        $employee = $this->createEmployee('Management');
+
+        $this->actingAs($employee);
+
+        Livewire::test(EmployeeServiceRequestHistory::class)
+            ->set('propertySearch', $tenantOne->tenantProperty()->street)
+            ->assertSee($tenantOne->tenantProperty()->street)
+            ->assertSee($tenantOne->tenantProperty()->city)
+            ->assertDontSee($tenantTwo->tenantProperty()->street)
+            ->assertDontSee($tenantThree->tenantProperty()->street);
+    }
+
+    /**
+     *  @test
+     * 
+     *  When a property is selected service requests are displayed
+     */
+    public function when_property_is_selected_requests_are_displayed()
+    {
+        $tenantOne = $this->createTestingTenant();
+        $tenantTwo = $this->createTestingTenant();
+
+        $employee = $this->createEmployee('Management');
+
+        $tenantOneRequests = $this->createMultipleServiceRequests($tenantOne->id, 3);
+        $tenantTwoRequests = $this->createMultipleServiceRequests($tenantTwo->id, 3);
+
+        $this->actingAs($employee);
+
+        Livewire::test(EmployeeServiceRequestHistory::class)
+            ->call('setProperty', $tenantOne->tenantProperty()->toArray())
+            ->assertSee($this->stringLimitOrNot($tenantOneRequests[0]['issue'], 25))
+            ->assertDontSee($this->stringLimitOrNot($tenantTwoRequests[0]['issue'], 25))
+            ->call('setProperty', $tenantTwo->tenantProperty()->toArray())
+            ->assertSee($this->stringLimitOrNot($tenantTwoRequests[1]['issue'], 25))
+            ->assertDontSee($this->stringLimitOrNot($tenantOneRequests[1]['issue'], 25));
+    }
+
+    /**
+     *  @test
+     * 
+     *  The search allows filtering by unit
+     */
+    public function unit_search_filters_by_unit_correctly()
+    {
+        $tenantOne = $this->createTestingTenant();
+
+        $employee = $this->createEmployee('Management');
+
+        $request = $this->createServiceRequest($tenantOne->id);
+
+        $this->actingAs($employee);
+
+        Livewire::test(EmployeeServiceRequestHistory::class)
+            ->call('setProperty', $tenantOne->tenantProperty()->toArray())
+            ->assertSee($this->stringLimitOrNot($request->issue, 25))
+            ->set('unitSearch', $tenantOne->userable->lease->unit)
+            ->assertSee($this->stringLimitOrNot($request->issue, 25))
+            ->set('unitSearch', uniqid())
+            ->assertDontSee($this->stringLimitOrNot($request->issue, 25));
+    }
 }

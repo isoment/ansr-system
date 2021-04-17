@@ -22,8 +22,8 @@ class RegionFactory extends Factory
     public function definition()
     {
         return [
-            'region_name' => $this->faker->city,
-            'slug' => $this->faker->lexify('???'),
+            'region_name' => $this->faker->unique()->city,
+            'slug' => $this->faker->unique()->lexify('???'),
         ];
     }
 }

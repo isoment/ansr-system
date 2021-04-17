@@ -19,6 +19,8 @@ trait PropertySelectable
             return;
         }
 
+        // dd($property);
+
         // Get an array of allowed property ids based on role
         if (Gate::allows('isManagement')) {
 
