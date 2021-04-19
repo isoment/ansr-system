@@ -5,6 +5,7 @@ namespace Tests;
 use App\Models\Employee;
 use App\Models\WorkDetails;
 use App\Models\WorkOrder;
+use Faker\Factory;
 
 trait WorkOrderable
 {
@@ -16,10 +17,33 @@ trait WorkOrderable
      */
     public function createWorkOrderFromServiceRequest(int $requestId)
     {
-        return WorkOrder::factory()->create([
+        return WorkOrder::create([
             'service_request_id' => $requestId,
             'employee_id' => Employee::factory()->create()->id,
-            'title' => 'aTestWorkOrder361723'
+            'title' => '98321ruqjfeq9e8h9djwqi09832ju8fjewfe',
+            'start_date' => now(),
+            'end_date' => null,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+    }
+
+    /**
+     *  Create a complete work order from a service request
+     * 
+     *  @param integer $requestId
+     *  @return object
+     */
+    public function createCompletedWorkOrderFromServiceRequest(int $requestId)
+    {
+        return WorkOrder::create([
+            'service_request_id' => $requestId,
+            'employee_id' => Employee::factory()->create()->id,
+            'title' => 'd93d09euqf89qu3fqko9kied310r9u3if9rw',
+            'start_date' => now(),
+            'end_date' => now(),
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 
