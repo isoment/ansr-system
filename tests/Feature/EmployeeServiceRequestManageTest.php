@@ -6,10 +6,7 @@ use App\Http\Livewire\EmployeeServiceRequestManage;
 use App\Models\ServiceRequest;
 use App\Models\WorkOrder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Gate;
 use Livewire\Livewire;
-use Prophecy\Call\Call;
 use Tests\TestCase;
 use Tests\ServiceRequestable;
 use Tests\TestHelpable;
@@ -74,7 +71,7 @@ class EmployeeServiceRequestManangeTest extends TestCase
      */
     public function non_manangers_cannot_view_requests_outside_their_region()
     {
-        // Three tenants in different regions
+        // Two tenants in different regions
         $tenantOne = $this->createTestingTenant();
         $tenantTwo = $this->createTestingTenant();
 

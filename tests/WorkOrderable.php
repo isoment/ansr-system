@@ -10,6 +10,19 @@ use Faker\Factory;
 trait WorkOrderable
 {
     /**
+     *  Create blank service request
+     * 
+     *  @param integer
+     *  @return object
+     */
+    public function createBlankWorkOrder(int $requestId)
+    {
+        return WorkOrder::create([
+            'service_request_id' => $requestId,
+        ]);
+    }
+
+    /**
      *  Create a work order from a service request
      * 
      *  @param integer $requestId
@@ -46,6 +59,23 @@ trait WorkOrderable
             'updated_at' => now()
         ]);
     }
+
+    /**
+     *  Create a work order from service request and employee
+     * 
+     *  @param integer $requestId
+     *  @param integer $employeeId
+     *  @return object
+     */
+    public function createWorkOrderSpecifyRequestAndEmployee(int $requestId, int $employeeId)
+    {
+        return WorkOrder::create([
+            'service_request_id' => $requestId,
+            'employee_id' => $employeeId,
+            'title' => uniqid('title_', true)
+        ]);
+    }
+
 
     /**
      *  Create multiple work orders
