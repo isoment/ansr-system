@@ -106,6 +106,18 @@ trait WorkOrderable
     }
 
     /**
+     *  Create unstarted work detail from a work order
+     */
+    public function createUnstartedWorkDetail(int $workOrderId)
+    {
+        return WorkDetails::factory()->create([
+            'work_order_id' => $workOrderId,
+            'start_date' => NULL,
+            'end_date' => NULL
+        ]);
+    }
+
+    /**
      *  Create multiple work details
      * 
      *  @param integer $workOrderId
