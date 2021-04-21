@@ -33,7 +33,7 @@ trait WorkOrderable
         return WorkOrder::create([
             'service_request_id' => $requestId,
             'employee_id' => Employee::factory()->create()->id,
-            'title' => '98321ruqjfeq9e8h9djwqi09832ju8fjewfe',
+            'title' => uniqid('title_', true),
             'start_date' => now(),
             'end_date' => null,
             'created_at' => now(),
