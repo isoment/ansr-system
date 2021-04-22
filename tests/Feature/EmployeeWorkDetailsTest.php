@@ -10,7 +10,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
-use Prophecy\Call\Call;
 use Tests\TestCase;
 use Tests\ServiceRequestable;
 use Tests\TestHelpable;
