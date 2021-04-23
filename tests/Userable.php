@@ -42,6 +42,27 @@ trait Userable
     }
 
     /**
+     *  Create a tenant for a lease
+     * 
+     *  @param int $leaseId
+     *  @return object
+     */
+    public function createTenantForLease(int $leaseId)
+    {
+        $tenant = Tenant::factory()->create([
+            'lease_id' => $leaseId
+        ]);
+
+        return User::create([
+            'name' => 'TestTenant',
+            'email' => $tenant->email,
+            'userable_type' => 'App\Models\Tenant',
+            'userable_id' => $tenant->id,
+            'password' => bcrypt('password'),
+        ]);
+    }
+
+    /**
      *  Create an employee and associated models for testing
      * 
      *  @param string $role

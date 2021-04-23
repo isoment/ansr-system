@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Http\Livewire\EmployeeLeaseManage;
 use App\Models\Lease;
 use App\Models\Region;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\Leaseable;
@@ -171,11 +172,15 @@ class EmployeeLeaseManageTest extends TestCase
 
         $this->assertEmpty(Lease::first());
 
+        $startDate = Carbon::now()->format('Y-m-d');
+
+        $endDate = Carbon::now()->addYear()->format('Y-m-d');
+
         Livewire::test(EmployeeLeaseManage::class)
             ->set('selectedProperty', $propertyOne->toArray())
             ->set('unit', 'dj2189ryheiajqo9328r')
-            ->set('startDate', "2021-07-07")
-            ->set('endDate', "2021-07-09")
+            ->set('startDate', $startDate)
+            ->set('endDate', $endDate)
             ->call('createLease')
             ->assertSee('Lease created successfully');
 

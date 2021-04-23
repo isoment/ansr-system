@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Http\Livewire\EmployeeWorkDetailManage;
 use App\Models\DetailImage;
 use App\Models\WorkDetails;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -170,12 +171,14 @@ class EmployeeWorkDetailsTest extends TestCase
 
         $this->actingAs($manager);
 
+        $startDate = Carbon::now()->format('Y-m-d');
+
         Livewire::test(EmployeeWorkDetailManage::class, ['workDetail' => $workDetail])
             ->assertSet('details', $workDetail->details)
             ->assertSet('tenantNotes', $workDetail->tenant_notes)
             ->set('details', 'testDetail132839djdidoasdDUd3')
             ->set('tenantNotes', 'kdo2r90j9feqjeqfijq3ur90qUSDew98')
-            ->set('startdate', '2021-07-07')
+            ->set('startdate', $startDate)
             ->call('editWorkDetail')
             ->assertSee('Work detail updated');
 
@@ -183,7 +186,7 @@ class EmployeeWorkDetailsTest extends TestCase
 
         $this->assertEquals($updatedDetail->details, 'testDetail132839djdidoasdDUd3');
         $this->assertEquals($updatedDetail->tenant_notes, 'kdo2r90j9feqjeqfijq3ur90qUSDew98');
-        $this->assertEquals($updatedDetail->start_date, '2021-07-07');
+        $this->assertEquals($updatedDetail->start_date, $startDate);
     }
 
     /**
@@ -205,13 +208,15 @@ class EmployeeWorkDetailsTest extends TestCase
 
         $this->actingAs($manager);
 
+        $startDate = Carbon::now()->format('Y-m-d');
+
         Livewire::test(EmployeeWorkDetailManage::class, ['workDetail' => $workDetail])
             ->call('toggleEndDate')
             ->assertSee('Please set a start date before completing')
-            ->set('startdate', '2021-07-07')
+            ->set('startdate', $startDate)
             ->call('editWorkDetail')
             ->call('toggleEndDate')
-            ->assertSee('Jul 7, 2021');
+            ->assertSee(Carbon::parse($startDate)->toFormattedDateString());
 
         $updatedDetail = WorkDetails::find($workDetail->id);
 

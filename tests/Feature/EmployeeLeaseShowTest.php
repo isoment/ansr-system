@@ -2,6 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Http\Livewire\EmployeeLeaseShow;
+use App\Models\Lease;
+use App\Models\Tenant;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Livewire\Livewire;
@@ -79,5 +83,130 @@ class EmployeeLeaseShowTest extends TestCase
 
         $this->get(route('employee.lease-show', $unmanageableLeases[0]->id))
             ->assertStatus(403);
+    }
+
+    /**
+     *  @test
+     * 
+     *  The lease information is displayed
+     */
+    public function the_lease_information_is_displayed()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $lease = $this->createLease();
+
+        $this->actingAs($manager);
+
+        Livewire::test(EmployeeLeaseShow::class, ['lease' => $lease])
+            ->assertSee($lease->property->street)
+            ->assertSee($lease->property->city)
+            ->assertSee($lease->property->zipcode);
+    }
+
+    /**
+     *  @test
+     * 
+     *  Tenants on the lease are displayed
+     */
+    public function tenants_on_the_lease_are_displayed()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $lease = $this->createLease();
+
+        $tenant = $this->createTenantForLease($lease->id);
+
+        $this->actingAs($manager);
+
+        Livewire::test(EmployeeLeaseShow::class, ['lease' => $lease])
+            ->assertSee($tenant->first_name)
+            ->assertSee($tenant->last_name)
+            ->assertSee($tenant->email);
+    }
+
+    /**
+     *  @test
+     * 
+     *  A new tenant can be created and added to lease
+     */
+    public function a_new_tenant_can_be_created_and_added_to_the_lease()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $lease = $this->createLease();
+
+        $this->actingAs($manager);
+
+        $this->assertEmpty(Tenant::first());
+
+        Livewire::test(EmployeeLeaseShow::class, ['lease' => $lease])
+            ->set('firstName', 'djoi38X')
+            ->set('lastName', '9d9wqdw')
+            ->set('email', 'test926@t3St.com')
+            ->set('phone', '555-555-5555')
+            ->call('createTenant');
+
+        $newTenant = Tenant::first();
+
+        $this->assertNotEmpty($newTenant);
+
+        Livewire::test(EmployeeLeaseShow::class, ['lease' => $lease])
+            ->assertSee($newTenant->first_name)
+            ->assertSee($newTenant->last_name);
+    }
+
+    /**
+     *  @test
+     * 
+     *  A lease can be extended
+     */
+    public function a_lease_can_be_extended()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $lease = $this->createLease();
+
+        $tenant = $this->createTenantForLease($lease->id);
+
+        $this->actingAs($manager);
+
+        $aYearFromNow = Carbon::now()->addYear()->format('Y-m-d');
+
+        Livewire::test(EmployeeLeaseShow::class, ['lease' => $lease])
+            ->set('endDate', $aYearFromNow)
+            ->call('extendLease')
+            ->assertSee(Carbon::parse($aYearFromNow)->toFormattedDateString());
+    }
+
+    /**
+     *  @test
+     * 
+     *  An existing tenant can be added to a lease
+     */
+    public function an_existing_tenant_can_be_added_to_a_lease()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $newLease = $this->createLease();
+
+        $oldLease = $this->createLease();
+
+        $tenant = $this->createTenantForLease($oldLease->id);
+
+        $this->actingAs($manager);
+
+        $this->assertEmpty($newLease->tenants);
+
+        Livewire::test(EmployeeLeaseShow::class, ['lease' => $newLease])
+            ->call('selectTenant', $tenant->userable->toArray())
+            ->call('addExistingTenant')
+            ->assertSee('Tenant removed from previous lease and added to this lease');
+
+        $newLeaseTenants = Lease::find($newLease->id)->tenants;
+
+        $this->assertNotEmpty($newLeaseTenants);
+
+        $this->assertEmpty($oldLease->tenants);
     }
 }
