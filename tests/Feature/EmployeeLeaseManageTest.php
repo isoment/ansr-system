@@ -15,8 +15,7 @@ use Tests\Userable;
 
 class EmployeeLeaseManageTest extends TestCase
 {
-    use RefreshDatabase, Userable, TestHelpable, Propertyable,
-        Leaseable;
+    use RefreshDatabase, Userable, TestHelpable, Propertyable, Leaseable;
 
     /**
      *  @test
