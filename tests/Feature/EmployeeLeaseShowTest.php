@@ -138,7 +138,7 @@ class EmployeeLeaseShowTest extends TestCase
 
         $this->actingAs($manager);
 
-        $this->assertEmpty(Tenant::first());
+        $this->assertEmpty(Tenant::all()->first());
 
         Livewire::test(EmployeeLeaseShow::class, ['lease' => $lease])
             ->set('firstName', 'djoi38X')
@@ -147,7 +147,7 @@ class EmployeeLeaseShowTest extends TestCase
             ->set('phone', '555-555-5555')
             ->call('createTenant');
 
-        $newTenant = Tenant::first();
+        $newTenant = Tenant::all()->first();
 
         $this->assertNotEmpty($newTenant);
 

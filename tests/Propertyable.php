@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\Property;
+use App\Models\PropertyListing;
 use App\Models\Region;
 
 trait Propertyable
@@ -32,6 +33,32 @@ trait Propertyable
     {
         return Property::factory()->create([
             'region_id' => $regionId
+        ]);
+    }
+
+    /**
+     *  Create property listing
+     * 
+     *  @param int $propertyId
+     *  @return object
+     */
+    public function createPropertyListing(int $propertyId)
+    {
+        return PropertyListing::factory()->create([
+            'property_id' => $propertyId
+        ]);
+    }
+
+    /**
+     *  Create property listing
+     * 
+     *  @param int $propertyId
+     *  @return object
+     */
+    public function createPropertyListings(int $propertyId, int $count)
+    {
+        return PropertyListing::factory()->count($count)->create([
+            'property_id' => $propertyId
         ]);
     }
 }
