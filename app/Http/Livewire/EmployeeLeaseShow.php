@@ -118,7 +118,7 @@ class EmployeeLeaseShow extends Component
             $this->validate([
                 'firstName' => 'required',
                 'lastName' => 'required',
-                'email' => ['required', 'email'],
+                'email' => ['required', 'email', 'unique:tenants,email'],
                 'phone' => ['required', new PhoneNumber],
             ]);
     
@@ -131,6 +131,11 @@ class EmployeeLeaseShow extends Component
             ]);
     
             $this->showTenantModal = false;
+
+            $this->firstName = '';
+            $this->lastName = '';
+            $this->phone = '';
+            $this->email = '';
     
             session()->flash('success', 'Tenant created and attached to lease');
 

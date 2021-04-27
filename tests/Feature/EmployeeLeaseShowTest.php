@@ -134,20 +134,21 @@ class EmployeeLeaseShowTest extends TestCase
     {
         $manager = $this->createEmployee('Management');
 
-        $lease = $this->createLease();
+        $lease = $this->createOpenLease();
 
         $this->actingAs($manager);
 
-        $this->assertEmpty(Tenant::all()->first());
+        $this->assertEmpty(Tenant::first());
 
         Livewire::test(EmployeeLeaseShow::class, ['lease' => $lease])
             ->set('firstName', 'djoi38X')
             ->set('lastName', '9d9wqdw')
-            ->set('email', 'test926@t3St.com')
+            ->set('email', 'testtest@testtest.com')
             ->set('phone', '555-555-5555')
-            ->call('createTenant');
+            ->call('createTenant')
+            ->assertSee('Tenant created and attached to lease');
 
-        $newTenant = Tenant::all()->first();
+        $newTenant = Tenant::first();
 
         $this->assertNotEmpty($newTenant);
 
@@ -188,9 +189,9 @@ class EmployeeLeaseShowTest extends TestCase
     {
         $manager = $this->createEmployee('Management');
 
-        $newLease = $this->createLease();
+        $newLease = $this->createOpenLease();
 
-        $oldLease = $this->createLease();
+        $oldLease = $this->createOpenLease();
 
         $tenant = $this->createTenantForLease($oldLease->id);
 

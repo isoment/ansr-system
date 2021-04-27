@@ -94,12 +94,111 @@ class EmployeePropertyListingIndexTest extends TestCase
 
         Livewire::test(EmployeePropertyListingIndex::class)
             ->assertSee(
-                $this->stringLimitOrNot($propertyOneListings[1]->property->street, 20)
+                $this->stringLimitOrNot($propertyOne->street, 20)
             )
             ->assertDontSee(
-                $this->stringLimitOrNot($propertyTwoListings[0]->property->street, 20)
+                $this->stringLimitOrNot($propertyTwo->street, 20)
             )
-            ->assertSee($propertyOneListings[1]->unit)
-            ->assertDontSee($propertyTwoListings[2]->unit);
+            ->assertSee(
+                $this->stringLimitOrNot($propertyOne->street, 20)
+            )
+            ->assertDontSee(
+                $this->stringLimitOrNot($propertyTwo->street, 20)
+            );
+    }
+
+    /**
+     *  @test
+     * 
+     *  Property listings can be filtered by region
+     */
+    public function property_listings_can_be_filtered_by_region()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $propertyOne = $this->createProperty();
+
+        $propertyTwo = $this->createProperty();
+
+        $propertyOneListings = $this->createPropertyListings($propertyOne->id, 3);
+
+        $propertyTwoListings = $this->createPropertyListings($propertyTwo->id, 3);
+
+        $this->actingAs($manager);
+
+        Livewire::test(EmployeePropertyListingIndex::class)
+            ->assertSee(
+                $this->stringLimitOrNot($propertyOne->street, 20)
+            )
+            ->assertSee(
+                $this->stringLimitOrNot($propertyTwo->street, 20)
+            )
+            ->call('regionFilter', $propertyOne->region->region_name)
+            ->assertSee(
+                $this->stringLimitOrNot($propertyOne->street, 20)
+            )
+            ->assertDontSee(
+                $this->stringLimitOrNot($propertyTwo->street, 20)
+            );
+    }
+
+    /**
+     *  @test
+     * 
+     *  Property listings can be filtered by bedrooms count
+     */
+    public function property_listings_can_be_filtered_by_bedroom_count()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $property = $this->createProperty();
+
+        $oneBedListings = $this->createPropertyListingBedCount($property->id, 2, 1);
+        $twoBedListings = $this->createPropertyListingBedCount($property->id, 2, 2);
+        $threeBedListings = $this->createPropertyListingBedCount($property->id, 2, 3);
+
+        $this->actingAs($manager);
+
+        Livewire::test(EmployeePropertyListingIndex::class)
+            ->assertSee('1bed')
+            ->assertSee('2bed')
+            ->assertSee('3bed')
+            ->call('filterBeds', 2)
+            ->assertSee('2bed')
+            ->assertDontSee('1bed')
+            ->call('filterBeds', 3)
+            ->assertSee('3bed')
+            ->assertDontSee('1bed')
+            ->assertDontSee('2bed');
+    }
+
+    /**
+     *  @test
+     * 
+     *  Property listing can be filtered by bathroom count
+     */
+    public function property_listings_can_be_filtered_by_bathroom_count()
+    {
+        $manager = $this->createEmployee('Management');
+
+        $property = $this->createProperty();
+
+        $oneBathListings = $this->createPropertyListingBathCount($property->id, 2, 1);
+        $twoBathListings = $this->createPropertyListingBathCount($property->id, 2, 2);
+        $threeBathListings = $this->createPropertyListingBathCount($property->id, 2, 3);
+
+        $this->actingAs($manager);
+
+        Livewire::test(EmployeePropertyListingIndex::class)
+            ->assertSee('1bath')
+            ->assertSee('2bath')
+            ->assertSee('3bath')
+            ->call('filterBaths', 2)
+            ->assertSee('2bath')
+            ->assertDontSee('1bath')
+            ->call('filterBaths', 3)
+            ->assertSee('3bath')
+            ->assertDontSee('1bath')
+            ->assertDontSee('2bath');
     }
 }

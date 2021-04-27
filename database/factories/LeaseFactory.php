@@ -26,7 +26,7 @@ class LeaseFactory extends Factory
             'property_id' => Property::all()->random()->id,
             'unit' => $this->faker->unique()->numberBetween(1, 900),
             'start_date' => $this->faker->dateTimeBetween('-1 years', 'now', null),
-            'end_date' => $this->faker->dateTimeBetween('-1 months', '+1 years', null),
+            'end_date' => $this->faker->dateTimeBetween('now', '+1 years', null),
         ];
     }
 }
