@@ -1,10 +1,6 @@
 <div class="flex flex-col mt-12"
      x-data="{ filterOpen: false }">
-
-    <div>
-        @dump($types)
-    </div>
-
+     
     <div class="flex items-end justify-between">
         {{-- Search --}}
         <div class="max-w-lg w-full lg:max-w-xs mb-0">
@@ -162,10 +158,6 @@
                             <label for="town-house">Townhouse</label>
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    @dump($availabilityInput)
                 </div>
 
                 {{-- Availability --}}

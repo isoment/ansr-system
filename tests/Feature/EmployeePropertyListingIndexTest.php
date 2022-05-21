@@ -153,9 +153,9 @@ class EmployeePropertyListingIndexTest extends TestCase
 
         $property = $this->createProperty();
 
-        $oneBedListings = $this->createPropertyListingBedCount($property->id, 2, 1);
-        $twoBedListings = $this->createPropertyListingBedCount($property->id, 2, 2);
-        $threeBedListings = $this->createPropertyListingBedCount($property->id, 2, 3);
+        $this->createPropertyListingBedCount($property->id, 2, 1);
+        $this->createPropertyListingBedCount($property->id, 2, 2);
+        $this->createPropertyListingBedCount($property->id, 2, 3);
 
         $this->actingAs($manager);
 
@@ -183,9 +183,9 @@ class EmployeePropertyListingIndexTest extends TestCase
 
         $property = $this->createProperty();
 
-        $oneBathListings = $this->createPropertyListingBathCount($property->id, 2, 1);
-        $twoBathListings = $this->createPropertyListingBathCount($property->id, 2, 2);
-        $threeBathListings = $this->createPropertyListingBathCount($property->id, 2, 3);
+        $this->createPropertyListingBathCount($property->id, 2, 1);
+        $this->createPropertyListingBathCount($property->id, 2, 2);
+        $this->createPropertyListingBathCount($property->id, 2, 3);
 
         $this->actingAs($manager);
 

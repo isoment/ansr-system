@@ -56,9 +56,21 @@
                                 shadow-md rounded-lg py-6 px-20 bg-white">
                         <i class="text-orange-400 fas fa-copy text-6xl"></i>
                         <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Lease Applications</h2>
-                        <p class="mt-4">View and manage lease applications</p>
+                        <p class="mt-4">View and manage lease applications.</p>
                     </div>
                 </a>
+            </div>
+            <div>
+                <a href="{{route('employee.property-listing-index')}}">
+                    <div class="h-full flex flex-col items-center justify-center text-center 
+                                shadow-md rounded-lg py-6 px-20 bg-white">
+                        <i class="text-orange-400 fa fa-home text-6xl"></i>
+                        <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Property Listings</h2>
+                        <p class="mt-4">
+                            Properties available now.
+                        </p>
+                    </div>
+                </a>    
             </div>
         @endcan
         @can('isMaintenance')
@@ -73,18 +85,6 @@
                 </a>
             </div>
         @endcan
-        <div>
-            <a href="{{route('employee.service-request-index')}}">
-                <div class="h-full flex flex-col items-center justify-center text-center 
-                            shadow-md rounded-lg py-6 px-20 bg-white">
-                    <i class="text-orange-400 fas fa-chart-pie text-6xl"></i>
-                    <h2 class="mt-4 font-bold text-xl font-prompt tracking-wider">Statistics</h2>
-                    <p class="mt-4">
-                        View data related to app usage.
-                    </p>
-                </div>
-            </a>    
-        </div>
     </section>
     
 </div>
